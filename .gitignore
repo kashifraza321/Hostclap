@@ -10,7 +10,11 @@
 /node_modules
 npm-debug.log
 yarn-error.log
+<<<<<<< HEAD
 */node_modules/*
+=======
+
+>>>>>>> e8ddbe2 (initial commit)
 # IDEs and editors
 .idea/
 .project
@@ -40,4 +44,7 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+<<<<<<< HEAD
 .angular/*
+=======
+>>>>>>> e8ddbe2 (initial commit)
