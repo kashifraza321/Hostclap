@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CMS Admin</title>
+</head>
+<body>
+  <h1>CMS Admin Panel</h1>
+  <form action="/add" method="post">
+    <input type="text" name="name" placeholder="Website Name" required>
+    <input type="text" name="template" placeholder="Template Name" required>
+    <textarea name="content" placeholder="Content" required></textarea>
+    <button type="submit">Add CMS</button>
+  </form>
+  <h2>Existing CMS Websites</h2>
+  <ul>
+    <% cmsList.forEach(cms => { %>
+      <li><%= cms.name %> - <%= cms.template %></li>
+    <% }) %>
+  </ul>
+</body>
+</html>

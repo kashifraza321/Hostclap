@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Editor</title>
+    <style>
+        body {
+            display: flex;
+        }
+        .editor {
+            width: 30%;
+            padding: 10px;
+        }
+        .preview {
+            width: 70%;
+            padding: 10px;
+            height: 100vh;
+        }
+
+        .preview iframe{
+            width: 70%;
+            padding: 10px;
+            height: 100vh;
+        }
+        textarea, input {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="editor">
+        <input type="text" id="header-heading" placeholder="Header Heading"><br>
+        <textarea id="banner-text" placeholder="Banner Text"></textarea><br>
+        <textarea id="about-us-text" placeholder="About Us Text"></textarea><br>
+        <textarea id="services-text" placeholder="Services Text"></textarea><br>
+        <input type="text" id="image-url" placeholder="Image URL"><br>
+        <input type="text" id="footer-text" placeholder="Footer Text"><br>
+    </div>
+    <div class="preview">
+        <iframe id="live-preview" srcdoc="<h1>Welcome!</h1>" frameborder="0"></iframe>
+    </div>
+
+    <script >
+        document.addEventListener("DOMContentLoaded", function() {
+    const headerHeadingInput = document.getElementById("header-heading");
+    const bannerTextInput = document.getElementById("banner-text");
+    const aboutUsTextInput = document.getElementById("about-us-text");
+    const servicesTextInput = document.getElementById("services-text");
+    const imageUrlInput = document.getElementById("image-url");
+    const footerTextInput = document.getElementById("footer-text");
+    const livePreviewIframe = document.getElementById("live-preview");
+
+    function updatePreview() {
+        const headerHeading = headerHeadingInput.value;
+        const bannerText = bannerTextInput.value;
+        const aboutUsText = aboutUsTextInput.value;
+        const servicesText = servicesTextInput.value;
+        const imageUrl = imageUrlInput.value;
+        const footerText = footerTextInput.value;
+
+        const previewContent = `
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Live Preview</title>
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        padding: 20px;
+                    }
+                    img {
+                        max-width: 100%;
+                        height: auto;
+                    }
+                    header, footer {
+                        background-color: #f8f8f8;
+                        padding: 10px;
+                        text-align: center;
+                    }
+                    .banner {
+                        background-color: #e0e0e0;
+                        padding: 20px;
+                        text-align: center;
+                        margin-bottom: 20px;
+                    }
+                    .section {
+                        margin-bottom: 20px;
+                    }
+                </style>
+            </head>
+            <body>
+                <header>
+                    <h1>${headerHeading}</h1>
+                </header>
+                <div class="banner">
+                    <p>${bannerText}</p>
+                </div>
+                <div class="section about-us">
+                    <h2>About Us</h2>
+                    <p>${aboutUsText}</p>
+                </div>
+                <div class="section services">
+                    <h2>Services</h2>
+                    <p>${servicesText}</p>
+                </div>
+                ${imageUrl ? `<img src="${imageUrl}" alt="Image">` : ""}
+                <footer>
+                    <p>${footerText}</p>
+                </footer>
+            </body>
+            </html>
+        `;
+
+        livePreviewIframe.srcdoc = previewContent;
+    }
+
+    headerHeadingInput.addEventListener("input", updatePreview);
+    bannerTextInput.addEventListener("input", updatePreview);
+    aboutUsTextInput.addEventListener("input", updatePreview);
+    servicesTextInput.addEventListener("input", updatePreview);
+    imageUrlInput.addEventListener("input", updatePreview);
+    footerTextInput.addEventListener("input", updatePreview);
+});
+
+    </script>
+</body>
+</html>

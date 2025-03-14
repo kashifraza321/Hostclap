@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WYSIWYG HTML Editor</title>
+  <style>
+    /* Add your CSS here */
+    body {
+      font-family: Arial, sans-serif;
+      padding: 0;
+      margin: 0;
+    }
+    #toolbar {
+      background: #f1f1f1;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+    #toolbar button {
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+    #editor {
+      height: 80vh;
+      border: 1px solid #ddd;
+      padding: 10px;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+<body>
+    
+  <div id="template-selector">
+    <label for="template">Choose a template:</label>
+    <select id="template">
+      <option value="template1.html">Template 1</option>
+      <option value="template2.html">Template 2</option>
+      <option value="template3.html">Template 3</option>
+    </select>
+    <button onclick="loadTemplate()">Load Template</button>
+
+    <div class="top-bar-right">
+        <a id="logoutButton" href="#">Logout</a>
+      </div>
+  </div>
+  <div id="toolbar">
+    <!-- Toolbar buttons will go here -->
+    <div id="toolbar">
+        <button onclick="format('bold')">Bold</button>
+        <button onclick="format('italic')">Italic</button>
+        <button onclick="format('underline')">Underline</button>
+        <button onclick="format('justifyLeft')">Left</button>
+        <button onclick="format('justifyCenter')">Center</button>
+        <button onclick="format('justifyRight')">Right</button>
+        <button onclick="format('insertOrderedList')">Ordered List</button>
+        <button onclick="format('insertUnorderedList')">Unordered List</button>
+        <button onclick="insertImage()">Insert Image</button>
+      </div>
+      
+  </div>
+  <div id="editor" contenteditable="true">
+    <!-- Your editable content will go here -->
+  </div>
+  <button onclick="saveContent()">Save</button>
+<button onclick="loadContent()">Load</button>
+
+<script>
+    document.getElementById('logoutButton').addEventListener('click', function() {
+      // Clear the token from local storage
+      localStorage.removeItem('token');
+      // Redirect to login page
+      window.location.href = '/login.html';
+    });
+  </script>
+
+<script>
+  function saveContent() {
+    const content = document.getElementById('editor').innerHTML;
+    localStorage.setItem('editorContent', content);
+  }
+
+  function loadContent() {
+    const content = localStorage.getItem('editorContent');
+    if (content) {
+      document.getElementById('editor').innerHTML = content;
+    }
+  }
+
+  // Load content on page load
+  window.onload = loadContent;
+</script>
+
+  <script>
+    // JavaScript code will go here
+    
+  document.execCommand('defaultParagraphSeparator', false, 'p');
+
+  function format(command, value) {
+    document.execCommand(command, false, value);
+  }
+
+  function insertImage() {
+    const url = prompt('Enter the image URL');
+    if (url) {
+      format('insertImage', url);
+    }
+  }
+
+  function loadTemplate() {
+    const template = document.getElementById('template').value;
+    fetch(template)
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('editor').innerHTML = data;
+      })
+      .catch(error => console.error('Error loading template:', error));
+  }
+ 
+
+  </script>
+
+
+</body>
+</html>

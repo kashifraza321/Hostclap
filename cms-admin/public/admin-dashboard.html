@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style>
+        body{display:flex;font-family:'Roboto',sans-serif}.editor{width:20%;padding:20px;background-color:#f5f5f5}.preview{width:80%;padding:20px}textarea,input{width:100%;margin-bottom:20px;border-radius:5px;border:1px solid #ccc}.hidden{display:none}iframe{width:100%;border:none}.template-selector img{width:100%;max-width:120px;margin:10px;cursor:pointer;border:2px solid transparent}.template-selector img.selected{border-color:#00acc1}
+    </style>
+    <style>
+        .container {
+            margin-top: 50px;
+        }
+        .pagination {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="editor">
+        <div class="top-bar-right">
+            <a id="logoutButton" href="#">Logout</a>
+          </div>
+         
+        
+        <!-- Footer Category -->
+         
+    </div>
+    <div class="preview"> 
+    <h4>Admin Page - List of Website Creation Requests</h4>
+    <table class="highlight">
+        <thead>
+        <tr>
+            <th onclick="sortTable(0)">Request ID</th>
+            <th onclick="sortTable(1)">User Name</th>
+            <th onclick="sortTable(2)">Request Details</th>
+            <th onclick="sortTable(3)">Status</th>
+            <th onclick="sortTable(4)">open</th>
+        </tr>
+        </thead>
+        <tbody id="request-table-body">
+        <!-- Dynamic content will be inserted here -->
+        </tbody>
+    </table>
+    <ul class="pagination" id="pagination">
+        <!-- Pagination links will be inserted here -->
+    </ul>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Sample data
+        const requests = Array.from({ length: 50 }, (_, i) => ({
+            id: i + 1,
+            name: `User ${i + 1}`,
+            details: 'Request to create a website',
+            status: 'Pending',
+            link: 'link'
+        }));
+
+        const tableBody = document.getElementById('request-table-body');
+        const pagination = document.getElementById('pagination');
+        const rowsPerPage = 10;
+        let currentPage = 1;
+
+        function displayTable(page) {
+            tableBody.innerHTML = '';
+            const start = (page - 1) * rowsPerPage;
+            const end = start + rowsPerPage;
+            const paginatedRequests = requests.slice(start, end);
+
+            paginatedRequests.forEach(request => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${request.id}</td>
+                    <td>${request.name}</td>
+                    <td>${request.details}</td>
+                    <td>${request.status}</td>
+                    <td><a href="/editor.html">${request.link}</a></td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        function setupPagination() {
+            pagination.innerHTML = '';
+            const totalPages = Math.ceil(requests.length / rowsPerPage);
+
+            for (let i = 1; i <= totalPages; i++) {
+                const li = document.createElement('li');
+                li.classList.add('waves-effect');
+                li.innerHTML = `<a href="#">${i}</a>`;
+                li.addEventListener('click', function () {
+                    currentPage = i;
+                    displayTable(currentPage);
+                });
+                pagination.appendChild(li);
+            }
+        }
+
+        function sortTable(columnIndex) {
+            requests.sort((a, b) => {
+                const aValue = Object.values(a)[columnIndex];
+                const bValue = Object.values(b)[columnIndex];
+                return aValue > bValue ? 1 : -1;
+            });
+            displayTable(currentPage);
+        }
+
+        // Initial display
+        displayTable(currentPage);
+        setupPagination();
+    });
+</script>
+
+</body>
+</html>

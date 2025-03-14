@@ -1,0 +1,508 @@
+<html lang="en">
+  
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap Website</title>
+    <!-- Including default portal based script framework at the top -->
+    <link rel="stylesheet" media="screen" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />	
+
+		
+    <link rel="stylesheet" media="screen" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" />	
+
+		
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ </head>
+  
+  <body>
+     
+    <nav class="navbar navbar-default">
+       
+      <div class="container">
+        
+        <div class="navbar-header">
+          
+          <!-- collapse btn -->
+          
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            
+            <span class="glyphicon glyphicon-menu-hamburger"></span>
+            
+          </button>  
+       <!--  end collapse btn -->
+          
+           <a href="#" class="navbar-brand">Travel Adventure</a>
+        </div>
+        
+  
+       <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="nav-link"><a href="#">Pricing</a></li>
+          <li class="nav-link"><a href="#">FAQ</a></li>
+        </ul>
+        
+        <form class="navbar-form navbar-right">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search for destinations">
+          <button type="button" class="btn btn-custom btn-search">
+
+            <span class="glyphicon glyphicon-search"></span>Search 
+          </button> 
+        </form>
+       </div>   
+      </div>
+    </nav>   
+    
+       <div class="jumbotron">  
+         <div class="container">
+          <div class="col-md-7 col-md-offset-1 jumbotron">
+            <h1>Travel with us.</h1>
+            <p class="lead"><strong>&nbsp; Be part of our amazing team this summer.</strong></p>
+            <hr>
+           
+             
+             <p class="lead main-jumbotron-text">If you are a travel consultant committed to providing exceptional customer service, come join our team in London.</p>
+             <a class="btn btn-lg" href="#" role="button">Learn more</a>
+          
+           </div> <!-- class="col-md-6" -->
+        </div> 
+      </div>  
+     
+     
+    <div class="container">
+      
+      <div class="row main-header">
+            <h2 class="text-center">Now Hiring!</h2>
+            <h2 class="text-center">Travel Adventure is looking for</h2>
+     </div>  
+    
+     <div class="row">   
+       
+        <div class="col-lg-6 col-md-12 col-sm-12 left">
+          <h3><span class="glyphicon glyphicon-menu-right"></span>Assistant Travel Coordinator</h3>
+          <p>This position is responsible for invoice data entry,</br>
+             traveler profile maintenance, computer software</br>
+             updates, and other administrative duties.</p>
+          <p>You will also be responsible for making ground transportation                  arrangements and assisting and coordinating corporate travel                    arrangements</br> 
+             for Rite Hite business travelers.</p>
+          <p>These arrangements will include domestic and international travel,              meeting planning, training coordination, customer site visit                    coordination </br>and visa or international documentation.</p>
+
+          <div class="requirements-list">
+            
+           <div class="schedule">  
+             <h4><span class="glyphicon glyphicon-time"></span>Full-Time</h4>
+           </div>
+            
+             <h4 class="experience-sentence"><span class="glyphicon glyphicon-briefcase"></span>2 years of prior experience required</h4>
+            
+            <h4><span class="glyphicon glyphicon-map-marker"></span>Based in London, UK</h4>
+          </div>
+
+         <a href="#textModal" class="btn btn-sample btn-lg" data-toggle="modal"  role="button">Submit your application</a>
+
+
+ <!--- Modal --->
+   
+        <div class="modal fade" id="textModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              
+              <div class="modal-header">
+                
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Tell us a little bit about yourself.</h4>
+                
+              </div>
+              
+              <div class="modal-body">
+                <form class="form">
+                  <div class="form-group">
+                    <label class="sr-only" for="mobilePhone">Mobile Phone</label>
+                    
+                    <p>Tell us about your current job (or most recent).</p> 
+                  
+                       <!-------------------------------
+                      I don't understand why there are 2 inputs.
+                      I just want to keep the smaller one.
+                      ---------------------------------->
+                    
+                      <div class="col-lg-10 first-form-question">
+                        <input type="text" class="form-control input-normal" id="mobilePhone" placeholder=""/>
+                      </div>
+                   
+
+               
+            
+                    <p class="text-center">Do you work it the tourism industry?</p>
+                      <label class="radio-inline">
+                         <input type="radio" name="optradio">Yes</label>
+                      <label class="radio-inline">
+                         <input type="radio" name="optradio">No</label>
+
+                  
+                   <div class="form-group">
+                     <select>
+                       <option>iOS</option>
+                       <option>Android</option>
+                     </select>
+                   </div>  
+                  
+                </form>
+              </div>
+              
+            </div> 
+          </div>  
+        </div>  
+        
+        <!--- End Modal --->
+          
+          
+      </div>   
+          </div>  
+
+        
+        <div class="col-lg-6 col-md-12 col-sm-12 right">
+          
+           <h3><span class="glyphicon glyphicon-menu-right"></span>Tour Consultant Trainee</h3>
+          
+          <p>Travel Agent Trainees will receive extensive training</br>
+              upon hire.</br></p>
+
+          <p>Our comprehensive training programs help</br>
+             employees acquire various skills necessary to do</br>
+             their jobs and to support career development.</p> 
+             
+          <p> This role will have you arranging domestic and complex international travel for busy executives including air, car hotel and ground transportation.</p>
+           
+           <div class="requirements-list">
+             
+             <div class="schedule" data-toggle="tooltip" class="tooltip" title="Starting from mid June 2017">  
+                        
+               <h4><span class="glyphicon glyphicon-time"></span>Part-Time</h4> 
+             </div>  
+             
+               <h4 class="experience-sentence"><span class="glyphicon glyphicon-briefcase"></span>No previous experience required</h4>
+             
+               <h4><span class="glyphicon glyphicon-globe"></span>Remote work available</h4>
+             
+           
+
+          <div class="btn-group">
+             <button class="btn btn-lg btn-sample">Apply</button>
+             <button class="btn btn-lg btn-custom">Refer this job to a friend</button>
+          </div>   
+        </div>
+        
+      </div>  
+    </div>
+  </div>
+        <footer>
+          <div class="footer" id="footer">
+           
+             <p>Copyright, links, social media</p>
+            
+             <ul class="social">
+               <a href="#"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-skype" aria-hidden="true"></i><a/>
+                <a href="#"><i class="fa fa-tripadvisor" aria-hidden="true"></i></a>
+             </ul>  
+           
+          </div> 
+        </footer>  
+
+    <!-- Icons for the Footer Section -->
+    <script src="https://use.fontawesome.com/9e94c5c550.js"></script>
+<style>
+    html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+
+/* ----------------------------
+    Header / Jumbotron Styles 
+-------------------------------*/
+
+.navbar {
+  margin-bottom: 0 !important;
+}
+
+.row.main-header {
+  padding:    25px;
+  margin-top: 50px;
+  padding-bottom: 45px;
+  background-color: #F0EBE5;
+  background-image: url( https://c1.staticflickr.com/4/3944/15626660876_e266441c7c_b.jpg);
+  background-size:       cover;   
+  background-position: 25% 20%; 
+  border-radius: 6px;
+}
+
+.jumbotron {
+  background-image: url(https://c1.staticflickr.com/1/725/20835879729_66b87b0759_b.jpg);
+  background-size:       cover;
+  background-position: 25% 20%; 
+  box-shadow: inset -140px 0px 90px 0px rgba(255, 255, 255, 0.70);
+  height: 500px;
+}
+
+ul {
+  font-size: 16px;
+}
+
+.form-inline {
+  float: right;
+  margin:  8px;
+}
+
+/* ------------------*/
+
+h1 {
+  padding-top: 40px;
+  font-family: 'Playfair Display' !important;
+  font-weight: 700  !important;
+  font-size:   70px !important;
+  font-style:           italic;
+}
+
+.col-md-7.jumbotron {
+  box-shadow: inset 0px -210px 191px -31px #FFFFFF;
+}
+
+p.main-jumbotron-text {
+  margin-top:  26px;
+  font-size:   25px;
+  font-weight:  500 !important;
+  line-height:  1.4; 
+  margin-left: 10px;
+}
+
+
+h1, h2, p, .btn .btn-lg {
+  color: #14120C !important;
+}
+
+hr {
+  border-color: #14120C !important;
+}
+
+
+input.form-control.mr-sm-2 {
+  border-radius: 20px;
+  width: 200px;
+  margin: 0 20px 0 20px;
+  text-align: center;
+}
+
+
+
+/* ----------------------------
+   Main Body Styles 
+-------------------------------*/
+
+
+h3 {
+  display: inline-block;
+  padding: 50px 43px 30px 43px; 
+}
+
+.glyphicon.glyphicon-menu-right {
+    font-size:     18px;
+    padding-right: 10px;
+}
+
+/*
+.row {
+  background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAYAAADgzO9IAAAALElEQVQYV2NkwAKm7bw+kxFdHCSY5a6ZjiIBEwQphksgC8Il0AXBEtgEQRIAUfYWxlQQD4AAAAAASUVORK5CYII=) repeat;
+}
+
+*/
+
+.col-lg-6 p {
+  font-size:   18px;
+  text-align:  left;
+  padding: 0 43px 12px 43px;
+  line-height:  1.6;
+}
+
+.col-lg-6.left, 
+.col-lg-6.right {
+  padding-left:   48px;
+  padding-bottom: 40px;
+  height: 100%;
+}  
+
+.glyphicon-search {
+  padding-right: 6px;
+}
+
+.glyphicon-time, 
+.glyphicon-briefcase, 
+.glyphicon-map-marker,
+.glyphicon-globe {
+   font-size:      25px;
+   padding-right:  10px;
+   vertical-align: bottom;
+   padding-left:   48px;
+   margin-top: 11px;
+   color: #163554;
+}
+
+.requirements-list {
+   margin: 20px 0px;
+}
+
+.schedule {
+  margin-bottom: 15px;
+}
+
+.tooltip {
+  width: 100px;
+}
+
+.radio-inline {
+  margin-left: 41px;
+}
+
+.first-form-question {
+   margin-left: 25px ;
+}
+
+
+/*--------------------------
+     Button Styles 
+-----------------------------*/
+
+.btn-search {
+  border: 1px solid;
+  margin: 0px !important;
+}
+
+.btn-group {
+  margin: 10px 0px 0px 43px;
+}
+
+.btn-sample,
+.btn-custom { 
+  color: #FFF; 
+  background-color: #65C9D8; 
+  margin: 20px 0px 0px 43px;
+} 
+
+.btn-custom {
+  background-color: #45A5CC; 
+}
+
+ 
+.btn-custom:hover,
+.btn-custom:active {
+  color: #FFF !important; 
+  background-color: #3B73A0; 
+  border-color: #FFFFFF; 
+}
+
+.btn-sample:hover, 
+.btn-sample:active { 
+  color: #FFF !important; 
+  background-color: #C6AD2B; 
+  border-color: #FFFFFF; 
+} 
+
+.btn-sample:active, 
+.btn-sample.active, 
+.open .dropdown-toggle.btn-sample { 
+  background-image: none; 
+} 
+ 
+.btn-sample.disabled, 
+.btn-sample[disabled], 
+fieldset[disabled] .btn-sample, 
+.btn-sample.disabled:hover, 
+.btn-sample[disabled]:hover, 
+fieldset[disabled] .btn-sample:hover, 
+.btn-sample.disabled:focus, 
+.btn-sample[disabled]:focus, 
+fieldset[disabled] .btn-sample:focus, 
+.btn-sample.disabled:active, 
+.btn-sample[disabled]:active, 
+fieldset[disabled] .btn-sample:active, 
+.btn-sample.disabled.active, 
+.btn-sample[disabled].active, 
+fieldset[disabled] .btn-sample.active { 
+  background-color: #97BAD8; 
+  border-color: #FFFFFF; 
+} 
+ 
+.btn-sample .badge { 
+  color: #97BAD8; 
+  background-color: #F7F7F7; 
+}
+
+.footer {
+  height: 50px;
+  background-color:    #45A5CC;
+  text-align:           center;
+  border-top-left-radius:  6px;
+  border-top-right-radius: 6px;
+}
+
+/*---------------------------
+      Media Queries 
+---------------------------*/
+
+
+
+@media screen and (max-width: 767px) {
+  
+input.form-control.mr-sm-2 {
+    width: 100%;
+    margin: 0 0 1vh 0;
+}
+  
+.btn-search {
+    width: 100%;
+}
+   
+p {
+    font-size: 2rem !important; 
+}
+  
+h3 {
+    display: inline-block;
+    padding: 50px 15px 30px 0px; 
+}
+  
+.col-lg-6 p {
+    font-size:   16px;
+    text-align:  left;
+    padding: 0 !important;
+    margin: 0 !important;
+    line-height:  1.4em;
+ }
+  
+.glyphicon-time, 
+.glyphicon-briefcase, 
+.glyphicon-map-marker,
+.glyphicon-globe {
+     font-size:      25px;
+     padding-right:  10px;
+     vertical-align: bottom;
+     padding-left:   15px;
+     margin-top: 11px;
+     color: #163554;
+ }
+
+ h4.experience-sentence {
+    line-height: 1.6;
+ }
+ 
+  .indent {
+    text-indent: 50px;
+ } 
+  
+}
+
+</style>
+  </body>  
+</html>
