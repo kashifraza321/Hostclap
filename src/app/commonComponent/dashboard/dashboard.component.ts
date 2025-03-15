@@ -13,7 +13,15 @@ import { ChartConfiguration, ChartOptions, ChartType } from 'chart.js';
   styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent implements OnInit {
-  constructor(private _dashboardData: LoginService) {}
+  text = 'small business online in less than 7 days';
+  displayText = '';
+  i = 0;
+  isDeleting = false;
+  targetIndex = 45;
+  constructor() {
+    this.type();
+  }
+
   private carousel: any;
 
   ngOnInit(): void {}
@@ -29,5 +37,27 @@ export class DashboardComponent implements OnInit {
     this.carousel?.carousel?.('cycle');
   }
 
-  //pie chart ends here
+  type() {
+    if (!this.isDeleting) {
+      this.displayText = this.text.slice(0, this.i);
+      this.i++;
+
+      if (this.i === this.targetIndex) {
+        this.isDeleting = true;
+        setTimeout(() => this.type(), 1000); // Pause before deleting
+        return;
+      }
+    } else {
+      this.displayText = this.text.slice(0, this.i);
+      this.i--;
+
+      if (this.i === 0) {
+        this.isDeleting = false;
+        setTimeout(() => this.type(), 500); // Pause before typing again
+        return;
+      }
+    }
+
+    setTimeout(() => this.type(), this.isDeleting ? 100 : 150);
+  }
 }

@@ -26,9 +26,9 @@ export const routes: Routes = [
   {
     path: '',
     component: ContainerComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     children: [
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: '', redirectTo: 'in', pathMatch: 'full' },
       { path: 'in', component: DashboardComponent },
       { path: 'change-password', component: ChangePasswordComponent },
       { path: 'profile', component: ProfileComponent },

@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 0;
+  padding: 13px 0;
 
   // z-index: 999;
   // -webkit-text-fill-color: inherit;
@@ -30,9 +30,9 @@ header.fixed {
   top: 0;
   left: 0;
   width: 100%;
-  background: rgba(255, 255, 255, 0.7); /* Transparent when scrolling */
+  background: rgba(255, 255, 255, 0.7);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px); /* Blur effect on scroll */
+  backdrop-filter: blur(10px);
 }
 body {
   padding-top: 70px; /* Prevents layout jump */
@@ -44,6 +44,7 @@ body {
 nav {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   flex-grow: 1;
 }
 .menuItems {
@@ -55,20 +56,35 @@ nav {
 
 .loginBtn {
   color: #333;
-  border-bottom: 2px solid #0000;
   justify-content: center;
   align-items: center;
-  margin-left: 14px;
-  margin-right: 14px;
-  padding: 0;
+  margin: 0 14px;
   font-family: Montserrat, sans-serif;
   font-size: 16px;
   font-weight: 600;
   line-height: 24px;
-  transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   display: flex;
   border: none;
-  background: none;
+  background: #f7cf0b;
+  max-width: 100px;
+  width: 100%;
+  border-radius: 21px;
+  height: 42px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.loginBtn:hover {
+  background: #ffdb4d; /* Lighter yellow */
+  color: #222;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Increased shadow for lift effect */
+  transform: translateY(-2px); /* Slight lift */
+}
+
+.loginBtn:active {
+  transform: translateY(0); /* Reset lift on click */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Reduced shadow on click */
 }
 
 // dropdown//
@@ -94,7 +110,7 @@ nav {
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #111;
+  background-color: #fff;
   padding: 10px;
   border-radius: 10px;
   // width: 300px;
@@ -117,7 +133,7 @@ nav {
 }
 
 .dropdown-item:hover {
-  background-color: #222;
+  background-color: #eaeaea;
   border-radius: 5px;
 }
 
@@ -134,7 +150,7 @@ nav {
 .dropdown-item-title {
   font-weight: bold;
   margin-bottom: 3px;
-  color: #fff;
+  color: #000;
 }
 
 .dropdown-item-description {
