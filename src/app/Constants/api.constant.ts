@@ -1,0 +1,18 @@
+export const API_CONSTANTS = {
+    LOGIN_URL: "/admin/auth/login",
+    CHANGE_PASSWORD: "/admin/auth/changePassword",
+    ADMIN_DETAILS: "/admin/auth/getAdminProfile",
+    EDIT_PROFILE_DETAILS: "/admin/auth/editProfile",
+    DASHBOARD_DETAILS: "/admin/dashboard",
+    FORGET_PASSWORD: "/admin/auth/forgotPassword",
+    RESET_PASSWORD: "/admin/auth/resetPassword",
+    USER_LIST: "/admin/user/list",
+    TEAM_LIST: "/admin/user/get-team-members",
+    USER_STATUS: "/admin/user/status",
+    SUBSCRIPTION_PLAN_LIST: "/admin/subscriptionPlan/list",
+    SUBSCRIPTION_CREATE: "/admin/subscriptionPlan/create",
+    SUBSCRIPTION_UPDATE: "/admin/subscriptionPlan/update",
+    SUBSCRIPTION_DELETE: "/admin/subscriptionPlan/delete",
+    SUBSCRIPTION_STATUS: "/admin/subscriptionPlan/status",
+    ORDER_LIST: "/admin/order/list",
+}

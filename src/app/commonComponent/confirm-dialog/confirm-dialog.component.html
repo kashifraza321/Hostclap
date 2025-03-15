@@ -1,0 +1,36 @@
+<div id="confirm-dialog" class="dialog">
+
+    @if(data?.contentTemplate){
+        <button  type="button" class="closeBtn" (click)="close(true)" >
+            <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 1L14 13" stroke="#616161" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M1 13L13 1" stroke="#616161" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+    }
+   
+    @if(data?.contentTemplate){
+        <p>Add SUB-ADMIN</p>
+    }@else if(data?.logoutText) {
+        <h2 class="logoutHeading">Logout</h2>
+        <p class="logoutText" >Are you sure you want to logout?</p>
+    }@else{
+        <h2 class="logoutHeading">Delete Sub-admin</h2>
+        <p class="logoutText" >Are you sure you want to Sub-admin?</p>
+        <div class="right">
+            <button id="confirm-ok-button" (click)="close(true)" autofocus>No</button>
+            &nbsp;
+            <button id="confirm-cancel-button" (click)="close(false)">Yes</button>
+        </div>
+    }
+    <div class="contentWrapper" *ngIf="data?.contentTemplate">
+        <ng-container *ngTemplateOutlet="data.contentTemplate"></ng-container>
+         <button type="button" (click)="onDone()">onDone</button>
+    </div>
+   
+    <div class="right" *ngIf="!data.contentTemplate">
+        <button id="confirm-ok-button" (click)="close(true)" autofocus>Ok</button>
+        &nbsp;
+        <button id="confirm-cancel-button" (click)="close(false)">Cancel</button>
+    </div>
+</div>

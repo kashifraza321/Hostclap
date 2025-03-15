@@ -1,0 +1,61 @@
+<div class="mid-bar-item">
+    <div class="d-flex justify-content-between align-items-center headingWrp" style="width: 100%">
+        <h2>Review Management</h2>
+        <div  class="searcWrp d-flex justify-content-between align-items-center g-4 ">
+       <app-search
+         [searchPlaceholder]="'Search by Name'"
+         (onSearch)="onSearch($event, 'all')"
+       ></app-search>
+       <button class="exptBtn">Export Report</button>
+     </div>
+     </div>
+</div>
+<mat-card class="plan-card">
+    <mat-card-content>
+        <table matSort mat-table [dataSource]="datasource" class="mat-elevation-z8">
+            <ng-container matColumnDef="s.no." class="format-column">
+                <th mat-header-cell *matHeaderCellDef>S.no.</th>
+                <td mat-cell *matCellDef="let user; let i = index">
+                    {{ (pageAll - 1) * limitAll + (i + 1) }}.
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="mobile.no.">
+                <th mat-sort-header mat-header-cell *matHeaderCellDef>Mobile No.</th>
+                <td mat-cell *matCellDef="let element">9310127732</td>
+            </ng-container>
+            <ng-container matColumnDef="name">
+                <th mat-sort-header mat-header-cell *matHeaderCellDef>Name</th>
+                <td mat-cell *matCellDef="let element">Alex</td>
+            </ng-container>
+            <ng-container matColumnDef="totalReview">
+                <th mat-sort-header mat-header-cell *matHeaderCellDef>Total Reviews</th>
+                <td mat-cell *matCellDef="let element" style="padding-left: 50px;" >2</td>
+            </ng-container>
+
+            <ng-container matColumnDef="averageFlag">
+                <th mat-header-cell *matHeaderCellDef>Average Flag</th>
+                <td mat-cell *matCellDef="let element" style="padding-left: 50px;">
+                    <svg width="15" height="22" viewBox="0 0 15 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.75 0C0.948912 0 1.13968 0.0790177 1.28033 0.21967C1.42098 0.360322 1.5 0.551088 1.5 0.75V2.6L3.22 2.256C4.87082 1.92705 6.58163 2.08406 8.145 2.708L8.349 2.789C9.90991 3.41349 11.6279 3.53035 13.259 3.123C13.4359 3.07878 13.6205 3.07546 13.7989 3.11328C13.9773 3.15111 14.1447 3.22909 14.2884 3.34129C14.4322 3.4535 14.5484 3.59699 14.6284 3.76085C14.7084 3.92472 14.75 4.10466 14.75 4.287V11.654C14.75 12.298 14.311 12.86 13.686 13.016L13.472 13.069C11.7025 13.5113 9.83864 13.385 8.145 12.708C6.58193 12.0843 4.8715 11.9272 3.221 12.256L1.5 12.6V20.75C1.5 20.9489 1.42098 21.1397 1.28033 21.2803C1.13968 21.421 0.948912 21.5 0.75 21.5C0.551088 21.5 0.360322 21.421 0.21967 21.2803C0.0790175 21.1397 0 20.9489 0 20.75V0.75C0 0.551088 0.0790175 0.360322 0.21967 0.21967C0.360322 0.0790177 0.551088 0 0.75 0Z" fill="black"/>
+                    </svg>      
+                </td>
+            </ng-container> 
+
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef>Action</th>
+                <td mat-cell *matCellDef="let element">
+                    <mat-icon color="primary"
+                        (click)="redireToUserDetails()">visibility</mat-icon>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColums"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColums"></tr>
+        </table>
+    </mat-card-content>
+    <br />
+    <mat-card-footer>
+        <mat-paginator [length]="totalItems" [pageSize]="limit" [pageSizeOptions]="[5, 10, 20, 50, 100]"
+            (page)="onPaginateChange($event, 'all')"></mat-paginator>
+    </mat-card-footer>
+</mat-card>

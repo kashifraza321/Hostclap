@@ -1,0 +1,99 @@
+<footer>
+  <div class="container">
+    <div class="footerWrapper">
+      <div class="footerLogo">
+        <h3>Hostclap</h3>
+        <p class="footerDesrcption">We untangle the web for small businesses</p>
+        <div class="socialIconWrp">
+          <a href=""
+            ><img
+              src="https://cdn.prod.website-files.com/5fba61e7aa2fae86f84dd98d/6022abe700a40385490a3853_Icons%20_%20Social%20_%20Twitter.svg"
+              alt=""
+              class="social-image"
+          /></a>
+          <a href="">
+            <img
+              src="https://cdn.prod.website-files.com/5fba61e7aa2fae86f84dd98d/6022abe700a4030b020a3854_Icons%20_%20Social%20_%20Instagram.svg"
+              alt=""
+              class="social-image"
+            />
+          </a>
+          <a href="">
+            <img
+              src="https://cdn.prod.website-files.com/5fba61e7aa2fae86f84dd98d/6022abe700a40382400a3856_Icons%20_%20Social%20_%20Youtube.svg"
+              alt=""
+              class="social-image"
+            />
+          </a>
+          <a href=""
+            ><img
+              src="https://cdn.prod.website-files.com/5fba61e7aa2fae86f84dd98d/6022abe700a40362730a3855_Icons%20_%20Social%20_%20Facebook.svg"
+              alt=""
+              class="social-image"
+          /></a>
+          <a href="">
+            <img
+              src="https://cdn.prod.website-files.com/5fba61e7aa2fae86f84dd98d/6022abe700a40304380a3857_Icons%20_%20Social%20_%20Linkedin.svg"
+              alt=""
+              class="social-image"
+            />
+          </a>
+        </div>
+      </div>
+      <div class="footerlinksWrap">
+        <ul>
+          <li class="hasmargin">Product</li>
+          <li>
+            <a href="">Guides</a>
+          </li>
+        </ul>
+        <ul>
+          <li class="hasmargin">Company</li>
+          <li>
+            <a href="">About us</a>
+            <a href="">Careers</a>
+            <a href="">Blog</a>
+            <a href="">Contact Us</a>
+          </li>
+        </ul>
+        <ul>
+          <li class="hasmargin">Account</li>
+          <li>
+            <a href="">Login</a>
+            <a href="">Terms & Conditions</a>
+            <a href="">Refund Policy</a>
+            <a href="">Privacy Policy</a>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <!-- <select class="form-select" aria-label="Default select example">
+          <option selected>Open this select menu</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select> -->
+        <div class="custom-select">
+          <div class="selected-option" (click)="toggleDropdown()">
+            <img
+              *ngIf="selectedCountry?.flag"
+              [src]="selectedCountry.flag"
+              class="flag"
+            />
+            {{ selectedCountry?.name || "Select Country" }}
+          </div>
+
+          <ul class="dropdown" *ngIf="dropdownOpen">
+            <li
+              *ngFor="let country of countries"
+              (click)="selectCountry(country)"
+            >
+              <img [src]="country.flag" class="flag" />
+              {{ country.name }}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
