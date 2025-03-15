@@ -1,0 +1,200 @@
+<div class="pageWrapper">
+  <div class=" position-relative">
+    <div>
+      <div class="customDrop">
+     <button
+          mat-icon-button
+          [matMenuTriggerFor]="menu"
+          class="toolbar-actions"
+        >Export Report
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <div class="d-flex justify-content-between align-items-center">
+              <h3>
+                User Profile
+              </h3>
+               <mat-checkbox class="example-margin"></mat-checkbox>
+            </div>
+          </button>
+          <button mat-menu-item>
+            <div class="d-flex justify-content-between align-items-center">
+              <h3>
+                Payment History
+              </h3>
+               <mat-checkbox class="example-margin"></mat-checkbox>
+            </div>
+          </button>
+          <button mat-menu-item>
+            <div class="d-flex justify-content-between align-items-center">
+              <h3>
+               Subscription Details
+              </h3>
+               <mat-checkbox class="example-margin"></mat-checkbox>
+            </div>
+          </button>
+        
+        </mat-menu>
+       
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item >
+            Active
+          </button>
+          <button mat-menu-item>
+            Blocked
+          </button>
+          <button mat-menu-item>
+            All
+          </button>
+        </mat-menu>
+
+        </div>
+      <!-- new -->
+
+    <mat-tab-group>
+  <mat-tab label="First"> 
+  <div class="d-flex justify-content-between ">
+   <div class="customCol">
+  <h3 class="stronHeading">User Profile</h3>
+  <div class="formContainer">
+  <form>
+    <div class="input-box">
+     <label for="">Username</label>
+     <input type="text">
+    </div>
+    <div class="input-box">
+     <label for="">Email </label>
+     <input type="text">
+    </div>
+    <div class="input-box">
+     <label for="">Mobile Number</label>
+     <input type="text">
+    </div>
+    <div class="input-box">
+     <label for="">Gender</label>
+     <input type="text">
+    </div>
+    <div class="input-box">
+     <label for="">Country</label>
+     <input type="text">
+    </div>
+    <div class="input-box">
+     <label for="">Status</label>
+     <input type="text">
+    </div>
+    <button class=" blockBtn">Block</button>
+  </form>
+  </div>
+   </div>
+   <div class="customCol">
+   <div class="customSelect">
+    <h4>Subscription Details</h4>
+    <div class="SubscriptionWrp">
+      <ul>
+        <li>
+          <h5>PlanType </h5>
+          <h6>Plan 1</h6>
+        </li>
+        <li>
+          <h5>PlanType </h5>
+          <h6>Plan 1</h6>
+        </li>
+        <li>
+          <h5>PlanType </h5>
+          <h6>Plan 1</h6>
+        </li>
+        <li>
+          <h5>PlanType </h5>
+          <h6>Plan 1</h6>
+        </li>
+        <li>
+          <h5>PlanType </h5>
+          <h6>Plan 1</h6>
+        </li>
+        <li>
+          <h5>PlanType </h5>
+          <h6>Plan 1</h6>
+        </li>
+        <li>
+          <h5>PlanType </h5>
+          <h6>Plan 1</h6>
+        </li>
+        <li>
+          <h5>PlanType </h5>
+          <h6>Plan 1</h6>
+        </li>
+        <li>
+          <h5>PlanType </h5>
+          <h6>Plan 1</h6>
+        </li>
+      </ul>
+    </div>
+    <div>
+
+    </div>
+   </div>
+   </div>
+  </div>  
+  </mat-tab>
+  <!-- review -->
+  <mat-tab label="Second"> 
+    <div class="reviewWrapper">
+      <div class="reviewBox">
+            <div class="reviewHeader">
+            <div class="reviewHeaderLeft">
+                <h2>Username</h2>
+                <h3>22/10/2024 </h3>
+                 <p>
+                  <svg width="16" height="38" viewBox="0 0 16 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9.09 10.294C11.014 11.244 12.512 11.984 14.562 10.986C14.7145 10.9117 14.8835 10.8774 15.0529 10.8864C15.2223 10.8954 15.3867 10.9473 15.5305 11.0373C15.6744 11.1273 15.7929 11.2525 15.875 11.4009C15.9572 11.5494 16.0002 11.7163 16 11.886V21.426C16.0002 21.6136 15.9476 21.7975 15.8482 21.9567C15.7488 22.1158 15.6067 22.2438 15.438 22.326C12.457 23.776 10.056 22.566 8.188 21.625C7.98159 21.5198 7.77425 21.4165 7.566 21.315C6.533 20.818 5.679 20.503 4.81 20.545C4.05 20.581 3.138 20.902 2 21.941V28C2 28.2652 1.89464 28.5196 1.70711 28.7071C1.51957 28.8947 1.26522 29 1 29C0.734784 29 0.48043 28.8947 0.292893 28.7071C0.105357 28.5196 0 28.2652 0 28V11.971C0.000157267 11.8389 0.0264844 11.7082 0.0774612 11.5863C0.128438 11.4644 0.203054 11.3539 0.297 11.261C1.819 9.75501 3.264 9.07601 4.714 9.00601C6.121 8.93801 7.367 9.45901 8.434 9.97301C8.65867 10.0817 8.877 10.1883 9.089 10.293L9.09 10.294Z" fill="#0FA958"/>
+                  </svg>
+                  </p>
+            </div>
+             <button class="reportbyButton" (click)="redireToReportedBy()"  >
+              +91 855475269
+             </button>
+            </div>
+            <p class="reviewText">
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+            </p>
+            <div class="buttonWrapper">
+               <button type="button d-flex justify-content-center gap-3 align-items-center" (click)="openMyDialog()">
+                Deleted By Admin
+                    <svg width="22" height="18" viewBox="0 0 22 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M11.0003 0C16.3924 0 20.8784 3.87976 21.8189 9C20.8784 14.1202 16.3924 18 11.0003 18C5.60812 18 1.12215 14.1202 0.181641 9C1.12215 3.87976 5.60812 0 11.0003 0ZM11.0003 16C15.2359 16 18.8603 13.052 19.7777 9C18.8603 4.94803 15.2359 2 11.0003 2C6.7646 2 3.14022 4.94803 2.22278 9C3.14022 13.052 6.7646 16 11.0003 16ZM11.0003 13.5C8.51498 13.5 6.50026 11.4853 6.50026 9C6.50026 6.51472 8.51498 4.5 11.0003 4.5C13.4855 4.5 15.5003 6.51472 15.5003 9C15.5003 11.4853 13.4855 13.5 11.0003 13.5ZM11.0003 11.5C12.381 11.5 13.5003 10.3807 13.5003 9C13.5003 7.6193 12.381 6.5 11.0003 6.5C9.6196 6.5 8.50026 7.6193 8.50026 9C8.50026 10.3807 9.6196 11.5 11.0003 11.5Z" fill="black"/>
+                    </svg>
+               </button>
+               
+            </div>
+        </div>
+
+    </div>
+  </mat-tab>
+  <mat-tab label="Third"> 
+    <div class="tableCOntainer">
+      <table>
+        <tr>
+          <th>S.no.</th>
+          <th>Username</th>
+          <th>Mobile Number</th>
+          <th>Date</th>
+          <th>Reason</th>
+        </tr>
+        <tr>
+          <td>1.</td>
+          <td>Gloria</td>
+          <td>897667386776</td>
+          <td>24/10/2024</td>
+          <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</td>
+        </tr>
+      </table>
+
+  </div>
+</mat-tab>
+</mat-tab-group>
+
+ 
+
+
+  </div>
+</div>

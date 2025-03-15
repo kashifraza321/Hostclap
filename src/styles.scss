@@ -1,0 +1,166 @@
+@import "bootstrap/dist/css/bootstrap.css";
+@import "bootstrap-icons/font/bootstrap-icons.css";
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap");
+
+:root {
+  --primaryColor: #4e88b4;
+  --secondaryColor: #f7f9fbfc;
+  --accent-color: #e74c3c;
+  --clr-primary-black: #000;
+  --clr-primary-white: #ffffff;
+  --clr-primary-grey: #ccc;
+  --lightGrey: rgba(255, 255, 255, 0.6);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  /* cursor: default; */
+}
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+  overflow-x: hidden;
+  word-wrap: break-word;
+  line-height: 1;
+  font-size: 62.5%;
+  /* text-transform: capitalize; */
+  /* cursor: default; */
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+.container {
+  max-width: 1280px;
+  width: 100%;
+  padding: 0 20px;
+}
+
+p,
+a,
+span,
+li {
+  word-break: break-word;
+  word-wrap: break-word;
+}
+
+ul,
+li {
+  list-style: none;
+}
+ul {
+  padding-left: 0 !important;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+picture,
+img,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c7c4cb;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #fcfcfc;
+}
+
+table {
+  width: 100%;
+}
+
+ul,
+li {
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  font-size: 100%;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+.textCenter {
+  text-align: center;
+}
+
+.primaryBtn {
+  background: var(--primaryColor);
+  padding: 10px;
+  border-radius: 8px;
+  color: var(--clr-primary-white);
+  border: none;
+  font-size: 17px;
+  font-weight: 600;
+  transition: 0.3s all;
+  padding: 15px 10px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 1px -2px,
+    rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px;
+}
+.primaryBtn:hover {
+  background-color: #4137ca;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px -1px,
+    rgba(0, 0, 0, 0.14) 0px 4px 5px;
+}
+
+.color-field {
+  color: var(--primaryColor);
+}
+.primaryBtn:focus {
+  outline-width: 2px;
+  outline-color: var(--primaryColor);
+}
+.mdc-switch:enabled .mdc-switch__track::after {
+  background: var(--primaryColor) !important;
+}
+.mdc-switch__icon .mdc-switch__icon--on {
+  background: var(--primaryColor) !important;
+}
+
+/* Importing Bootstrap SCSS file. */
+@import "bootstrap/scss/bootstrap";
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.invalid {
+  border: 1px solid red !important;
+}
+
+.active {
+  background: var(--primaryColor);
+}
+
+.addAdminWrapper .mat-mdc-dialog-surface,
+.deleteAdminWrapper .mat-mdc-dialog-surface {
+  padding: 20px !important;
+}
+.logoutWrapper .mat-mdc-dialog-surface {
+  padding: 31px 30px 47px 30px !important;
+}

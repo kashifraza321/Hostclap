@@ -1,0 +1,17 @@
+.search-bar input {
+  
+  height: 45px;
+  padding: 10px;
+  // margin-top: 10px;
+  background: #f0f0f0;
+  margin-top: 0 !important;
+  border: none;
+}
+   .search-bar {
+    position: relative;
+}
+   .search-bar  span{
+    position: absolute;
+    top: 14px ;
+    left: 9px;
+}

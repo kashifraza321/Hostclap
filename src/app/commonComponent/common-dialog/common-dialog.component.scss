@@ -1,0 +1,47 @@
+
+::ng-deep .mat-mdc-dialog-surface{
+    padding: 20px 27px !important;
+}
+.modal__heading{
+    font-family: Roboto;
+font-size: 24px;
+font-weight: 700;
+line-height: 24px;
+letter-spacing: -1px;
+text-align: center;
+
+
+}
+.modalBody p{
+    font-family: Roboto;
+font-size: 14px;
+font-weight: 400;
+line-height: 17px;
+letter-spacing: 0.02em;
+text-align: center;
+color: rgba(128, 127, 127, 1);
+
+padding: 14px 10px 33px;
+
+}
+.modalBtn{
+   max-width: 125px;
+   width: 100%;
+min-height:46px;
+gap: 10px;
+border-radius: 30px;
+font-size: 18px;
+font-weight: 700;
+line-height: 14px;
+letter-spacing: 0.02em;
+text-align: center;
+background: rgba(0, 0, 0, 1);
+color: #fff;
+
+}
+.Btn_wrp{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+}

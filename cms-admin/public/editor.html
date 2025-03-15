@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Editor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style>
+        body{display:flex;font-family:'Roboto',sans-serif}.editor{width:20%;padding:20px;background-color:#f5f5f5}.preview{width:80%;padding:20px}textarea,input{width:100%;margin-bottom:20px;border-radius:5px;border:1px solid #ccc}.hidden{display:none}iframe{width:100%;border:none}.template-selector img{width:100%;max-width:120px;margin:10px;cursor:pointer;border:2px solid transparent}.template-selector img.selected{border-color:#00acc1}
+    </style>
+</head>
+<body>
+    <div class="editor">
+        <div class="top-bar-right">
+            <a id="logoutButton" href="#">Logout</a>
+          </div>
+        <div class="template-selector">
+            <img src="../abc.jpg" alt="Simple Template" data-template="simple" class="selected">
+            <img src="../abc1.jpg"  alt="Portfolio Template" data-template="portfolio">
+            <img src="../abc2.jpg"  alt="Blog Template" data-template="blog">
+        </div>
+        <!-- Header Category -->
+        <div class="category">
+            <h5>Header</h5>
+            <div id="menu-editor">
+                <div class="input-field">
+                    <input type="text" id="menu-item-1" value="Home">
+                    <label for="menu-item-1">Menu Item 1</label>
+                </div>
+                <div class="input-field">
+                    <input type="text" id="menu-item-2" value="About">
+                    <label for="menu-item-2">Menu Item 2</label>
+                </div>
+                <div class="input-field">
+                    <input type="text" id="menu-item-3" value="Services">
+                    <label for="menu-item-3">Menu Item 3</label>
+                </div>
+                <div class="input-field">
+                    <input type="text" id="menu-item-4" value="Contact">
+                    <label for="menu-item-4">Menu Item 4</label>
+                </div>
+            </div>
+            <div id="header-heading-container" class="input-field">
+                <input type="text" id="header-heading" value="Welcome to My Website">
+                <label for="header-heading">Header Heading</label>
+            </div>
+        </div>
+        <!-- Main Content Category -->
+        <div class="category">
+            <h5>Main Content</h5>
+            <div id="banner-text-container" class="input-field">
+                <textarea id="banner-text" class="materialize-textarea">This is the banner text.</textarea>
+                <label for="banner-text">Banner Text</label>
+            </div>
+            <div id="about-us-text-container" class="input-field hidden">
+                <textarea id="about-us-text" class="materialize-textarea">We are a team of professionals...</textarea>
+                <label for="about-us-text">About Us Text</label>
+            </div>
+            <div id="services-text-container" class="input-field hidden">
+                <textarea id="services-text" class="materialize-textarea">We offer a variety of services...</textarea>
+                <label for="services-text">Services Text</label>
+            </div>
+            <div id="image-url-container" class="input-field">
+                <input type="text" id="image-url" value="https://via.placeholder.com/150">
+                <label for="image-url">Image URL</label>
+            </div>
+        </div>
+        <!-- Footer Category -->
+        <div class="category">
+            <h5>Footer</h5>
+            <div id="footer-text-container" class="input-field">
+                <input type="text" id="footer-text" value="© 2025 My Website">
+                <label for="footer-text">Footer Text</label>
+            </div>
+        </div>
+    </div>
+    <div class="preview">
+        <iframe id="live-preview" srcdoc="<h1>Welcome!</h1>" frameborder="0"></iframe>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        document.getElementById('logoutButton').addEventListener('click', function() {
+          // Clear the token from local storage
+          localStorage.removeItem('token');
+          // Redirect to login page
+          window.location.href = '/login.html';
+        });
+      </script>
+</body>
+</html>

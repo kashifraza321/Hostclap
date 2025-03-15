@@ -1,0 +1,89 @@
+<div class="mid-bar-item">
+    <div class="d-flex justify-content-between align-items-center headingWrp" style="width: 100%">
+        <h2>Sub-admin Management</h2>
+        <div  class="searcWrp d-flex justify-content-between align-items-center g-4 ">
+       <button class="exptBtn" (click)="addSubAdmin()">Add Sub-admin</button>
+     </div>
+     </div>
+</div>
+<mat-card class="plan-card">
+    <mat-card-content>
+        <table matSort mat-table [dataSource]="datasource" class="mat-elevation-z8">
+            <ng-container matColumnDef="s.no." class="format-column">
+                <th mat-header-cell *matHeaderCellDef>S.no.</th>
+                <td mat-cell *matCellDef="let user; let i = index">
+                    {{ (pageAll - 1) * limitAll + (i + 1) }}.
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="name">
+                <th mat-sort-header mat-header-cell *matHeaderCellDef>Name</th>
+                <td mat-cell *matCellDef="let element">Gloria</td>
+            </ng-container>
+            <ng-container matColumnDef="email">
+                <th mat-sort-header mat-header-cell *matHeaderCellDef>Email</th>
+                <td mat-cell *matCellDef="let element">alexfedrer2385&#64;gmail.com</td>
+            </ng-container>
+
+            <ng-container matColumnDef="accessTo">
+                <th mat-header-cell *matHeaderCellDef>Access to</th>
+                <td mat-cell *matCellDef="let element">
+                    Dashboard, User Management    
+                </td>
+            </ng-container> 
+
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef style="text-align: center;">Action</th>
+                <td mat-cell *matCellDef="let element">
+                    <div class="iconsWrapper">
+                        <mat-slide-toggle
+                        class="example-margin"
+                        [color]="color"
+                        [checked]="element.isActive"
+                        [disabled]="disabled"
+                        (change)="toggleStatus(element._id, 'all')"
+                      >
+                      </mat-slide-toggle>
+                      <button class="icons" type="button" (click)="addSubAdmin()">
+                        <svg width="18" height="21" viewBox="0 0 18 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3.41421 14.89L13.5563 4.74786L12.1421 3.33364L2 13.4758V14.89H3.41421ZM4.24264 16.89H0V12.6473L11.435 1.21232C11.8256 0.821804 12.4587 0.821804 12.8492 1.21232L15.6777 4.04075C16.0682 4.43127 16.0682 5.06444 15.6777 5.45496L4.24264 16.89ZM0 18.89H18V20.89H0V18.89Z" fill="black"/>
+                        </svg>   
+                      </button>
+                      <button class="icons" type="button" (click)="deleteSubAdmin()">
+                        <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 18C2.45 18 1.97933 17.8043 1.588 17.413C1.19667 17.0217 1.00067 16.5507 1 16V3H0V1H5V0H11V1H16V3H15V16C15 16.55 14.8043 17.021 14.413 17.413C14.0217 17.805 13.5507 18.0007 13 18H3ZM13 3H3V16H13V3ZM5 14H7V5H5V14ZM9 14H11V5H9V14Z" fill="black"/>
+                        </svg>
+                      </button>
+                    </div>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColums"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColums"></tr>
+        </table>
+    </mat-card-content>
+    <br />
+    <mat-card-footer>
+        <mat-paginator [length]="totalItems" [pageSize]="limit" [pageSizeOptions]="[5, 10, 20, 50, 100]"
+            (page)="onPaginateChange($event, 'all')"></mat-paginator>
+    </mat-card-footer>
+</mat-card>
+
+<ng-template #inputDialogContent >
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Enter your name">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Enter your name">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Select Functionalities</mat-label>
+        <mat-select [(ngModel)]="selectedFunctionalities" multiple>
+          @for (functionalitiy of functionalitiesList; track functionalitiy) {
+            <mat-option [value]="functionalitiy">{{functionalitiy}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+   
+  </ng-template>
+
