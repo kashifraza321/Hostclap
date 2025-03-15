@@ -673,3 +673,6 @@
 .watch-link:hover {
   text-decoration: underline;
 }
+.typewriter{
+  margin-top: -100px;
+}
