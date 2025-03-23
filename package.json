@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "concurrently \"ng serve\" \"node cms-admin/server.js\" \"node cms-admin/dist/bundle.js\"",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -42,6 +42,7 @@
     "@types/jasmine": "~5.1.0",
     "@types/jsonwebtoken": "^9.0.7",
     "@types/uuid": "^10.0.0",
+    "concurrently": "^9.1.2",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
