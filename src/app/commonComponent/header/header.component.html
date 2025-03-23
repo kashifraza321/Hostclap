@@ -4,7 +4,8 @@
       <div class="logo">
         <h2>HostClap</h2>
       </div>
-      <nav>
+      <button class="hamburger-menu" (click)="toggleMenu()">&#9776;</button>
+      <nav [class.open]="isMenuOpen">
         <ul class="menuItems">
           <li><a href="">Home</a></li>
           <li>
@@ -23,36 +24,36 @@
                   <span class="dropdown-item-icon">🌐</span>
                   <div class="dropdown-item-text">
                     <span class="dropdown-item-title">Custom Websites</span>
-                    <span class="dropdown-item-description"
-                      >Tailored solutions to meet your business needs.</span
-                    >
+                    <span class="dropdown-item-description">
+                      Tailored solutions to meet your business needs.
+                    </span>
                   </div>
                 </div>
                 <div class="dropdown-item">
                   <span class="dropdown-item-icon">🚀</span>
                   <div class="dropdown-item-text">
                     <span class="dropdown-item-title">SEO Optimisation</span>
-                    <span class="dropdown-item-description"
-                      >Boost your website's visibility on search engines.</span
-                    >
+                    <span class="dropdown-item-description">
+                      Boost your website's visibility on search engines.
+                    </span>
                   </div>
                 </div>
                 <div class="dropdown-item">
                   <span class="dropdown-item-icon">📊</span>
                   <div class="dropdown-item-text">
                     <span class="dropdown-item-title">Business Strategy</span>
-                    <span class="dropdown-item-description"
-                      >Expert advice to grow your business effectively.</span
-                    >
+                    <span class="dropdown-item-description">
+                      Expert advice to grow your business effectively.
+                    </span>
                   </div>
                 </div>
                 <div class="dropdown-item">
                   <span class="dropdown-item-icon">💡</span>
                   <div class="dropdown-item-text">
                     <span class="dropdown-item-title">Creative Solutions</span>
-                    <span class="dropdown-item-description"
-                      >Innovative ideas to make your brand stand out.</span
-                    >
+                    <span class="dropdown-item-description">
+                      Innovative ideas to make your brand stand out.
+                    </span>
                   </div>
                 </div>
               </div>
@@ -61,7 +62,29 @@
           <li><a href="">Web Example</a></li>
           <li><a href="">Pricing</a></li>
         </ul>
+
         <button type="button" class="loginBtn">Login</button>
+        <!-- custom select  -->
+        <div class="custom-select">
+          <div class="selected-option" (click)="toggleDropdown()">
+            <img
+              *ngIf="selectedCountry?.flag"
+              [src]="selectedCountry.flag"
+              class="flag"
+            />
+            {{ selectedCountry?.name || "Select Country" }}
+          </div>
+
+          <ul class="dropdown" *ngIf="dropdownOpen">
+            <li
+              *ngFor="let country of countries"
+              (click)="selectCountry(country)"
+            >
+              <img [src]="country.flag" class="flag" />
+              {{ country.name }}
+            </li>
+          </ul>
+        </div>
       </nav>
     </div>
   </div>

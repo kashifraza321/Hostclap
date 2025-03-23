@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -7,6 +8,7 @@ import {
   TemplateRef,
   inject,
 } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   ModalDismissReasons,
   NgbDatepickerModule,
@@ -17,17 +19,65 @@ import {
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
   isFixed = false;
+  dropdownOpen = false;
 
+  countries = [
+    {
+      name: 'UK',
+      code: 'uk',
+      flag: '	/assets/images/united-kingdom-flag-icon.png',
+    },
+    {
+      name: 'USA',
+      code: 'us',
+      flag: '/assets/images/united-states-flag-icon.png',
+    },
+    {
+      name: 'Canada',
+      code: 'ca',
+      flag: '/assets/images/canada-flag-icon.png',
+    },
+    {
+      name: 'India',
+      code: 'in',
+      flag: '/assets/images/india-flag-icon.png',
+    },
+  ];
+
+  selectedCountry = this.countries[0];
   isHalfShown = false;
   @Output() dataEvent = new EventEmitter<boolean>();
 
-  constructor(private modalService: NgbModal, private ngZone: NgZone) {}
+  constructor(
+    private modalService: NgbModal,
+    private ngZone: NgZone,
+    private router: Router
+  ) {}
+
+  toggleDropdown() {
+    console.log('Dropdown clicked'); // Check if this logs to the console
+    this.dropdownOpen = !this.dropdownOpen;
+  }
+
+  selectCountry(country: any) {
+    this.selectedCountry = country;
+    this.dropdownOpen = false;
+
+    // Navigate to the route based on selected country
+    this.router.navigate([`/${country.code}`]);
+  }
+  // isFixed = false;
+  isMenuOpen = false;
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
 
   toggleSidebar() {
     this.isHalfShown = !this.isHalfShown;
