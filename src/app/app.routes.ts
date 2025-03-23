@@ -14,6 +14,7 @@ import { ViewUserComponent } from './features-module/user-management/Components/
 import { UkComponent } from './uk/uk.component';
 import { CaComponent } from './components/ca/ca.component';
 import { UsaComponent } from './components/usa/usa.component';
+import { TermsConditionComponent } from './commonComponent/dashboard/terms-condition/terms-condition.component';
 
 export const routes: Routes = [
   {
@@ -36,6 +37,7 @@ export const routes: Routes = [
       { path: 'uk', component: UkComponent },
       { path: 'ca', component: CaComponent },
       { path: 'us', component: UsaComponent },
+      { path: 'in/terms', component: TermsConditionComponent },
       {
         path: 'user-management',
         loadChildren: () =>

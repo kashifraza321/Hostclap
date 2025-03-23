@@ -101,3 +101,26 @@ footer {
 .hasmargin {
   margin-bottom: 20px;
 }
+.dropdown li {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.dropdown li:hover {
+  background-color: #f0f0f0;
+}
+
+.hasmargin {
+  margin-bottom: 20px;
+}
+
+@media (max-width: 500px) {
+  .footerWrapper {
+    flex-direction: column;
+  }
+  .footerlinksWrap {
+    width: 100%;
+  }
+}

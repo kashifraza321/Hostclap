@@ -834,6 +834,7 @@ h1 {
   justify-content: center;
   gap: 20px;
   margin-top: 20px;
+  flex-wrap: wrap;
 }
 .step-card {
   background-color: black;
@@ -992,4 +993,44 @@ h1 {
 .right-phone {
   transform: translateX(20px) rotate(6deg);
   z-index: 2;
+}
+
+@media (max-width: 775px) {
+  .multiWrapper {
+    flex-direction: column;
+  }
+  .box:nth-child(1) {
+    margin-top: 112px;
+  }
+  .testimonialtwo {
+    left: 30%;
+    top: 186px;
+  }
+}
+@media (max-width: 567px) {
+  .box:nth-child(1) {
+    margin-top: 254px;
+  }
+  .testimonialtwo {
+    top: 295px;
+    left: 0;
+  }
+  .testimonialthree {
+    right: 35px;
+    top: 133px;
+    right: 0;
+  }
+  .why {
+    display: none;
+  }
+  .browser-mockup {
+    background-image: none;
+  }
+
+  .hero-section {
+    margin: 0 0;
+  }
+  .browser-header {
+    display: none;
+  }
 }

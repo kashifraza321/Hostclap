@@ -7,16 +7,14 @@ import { Component } from '@angular/core';
   templateUrl: './ca.component.html',
   styleUrl: './ca.component.css',
 })
-export class CaComponent
-{
-  
+export class CaComponent {
   private carousel: any;
-   text = 'your Local Business';
+  text = 'your Local Business';
   displayText = '';
   i = 0;
   isDeleting = false;
-  targetIndex = 20; 
-constructor() {
+  targetIndex = 20;
+  constructor() {
     this.type();
   }
   ngAfterViewInit() {

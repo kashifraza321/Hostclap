@@ -51,7 +51,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 50px;
+  gap: 11px;
 }
 
 .loginBtn {
@@ -196,4 +196,137 @@ nav {
 
 .menuItems a:hover::after {
   width: 100%;
+}
+.rightIMageside {
+  flex-shrink: 0;
+}
+/* Hamburger Menu */
+.hamburger-menu {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.custom-select {
+  position: relative;
+  width: 150px;
+  border-radius: 20px;
+}
+
+.selected-option {
+  padding: 10px;
+  border: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 20px;
+  font-weight: 500;
+  font-size: 11px;
+}
+
+.flag {
+  width: 24px;
+  height: 16px;
+  margin-right: 10px;
+}
+
+.custom-select .dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  z-index: 10;
+  border-radius: 10px;
+}
+.custom-select .dropdown li {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.custom-select .dropdown li:hover {
+  background-color: #f0f0f0;
+}
+
+.hasmargin {
+  margin-bottom: 20px;
+}
+.custom-select .dropdown li {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.custom-select .dropdown li:hover {
+  background-color: #f0f0f0;
+}
+
+.hasmargin {
+  margin-bottom: 20px;
+}
+
+@media (max-width: 1200px) {
+  .menuItems a {
+    font-size: 18px;
+  }
+  .menuItems {
+    gap: 11px;
+  }
+  .herosectionWrapp {
+    margin-top: 118px;
+  }
+}
+@media (max-width: 900px) {
+  .hamburger-menu {
+    display: block;
+  }
+
+  nav {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: #ffffff;
+    width: 100%;
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+  }
+
+  nav.open {
+    opacity: 1;
+    max-height: 500px;
+  }
+
+  .menuItems {
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+  }
+
+  .menuItems li {
+    width: 100%;
+  }
+  .dropdown-button {
+    padding: 12px 20px 12px 9px;
+  }
+  .loginBtn {
+    margin-right: auto;
+  }
+  .custom-select {
+    margin: 25px auto 19px 19px;
+  }
 }
