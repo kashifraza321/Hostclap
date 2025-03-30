@@ -185,6 +185,50 @@ router.post('/auth/login', async (req, res) => {
   }
 });
 
+
+// Register Route
+/**
+ * @swagger
+ * /auth/register:
+ *   post:
+ *     summary: Register a new user
+ *     description: This route allows a new user to register by providing a username and password. The user will be created and stored in the database.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *                 description: The username of the user.
+ *                 example: "newuser"  # Example value for the username
+ *               password:
+ *                 type: string
+ *                 description: The password of the user.
+ *                 example: "password123"  # Example value for the password
+ *     responses:
+ *       201:
+ *         description: User successfully registered
+ *       400:
+ *         description: Bad request (e.g., missing required fields)
+ *       500:
+ *         description: Internal server error
+ */
+router.post('/auth/register', async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    const user = new User({ username, password });
+    await user.save();
+    res.status(201).send('User registered');
+  } catch (err) {
+    res.status(500).send('Error registering user: ' + err.message);
+  }
+});
+
+
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
