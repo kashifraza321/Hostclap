@@ -3,7 +3,9 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const authRoutes = require('./routes/auth'); 
 const path = require('path');
-
+const swaggerUi = require('swagger-ui-express');
+const swaggerJsdoc = require('swagger-jsdoc');
+const router = express.Router();
 dotenv.config();
 
 const app = express();
@@ -32,6 +34,15 @@ const itemSchema = new mongoose.Schema({
 
 const Item = mongoose.model('Item', itemSchema);
 
+/**
+ * @swagger
+ * /items:
+ *   get:
+ *     summary: Get all items
+ *     responses:
+ *       200:
+ *         description: A list of items.
+ */
 // Create (POST) - Add a new item
 app.post('/items', async (req, res) => {
   try {
@@ -76,67 +87,107 @@ app.delete('/items/:id', async (req, res) => {
 
 // Routes
 app.use('/auth', authRoutes);
+/*
+/**
+ * @swagger
+ * /api/items:
+ *   get:
+ *     summary: Get all items
+ *     responses:
+ *       200:
+ *         description: A list of items.
+ * /
+app.get('/api/items', async (req, res) => {
+  const items = await Item.find();
+  res.json(items);
+});
+
+
+app.get('/api/items/:id', async (req, res) => {
+  const item = await Item.findById(req.params.id);
+  if (!item) {
+    return res.status(404).send('Item not found');
+  }
+  res.json(item);
+});
+*/
+// Swagger Setup
+const options = {
+  definition: {
+    openapi: '3.0.0',
+    info: {
+      title: 'Node MongoDB API',
+      version: '1.0.0',
+      description: 'A simple API to demonstrate Swagger in a Node.js app',
+    },
+  },
+  apis: ['./server.js', './routes/**/*.js'], // Add your routes files here
+};
+
+const specs = swaggerJsdoc(options);
+ 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, {
+  explorer: true, // Enable the API explorer in Swagger UI
+}));
+
+
+/**
+ * @swagger
+ * /auth/login:
+ *   post:
+ *     summary: User login to obtain a JWT token
+ *     description: Authenticates the user by checking the username and password, then returns a JWT token if credentials are valid.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *                 description: The username of the user
+ *                 default: "john_doe1"  # Preset default value
+ *               password:
+ *                 type: string
+ *                 description: The password of the user
+ *                 default: "john_doe"  # Preset default value  
+ *     responses:
+ *       200:
+ *         description: Successfully logged in, JWT token returned
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 token:
+ *                   type: string
+ *       400:
+ *         description: Invalid credentials
+ *       500:
+ *         description: Internal server error
+ */
+router.post('/auth/login', async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    const user = await User.findOne({ username });
+    if (!user) {
+      return res.status(400).send('Invalid credentials');
+    }
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).send('Invalid credentials');
+    }
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    res.json({ token });
+  } catch (err) {
+    res.status(500).send('Error logging in: ' + err.message);
+  }
+});
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
 
  
-
-//88888888
-
-// const app = express();
-// app.use(bodyParser.urlencoded({ extended: true }));
-// app.set('view engine', 'ejs');
-
-// mongoose.connect('mongodb://localhost:27017/cmsDB', { useNewUrlParser: true, useUnifiedTopology: true });
-
-// const cmsSchema = new mongoose.Schema({
-//   name: String,
-//   template: String,
-//   content: String
-// });
-
-// const CMS = mongoose.model('CMS', cmsSchema);
-
-// app.get('/', (req, res) => {
-//   CMS.find({}, (err, cmsList) => {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       res.render('index', { cmsList: cmsList });
-//     }
-//   });
-// });
-
-// app.post('/add', (req, res) => {
-//   const newCMS = new CMS({
-//     name: req.body.name,
-//     template: req.body.template,
-//     content: req.body.content
-//   });
-//   newCMS.save((err) => {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       res.redirect('/');
-//     }
-//   });
-// });
-// app.get('/cms/:id', (req, res) => {
-//     CMS.findById(req.params.id, (err, foundCMS) => {
-//       if (err) {
-//         console.log(err);
-//       } else {
-//         res.render(`../templates/${foundCMS.template}`, {
-//           name: foundCMS.name,
-//           content: foundCMS.content
-//         });
-//       }
-//     });
-//   });
-  
-
-// app.listen(3000, () => {
-//   console.log('Server started on port 3000');
-// });
+ 

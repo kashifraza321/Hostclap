@@ -18,8 +18,7 @@ router.post('/register', async (req, res) => {
     res.status(500).send('Error registering user: ' + err.message);
   }
 });
-
-// Login Route
+ 
 router.post('/login', async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -37,5 +36,7 @@ router.post('/login', async (req, res) => {
     res.status(500).send('Error logging in: ' + err.message);
   }
 });
+
+
 
 module.exports = router;
