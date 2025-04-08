@@ -1,0 +1,88 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f6fb; /* Off-white/light grey */
+}
+
+.account-wrapper {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #f4f6fb; /* Off-white */
+  text-align: center;
+}
+
+.account-wrapper h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.sub-heading {
+  font-weight: bold;
+  font-size: 1rem;
+  color: #000;
+  margin-bottom: 30px;
+}
+
+form input {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+
+.password-wrapper {
+  position: relative;
+}
+
+.eye-icon {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.error {
+  color: #e74c3c;
+  font-size: 0.9rem;
+  text-align: left;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+.info-text {
+  font-size: 0.9rem;
+  margin-top: 10px;
+  color: #555;
+}
+
+.flag {
+  margin: 0 5px;
+}
+
+a {
+  color: #0d6efd;
+  text-decoration: underline;
+}
+
+.next-btn {
+  background-color: #f64800;
+  color: white;
+  padding: 14px 0;
+  border: none;
+  border-radius: 25px;
+  width: 100%;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.next-btn:hover {
+  background-color: #e03e00;
+}

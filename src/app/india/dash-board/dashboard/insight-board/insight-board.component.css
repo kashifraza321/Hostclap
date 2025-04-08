@@ -1,0 +1,90 @@
+.nav-tabs .nav-link.active {
+  /* background-color: #fff; */
+  border-color: #ddd;
+  width: 100%;
+  color: #000;
+}
+.nav {
+  margin: 0 auto;
+}
+
+.badge {
+  font-size: 0.8rem;
+}
+
+.pagewrapper {
+  padding: 100px 0;
+}
+
+.purpleBg {
+  background: #4053bb;
+  min-height: 300px;
+  padding: 90px 0;
+}
+.nav-item {
+  width: 33%;
+}
+.nav-item button {
+  width: 100%;
+  padding: 13px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #f8f9fa;
+  border: none;
+}
+
+.tabWrapper {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.hasWHitebg {
+  background: #fff;
+}
+.tab-pane {
+  background: #fff;
+  padding: 14px;
+  border: 1px solid #ccc;
+  min-height: 200px;
+}
+table tr th,
+table tr td {
+  padding: 18px 8px;
+  font-size: 13px;
+  text-align: center;
+}
+table tr td {
+  font-size: 13px;
+}
+.tabbing {
+  transform: translateY(-192px);
+}
+
+.headingmain {
+  color: #fff;
+  padding-bottom: 30px;
+}
+.para {
+  font-size: 18px;
+  color: #000;
+}
+
+.dwJdKC {
+  background: var(--button-secondary, rgb(255, 74, 0));
+  border-radius: 25px;
+  color: var(--button-secondary-text, rgb(255, 255, 255));
+  font-family: Montserrat;
+  font-weight: 600;
+  padding: 13px 30px;
+  text-align: center;
+  display: block;
+  margin: 0px auto;
+  max-width: 500px;
+  font-size: 13px;
+}
+.msgWrp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 40px 0;
+}

@@ -1,16 +1,58 @@
 <section class="loginWrapper">
   <div class="loginForm">
     <div class="textCenter headingWrap">
-      <!--  <img
-          src="../../../../assets/images/logo.png"
-          alt="logo"
-          width="100"
-          height="100"
-        /> -->
-      <h1 class="loginHeading">Hi, Welcome Back</h1>
+      <h1>HostClap</h1>
+      <h1 class="loginHeading">Welcome Back</h1>
       <p class="text">Enter your credentials to continue</p>
     </div>
-    <div class="formContainer">
+    <div class="divWrp">
+      <div class="facebookTab">
+        <a href=""
+          ><img
+            src="../../../assets/images/icons8-facebook-48.png"
+            alt="facebook"
+          />
+          Sign in with Facebook</a
+        >
+      </div>
+
+      <div class="facebookTab">
+        <a href=""
+          ><img
+            src="../../../assets/images/icons8-google-48.png"
+            alt="google"
+          />
+          Sign in with Facebook</a
+        >
+      </div>
+
+      <!-- new -->
+
+      <div class="separator">or Sign in with</div>
+
+      <div class="login-options">
+        <div class="login-box">
+          <a href="">
+            <img src="../../../assets/images/passwordicon.png" alt="Password"
+          /></a>
+
+          <div>Password</div>
+        </div>
+        <div class="login-box">
+          <a href=""
+            ><img src="../../../assets/images/icons8-email-50.png" alt="Email"
+          /></a>
+          <div>Email Link</div>
+        </div>
+      </div>
+
+      <div class="register">
+        Don’t have an account?
+        <a (click)="navigateToSignUp()">Create one now</a>
+      </div>
+      <!-- new -->
+    </div>
+    <!-- <div class="formContainer">
       <form [formGroup]="loginForm">
         <div class="formRow">
           <label class="label" for="email">Email</label>
@@ -59,19 +101,13 @@
             <div *ngIf="f['password'].errors['required']" class="text-danger">
               Password is required !
             </div>
-            <!-- <div *ngIf="f['password'].errors.minlength" class="text-danger text-center">
-                  Password must be at least 6 characters.
-              </div> -->
           </div>
           <span class="forgetPassword" [routerLink]="['/forget-password']"
             >Forget Password ?</span
           >
         </div>
         <button class="primaryBtn loginBtn" (click)="login()">Sign In</button>
-        <!-- <div class="haveAccount">
-          <button class="bg-color">Forget Password ?</button>
-        </div> -->
       </form>
-    </div>
+    </div> -->
   </div>
 </section>

@@ -49,4 +49,11 @@ export class FooterComponent {
     // Navigate to the route based on selected country
     this.router.navigate([`/${country.code}`]);
   }
+
+  navigateToprivacy() {
+    this.router.navigate(['/in/privacy']);
+  }
+  navigateToterms() {
+    this.router.navigate(['/in/terms']);
+  }
 }

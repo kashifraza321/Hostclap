@@ -15,13 +15,18 @@ import { UkComponent } from './uk/uk.component';
 import { CaComponent } from './components/ca/ca.component';
 import { UsaComponent } from './components/usa/usa.component';
 import { TermsConditionComponent } from './commonComponent/dashboard/terms-condition/terms-condition.component';
+import { PrivacyPolicyComponent } from './commonComponent/dashboard/privacy-policy/privacy-policy.component';
+import { RefundPolicyComponent } from './commonComponent/dashboard/refund-policy/refund-policy.component';
+import { SignUpComponent } from './features-module/sign-up/sign-up.component';
 
 export const routes: Routes = [
   {
     path: 'login',
-    canActivate: [ProtectGuard],
+    // canActivate: [ProtectGuard],
     component: LoginComponent,
   },
+
+  { path: 'signUp', component: SignUpComponent },
   { path: 'forget-password', component: ForgetPasswordComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
   {
@@ -38,12 +43,21 @@ export const routes: Routes = [
       { path: 'ca', component: CaComponent },
       { path: 'us', component: UsaComponent },
       { path: 'in/terms', component: TermsConditionComponent },
+      { path: 'in/privacy', component: PrivacyPolicyComponent },
+      { path: 'in/refund', component: RefundPolicyComponent },
       {
         path: 'user-management',
         loadChildren: () =>
           import(
             '../app/features-module/user-management/user-management.module'
           ).then((m) => m.UserManagementModule),
+      },
+      {
+        path: 'in/insight',
+        loadChildren: () =>
+          import('../app/india/dash-board/dashboard/dashboard.module').then(
+            (m) => m.DashboardModule
+          ),
       },
       {
         path: 'review-management',

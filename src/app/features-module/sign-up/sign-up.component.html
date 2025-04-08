@@ -1,0 +1,86 @@
+<div class="account-wrapper">
+  <h2>Create your Account</h2>
+  <p class="sub-heading">Unlock access to the website of your dreams...</p>
+
+  <form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
+    <input
+      type="text"
+      formControlName="firstName"
+      placeholder="Your First Name"
+    />
+    <div
+      *ngIf="
+        accountForm.get('firstName')?.touched &&
+        accountForm.get('firstName')?.invalid
+      "
+      class="error"
+    >
+      First name is required.
+    </div>
+
+    <input
+      type="text"
+      formControlName="lastName"
+      placeholder="Your Last Name"
+    />
+    <div
+      *ngIf="
+        accountForm.get('lastName')?.touched &&
+        accountForm.get('lastName')?.invalid
+      "
+      class="error"
+    >
+      Last name is required.
+    </div>
+
+    <!-- <input
+      type="text"
+      formControlName="phone"
+      placeholder="Your Phone Number"
+    />
+    <div
+      *ngIf="
+        accountForm.get('phone')?.touched && accountForm.get('phone')?.invalid
+      "
+      class="error"
+    >
+      Valid phone number is required.
+    </div> -->
+
+    <input type="email" formControlName="email" placeholder="Your Email" />
+    <div
+      *ngIf="
+        accountForm.get('email')?.touched && accountForm.get('email')?.invalid
+      "
+      class="error"
+    >
+      Valid email is required.
+    </div>
+
+    <div class="password-wrapper">
+      <input
+        [type]="showPassword ? 'text' : 'password'"
+        formControlName="password"
+        placeholder="Create Password"
+      />
+      <span class="eye-icon" (click)="togglePassword()">👁️</span>
+    </div>
+    <div
+      *ngIf="
+        accountForm.get('password')?.touched &&
+        accountForm.get('password')?.invalid
+      "
+      class="error"
+    >
+      Password must be at least 6 characters.
+    </div>
+
+    <p class="info-text">
+      You are creating a UENI account for a business in the
+      <span class="flag">🇺🇸</span>
+      <a href="#">Need to change?</a>
+    </p>
+
+    <button class="next-btn" type="submit">Next ➜</button>
+  </form>
+</div>
