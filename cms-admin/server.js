@@ -5,6 +5,8 @@ const authRoutes = require('./routes/auth');
 const path = require('path');
 const swaggerUi = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc');
+const bodyParser = require('body-parser');
+
 const router = express.Router();
 dotenv.config();
 
@@ -15,6 +17,14 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Middleware
+app.use(bodyParser.json());
+
+// MongoDB connection
+// mongoose.connect('mongodb://localhost:27017/formDB', { useNewUrlParser: true, useUnifiedTopology: true })
+//     .then(() => console.log('Connected to MongoDB'))
+//     .catch((err) => console.log('MongoDB connection error:', err));
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, {
@@ -203,7 +213,7 @@ router.post('/auth/login', async (req, res) => {
  *               username:
  *                 type: string
  *                 description: The username of the user.
- *                 example: "newuser"  # Example value for the username
+ *                 example: "newuser@krwizard.com"  # Example value for the username
  *               password:
  *                 type: string
  *                 description: The password of the user.
@@ -221,11 +231,16 @@ router.post('/auth/register', async (req, res) => {
     const { username, password } = req.body;
     const user = new User({ username, password });
     await user.save();
-    res.status(201).send('User registered');
+    res.status(201).send('User successfully registered');
   } catch (err) {
     res.status(500).send('Error registering user: ' + err.message);
   }
 });
+
+ 
+
+
+
 
 
 
