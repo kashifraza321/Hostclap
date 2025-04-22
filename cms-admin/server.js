@@ -3,12 +3,17 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const authRoutes = require('./routes/auth'); 
 const path = require('path');
+const cors = require('cors');
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
-
+const corsOptions = {
+  credentials: true,
+  origin: ['http://localhost:4201', 'http://localhost:4200'] // Whitelist the domains you want to allow
+};
+app.use(cors(corsOptions));
 // Middleware to parse JSON
 app.use(express.json());
 // Serve static files from the 'public' directory

@@ -10,8 +10,8 @@ dotenv.config();
 // Register Route
 router.post('/register', async (req, res) => {
   try {
-    const { username, password } = req.body;
-    const user = new User({ username, password });
+    const { email, password } = req.body;
+    const user = new User({ email, password });
     await user.save();
     res.status(201).send('User registered');
   } catch (err) {
