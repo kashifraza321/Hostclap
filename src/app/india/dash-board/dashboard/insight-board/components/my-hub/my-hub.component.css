@@ -48,9 +48,9 @@
 }
 
 .search-box button {
-  background: linear-gradient(to right, #94336c, #94336c);
+  background: #7d2a5b;
   border: none;
-  color: #d1a4c7;
+  color: #fff;
   padding: 10px 30px;
   border-radius: 50px;
   font-size: 16px;
@@ -207,3 +207,61 @@
 .box1 {
   width: 30%;
 }
+
+/* grid box  */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+.card {
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.card-content {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.icon {
+  font-size: 30px;
+  color: #6a1b9a;
+  margin-bottom: 10px;
+}
+.title {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+.arrow {
+  border: 1px solid #6a1b9a;
+  border-radius: 50%;
+  padding: 8px 12px;
+  font-size: 18px;
+  color: #6a1b9a;
+  cursor: pointer;
+}
+.button {
+  background-color: #4a148c;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.button.blue {
+  background-color: #79d2f2;
+  color: white;
+}
+.gridBox {
+  margin: 50px 0;
+}
+/* grid box  */

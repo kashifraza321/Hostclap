@@ -3,11 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from 'src/app/commonComponent/dashboard/dashboard.component';
 import { InsightBoardComponent } from './insight-board/insight-board.component';
 import { MyHubComponent } from './insight-board/components/my-hub/my-hub.component';
+import { AnalyticsComponent } from './insight-board/components/analytics/analytics.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: '', component: InsightBoardComponent },
   { path: 'myhub', component: MyHubComponent },
+  { path: 'analytics', component: AnalyticsComponent },
 ];
 
 @NgModule({
