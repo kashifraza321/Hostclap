@@ -47,9 +47,12 @@ export class SignUpComponent {
       const formData = this.accountForm.value;
       this._login.signup(formData).subscribe({
         next: (response: any) => {
+          console.log(response);
           if (response.status === 200) {
             alert('Sign-up successful!');
             this._router.navigate(['/login']); // Or wherever you want to redirect
+          }else if (response.status === 409) {
+            alert('User already exists.!');
           } else {
             alert('Sign-up failed. Please try again.');
           }
