@@ -61,8 +61,7 @@ export class LoginComponent {
     }
 
     const login = {
-      email: this.loginForm.value.email,
-      name: 'Super Admin', // This could be dynamic based on your application's logic
+      email: this.loginForm.value.email, 
       password: this.loginForm.value.password,
     };
 

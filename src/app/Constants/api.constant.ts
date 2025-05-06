@@ -1,5 +1,5 @@
 export const API_CONSTANTS = {
-  LOGIN_URL: '/admin/auth/login',
+  LOGIN_URL: '/auth/login',
   SIGN_UP: '/auth/register',
   // https://api.krwizard.com/hostclapapihttps://api.krwizard.com/hostclapapi/auth/register
 
