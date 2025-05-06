@@ -8,18 +8,21 @@ import { MaterialModule } from '../../../Module/material.module';
 import { LoginService } from '../../services/login.service';
 import { environment } from '../../../environments/environment';
 import { FooterComponent } from '../footer/footer.component';
+import { InsightHeaderComponent } from 'src/app/india/dash-board/dashboard/insight-board/components/insight-header/insight-header.component';
 
 @Component({
   selector: 'app-container',
   standalone: true,
   imports: [
     HeaderComponent,
+
     SidebarComponent,
     CommonModule,
     RouterModule,
     NgxPaginationModule,
     MaterialModule,
     FooterComponent,
+    InsightHeaderComponent,
   ],
   providers: [
     {
@@ -35,6 +38,7 @@ export class ContainerComponent implements OnInit {
   toggle: boolean = false;
   imageUrl = environment.imageUrl;
   defaultUser = 'assets/images/user.avif';
+  isLoggedIn = true;
 
   @Output() dataEvent = new EventEmitter<boolean>();
 
@@ -44,6 +48,9 @@ export class ContainerComponent implements OnInit {
 
   ngOnInit() {
     this.getProfileDetails();
+    // this.authService.isAuthenticated().subscribe((loggedIn) => {
+    //   this.isLoggedIn = loggedIn;
+    // });
   }
 
   receiveData(data: boolean): void {

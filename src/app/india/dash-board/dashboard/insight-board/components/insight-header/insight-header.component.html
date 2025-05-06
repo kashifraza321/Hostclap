@@ -1,36 +1,148 @@
-<div class="dashboard-header">
+<!-- <router-outlet></router-outlet> -->
+<div class="dashboard-header" [class.scrolled]="isScrolled">
   <!-- Left Section -->
+
+  <!-- This is critical -->
+
   <div class="header-left">
     <div class="site-logo">H</div>
-    <div class="menu-item">My Hub</div>
-    <div class="menu-item active">
-      <a href=""> My Customers <span class="notification-badge">19</span></a>
+
+    <a
+      class="menu-item"
+      routerLink="/in/insight/myhub"
+      routerLinkActive="active"
+      >My Hub</a
+    >
+
+    <a
+      class="menu-item"
+      routerLink="/in/insight/customer"
+      routerLinkActive="active"
+    >
+      My Customers <span class="notification-badge">19</span>
+    </a>
+
+    <a
+      class="menu-item"
+      routerLink="/in/insight/analytics"
+      routerLinkActive="active"
+      >Analytics</a
+    >
+
+    <a
+      class="menu-item"
+      routerLink="/in/insight/features"
+      routerLinkActive="active"
+    >
+      Pro Features <span class="notification-badge">3</span>
+    </a>
+
+    <a
+      class="menu-item"
+      routerLink="/in/insight/analytics"
+      routerLinkActive="active"
+      >Edit Website</a
+    >
+
+    <a
+      class="menu-item"
+      routerLink="/in/insight/upgrade"
+      routerLinkActive="active"
+    >
+      <span style="color: #f50">Upgrade</span>
+    </a>
+
+    <div class="help-circle" data-bs-toggle="modal" data-bs-target="#helpModal">
+      ?
     </div>
-    <div class="menu-item"><a href="">Analytics</a></div>
-    <div class="menu-item">
-      <a href=""> Pro Features <span class="notification-badge">3</span></a>
-    </div>
-    <div class="menu-item"><a href="">Edit Website</a></div>
-    <div class="menu-item" style="color: #f50"><a href="">Upgrade</a></div>
-    <div class="help-circle">?</div>
   </div>
 
   <!-- Right Section -->
   <div class="header-right">
+    <button class="edit-button">✎</button>
     <div class="icon-wrapper">
       <img
-        src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Gmail_Icon.png"
-        alt="Gmail"
-        width="24"
-        height="24"
+        src="../../../../../../../assets/images/market.png"
+        alt="market"
+        width="27"
+        height="27"
       />
       <span class="notification-badge">1</span>
     </div>
     <div class="icon-wrapper">
       <span class="notification-badge">19</span>
-      🔔
+      <img src="../../../../../../../assets/images/bell.png" alt="bell" />
     </div>
-    <div class="edit-button">✎</div>
-    <div class="profile-icon">👤</div>
+
+    <div class="dropdown">
+      <button
+        class="btn btn-secondary dropdown-toggle"
+        type="button"
+        id="dropdownMenuButton1"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        👤
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li><a class="dropdown-item" href="#">Personal details</a></li>
+        <li><a class="dropdown-item" href="#">Subscription</a></li>
+        <li><a class="dropdown-item" href="#">Billing details</a></li>
+        <li><a class="dropdown-item" href="#">Billing details</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- side popup -->
+<div
+  class="modal fade custom-help-modal"
+  id="helpModal"
+  tabindex="-1"
+  aria-labelledby="helpModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content" style="border-radius: 15px">
+      <div class="modal-header" style="color: white">
+        <h5 class="modal-title" id="helpModalLabel">
+          Welcome to HostClap Support
+        </h5>
+
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <h6>Got questions?</h6>
+        <div class="input-group mb-3">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search for help"
+          />
+          <button class="btn btn-outline-secondary" type="button">🔍</button>
+        </div>
+        <div>
+          <p><strong>Suggested articles</strong></p>
+          <ul class="list-group">
+            <li class="list-group-item">How to log in to my Business Hub</li>
+            <li class="list-group-item">How to log into your UENI account</li>
+            <li class="list-group-item">
+              How can customers contact me through my website?
+            </li>
+            <li class="list-group-item">
+              How can customers contact me through my website?
+            </li>
+            <li class="list-group-item">
+              How can customers contact me through my website?
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

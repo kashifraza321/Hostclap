@@ -3,11 +3,12 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import Chart, { ChartConfiguration } from 'chart.js/auto';
 // import { NgChartsModule } from 'ng2-charts';
 import * as echarts from 'echarts';
+import { InsightHeaderComponent } from '../insight-header/insight-header.component';
 
 @Component({
   selector: 'app-analytics',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, InsightHeaderComponent],
   templateUrl: './analytics.component.html',
   styleUrl: './analytics.component.css',
 })

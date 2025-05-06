@@ -1,0 +1,307 @@
+.pagewrapper {
+  padding-top: 84px;
+}
+.step-wrapper {
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
+  font-family: sans-serif;
+
+  .step-header {
+    background: linear-gradient(to right, #5e2abf, #7e2ce9);
+    color: white;
+    text-align: center;
+    padding: 20px;
+
+    h2 {
+      margin: 0;
+      .number {
+        background: white;
+        color: #7e2ce9;
+        border-radius: 50%;
+        padding: 4px 10px;
+        margin: 0 4px;
+      }
+    }
+  }
+
+  .step-content {
+    padding: 20px;
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto;
+
+    .step-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+
+      .step-number {
+        background: #f96500;
+        color: white;
+        border-radius: 50%;
+        padding: 8px 14px;
+        font-weight: bold;
+        font-size: 18px;
+      }
+
+      h3 {
+        margin: 0;
+        font-size: 22px;
+        font-weight: bold;
+      }
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      margin-bottom: 20px;
+      padding: 20px;
+
+      .card-title {
+        font-weight: bold;
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+
+      .card-body {
+        p {
+          margin: 0 0 10px;
+        }
+
+        &.center {
+          text-align: center;
+        }
+
+        .share-icons img {
+          height: 20px;
+          margin-right: 10px;
+          cursor: pointer;
+        }
+        .share-icons {
+          display: flex;
+        }
+
+        .domain-item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 10px 0;
+          border-top: 1px solid #eee;
+
+          .domain-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            .status {
+              background: #28a745;
+              color: white;
+              padding: 2px 8px;
+              border-radius: 12px;
+              font-size: 12px;
+
+              &.live {
+                background-color: #28a745;
+              }
+            }
+          }
+        }
+
+        .connect {
+          justify-content: center;
+
+          .btn-secondary {
+            background: none;
+            border: 1px dashed #ff6600;
+            color: #ff6600;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+          }
+        }
+      }
+
+      .card-footer {
+        margin-top: 10px;
+        a {
+          color: #f96500;
+          text-decoration: none;
+        }
+      }
+    }
+
+    .btn-primary {
+      background: #f96500;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 20px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+  }
+}
+
+.steps-section {
+  padding: 40px 20px;
+  font-family: sans-serif;
+  max-width: 700px;
+  width: 100%;
+  margin: 0 auto;
+
+  &.bg-light {
+    background: #f8f8f8;
+  }
+
+  .step {
+    margin-bottom: 50px;
+
+    .step-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 30px;
+      justify-content: center;
+
+      .step-number {
+        background: #f96500;
+        color: white;
+        border-radius: 50%;
+        padding: 8px 14px;
+        font-weight: bold;
+        font-size: 18px;
+      }
+
+      h3 {
+        margin: 0;
+        font-size: 22px;
+        font-weight: bold;
+      }
+    }
+
+    .card-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+
+      &.center {
+        justify-content: center;
+      }
+
+      .card {
+        background: white;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        max-width: 300px;
+        width: 100%;
+        position: relative;
+        text-align: center;
+
+        h4 {
+          font-size: 16px;
+          margin-top: 10px;
+          font-weight: bold;
+        }
+
+        p {
+          font-size: 14px;
+          color: #555;
+          margin: 10px 0;
+        }
+
+        .btn-primary {
+          background: #f96500;
+          color: white;
+          padding: 8px 16px;
+          border: none;
+          border-radius: 20px;
+          font-size: 14px;
+          cursor: pointer;
+          margin-top: 10px;
+        }
+
+        a {
+          display: block;
+          margin-top: 10px;
+          color: #f96500;
+          font-size: 13px;
+          text-decoration: none;
+        }
+
+        .card-label {
+          position: absolute;
+          top: 0;
+          right: 0;
+          background: #ddd;
+          font-size: 10px;
+          padding: 2px 6px;
+          border-bottom-left-radius: 6px;
+          font-weight: bold;
+        }
+
+        &.google {
+          border-top: 5px solid #1a73e8;
+        }
+
+        &.payment {
+          border-top: 5px solid #ff9900;
+        }
+
+        &.logo {
+          border-top: 5px solid #33c4cc;
+        }
+      }
+    }
+  }
+}
+
+.header-steps {
+  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+  color: white;
+  padding: 50px 20px;
+  text-align: center;
+
+  .container {
+    max-width: 1000px;
+    margin: auto;
+  }
+
+  .title-line {
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+
+      .step-badge {
+        background: white;
+        color: #6a11cb;
+        border-radius: 50%;
+        display: inline-block;
+        width: 36px;
+        height: 36px;
+        line-height: 36px;
+        font-weight: bold;
+        font-size: 18px;
+        margin: 0 5px;
+      }
+
+      .dash {
+        font-weight: 400;
+        font-size: 1.2rem;
+        margin: 0 8px;
+        display: inline-block;
+        color: #fff;
+      }
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      margin-top: 12px;
+      opacity: 0.9;
+    }
+  }
+}

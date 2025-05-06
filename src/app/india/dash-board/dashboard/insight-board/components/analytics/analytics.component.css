@@ -1,6 +1,10 @@
 .section {
   max-width: 1000px;
   margin: auto;
+  margin-top: 124px;
+}
+.pagewrapper {
+  margin-top: 83px;
 }
 
 .grid {
@@ -9,7 +13,7 @@
 }
 
 .grid-2 {
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
 }
 
 .grid-4 {
@@ -63,9 +67,15 @@
 .list-source li {
   border-bottom: 1px solid #eee;
   padding: 6px 0;
+  font-size: 16px;
 }
 
 .revenue {
   font-size: 30px;
   font-weight: bold;
+}
+
+.card2 {
+  min-height: 280px;
+  max-height: 280px;
 }

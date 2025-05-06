@@ -1,4 +1,13 @@
-<app-header></app-header>
+<!-- <app-header></app-header> -->
+<ng-container *ngIf="isLoggedIn; else publicHeader">
+  <app-insight-header></app-insight-header>
+  <!-- Header after login -->
+</ng-container>
+
+<ng-template #publicHeader>
+  <app-header></app-header>
+  <!-- Header before login -->
+</ng-template>
 <main>
   <router-outlet></router-outlet>
 </main>

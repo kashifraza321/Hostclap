@@ -13,21 +13,24 @@
 }
 
 .pagewrapper {
-  padding: 100px 0;
+  padding: 19px 0;
 }
 
 .purpleBg {
   background: #4053bb;
-  min-height: 300px;
+  min-height: 317px;
   padding: 90px 0;
 }
 .nav-item {
   width: 33%;
 }
+.nav-item:last-child {
+  width: 34%;
+}
 .nav-item button {
   width: 100%;
-  padding: 13px;
-  font-size: 16px;
+  padding: 20px;
+  font-size: 20px;
   font-weight: 500;
   color: #f8f9fa;
   border: none;
@@ -43,7 +46,7 @@
 }
 .tab-pane {
   background: #fff;
-  padding: 14px;
+  padding: 26px 14px;
   border: 1px solid #ccc;
   min-height: 200px;
 }
@@ -56,13 +59,32 @@ table tr td {
 table tr td {
   font-size: 13px;
 }
+table tr td img {
+  margin: 0 auto;
+  width: 20px;
+  height: 20px;
+}
+.table tbody tr {
+  transition: all 0.3s ease;
+}
+
+.table tbody tr:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-3px);
+  background-color: #fff; /* optional: keeps it clean on hover */
+  z-index: 1;
+  position: relative;
+  cursor: pointer;
+}
+
 .tabbing {
-  transform: translateY(-192px);
+  transform: translateY(-219px);
 }
 
 .headingmain {
   color: #fff;
-  padding-bottom: 30px;
+  padding-bottom: 39px;
+  font-size: 32px;
 }
 .para {
   font-size: 18px;
@@ -87,4 +109,94 @@ table tr td {
   flex-direction: column;
   align-items: center;
   margin: 40px 0;
+}
+
+/* lower section */
+.google-warning-section {
+  background-color: #ffffff;
+  padding: 40px 20px;
+  text-align: center;
+  max-width: 800px;
+  margin: -152px auto 0;
+}
+
+.warning-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ff4500;
+  font-weight: bold;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.warning-header .icon {
+  font-size: 30px;
+  margin-right: 10px;
+}
+
+.warning-header h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.google-warning-section hr {
+  margin: 20px 0;
+  border: none;
+  border-top: 1px solid #eeeeee;
+}
+
+.warning-content {
+  text-align: left;
+}
+
+.warning-content p {
+  font-size: 16px;
+  color: #333333;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.warning-content strong {
+  font-weight: bold;
+}
+
+.warning-content ul {
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.warning-content ul li {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.warning-content .quote {
+  color: #ff4500;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.google-connect-btn {
+  background-color: #4285f4;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 20px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin: 0 auto;
+}
+
+.google-connect-btn img {
+  height: 20px;
+  margin-right: 10px;
+}
+
+.google-connect-btn:hover {
+  background-color: #3367d6;
 }

@@ -1,13 +1,21 @@
 /* dashboard heasder */
 .dashboard-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: #fff;
+  padding: 23px 20px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #fff;
-  border-top: 4px solid #662d91; /* purple line */
-  padding: 10px 20px;
+  transition: box-shadow 0.3s ease;
 }
 
+.dashboard-header.scrolled {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* rest of your CSS (no changes needed to the inside styles) */
 .header-left,
 .header-right {
   display: flex;
@@ -22,13 +30,30 @@
 
 .menu-item {
   position: relative;
-  font-weight: 500;
+  padding: 10px;
+  text-decoration: none;
+  color: #333;
   cursor: pointer;
+  font-size: 14px;
 }
 
-.menu-item.active {
-  font-weight: bold;
-  border-bottom: 3px solid black;
+.menu-item.active,
+.menu-item.router-link-active {
+  color: #f50;
+  font-weight: 600;
+  background: none;
+}
+
+.menu-item.active::after,
+.menu-item.router-link-active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+  right: 10px;
+  height: 3px;
+  background-color: #f50;
+  border-radius: 2px;
 }
 
 .notification-badge {
@@ -47,6 +72,11 @@
   padding: 10px;
   border-radius: 50%;
   color: white;
+  height: 31px;
+  display: flex;
+  justify-content: center;
+  place-items: center;
+  border: none;
 }
 
 .profile-icon {
@@ -67,6 +97,95 @@
 .header-right {
   width: 200px;
 }
+
 .icon-wrapper {
   width: 100%;
+}
+
+/* side popup */
+.help-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1050;
+}
+
+.custom-help-modal .modal-dialog {
+  position: fixed;
+  bottom: -119px;
+  right: 20px;
+  margin: 0;
+  max-width: 300px;
+  width: 100%;
+  transform: translate(100%, 0);
+  transition: all 0.3s ease-in-out;
+}
+
+/* When modal is showing, slide it into view */
+.custom-help-modal.show .modal-dialog {
+  transform: translate(0, 0);
+}
+.modal-dialog-scrollable .modal-content {
+  max-height: 100%;
+  overflow: hidden;
+  min-height: 400px;
+}
+.modal-header {
+  background-color: #cd87d9;
+  color: white;
+  min-height: 155px;
+  align-items: flex-start;
+  padding: 36px 10px;
+}
+.modal-body {
+  overflow: auto;
+  max-height: 265px;
+  transform: translateY(-76px);
+  min-height: 200px;
+  max-width: 273px;
+  width: 100%;
+  margin: 0 auto;
+  background: #8b66cc;
+  border-radius: 7px;
+}
+.modal-title {
+  font-size: 18px;
+  color: #fff;
+}
+
+.modal-body input {
+  min-height: 32px;
+}
+.modal-body h6 {
+  font-size: 16px;
+  color: #fff;
+}
+.modal-body p {
+  font-size: 14px;
+  color: #fff;
+}
+
+#dropdownMenuButton1 {
+  background: #fff;
+  border: none;
+  font-size: 20px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dropdown ul {
+  display: block;
+  min-height: 199px !important;
+  width: 147px !important;
+  transform: translate3d(-78.0649px, 1.4805px, 0px) !important;
 }

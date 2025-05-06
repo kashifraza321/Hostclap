@@ -1,5 +1,11 @@
-<div class="pagewrapper mt-4">
-  <app-insight-header></app-insight-header>
+<router-outlet></router-outlet>
+<!-- <app-insight-header></app-insight-header> -->
+
+<div class="main-content">
+  <router-outlet></router-outlet>
+</div>
+<div class="pagewrapper">
+  <!-- <app-insight-header></app-insight-header> -->
   <div class="purpleBg"></div>
   <div class="tabbing">
     <h2 class="text-center mb-4 headingmain">My Customers</h2>
@@ -70,7 +76,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr (click)="openBookingRequestModal()">
                 <td>
                   <input type="checkbox" />
                 </td>
@@ -79,7 +85,10 @@
                 <td>2025-04-01</td>
                 <td>Yes</td>
                 <td>
-                  <button class="btn btn-danger">Delete</button>
+                  <img
+                    src="../../../../../assets/images/delete.png"
+                    alt="delete"
+                  />
                 </td>
               </tr>
             </tbody>
@@ -91,7 +100,39 @@
           role="tabpanel"
           aria-labelledby="profile-tab"
         >
-          ...
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>
+                  <input type="checkbox" />
+                </th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Message</th>
+                <th>Date</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <input type="checkbox" />
+                </td>
+                <td>John Doe</td>
+                <td>+44 123 456 789</td>
+                <td>Testinggmail.com</td>
+                <td>Testxsxsss.</td>
+                <td>9 Mar</td>
+                <td>
+                  <img
+                    src="../../../../../assets/images/delete.png"
+                    alt="delete"
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
         <div
           class="tab-pane fade"
@@ -112,4 +153,47 @@
   </div>
 
   <!-- Tabs Content -->
+  <section class="google-warning-section">
+    <div class="warning-header">
+      <span class="icon">❗</span>
+      <h2>Hurry up, your customers are leaving!</h2>
+    </div>
+
+    <hr />
+
+    <div class="warning-content">
+      <p>
+        Every day, thousands of people use Google to find services like yours
+        online. They read reviews, view pictures and use directions to discover
+        new businesses daily.
+        <br /><br />
+        We noticed that
+        <strong
+          >your Google Business Profile needs to be connected to your UENI
+          account.</strong
+        >
+        <br /><br />
+        This means that you're missing out on a lot of great opportunities,
+        including:
+      </p>
+
+      <ul>
+        <li><strong>Displaying Google Reviews</strong> on your page.</li>
+        <li><strong>Optimisation</strong> of your Google Business Profile.</li>
+      </ul>
+
+      <p class="quote">
+        "64% of consumers have used Google Business Profiles to find contact
+        details for local businesses."
+      </p>
+
+      <button class="google-connect-btn">
+        <img
+          src="../../../../../assets/images/googleicon.png"
+          alt="Google Logo"
+        />
+        Connect my Google account
+      </button>
+    </div>
+  </section>
 </div>
