@@ -61,17 +61,18 @@ export class LoginComponent {
     }
 
     const login = {
-      email: this.loginForm.value.email, 
+      email: this.loginForm.value.email,
       password: this.loginForm.value.password,
     };
 
     this._login.login(login).subscribe(
       (result) => {
+        console.log('userrrrrrrr', result);
         if (result.status === 200) {
           localStorage.setItem('isLoggedIn', 'true');
           localStorage.setItem('token', result.data.token);
           this.alertService.success('Login successfully');
-          this._route.navigate(['/dashboard']);
+          this._route.navigate(['/in/insight/myhub']);
         } else {
           // Handle invalid login response if necessary
           this.alertService.error(
