@@ -9,6 +9,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
+import { validate } from 'uuid';
 
 @Component({
   selector: 'app-sign-up',
@@ -33,9 +34,18 @@ export class SignUpComponent {
     this.accountForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      // phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
+      companyname: [''],
+      phonenumber: [
+        '',
+        [Validators.required, Validators.pattern(/^[0-9]{10}$/)],
+      ],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
+      address: [''],
+      city: [''],
+      state: [''],
+      pincode: [''],
+      doyouneed: [''],
     });
   }
   togglePassword() {
@@ -51,7 +61,7 @@ export class SignUpComponent {
           if (response.status === 200) {
             alert('Sign-up successful!');
             this._router.navigate(['/login']); // Or wherever you want to redirect
-          }else if (response.status === 409) {
+          } else if (response.status === 409) {
             alert('User already exists.!');
           } else {
             alert('Sign-up failed. Please try again.');

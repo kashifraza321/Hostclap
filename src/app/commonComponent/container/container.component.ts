@@ -38,7 +38,8 @@ export class ContainerComponent implements OnInit {
   toggle: boolean = false;
   imageUrl = environment.imageUrl;
   defaultUser = 'assets/images/user.avif';
-  isLoggedIn = true;
+  // isLoggedIn = true;
+  isLoggedIn: boolean = false;
 
   @Output() dataEvent = new EventEmitter<boolean>();
 
@@ -51,6 +52,8 @@ export class ContainerComponent implements OnInit {
     // this.authService.isAuthenticated().subscribe((loggedIn) => {
     //   this.isLoggedIn = loggedIn;
     // });
+
+    this.isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
   }
 
   receiveData(data: boolean): void {

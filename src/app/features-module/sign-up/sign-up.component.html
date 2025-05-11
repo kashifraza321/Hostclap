@@ -33,20 +33,6 @@
       Last name is required.
     </div>
 
-    <!-- <input
-      type="text"
-      formControlName="phone"
-      placeholder="Your Phone Number"
-    />
-    <div
-      *ngIf="
-        accountForm.get('phone')?.touched && accountForm.get('phone')?.invalid
-      "
-      class="error"
-    >
-      Valid phone number is required.
-    </div> -->
-
     <input type="email" formControlName="email" placeholder="Your Email" />
     <div
       *ngIf="
@@ -74,6 +60,41 @@
     >
       Password must be at least 6 characters.
     </div>
+
+    <input
+      type="text"
+      formControlName="phonenumber"
+      placeholder="Phone Number"
+    />
+    <div
+      *ngIf="
+        accountForm.get('phonenumber')?.touched &&
+        accountForm.get('phonenumber')?.invalid
+      "
+      class="error"
+    >
+      Valid phone number is required.
+    </div>
+
+    <input
+      type="text"
+      formControlName="companyname"
+      placeholder="Company Name"
+    />
+
+    <input type="text" formControlName="address" placeholder="Address" />
+
+    <input type="text" formControlName="city" placeholder="City" />
+
+    <input type="text" formControlName="state" placeholder="State" />
+
+    <input type="text" formControlName="pincode" placeholder="Pincode" />
+
+    <input
+      type="text"
+      formControlName="doyouneed"
+      placeholder="What do you need?"
+    />
 
     <p class="info-text">
       You are creating a UENI account for a business in the
