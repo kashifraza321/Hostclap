@@ -84,12 +84,18 @@
       >
         👤
       </button>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      
+ 
+      
+      <header *ngIf="!isAuthenticated()" (click)="onHeaderClick()">
+        My Application 
+      </header>
+      <ul *ngIf="isAuthenticated()" class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
         <li><a class="dropdown-item" href="#">Personal details</a></li>
         <li><a class="dropdown-item" href="#">Subscription</a></li>
         <li><a class="dropdown-item" href="#">Billing details</a></li>
         <li><a class="dropdown-item" href="#">Billing details</a></li>
-        <li><a class="dropdown-item" href="#">Sign out</a></li>
+        <li><a class="dropdown-item"  (click)="logout()">Sign out</a></li>
       </ul>
     </div>
   </div>
