@@ -1,5 +1,5 @@
 <!-- <router-outlet></router-outlet> -->
-<div class="dashboard-header" [class.scrolled]="isScrolled">
+<div class="dashboard-header" [class.scrolled]="isScrolled" *ngIf="">
   <!-- Left Section -->
 
   <!-- This is critical -->
@@ -94,6 +94,97 @@
     </div>
   </div>
 </div>
+
+<!-- responsive header -->
+<div class="dashboard-header" [class.scrolled]="isScrolled">
+  <!-- Hamburger Toggle for Mobile -->
+  <div class="site-logo">H</div>
+  <button class="hamburger" (click)="menuOpen = !menuOpen">&#9776;</button>
+  <!-- Left Section -->
+  <div class="header-left" [class.show]="menuOpen">
+    <a
+      class="menu-item"
+      routerLink="/in/insight/myhub"
+      routerLinkActive="active"
+      >My Hub</a
+    >
+    <a
+      class="menu-item"
+      routerLink="/in/insight/customer"
+      routerLinkActive="active"
+    >
+      My Customers <span class="notification-badge">19</span>
+    </a>
+    <a
+      class="menu-item"
+      routerLink="/in/insight/analytics"
+      routerLinkActive="active"
+      >Analytics</a
+    >
+    <a
+      class="menu-item"
+      routerLink="/in/insight/features"
+      routerLinkActive="active"
+    >
+      Pro Features <span class="notification-badge">3</span>
+    </a>
+    <a
+      class="menu-item"
+      routerLink="/in/insight/analytics"
+      routerLinkActive="active"
+      >Edit Website</a
+    >
+    <a
+      class="menu-item"
+      routerLink="/in/insight/upgrade"
+      routerLinkActive="active"
+    >
+      <span style="color: #f50">Upgrade</span>
+    </a>
+
+    <div class="help-circle" data-bs-toggle="modal" data-bs-target="#helpModal">
+      ?
+    </div>
+  </div>
+
+  <!-- Right Section -->
+  <div class="header-right">
+    <button class="edit-button">✎</button>
+    <div class="icon-wrapper">
+      <img
+        src="../../../../../../../assets/images/market.png"
+        alt="market"
+        width="27"
+        height="27"
+      />
+      <span class="notification-badge">1</span>
+    </div>
+    <div class="icon-wrapper">
+      <span class="notification-badge">19</span>
+      <img src="../../../../../../../assets/images/bell.png" alt="bell" />
+    </div>
+
+    <div class="dropdown">
+      <button
+        class="btn btn-secondary dropdown-toggle"
+        type="button"
+        id="dropdownMenuButton1"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        👤
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li><a class="dropdown-item" href="#">Personal details</a></li>
+        <li><a class="dropdown-item" href="#">Subscription</a></li>
+        <li><a class="dropdown-item" href="#">Billing details</a></li>
+        <li><a class="dropdown-item" href="#">Billing details</a></li>
+        <li><a class="dropdown-item" href="#">Sign out</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- responsive header -->
 
 <!-- side popup -->
 <div

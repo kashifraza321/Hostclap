@@ -10,9 +10,22 @@ import { RouterModule } from '@angular/router';
 })
 export class InsightHeaderComponent {
   isScrolled = false;
+  menuOpen = false;
+
+  // toggleMobileMenu() {
+  //   this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  // }
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
     this.isScrolled = window.scrollY > 0;
+  }
+
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+  }
+
+  closeMenu() {
+    this.menuOpen = false;
   }
 }

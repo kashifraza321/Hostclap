@@ -200,3 +200,14 @@ table tr td img {
 .google-connect-btn:hover {
   background-color: #3367d6;
 }
+
+@media (max-width: 575px) {
+  .nav-item button {
+    font-size: 17px;
+    padding: 20px 6px;
+  }
+  .tabWrapper {
+    width: 96%;
+    margin: 0 auto;
+  }
+}

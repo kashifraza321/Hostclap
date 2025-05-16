@@ -72,7 +72,7 @@ export class LoginComponent {
           localStorage.setItem('isLoggedIn', 'true');
           localStorage.setItem('token', result.data.token);
           this.alertService.success('Login successfully');
-          this._route.navigate(['/in/insight/myhub']);
+          this._route.navigate(['/in/insight/customer']);
         } else {
           // Handle invalid login response if necessary
           this.alertService.error(
