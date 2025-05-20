@@ -68,8 +68,17 @@ export class SignUpComponent {
           }
         },
         error: (err) => {
-          console.error('Sign-up error:', err);
-          alert('An error occurred during sign-up. Please try again.');
+          if (err.status === 409) {
+            alert('User already exists.!');
+          } else {
+            alert('Sign-up failed. Please try again.');
+           
+            alert('An error occurred. Please try again later.');
+            console.error('Sign-up error:', err);
+            
+          }
+         
+        
         },
       });
     } else {
