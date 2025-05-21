@@ -60,7 +60,7 @@
   <!-- Right Section -->
   <div class="header-right">
     <button class="edit-button">✎</button>
-    <div class="icon-wrapper">
+    <div *ngIf="isAuthenticated()" class="icon-wrapper">
       <img
         src="../../../../../../../assets/images/market.png"
         alt="market"
@@ -69,12 +69,12 @@
       />
       <span class="notification-badge">1</span>
     </div>
-    <div class="icon-wrapper">
+    <div *ngIf="isAuthenticated()" class="icon-wrapper">
       <span class="notification-badge">19</span>
       <img src="../../../../../../../assets/images/bell.png" alt="bell" />
     </div>
 
-    <div class="dropdown">
+    <div *ngIf="isAuthenticated()"  class="dropdown">
       <button
         class="btn btn-secondary dropdown-toggle"
         type="button"
@@ -85,11 +85,9 @@
         👤
       </button>
       
- 
+      <button  *ngIf="!isAuthenticated()" (click)="onHeaderClick()" type="button" class="loginBtn"> Login </button>
       
-      <header *ngIf="!isAuthenticated()" (click)="onHeaderClick()">
-        My Application 
-      </header>
+      
       <ul *ngIf="isAuthenticated()" class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
         <li><a class="dropdown-item" href="#">Personal details</a></li>
         <li><a class="dropdown-item" href="#">Subscription</a></li>

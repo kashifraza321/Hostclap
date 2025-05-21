@@ -9,7 +9,7 @@ import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { LoginService } from '../../services/login.service';
 import { AlertService } from '../../services/Toaster/alert.service';
-
+import { gapi } from 'gapi-script';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -32,9 +32,21 @@ export class LoginComponent {
   ) {}
 
   ngOnInit() {
-    this.buildForm();
+    this.buildForm(); 
+    gapi.load('auth2', () => {
+      gapi.auth2.init({
+        client_id: '621564911356-jr2mo7msre6a4e2ph8et3bp66t7t1n18.apps.googleusercontent.com'
+      });
+    });
   }
-
+  signIn() {
+    const authInstance = gapi.auth2.getAuthInstance();
+    authInstance.signIn().then(user => {
+      const profile = user.getBasicProfile();
+      console.log("User Logged In:", profile.getEmail());
+      // You can send profile info to the backend for further verification
+    });
+  }
   togglePasswordVisibility(): void {
     this.passwordVisible = !this.passwordVisible;
   }

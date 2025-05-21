@@ -32,6 +32,7 @@ export class InsightHeaderComponent {
     const tokenKey = 'token';
     localStorage.removeItem(tokenKey);
     console.log('Token cleared from local storage.');
+    this._router.navigate(['/']); 
   }
   // Check if a token exists
   isAuthenticated(): boolean {
