@@ -1,0 +1,200 @@
+<div class="mainWrapper">
+  <div class="purpleBg">
+    <h1>My account</h1>
+  </div>
+
+  <!-- tabbing -->
+  <!-- Nav Tabs -->
+  <div class="container">
+    <div class="tabContainer">
+      <ul class="nav nav-tabs" id="accountTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link active"
+            id="personal-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#personal"
+            type="button"
+            role="tab"
+          >
+            Personal details
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="subscription-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#subscription"
+            type="button"
+            role="tab"
+          >
+            Subscription
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="billing-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#billing"
+            type="button"
+            role="tab"
+          >
+            Billing details
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="invoice-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#invoice"
+            type="button"
+            role="tab"
+          >
+            Invoice history
+          </button>
+        </li>
+      </ul>
+
+      <!-- Tab Content -->
+      <div class="tab-content mt-4">
+        <div class="tab-pane fade show active" id="personal" role="tabpanel">
+          <form
+            [formGroup]="profileForm"
+            (ngSubmit)="onSubmit()"
+            class="profile-container"
+          >
+            <h2>Your Name</h2>
+            <div class="form-row">
+              <div class="form-group">
+                <label>First Name</label>
+                <input type="text" formControlName="firstName" />
+              </div>
+              <div class="form-group">
+                <label>Surname</label>
+                <input type="text" formControlName="lastName" />
+              </div>
+            </div>
+
+            <h2>Contact Details</h2>
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" formControlName="email" readonly />
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Phone Number</label>
+                <input type="tel" formControlName="phone" />
+              </div>
+              <div class="form-group">
+                <label>WhatsApp number</label>
+                <input
+                  type="tel"
+                  formControlName="whatsapp"
+                  [readonly]="profileForm.get('useSame')?.value"
+                />
+              </div>
+            </div>
+
+            <div class="form-check">
+              <input type="checkbox" formControlName="useSame" />
+              <label>Use the same for WhatsApp</label>
+            </div>
+
+            <button type="submit" class="subbutton">Save Profile</button>
+          </form>
+          <!-- change password form -->
+          <div class="passwordForm">
+            <form
+              [formGroup]="passwordForm"
+              (ngSubmit)="onSubmit()"
+              class="change-password-form"
+            >
+              <h2>Change Password</h2>
+              <div class="form-row">
+                <div class="form-group password-wrapper">
+                  <input
+                    [type]="showPassword ? 'text' : 'password'"
+                    formControlName="newPassword"
+                    placeholder="New Password"
+                  />
+                  <button type="button" (click)="togglePasswordVisibility()">
+                    <img src="assets/icons/eye.svg" *ngIf="!showPassword" />
+                    <img src="assets/icons/eye-off.svg" *ngIf="showPassword" />
+                  </button>
+                </div>
+
+                <div class="form-group password-wrapper">
+                  <input
+                    [type]="showConfirmPassword ? 'text' : 'password'"
+                    formControlName="confirmPassword"
+                    placeholder="Confirm New Password"
+                  />
+                  <button
+                    type="button"
+                    (click)="toggleConfirmPasswordVisibility()"
+                  >
+                    <img
+                      src="assets/icons/eye.svg"
+                      *ngIf="!showConfirmPassword"
+                    />
+                    <img
+                      src="assets/icons/eye-off.svg"
+                      *ngIf="showConfirmPassword"
+                    />
+                  </button>
+                </div>
+              </div>
+
+              <button class="subbutton" type="submit">Save Password</button>
+            </form>
+          </div>
+          <div class="emailForm">
+            <form
+              [formGroup]="emailForm"
+              (ngSubmit)="onSubmit()"
+              class="change-password-form"
+            >
+              <h2>Change Email</h2>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <input
+                    type="email"
+                    formControlName="newEmail"
+                    placeholder="New Email"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <input
+                    type="email"
+                    formControlName="confirmEmail"
+                    placeholder="Confirm New Email"
+                  />
+                </div>
+              </div>
+
+              <button class="subbutton" type="submit">Save Email</button>
+            </form>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="subscription" role="tabpanel">
+          <!-- Subscription content -->
+          <p>Subscription content goes here.</p>
+        </div>
+        <div class="tab-pane fade" id="billing" role="tabpanel">
+          <!-- Billing details content -->
+          <p>Billing details content goes here.</p>
+        </div>
+        <div class="tab-pane fade" id="invoice" role="tabpanel">
+          <!-- Invoice history content -->
+          <p>Invoice history content goes here.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

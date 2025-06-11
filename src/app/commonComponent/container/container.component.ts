@@ -48,12 +48,20 @@ export class ContainerComponent implements OnInit {
   private carousel: any;
 
   ngOnInit() {
-    this.getProfileDetails();
+    // this.getProfileDetails();
+    console.log(' Insight Header Loaded');
     // this.authService.isAuthenticated().subscribe((loggedIn) => {
     //   this.isLoggedIn = loggedIn;
     // });
 
-    this.isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    // this.isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    const currentStatus = localStorage.getItem('isLoggedIn') === 'true';
+    this.loginService.setLoginStatus(currentStatus);
+
+    this.loginService.isLoggedIn$.subscribe((status) => {
+      console.log(' isLoggedIn status changed:', status);
+      this.isLoggedIn = status;
+    });
   }
 
   receiveData(data: boolean): void {

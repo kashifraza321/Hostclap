@@ -62,7 +62,7 @@
     <button class="edit-button">✎</button>
     <div *ngIf="isAuthenticated()" class="icon-wrapper">
       <img
-        src="../../../../../../../assets/images/market.png"
+        src="../../../../../../../assets/images/icons8-google-business-50.png"
         alt="market"
         width="27"
         height="27"
@@ -74,7 +74,7 @@
       <img src="../../../../../../../assets/images/bell.png" alt="bell" />
     </div>
 
-    <div *ngIf="isAuthenticated()"  class="dropdown">
+    <div *ngIf="isAuthenticated()" class="dropdown">
       <button
         class="btn btn-secondary dropdown-toggle"
         type="button"
@@ -84,16 +84,26 @@
       >
         👤
       </button>
-      
-      <button  *ngIf="!isAuthenticated()" (click)="onHeaderClick()" type="button" class="loginBtn"> Login </button>
-      
-      
-      <ul *ngIf="isAuthenticated()" class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+
+      <button
+        *ngIf="!isAuthenticated()"
+        (click)="onHeaderClick()"
+        type="button"
+        class="loginBtn"
+      >
+        Login
+      </button>
+
+      <ul
+        *ngIf="isAuthenticated()"
+        class="dropdown-menu"
+        aria-labelledby="dropdownMenuButton1"
+      >
         <li><a class="dropdown-item" href="#">Personal details</a></li>
         <li><a class="dropdown-item" href="#">Subscription</a></li>
         <li><a class="dropdown-item" href="#">Billing details</a></li>
         <li><a class="dropdown-item" href="#">Billing details</a></li>
-        <li><a class="dropdown-item"  (click)="logout()">Sign out</a></li>
+        <li><a class="dropdown-item" (click)="logout()">Sign out</a></li>
       </ul>
     </div>
   </div>
@@ -156,7 +166,7 @@
     <button class="edit-button">✎</button>
     <div class="icon-wrapper">
       <img
-        src="../../../../../../../assets/images/market.png"
+        src="../../../../../../../assets/images/icons8-google-business-50.png"
         alt="market"
         width="27"
         height="27"
@@ -179,11 +189,13 @@
         👤
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-        <li><a class="dropdown-item" href="#">Personal details</a></li>
+        <li>
+          <a class="dropdown-item" (click)="getProfile()">Personal details</a>
+        </li>
         <li><a class="dropdown-item" href="#">Subscription</a></li>
         <li><a class="dropdown-item" href="#">Billing details</a></li>
         <li><a class="dropdown-item" href="#">Billing details</a></li>
-        <li><a class="dropdown-item" href="#">Sign out</a></li>
+        <li><a class="dropdown-item" (click)="logout()">Sign out</a></li>
       </ul>
     </div>
   </div>

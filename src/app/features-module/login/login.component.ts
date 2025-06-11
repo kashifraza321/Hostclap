@@ -19,6 +19,7 @@ import { gapi } from 'gapi-script';
   providers: [LoginService],
 })
 export class LoginComponent {
+  declare gapi: any;
   submitted = false;
   loginForm!: FormGroup;
   passwordVisible: boolean = false;
@@ -32,18 +33,19 @@ export class LoginComponent {
   ) {}
 
   ngOnInit() {
-    this.buildForm(); 
+    this.buildForm();
     gapi.load('auth2', () => {
       gapi.auth2.init({
-        client_id: '621564911356-jr2mo7msre6a4e2ph8et3bp66t7t1n18.apps.googleusercontent.com'
+        client_id:
+          '621564911356-jr2mo7msre6a4e2ph8et3bp66t7t1n18.apps.googleusercontent.com',
       });
     });
   }
   signIn() {
     const authInstance = gapi.auth2.getAuthInstance();
-    authInstance.signIn().then(user => {
+    authInstance.signIn().then((user: gapi.auth2.GoogleUser) => {
       const profile = user.getBasicProfile();
-      console.log("User Logged In:", profile.getEmail());
+      console.log('User Logged In:', profile.getEmail());
       // You can send profile info to the backend for further verification
     });
   }
@@ -81,9 +83,11 @@ export class LoginComponent {
       (result) => {
         console.log('userrrrrrrr', result);
         if (result.status === 200) {
+          this._login.setLoginStatus(true);
           localStorage.setItem('isLoggedIn', 'true');
           localStorage.setItem('token', result.data.token);
           this.alertService.success('Login successfully');
+
           this._route.navigate(['/in/insight/customer']);
         } else {
           // Handle invalid login response if necessary
