@@ -1,12 +1,51 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { EditorHeaderComponent } from '../editor-header/editor-header.component';
+import { EditorSidebarComponent } from '../editor-sidebar/editor-sidebar.component';
+import { EditorRightSideComponent } from '../editor-right-side/editor-right-side.component';
+import { RouterModule, RouterOutlet } from '@angular/router';
+import { ThemeComponent } from '../theme/theme/theme.component';
 
 @Component({
   selector: 'app-editor-layout',
   standalone: true,
-  imports: [],
+  imports: [
+    CommonModule,
+    EditorHeaderComponent,
+    EditorSidebarComponent,
+    EditorRightSideComponent,
+    RouterOutlet,
+  ],
   templateUrl: './editor-layout.component.html',
-  styleUrl: './editor-layout.component.css'
+  styleUrl: './editor-layout.component.css',
 })
 export class EditorLayoutComponent {
+  selectedTemplate: string = 'default';
+  showSidebar = true;
+  currentComponent: any = null;
 
+  loadMenu(menu: string) {
+    console.log('EditorLayout received menu click:', menu);
+    this.showSidebar = false;
+
+    switch (menu) {
+      case 'theme':
+        this.currentComponent = ThemeComponent;
+        break;
+      // case 'pages':
+      //   this.currentComponent = PagesComponent;
+      //   break;
+      // case 'sections':
+      //   this.currentComponent = SectionsComponent;
+      //   break;
+      // case 'settings':
+      //   this.currentComponent = SettingsComponent;
+      //   break;
+    }
+  }
+
+  backToSidebar() {
+    this.showSidebar = true;
+    this.currentComponent = null;
+  }
 }

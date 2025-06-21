@@ -1,1 +1,77 @@
-<p>editor-sidebar works!</p>
+<div class="sidebar">
+  <h3>Website</h3>
+
+  <ul class="sidebrMenu">
+    <li>
+      <!-- <a routerLink="/in/insight/editor/theme" routerLinkActive="active">
+        Theme >
+      </a> -->
+      <a (click)="menuClicked('theme')">
+        <span
+          ><img
+            src="../../../../../../../assets/images/icons8-drop-24.png"
+            alt=""
+            width="20"
+            height="20"
+        /></span>
+        Theme
+        <span class="chevronIcon"
+          ><img
+            src="../../../../../../../assets/images/icons8-chevron-right-24.png"
+            alt=""
+        /></span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="['theme']">
+        <span
+          ><img
+            src="../../../../../../../assets/images/icons8-pages-50.png"
+            alt="icon"
+            width="20"
+            height="20"
+        /></span>
+        Pages
+        <span class="chevronIcon"
+          ><img
+            src="../../../../../../../assets/images/icons8-chevron-right-24.png"
+            alt=""
+        /></span>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/sections" routerLinkActive="active">
+        <span
+          ><img
+            src="../../../../../../../assets/images/icons8-to-do-24.png"
+            alt="icon"
+            width="20"
+            height="20"
+        /></span>
+        Sections
+        <span class="chevronIcon"
+          ><img
+            src="../../../../../../../assets/images/icons8-chevron-right-24.png"
+            alt=""
+        /></span>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/settings" routerLinkActive="active">
+        <span
+          ><img
+            src="../../../../../../../assets/images/icons8-settings-24.png"
+            alt="icon"
+            width="20"
+            height="20"
+        /></span>
+        Settings
+        <span class="chevronIcon"
+          ><img
+            src="../../../../../../../assets/images/icons8-chevron-right-24.png"
+            alt=""
+        /></span>
+      </a>
+    </li>
+  </ul>
+</div>

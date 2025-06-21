@@ -85,7 +85,10 @@ export class LoginComponent {
         if (result.status === 200) {
           this._login.setLoginStatus(true);
           localStorage.setItem('isLoggedIn', 'true');
+
           localStorage.setItem('token', result.data.token);
+          localStorage.setItem('userId', result.data._id);
+          console.log('User IDvsmvkkkkkkkkk:', result.data._id);
           this.alertService.success('Login successfully');
 
           this._route.navigate(['/in/insight/customer']);

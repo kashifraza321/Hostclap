@@ -1,8 +1,8 @@
 .sidebar {
+  width: 200px;
+  padding: 20px;
   background: #fff;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  height: 100%;
 }
 
 .sidebar h3 {
@@ -25,7 +25,6 @@
   color: #333;
   display: flex;
   align-items: center;
-  font-size: 18px;
 }
 
 .sidebar a.active {
@@ -35,12 +34,4 @@
 
 .sidebar span {
   margin-right: 10px;
-}
-.chevronIcon {
-  margin-left: auto;
-}
-.sidebrMenu li {
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-  padding: 15px 2px;
-  margin: 20px 0;
 }

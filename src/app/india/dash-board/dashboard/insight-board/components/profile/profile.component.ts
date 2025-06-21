@@ -31,17 +31,21 @@ export class ProfileComponent {
   userId: any;
 
   ngOnInit(): void {
+    this.userId = localStorage.getItem('userId');
+    if (this.userId) {
+      this.getProfileDetail();
+    } else {
+      console.error('User ID not found in localStorage.');
+    }
     this.initializeForms();
-    this.getProfileDetail();
   }
 
-  // Form initialization in a separate function for clarity
   initializeForms() {
     this.profileForm = this.fb.group({
-      firstName: [''],
-      lastName: [''],
-      email: [''],
-      phone: [''],
+      firstName: ['', [Validators.required, Validators.minLength(3)]],
+      lastName: ['', [Validators.required, Validators.minLength(3)]],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
       whatsapp: [''],
       useSame: [true],
     });
@@ -57,19 +61,19 @@ export class ProfileComponent {
     });
 
     // Auto update WhatsApp when checkbox is selected
-    this.profileForm.get('useSame')?.valueChanges.subscribe((val) => {
-      if (val) {
-        const phone = this.profileForm.get('phone')?.value;
-        this.profileForm.get('whatsapp')?.setValue(phone);
-      }
-    });
+    // this.profileForm.get('useSame')?.valueChanges.subscribe((val) => {
+    //   if (val) {
+    //     const phone = this.profileForm.get('phone')?.value;
+    //     this.profileForm.get('whatsapp')?.setValue(phone);
+    //   }
+    // });
 
     // Sync WhatsApp when phone changes and checkbox is checked
-    this.profileForm.get('phone')?.valueChanges.subscribe((phone) => {
-      if (this.profileForm.get('useSame')?.value) {
-        this.profileForm.get('whatsapp')?.setValue(phone);
-      }
-    });
+    // this.profileForm.get('phone')?.valueChanges.subscribe((phone) => {
+    //   if (this.profileForm.get('useSame')?.value) {
+    //     this.profileForm.get('whatsapp')?.setValue(phone);
+    //   }
+    // });
   }
 
   togglePasswordVisibility() {
@@ -81,26 +85,48 @@ export class ProfileComponent {
   }
 
   getProfileDetail() {
-    this.profileService.getProfile().subscribe({
-      next: (data: any) => {
-        console.log(data, 'Fetched Profile Data');
-        this.profileForm.patchValue({
-          firstName: data.firstName,
-          lastName: data.lastName,
-          email: data.email,
-          phone: data.phone,
-          whatsapp: data.whatsapp,
-          useSame: data.useSame ?? true, // default true if not available
-        });
-      },
-      error: (err) => {
-        console.error('Error fetching profile:', err);
-      },
+    this.profileService.getProfile(this.userId).subscribe((data: any) => {
+      console.log('Profile Data:', data);
+      this.profileForm.patchValue({
+        firstName: data.data?.userId.firstName || '_',
+        lastName: data.data?.userId.lastName || '_',
+        email: data.data.contactInfo?.email,
+        phone: data.data.contactInfo?.phone,
+        whatsapp: data.data.contactInfo?.phone,
+        useSame: true,
+      });
+      this.emailForm.patchValue({
+        newEmail: data.data.contactInfo?.email || '__',
+        confirmEmail: data.data.contactInfo?.email || '__',
+      });
     });
   }
 
+  // profileForm
+
   onSubmit() {
-    console.log('Form Submitted:', this.profileForm.value);
-    // TODO: Call API to update profile here
+    if (this.profileForm.invalid) {
+      console.log('Form is invalid');
+      return;
+    }
+
+    const payload = {
+      firstName: this.profileForm.get('firstName')?.value,
+      lastName: this.profileForm.get('lastName')?.value,
+      phoneNumber: this.profileForm.get('phone')?.value,
+    };
+
+    console.log('Payload to send:', payload);
+
+    this.profileService.updateProfile(payload).subscribe({
+      next: (res) => {
+        console.log('Profile updated successfully:', res);
+        alert('Profile updated successfully!');
+      },
+      error: (err) => {
+        console.error('Failed to update profile:', err);
+        alert('Failed to update profile. Please try again.');
+      },
+    });
   }
 }

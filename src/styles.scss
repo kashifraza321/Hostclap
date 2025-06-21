@@ -169,3 +169,12 @@ body {
 .main {
   padding: 115px 0;
 }
+
+.backBtn {
+  background: none;
+  border: none;
+  display: flex;
+  gap: 1px;
+  align-items: center;
+  font-size: 15px;
+}

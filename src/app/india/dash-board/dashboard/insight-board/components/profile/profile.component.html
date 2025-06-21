@@ -71,10 +71,29 @@
               <div class="form-group">
                 <label>First Name</label>
                 <input type="text" formControlName="firstName" />
+                <div
+                  *ngIf="
+                    profileForm.get('firstName')?.touched &&
+                    profileForm.get('firstName')?.invalid
+                  "
+                  class="error"
+                >
+                  First Name is required.
+                </div>
               </div>
+
               <div class="form-group">
-                <label>Surname</label>
+                <label>Last Name</label>
                 <input type="text" formControlName="lastName" />
+                <div
+                  *ngIf="
+                    profileForm.get('lastName')?.touched &&
+                    profileForm.get('lastName')?.invalid
+                  "
+                  class="error"
+                >
+                  Last Name is required.
+                </div>
               </div>
             </div>
 
@@ -84,28 +103,23 @@
               <input type="email" formControlName="email" readonly />
             </div>
 
-            <div class="form-row">
-              <div class="form-group">
-                <label>Phone Number</label>
-                <input type="tel" formControlName="phone" />
+            <div class="form-group">
+              <label>Phone Number</label>
+              <input type="tel" formControlName="phone" />
+              <div
+                *ngIf="
+                  profileForm.get('phone')?.touched &&
+                  profileForm.get('phone')?.invalid
+                "
+                class="error"
+              >
+                Phone Number is required and must be valid.
               </div>
-              <div class="form-group">
-                <label>WhatsApp number</label>
-                <input
-                  type="tel"
-                  formControlName="whatsapp"
-                  [readonly]="profileForm.get('useSame')?.value"
-                />
-              </div>
-            </div>
-
-            <div class="form-check">
-              <input type="checkbox" formControlName="useSame" />
-              <label>Use the same for WhatsApp</label>
             </div>
 
             <button type="submit" class="subbutton">Save Profile</button>
           </form>
+
           <!-- change password form -->
           <div class="passwordForm">
             <form

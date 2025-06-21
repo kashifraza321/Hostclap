@@ -1,0 +1,156 @@
+.classicWrapper {
+  font-family: "Segoe UI", sans-serif;
+  color: #333;
+  background: #f9f9f9;
+}
+
+.classic-top-bar {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  padding: 8px 20px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.classic-btn {
+  background: #3498db;
+  color: #fff;
+  border: none;
+  padding: 5px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.classic-header-info {
+  background: #ecf0f1;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+}
+
+.classic-nav {
+  background: #34495e;
+  padding: 10px;
+}
+
+.classic-nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.classic-nav a {
+  color: #ecf0f1;
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.classic-hero {
+  background: url("/assets/images/hero-classic.jpg") no-repeat center
+    center/cover;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-text {
+  background: rgba(44, 62, 80, 0.7);
+  padding: 20px;
+  color: white;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.classic-services {
+  padding: 30px 20px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  background: #fff;
+}
+
+.service-card {
+  background: #ecf0f1;
+  padding: 15px;
+  border: 1px solid #ddd;
+  width: 250px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.service-card h3 {
+  margin-top: 0;
+}
+
+.service-card button {
+  background: #2980b9;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.classic-contact-form {
+  padding: 30px 20px;
+  text-align: center;
+  background: #f9f9f9;
+}
+
+.classic-contact-form form {
+  display: grid;
+  gap: 10px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.classic-contact-form textarea,
+.classic-contact-form input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.classic-contact-form button {
+  background: #3498db;
+  color: #fff;
+  border: none;
+  padding: 8px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.classic-hours {
+  padding: 20px;
+  text-align: center;
+  background: #fff;
+}
+
+.classic-hours ul {
+  list-style: none;
+  padding: 0;
+}
+
+.classic-hours li {
+  margin: 5px 0;
+}
+
+.classic-footer {
+  background: #2c3e50;
+  color: #ecf0f1;
+  padding: 15px 0;
+  text-align: center;
+  font-size: 12px;
+}
+.hero {
+  position: relative;
+  text-align: center;
+  color: white;
+  background: url("../../../../../../../../../../assets/images/bg2.webp")
+    no-repeat center center/cover;
+  height: 500px;
+}

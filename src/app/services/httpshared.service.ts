@@ -38,7 +38,14 @@ export class HttpcommanService {
   }
 
   patchCall(routeUrl: string, data: any): Observable<any> {
-    return this._http.patch<any>(`${this.baseUrl}${routeUrl}`, data);
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    });
+    return this._http.patch<any>(`${this.baseUrl}${routeUrl}`, data, {
+      headers,
+    });
   }
   deleteCall(routeUrl: string, id: any): Observable<any> {
     return this._http.delete<any>(`${this.baseUrl}${routeUrl}/${id}`);

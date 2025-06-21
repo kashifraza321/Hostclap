@@ -19,4 +19,5 @@ export const API_CONSTANTS = {
   SUBSCRIPTION_STATUS: '/admin/subscriptionPlan/status',
   ORDER_LIST: '/admin/order/list',
   GET_PROFILE: '/app/auth/profile',
+  EDIT_PROFILE: '/app/auth/edit-profile',
 };

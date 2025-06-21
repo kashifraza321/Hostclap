@@ -1,1 +1,21 @@
-<p>editor-layout works!</p>
+<app-editor-header></app-editor-header>
+<div class="editor-layout">
+  <!-- Sidebar position pe router outlet -->
+  <!-- Left Side -->
+  <div class="editor-sidebar">
+    <ng-container *ngIf="showSidebar; else loadComponent">
+      <app-editor-sidebar (menuClick)="loadMenu($event)"></app-editor-sidebar>
+    </ng-container>
+
+    <ng-template #loadComponent>
+      <ng-container [ngComponentOutlet]="currentComponent"></ng-container>
+    </ng-template>
+  </div>
+
+  <!-- Right Side Always -->
+  <div class="editor-main">
+    <app-editor-right-side
+      [selectedTemplate]="selectedTemplate"
+    ></app-editor-right-side>
+  </div>
+</div>

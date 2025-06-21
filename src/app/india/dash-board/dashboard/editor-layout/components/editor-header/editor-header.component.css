@@ -1,0 +1,88 @@
+.editor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  border-bottom: 1px solid #ddd;
+  background-color: #fff;
+}
+
+.editor-header-left {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.editor-icon {
+  font-size: 20px;
+}
+
+.editor-arrow {
+  font-size: 20px;
+  color: grey;
+}
+
+.editor-theme-link {
+  text-decoration: none;
+  color: #3f51b5; /* blue link */
+  font-weight: 500;
+}
+
+.editor-header-center {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.editor-device-toggle {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.editor-device-btn {
+  background: none;
+  border: none;
+  padding: 5px 10px;
+  font-size: 18px;
+  cursor: pointer;
+  color: #888;
+}
+
+.editor-device-btn.active {
+  border-right: 1px solid #ccc;
+  color: #000;
+}
+
+.editor-nav-links a {
+  text-decoration: none;
+  color: #555;
+  margin: 0 8px;
+  font-size: 16px;
+}
+
+.editor-header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.editor-help-icon {
+  background: #333;
+  color: #fff;
+  border-radius: 50%;
+  padding: 3px 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.editor-preview-btn {
+  padding: 8px 20px;
+  border: 1px solid #333;
+  background: #3f53b6;
+  border-radius: 11px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #fff;
+  border: none;
+}
