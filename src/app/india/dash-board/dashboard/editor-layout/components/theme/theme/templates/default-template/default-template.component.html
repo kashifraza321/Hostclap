@@ -1,34 +1,89 @@
 <div class="mainWrapper">
-  <div class="top-bar">
+  <div
+    class="top-bar"
+    [ngStyle]="{ background: data?.selectedColor?.primary || '#f88d00' }"
+  >
     AC isn't working?
     <button>Send a message</button>
   </div>
 
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark">
+  <nav
+    class="navbar navbar-expand-lg navbar-dark"
+    [ngStyle]="{ background: data?.selectedColor?.secondary || '#f2f2f2' }"
+  >
     <div class="container-fluid">
-      <span class="navbar-text text-white">
+      <span
+        class="navbar-text text-white"
+        [ngStyle]="{ 'font-family': data?.selectedFont }"
+      >
         <i class="bi bi-geo-alt-fill"></i> H No. 7, Ramzan Colony, Lalpur,
         Ranchi, Jharkhand, 834001
       </span>
-      <span class="ms-auto navbar-text text-white">
+      <span
+        class="ms-auto navbar-text text-white"
+        [ngStyle]="{ 'font-family': data?.selectedFont }"
+      >
         <i class="bi bi-telephone-fill"></i> 081020 65847
       </span>
     </div>
   </nav>
 
   <!-- Menu -->
-  <nav class="navbar navbar-expand-lg navbar-dark">
+  <nav
+    class="navbar navbar-expand-lg navbar-dark"
+    [ngStyle]="{ background: data?.selectedColor?.secondary || '#ccc' }"
+  >
     <div class="container-fluid justify-content-center">
       <ul class="navbar-nav">
-        <li class="nav-item"><a class="nav-link active" href="#">HOME</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">FCHGHYJGJGJ</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">OPENING HOURS</a></li>
         <li class="nav-item">
-          <a class="nav-link" href="#">CONTACT RANCHI SERVICE</a>
+          <a
+            class="nav-link active"
+            href="#"
+            [ngStyle]="{ 'font-family': data?.selectedFont }"
+            >HOME</a
+          >
         </li>
-        <li class="nav-item"><a class="nav-link" href="#">TEST</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">PAGE 3</a></li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            href="#"
+            [ngStyle]="{ 'font-family': data?.selectedFont }"
+            >FCHGHYJGJGJ</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            href="#"
+            [ngStyle]="{ 'font-family': data?.selectedFont }"
+            >OPENING HOURS</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            href="#"
+            [ngStyle]="{ 'font-family': data?.selectedFont }"
+            >CONTACT RANCHI SERVICE</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            href="#"
+            [ngStyle]="{ 'font-family': data?.selectedFont }"
+            >TEST</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            href="#"
+            [ngStyle]="{ 'font-family': data?.selectedFont }"
+            >PAGE 3</a
+          >
+        </li>
       </ul>
     </div>
   </nav>
@@ -56,8 +111,15 @@
   </div>
   <!-- services section -->
   <section class="service-section">
-    <h2 class="section-title">SERVICE</h2>
-    <p class="section-subtitle">Get AC Service Now</p>
+    <h2 class="section-title" [ngStyle]="{ 'font-family': data?.selectedFont }">
+      SERVICE
+    </h2>
+    <p
+      class="section-subtitle"
+      [ngStyle]="{ 'font-family': data?.selectedFont }"
+    >
+      Get AC Service Now
+    </p>
 
     <!-- Dropdown -->
     <div class="dropdown-wrapper">
@@ -68,7 +130,12 @@
       </select>
     </div>
 
-    <h5 class="service-heading">Air conditioning services</h5>
+    <h5
+      class="service-heading"
+      [ngStyle]="{ 'font-family': data?.selectedFont }"
+    >
+      Air conditioning services
+    </h5>
 
     <!-- Service Cards Container -->
     <div class="cards-container">
@@ -80,12 +147,25 @@
           alt="AC Repair"
         />
         <div class="card-content">
-          <h5 class="card-title">AC Repairing Service</h5>
-          <p class="card-text">
+          <h5
+            class="card-title"
+            [ngStyle]="{ 'font-family': data?.selectedFont }"
+          >
+            AC Repairing Service
+          </h5>
+          <p
+            class="card-text"
+            [ngStyle]="{ 'font-family': data?.selectedFont }"
+          >
             Ranchi Service offers efficient and reliable AC repair services in
             Ranchi. Our skilled technicians provide thorough ...
           </p>
-          <button class="service-btn">Request Service</button>
+          <button
+            class="service-btn"
+            [ngStyle]="{ 'font-family': data?.selectedFont }"
+          >
+            Request Service
+          </button>
         </div>
       </div>
 
@@ -97,12 +177,25 @@
           alt="Split AC"
         />
         <div class="card-content">
-          <h5 class="card-title">Split AC Service</h5>
-          <p class="card-text">
+          <h5
+            class="card-title"
+            [ngStyle]="{ 'font-family': data?.selectedFont }"
+          >
+            Split AC Service
+          </h5>
+          <p
+            class="card-text"
+            [ngStyle]="{ 'font-family': data?.selectedFont }"
+          >
             Ranchi Services offers expert split AC repair in Ranchi, Jharkhand,
             ensuring fast and reliable solutions for all ...
           </p>
-          <button class="service-btn">Request Service</button>
+          <button
+            class="service-btn"
+            [ngStyle]="{ 'font-family': data?.selectedFont }"
+          >
+            Request Service
+          </button>
         </div>
       </div>
 
@@ -114,20 +207,38 @@
           alt="AC Gas Filling"
         />
         <div class="card-content">
-          <h5 class="card-title">AC Gas Filling Service</h5>
-          <p class="card-text">
+          <h5
+            class="card-title"
+            [ngStyle]="{ 'font-family': data?.selectedFont }"
+          >
+            AC Gas Filling Service
+          </h5>
+          <p
+            class="card-text"
+            [ngStyle]="{ 'font-family': data?.selectedFont }"
+          >
             Ranchi Service specializes in AC gas filling, restoring your cooling
             efficiency. Our expert technicians ensure precise ...
           </p>
-          <button class="service-btn">Request Gas Filling</button>
+          <button
+            class="service-btn"
+            [ngStyle]="{ 'font-family': data?.selectedFont }"
+          >
+            Request Gas Filling
+          </button>
         </div>
       </div>
     </div>
   </section>
   <!-- form -->
-  <section class="technician-form-section">
-    <h2 class="form-title">Available Technician at Your Service!</h2>
-    <p class="form-subtitle">
+  <section
+    class="technician-form-section"
+    [ngStyle]="{ 'font-family': data?.selectedFont }"
+  >
+    <h2 class="form-title" [ngStyle]="{ 'font-family': data?.selectedFont }">
+      Available Technician at Your Service!
+    </h2>
+    <p class="form-subtitle" [ngStyle]="{ 'font-family': data?.selectedFont }">
       AC trouble? Choose Ranchi Service for quick solutions.
     </p>
 
@@ -147,72 +258,95 @@
 
     <div class="form-terms">
       <input type="checkbox" id="termsCheckbox" />
-      <label for="termsCheckbox">
-        I agree with the <a href="#">Terms & Conditions</a> and the
-        <a href="#">Privacy & Cookies Policy</a> of Hostclap and any applicable
-        Terms and Conditions of AC Service Ranchi. This site is protected by
-        reCAPTCHA and the Google <a href="#">Privacy Policy</a> and
+      <label
+        for="termsCheckbox"
+        [ngStyle]="{ 'font-family': data?.selectedFont }"
+      >
+        I agree with the
+        <a href="#" [ngStyle]="{ 'font-family': data?.selectedFont }"
+          >Terms & Conditions</a
+        >
+        and the <a href="#">Privacy & Cookies Policy</a> of Hostclap and any
+        applicable Terms and Conditions of AC Service Ranchi. This site is
+        protected by reCAPTCHA and the Google <a href="#">Privacy Policy</a> and
         <a href="#">Terms of Service</a> apply.
       </label>
     </div>
 
     <div class="form-button-wrapper">
-      <button class="form-button">Send Message</button>
+      <button
+        class="form-button"
+        [ngStyle]="{ 'font-family': data?.selectedFont }"
+      >
+        Send Message
+      </button>
     </div>
   </section>
 
   <!-- form -->
 
   <section class="opening-hours-section">
-    <h2 class="section-title">Opening Hours</h2>
+    <h2 class="section-title" [ngStyle]="{ 'font-family': data?.selectedFont }">
+      Opening Hours
+    </h2>
 
     <table class="hours-table">
       <tr>
-        <td>Sunday</td>
-        <td>All day</td>
+        <td [ngStyle]="{ 'font-family': data?.selectedFont }">Sunday</td>
+        <td [ngStyle]="{ 'font-family': data?.selectedFont }">All day</td>
       </tr>
       <tr class="even-row">
-        <td>Monday</td>
-        <td>All day</td>
+        <td [ngStyle]="{ 'font-family': data?.selectedFont }">Monday</td>
+        <td [ngStyle]="{ 'font-family': data?.selectedFont }">All day</td>
       </tr>
       <tr>
-        <td>Tuesday</td>
-        <td>All day</td>
+        <td [ngStyle]="{ 'font-family': data?.selectedFont }">Tuesday</td>
+        <td [ngStyle]="{ 'font-family': data?.selectedFont }">All day</td>
       </tr>
       <tr class="even-row">
-        <td>Wednesday</td>
-        <td>All day</td>
+        <td [ngStyle]="{ 'font-family': data?.selectedFont }">Wednesday</td>
+        <td [ngStyle]="{ 'font-family': data?.selectedFont }">All day</td>
       </tr>
       <tr>
-        <td>Thursday</td>
-        <td>All day</td>
+        <td [ngStyle]="{ 'font-family': data?.selectedFont }">Thursday</td>
+        <td [ngStyle]="{ 'font-family': data?.selectedFont }">All day</td>
       </tr>
       <tr class="even-row">
-        <td>Friday</td>
-        <td>All day</td>
+        <td [ngStyle]="{ 'font-family': data?.selectedFont }">Friday</td>
+        <td [ngStyle]="{ 'font-family': data?.selectedFont }">All day</td>
       </tr>
       <tr class="today-row">
-        <td><strong>Today</strong></td>
-        <td><strong>All day</strong></td>
+        <td [ngStyle]="{ 'font-family': data?.selectedFont }">
+          <strong>Today</strong>
+        </td>
+        <td [ngStyle]="{ 'font-family': data?.selectedFont }">
+          <strong>All day</strong>
+        </td>
       </tr>
     </table>
   </section>
 
   <!-- Contact Section -->
   <section class="contact-section">
-    <h3 class="contact-title">Contact Ranchi Service</h3>
+    <h3 class="contact-title" [ngStyle]="{ 'font-family': data?.selectedFont }">
+      Contact Ranchi Service
+    </h3>
     <div class="contact-info">
       <div class="contact-item">
         <span class="icon">📍</span>
-        <p>H No. 7, Ramzan Colony, Lalpur, Ranchi, Jharkhand, 834001</p>
+        <p [ngStyle]="{ 'font-family': data?.selectedFont }">
+          H No. 7, Ramzan Colony, Lalpur, Ranchi, Jharkhand, 834001
+        </p>
       </div>
       <div class="contact-item">
         <span class="icon">📧</span>
-        <p>infoanchiservice.com</p>
+        <p [ngStyle]="{ 'font-family': data?.selectedFont }">
+          infoanchiservice.com
+        </p>
       </div>
       <div class="contact-item">
         <span class="icon">📞</span>
-        <p>081020 65847</p>
+        <p [ngStyle]="{ 'font-family': data?.selectedFont }">081020 65847</p>
       </div>
     </div>
   </section>

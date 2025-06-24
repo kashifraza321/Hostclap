@@ -47,7 +47,7 @@
             <div class="card" style="width: 10rem">
               <div class="card-body text-center">
                 <h5 class="card-title">Default</h5>
-                <p class="card-text">Default Template preview</p>
+
                 <button
                   class="btn btn-primary btn-sm"
                   (click)="selectTemplate('default')"
@@ -82,7 +82,12 @@
         data-bs-parent="#themeAccordion"
       >
         <div class="accordion-body">
-          <!-- Font content here -->
+          <label>Select Font:</label>
+          <select (change)="selectFont($event)">
+            <option *ngFor="let font of fonts" [value]="font">
+              {{ font }}
+            </option>
+          </select>
         </div>
       </div>
     </div>
@@ -132,7 +137,14 @@
             <div class="color-options">
               <div
                 *ngFor="let color of colorOptions"
-                [ngStyle]="{ background: color.gradient }"
+                [ngStyle]="{
+                  background:
+                    'linear-gradient(to right, ' +
+                    color.primary +
+                    ' 50%, ' +
+                    color.secondary +
+                    ' 50%)'
+                }"
                 class="color-circle"
                 (click)="selectColor(color)"
               ></div>
@@ -154,5 +166,9 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="btnWRap">
+    <button class="cancelBtn">cancel</button>
+    <button (click)="saveTheme()" class="btn btn-success">Save Theme</button>
   </div>
 </div>

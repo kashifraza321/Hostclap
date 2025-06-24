@@ -1,18 +1,38 @@
 <div class="classicWrapper">
   <!-- Top Bar -->
-  <div class="classic-top-bar">
-    <span>Need AC Help?</span>
-    <button class="classic-btn">Contact Us</button>
+  <div
+    class="classic-top-bar"
+    [ngStyle]="{
+      background: data?.selectedColor?.primary || '#9C27B0'
+    }"
+  >
+    <span [ngStyle]="{ 'font-family': data?.selectedFont }">Need AC Help?</span>
+    <button
+      class="classic-btn"
+      [ngStyle]="{ 'font-family': data?.selectedFont }"
+    >
+      Contact Us
+    </button>
   </div>
 
   <!-- Header Info -->
   <header class="classic-header-info">
-    <div><i class="bi bi-geo-alt-fill"></i> Lalpur, Ranchi, Jharkhand</div>
-    <div><i class="bi bi-telephone-fill"></i> +91 81020 65847</div>
+    <div [ngStyle]="{ 'font-family': data?.selectedFont }">
+      <i class="bi bi-geo-alt-fill"></i> Lalpur, Ranchi, Jharkhand
+    </div>
+    <div [ngStyle]="{ 'font-family': data?.selectedFont }">
+      <i class="bi bi-telephone-fill"></i> +91 81020 65847
+    </div>
   </header>
 
   <!-- Navigation -->
-  <nav class="classic-nav">
+  <nav
+    class="classic-nav"
+    [ngStyle]="{
+      background: data?.selectedColor?.secondary || '#E91E63',
+      'font-family': data?.selectedFont
+    }"
+  >
     <ul>
       <li><a href="#">Home</a></li>
       <li><a href="#">Services</a></li>
@@ -25,34 +45,54 @@
   <!-- Hero -->
   <section class="classic-hero hero">
     <div class="hero-text">
-      <h1>Ranchi AC Services</h1>
-      <p>Reliable AC Solutions at Your Doorstep</p>
+      <h1 [ngStyle]="{ 'font-family': data?.selectedFont }">
+        Ranchi AC Services
+      </h1>
+      <p [ngStyle]="{ 'font-family': data?.selectedFont }">
+        Reliable AC Solutions at Your Doorstep
+      </p>
     </div>
   </section>
 
   <!-- Services -->
   <section class="classic-services">
-    <h2>Our Services</h2>
+    <h2 [ngStyle]="{ 'font-family': data?.selectedFont }">Our Services</h2>
     <div class="service-card">
-      <h3>AC Repair</h3>
-      <p>Expert repairs for all AC models ensuring lasting performance.</p>
-      <button>Book Now</button>
+      <h3 [ngStyle]="{ 'font-family': data?.selectedFont }">AC Repair</h3>
+      <p [ngStyle]="{ 'font-family': data?.selectedFont }">
+        Expert repairs for all AC models ensuring lasting performance.
+      </p>
+      <button [ngStyle]="{ 'font-family': data?.selectedFont }">
+        Book Now
+      </button>
     </div>
     <div class="service-card">
-      <h3>Split AC Installation</h3>
-      <p>Proper and affordable AC installation with quick support.</p>
-      <button>Book Now</button>
+      <h3 [ngStyle]="{ 'font-family': data?.selectedFont }">
+        Split AC Installation
+      </h3>
+      <p [ngStyle]="{ 'font-family': data?.selectedFont }">
+        Proper and affordable AC installation with quick support.
+      </p>
+      <button [ngStyle]="{ 'font-family': data?.selectedFont }">
+        Book Now
+      </button>
     </div>
     <div class="service-card">
-      <h3>AC Gas Filling</h3>
-      <p>Top-quality gas filling service ensuring your cooling efficiency.</p>
-      <button>Book Now</button>
+      <h3 [ngStyle]="{ 'font-family': data?.selectedFont }">AC Gas Filling</h3>
+      <p [ngStyle]="{ 'font-family': data?.selectedFont }">
+        Top-quality gas filling service ensuring your cooling efficiency.
+      </p>
+      <button [ngStyle]="{ 'font-family': data?.selectedFont }">
+        Book Now
+      </button>
     </div>
   </section>
 
   <!-- Contact Form -->
   <section class="classic-contact-form">
-    <h2>Request Technician</h2>
+    <h2 [ngStyle]="{ 'font-family': data?.selectedFont }">
+      Request Technician
+    </h2>
     <form>
       <textarea placeholder="Your issue description..."></textarea>
       <input type="text" placeholder="Full Name" />
@@ -64,16 +104,25 @@
 
   <!-- Opening Hours -->
   <section class="classic-hours">
-    <h2>Opening Hours</h2>
+    <h2 [ngStyle]="{ 'font-family': data?.selectedFont }">Opening Hours</h2>
     <ul>
-      <li>Mon - Fri: 9:00 AM - 7:00 PM</li>
-      <li>Saturday: 10:00 AM - 5:00 PM</li>
-      <li>Sunday: Closed</li>
+      <li [ngStyle]="{ 'font-family': data?.selectedFont }">
+        Mon - Fri: 9:00 AM - 7:00 PM
+      </li>
+      <li [ngStyle]="{ 'font-family': data?.selectedFont }">
+        Saturday: 10:00 AM - 5:00 PM
+      </li>
+      <li [ngStyle]="{ 'font-family': data?.selectedFont }">Sunday: Closed</li>
     </ul>
   </section>
 
   <!-- Footer -->
-  <footer class="classic-footer">
-    <p>📍 Ranchi, Jharkhand | 📞 81020 65847 | ✉️ inforanchiservice.com</p>
+  <footer
+    class="classic-footer"
+    [ngStyle]="{ background: data?.selectedColor?.primary || '#ccc' }"
+  >
+    <p [ngStyle]="{ 'font-family': data?.selectedFont }">
+      📍 Ranchi, Jharkhand | 📞 81020 65847 | ✉️ inforanchiservice.com
+    </p>
   </footer>
 </div>

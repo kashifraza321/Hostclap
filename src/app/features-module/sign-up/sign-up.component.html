@@ -63,13 +63,13 @@
 
     <input
       type="text"
-      formControlName="phonenumber"
+      formControlName="phoneNumber"
       placeholder="Phone Number"
     />
     <div
       *ngIf="
-        accountForm.get('phonenumber')?.touched &&
-        accountForm.get('phonenumber')?.invalid
+        accountForm.get('phoneNumber')?.touched &&
+        accountForm.get('phoneNumber')?.invalid
       "
       class="error"
     >
@@ -78,7 +78,7 @@
 
     <input
       type="text"
-      formControlName="companyname"
+      formControlName="companyName"
       placeholder="Company Name"
     />
 

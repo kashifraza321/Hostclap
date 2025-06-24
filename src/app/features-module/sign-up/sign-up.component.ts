@@ -34,8 +34,8 @@ export class SignUpComponent {
     this.accountForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      companyname: [''],
-      phonenumber: [
+      companyName: [''],
+      phoneNumber: [
         '',
         [Validators.required, Validators.pattern(/^[0-9]{10}$/)],
       ],
@@ -60,7 +60,7 @@ export class SignUpComponent {
           console.log(response);
           if (response.status === 200) {
             alert('Sign-up successful!');
-            this._router.navigate(['/login']); // Or wherever you want to redirect
+            this._router.navigate(['/in/insight/customer']);
           } else if (response.status === 409) {
             alert('User already exists.!');
           } else {
@@ -72,13 +72,10 @@ export class SignUpComponent {
             alert('User already exists.!');
           } else {
             alert('Sign-up failed. Please try again.');
-           
+
             alert('An error occurred. Please try again later.');
             console.error('Sign-up error:', err);
-            
           }
-         
-        
         },
       });
     } else {

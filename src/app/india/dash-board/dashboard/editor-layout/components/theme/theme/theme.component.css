@@ -72,12 +72,50 @@
   text-decoration: underline;
 }
 
+.card-title {
+  color: #fff;
+  font-size: 14px;
+  padding-top: 40px;
+}
 /* color */
 /* template */
 .card {
   width: 50% !important;
-  background: url(../../../../../../../../assets/images/bgimg.jpeg) no-repeat;
+  background: url(../../../../../../../../assets/images/default.png) no-repeat;
   background-position: center;
   background-size: cover;
+  min-height: 137px;
 }
 /* template */
+select {
+  min-height: 42px;
+  width: 100%;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.btnWRap {
+  display: flex;
+  align-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+.accordion {
+  overflow: auto;
+  min-height: 444px;
+}
+.btnWRap button {
+  font-size: 18px;
+  max-width: 180px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+}
+.cancelBtn {
+  background: #ccc;
+}

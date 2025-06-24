@@ -5,6 +5,7 @@ import { EditorSidebarComponent } from '../editor-sidebar/editor-sidebar.compone
 import { EditorRightSideComponent } from '../editor-right-side/editor-right-side.component';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { ThemeComponent } from '../theme/theme/theme.component';
+import { Data } from 'src/app/models/data.model';
 
 @Component({
   selector: 'app-editor-layout',
@@ -23,6 +24,15 @@ export class EditorLayoutComponent {
   selectedTemplate: string = 'default';
   showSidebar = true;
   currentComponent: any = null;
+  data: Data = {
+    selectedTemplate: 'default',
+    selectedFont: 'Roboto',
+    selectedColor: null,
+  };
+  updateData(newData: Partial<Data>) {
+    this.data = { ...this.data, ...newData };
+    console.log('EditorLayoutComponent updated data:', this.data);
+  }
 
   loadMenu(menu: string) {
     console.log('EditorLayout received menu click:', menu);

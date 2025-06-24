@@ -20,4 +20,6 @@ export const API_CONSTANTS = {
   ORDER_LIST: '/admin/order/list',
   GET_PROFILE: '/app/auth/profile',
   EDIT_PROFILE: '/app/auth/edit-profile',
+  GET_THEME: '/app/website/create-theme',
+  GET_WEBSITE: '/app/auth/website/get-website',
 };

@@ -1,6 +1,6 @@
 .mainWrapper {
-  max-height: 900px;
-  min-height: 900px;
+  max-height: 500px;
+  min-height: 500px;
   overflow: auto;
 }
 .top-bar {
