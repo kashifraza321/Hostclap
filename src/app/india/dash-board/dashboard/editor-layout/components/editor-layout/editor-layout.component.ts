@@ -21,12 +21,12 @@ import { Data } from 'src/app/models/data.model';
   styleUrl: './editor-layout.component.css',
 })
 export class EditorLayoutComponent {
-  selectedTemplate: string = 'default';
+  template: string = 'default';
   showSidebar = true;
   currentComponent: any = null;
   data: Data = {
-    selectedTemplate: 'default',
-    selectedFont: 'Roboto',
+    template: 'default',
+    font: 'Roboto',
     selectedColor: null,
   };
   updateData(newData: Partial<Data>) {

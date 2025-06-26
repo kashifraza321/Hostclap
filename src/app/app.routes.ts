@@ -18,6 +18,7 @@ import { TermsConditionComponent } from './commonComponent/dashboard/terms-condi
 import { PrivacyPolicyComponent } from './commonComponent/dashboard/privacy-policy/privacy-policy.component';
 import { RefundPolicyComponent } from './commonComponent/dashboard/refund-policy/refund-policy.component';
 import { SignUpComponent } from './features-module/sign-up/sign-up.component';
+import { EditorRightSideComponent } from './india/dash-board/dashboard/editor-layout/components/editor-right-side/editor-right-side.component';
 
 export const routes: Routes = [
   {
@@ -45,6 +46,7 @@ export const routes: Routes = [
       { path: 'in/terms', component: TermsConditionComponent },
       { path: 'in/privacy', component: PrivacyPolicyComponent },
       { path: 'in/refund', component: RefundPolicyComponent },
+      { path: 'in/myWebsite', component: EditorRightSideComponent },
       {
         path: 'user-management',
         loadChildren: () =>

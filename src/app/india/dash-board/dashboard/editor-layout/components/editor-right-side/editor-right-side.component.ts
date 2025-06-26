@@ -15,7 +15,7 @@ import { ThemeService } from '../theme/theme/theme.service';
 })
 export class EditorRightSideComponent {
   constructor(private themeService: ThemeService) {}
-  // @Input() selectedTemplate: string = 'default';
+  // @Input() template: string = 'default';
   @Input() data!: Data;
   ngOnInit() {
     this.GetWebsiteTheme();
@@ -23,6 +23,8 @@ export class EditorRightSideComponent {
   GetWebsiteTheme() {
     this.themeService.getTheme().subscribe({
       next: (response) => {
+        this.data = response.data;
+        console.log(this.data, 'dataaaaaaaaaaaa');
         console.log('get themeee', response);
       },
     });

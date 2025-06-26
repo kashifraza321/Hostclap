@@ -1,5 +1,5 @@
 export interface Data {
-  selectedTemplate: string;
+  template: string;
   selectedColor: any;
-  selectedFont: string;
+  font: string;
 }

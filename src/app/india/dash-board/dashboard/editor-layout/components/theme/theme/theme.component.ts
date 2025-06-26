@@ -19,11 +19,11 @@ export class ThemeComponent {
   ngOnInIt() {
     // this.GetWebsiteTheme();
   }
-  selectedTemplate: string = 'default';
+  template: string = 'Origins';
 
   selectTemplate(template: string) {
     console.log('ThemeComponent: selected template =', template);
-    this.parent.updateData({ selectedTemplate: template });
+    this.parent.updateData({ template: template });
   }
 
   selectColor(color: any) {
@@ -79,7 +79,7 @@ export class ThemeComponent {
     const target = event.target as HTMLSelectElement;
     const value = target.value;
     console.log('Selected font:', value);
-    this.parent.updateData({ selectedFont: value });
+    this.parent.updateData({ font: value });
   }
 
   saveTheme() {
