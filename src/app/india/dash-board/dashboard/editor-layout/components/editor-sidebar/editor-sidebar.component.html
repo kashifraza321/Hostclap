@@ -2,11 +2,11 @@
   <h3>Website</h3>
 
   <ul class="sidebrMenu">
-    <li>
+    <li (click)="goToTheme()">
       <!-- <a routerLink="/in/insight/editor/theme" routerLinkActive="active">
         Theme >
       </a> -->
-      <a (click)="menuClicked('theme')">
+      <a>
         <span
           ><img
             src="../../../../../../../assets/images/icons8-drop-24.png"
@@ -22,8 +22,8 @@
         /></span>
       </a>
     </li>
-    <li>
-      <a [routerLink]="['theme']">
+    <li (click)="goToPages()">
+      <a>
         <span
           ><img
             src="../../../../../../../assets/images/icons8-pages-50.png"

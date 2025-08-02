@@ -11,6 +11,7 @@ export const API_CONSTANTS = {
   RESET_PASSWORD: '/admin/auth/resetPassword',
   USER_LIST: '/admin/user/list',
   TEAM_LIST: '/admin/user/get-team-members',
+
   USER_STATUS: '/admin/user/status',
   SUBSCRIPTION_PLAN_LIST: '/admin/subscriptionPlan/list',
   SUBSCRIPTION_CREATE: '/admin/subscriptionPlan/create',
@@ -18,8 +19,14 @@ export const API_CONSTANTS = {
   SUBSCRIPTION_DELETE: '/admin/subscriptionPlan/delete',
   SUBSCRIPTION_STATUS: '/admin/subscriptionPlan/status',
   ORDER_LIST: '/admin/order/list',
+  // =============================
   GET_PROFILE: '/app/auth/profile',
   EDIT_PROFILE: '/app/auth/edit-profile',
   GET_THEME: '/app/website/create-theme',
   GET_WEBSITE: '/app/website/get-website',
+
+  CREATE_PAGES: '/app/page/add-page',
+  GET_PAGES: '/app/website/get-pages',
+  GET_PAGE_DETAIL: '/app/website/get-page-detail',
+  EDIT_HEADER: '/app/website/edit-headers',
 };

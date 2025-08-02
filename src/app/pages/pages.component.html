@@ -1,0 +1,131 @@
+<div class="pageWrapper">
+  <ng-container>
+    <button class="backBtn" (click)="goBack()">
+      <img
+        src="../../../../../../../../assets/images/icons8-chevron-right-24.png"
+        alt="chevron"
+        width="18"
+        height="18"
+      />
+      Back
+    </button>
+    <ul class="listing">
+      <li data-bs-toggle="modal" data-bs-target="#pageModal">
+        <img
+          src="../../assets/images/icons8-add-50.png"
+          alt=""
+          width="25"
+          height="25"
+        />
+        Add Page or Link(1 available)
+      </li>
+      <!-- <li><a href=""></a></li> -->
+    </ul>
+    <ul class="page-list" *ngIf="!showHomePage">
+      <li
+        class="pageListItem"
+        *ngFor="let page of pagesList; let i = index"
+        (click)="openHomePage(page._id)"
+      >
+        <div class="page-header" (click)="togglePage(i)">
+          <div class="d-flex gap-4 align-item-center">
+            <img
+              src="../../assets/images/icons8-home-50.png"
+              alt="icon"
+              width="18"
+              height="18"
+            />
+            <a href="javascript:void(0)">{{ page.pageName }}</a>
+          </div>
+          <img
+            src="../../../../../assets/images/icons8-chevron-right-24.png"
+            alt="Delete"
+            width="18"
+            height="18"
+            (click)="deletePage(page._id, $event)"
+          />
+        </div>
+      </li>
+    </ul>
+    <div class="btnWrp">
+      <button class="cancelBtn">cancel</button>
+      <button class="btn btn-success greenBtn">Save</button>
+    </div>
+  </ng-container>
+
+  <!-- modal -->
+  <!-- Button to trigger modal -->
+
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="pageModal"
+    tabindex="-1"
+    aria-labelledby="pageModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content custom-modal">
+        <div class="modal-header">
+          <h5 class="modal-title" id="pageModalLabel">Add Page</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="pageForm" (ngSubmit)="onSubmit()">
+            <div class="modal-body">
+              <!-- Page Type -->
+              <div class="mb-3">
+                <label for="pageType" class="form-label">Type</label>
+                <select
+                  id="pageType"
+                  class="form-select"
+                  formControlName="pageType"
+                >
+                  <option value="" disabled>Select type</option>
+                  <option value="spaces">Page</option>
+                  <option value="link">URL</option>
+                </select>
+                <!-- @Tazeen Fatima  enum:['spaces','profile','media','faq','blank','link'] -->
+              </div>
+
+              <!-- Page Name -->
+              <div class="mb-3">
+                <label for="pageName" class="form-label">Page Name</label>
+                <input
+                  id="pageName"
+                  type="text"
+                  class="form-control"
+                  formControlName="pageName"
+                  placeholder="Enter page name"
+                />
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+                class="cancelBtn"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                class="btn saveBtn"
+                [disabled]="pageForm.invalid"
+              >
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

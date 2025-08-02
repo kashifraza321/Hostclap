@@ -6,6 +6,8 @@ import { EditorRightSideComponent } from '../editor-right-side/editor-right-side
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { ThemeComponent } from '../theme/theme/theme.component';
 import { Data } from 'src/app/models/data.model';
+import { PagesComponent } from 'src/app/pages/pages.component';
+import { HomePageComponent } from 'src/app/pages/home-page/home-page.component';
 
 @Component({
   selector: 'app-editor-layout',
@@ -32,30 +34,5 @@ export class EditorLayoutComponent {
   updateData(newData: Partial<Data>) {
     this.data = { ...this.data, ...newData };
     console.log('EditorLayoutComponent updated data:', this.data);
-  }
-
-  loadMenu(menu: string) {
-    console.log('EditorLayout received menu click:', menu);
-    this.showSidebar = false;
-
-    switch (menu) {
-      case 'theme':
-        this.currentComponent = ThemeComponent;
-        break;
-      // case 'pages':
-      //   this.currentComponent = PagesComponent;
-      //   break;
-      // case 'sections':
-      //   this.currentComponent = SectionsComponent;
-      //   break;
-      // case 'settings':
-      //   this.currentComponent = SettingsComponent;
-      //   break;
-    }
-  }
-
-  backToSidebar() {
-    this.showSidebar = true;
-    this.currentComponent = null;
   }
 }

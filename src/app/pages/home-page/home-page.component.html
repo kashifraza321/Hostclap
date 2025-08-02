@@ -1,0 +1,148 @@
+<div class="home-wrapper" [formGroup]="homeForm">
+  <!-- Header with Back, Title, Toggle -->
+  <div class="header">
+    <button class="backBtn" (click)="goBack()">
+      <img
+        src="../../../../../../../../assets/images/icons8-chevron-right-24.png"
+        alt="chevron"
+        width="18"
+        height="18"
+      />
+      Back
+    </button>
+    <h2>Home</h2>
+    <label class="switch">
+      <input type="checkbox" formControlName="isActive" />
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <!-- Page Name Card -->
+  <div class="page-name-card">
+    <label>Page Name</label>
+    <input type="text" formControlName="pageName" />
+  </div>
+
+  <!-- Section Header -->
+  <div class="section-header">
+    <div class="left">
+      <strong>Sections on this page</strong>
+      <span class="info-icon" title="This is where your sections appear."
+        >ℹ️</span
+      >
+    </div>
+    <button class="edit-btn" (click)="editSections()">Edit</button>
+  </div>
+
+  <!-- Section List -->
+  <div class="section-list">
+    <div class="addSection" data-bs-toggle="modal" data-bs-target="#pageModal">
+      <img
+        src="../../../../../assets/images/icons8-add-50.png"
+        alt=""
+        width="25"
+        height="25"
+      />
+      Add Section
+    </div>
+    <ul>
+      <p style="color: green">🟢 Section Count: {{ sections.length }}</p>
+      <p style="color: blue">🔵 Sections JSON: {{ sections | json }}</p>
+      <p style="color: orange">🟠 selectedSection = {{ selectedSection }}</p>
+      <li *ngFor="let section of sections">
+        {{ section?.name }}
+      </li>
+      <li
+        class="section-item"
+        *ngFor="let section of sections"
+        (click)="onSectionClick(section)"
+      >
+        <!-- {{ section | json }} -->
+        tazeen
+        <!-- <p style="color: red">🔍 {{ section | json }}</p> -->
+        <p style="color: red; font-weight: bold">
+          Section: {{ section?.name || "No Name" }}
+          mxsxsm
+        </p>
+        <span class="chevron"
+          ><img
+            src="../../../../../../../assets/images/icons8-chevron-right-24.png"
+            alt=""
+            width="17"
+        /></span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="pageModal"
+  tabindex="-1"
+  aria-labelledby="pageModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content custom-modal">
+      <div class="modal-header">
+        <h5 class="modal-title" id="pageModalLabel">Add Page</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="pageForm" (ngSubmit)="onSubmit()">
+          <div class="modal-body">
+            <!-- Page Type -->
+            <div class="mb-3">
+              <label for="pageType" class="form-label">Type</label>
+              <select
+                id="pageType"
+                class="form-select"
+                formControlName="pageType"
+              >
+                <option value="" disabled>Select type</option>
+                <option value="spaces">Page</option>
+                <option value="link">URL</option>
+              </select>
+              <!-- @Tazeen Fatima  enum:['spaces','profile','media','faq','blank','link'] -->
+            </div>
+
+            <!-- Page Name -->
+            <div class="mb-3">
+              <label for="pageName" class="form-label">Page Name</label>
+              <input
+                id="pageName"
+                type="text"
+                class="form-control"
+                formControlName="pageName"
+                placeholder="Enter page name"
+              />
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+              class="cancelBtn"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="btn saveBtn"
+              [disabled]="pageForm.invalid"
+            >
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

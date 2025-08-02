@@ -3,6 +3,7 @@ import { EditorLayoutComponent } from '../../editor-layout/editor-layout.compone
 import { CommonModule } from '@angular/common';
 import { ThemeService } from './theme.service';
 import { Data } from 'src/app/models/data.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-theme',
@@ -14,7 +15,8 @@ import { Data } from 'src/app/models/data.model';
 export class ThemeComponent {
   constructor(
     private themeService: ThemeService,
-    private parent: EditorLayoutComponent
+    private parent: EditorLayoutComponent,
+    private router: Router
   ) {}
   ngOnInIt() {
     // this.GetWebsiteTheme();
@@ -30,7 +32,7 @@ export class ThemeComponent {
     this.parent.updateData({ selectedColor: color });
   }
   goBack() {
-    this.parent.backToSidebar();
+    this.router.navigateByUrl('/in/insight/editor');
   }
 
   colorOptions = [

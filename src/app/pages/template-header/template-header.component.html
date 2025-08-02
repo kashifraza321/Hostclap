@@ -1,0 +1,207 @@
+<div class="home-wrapper">
+  <button class="backBtn" (click)="goBack()">
+    <img
+      src="../../../../../../../../assets/images/icons8-chevron-right-24.png"
+      alt="chevron"
+      width="18"
+      height="18"
+    />
+    Back
+  </button>
+  <form [formGroup]="headerForm">
+    <!-- Header Section List -->
+    <div class="section-item" *ngFor="let item of sectionItems">
+      <div class="flexWRP" (click)="toggleSection(item.id)">
+        <img
+          [src]="'../../../assets/images/' + item.icon"
+          width="20"
+          height="20"
+        />
+        <span class="title">{{ item.title }}</span>
+        <img
+          src="../../../assets/images/icons8-chevron-right-24.png"
+          width="15"
+        />
+      </div>
+      <button
+        class="save-btn"
+        type="button"
+        (click)="saveSection('announcement')"
+      >
+        Save Announcement
+      </button>
+
+      <ng-container *ngIf="activeSection === item.id">
+        <div *ngIf="item.id === 'announcement'">
+          <div class="announcement-editor">
+            <div class="announcement-toggle">
+              <label>
+                <input type="checkbox" formControlName="show" />
+                Show Announcement
+              </label>
+            </div>
+
+            <div class="editor-section">
+              <div style="max-width: 600px; width: 100%">
+                <label class="quill-label">Announcement Message</label>
+                <quill-editor
+                  [modules]="modules"
+                  theme="snow"
+                  class="custom-quill"
+                  formControlName="message"
+                ></quill-editor>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="item.id === 'logo'" class="LogoWrap">
+          <div class="add-logo-section">
+            <button class="add-logo-btn" (click)="openMediaLibrary()">
+              Add Logo
+            </button>
+          </div>
+
+          <div class="logo-box" *ngIf="logoUrl">
+            <!-- <img [src]="logoUrl" alt="Logo" class="logo" /> -->
+            <img
+              src="../../../assets/images/businesswoman.jpg"
+              alt="Logo"
+              class="logo"
+            />
+            <div class="icons">
+              <button type="button" (click)="editLogo()">
+                <img
+                  src="../../../assets/images/icons8-pencil-24.png"
+                  alt="edit"
+                  width="20"
+                  height="20"
+                />
+              </button>
+              <button type="button" (click)="removeLogo()">
+                <img
+                  src="../../../assets/images/delete.png"
+                  alt="delete"
+                  width="20"
+                  height="20"
+                />
+              </button>
+            </div>
+          </div>
+
+          <div class="slider-container">
+            <label>Size</label>
+            <input type="range" formControlName="logoSize" min="0" max="100" />
+            <div class="slider-labels">
+              <span>Small</span>
+              <span>Medium</span>
+              <span>Large</span>
+            </div>
+          </div>
+
+          <div class="alignment-box">
+            <label>Alignment</label>
+            <select formControlName="alignment">
+              <option value="left">Left</option>
+              <option value="center">Center</option>
+              <option value="right">Right</option>
+            </select>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <!-- Expanded Section: LOGO -->
+
+    <!-- Expanded Section: ANNOUNCEMENT -->
+    <div *ngIf="activeSection === 'announcement'" class="announcement-editor">
+      <!-- Remove *ngIf to always show the editor -->
+    </div>
+  </form>
+</div>
+
+<!-- media gallery modal -->
+<div class="media-modal-backdrop" *ngIf="showMediaModal">
+  <div class="media-modal">
+    <div class="modal-header">
+      <h2>Media Library</h2>
+      <button class="cross" (click)="closeMediaLibrary()">✕</button>
+    </div>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link active"
+          id="home-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#home"
+          type="button"
+          role="tab"
+          aria-controls="home"
+          aria-selected="true"
+        >
+          My Uploads
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="profile-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#profile"
+          type="button"
+          role="tab"
+          aria-controls="profile"
+          aria-selected="false"
+        >
+          URL Upload
+        </button>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div
+        class="tab-pane fade show active"
+        id="home"
+        role="tabpanel"
+        aria-labelledby="home-tab"
+      >
+        <div class="upload-gallery">
+          <div class="upload-box">
+            <label>
+              <input type="file" (change)="uploadFile($event)" hidden />
+              <div class="upload-placeholder">+</div>
+            </label>
+          </div>
+
+          <!-- <div class="media-items">
+            <div
+              *ngFor="let image of uploadedImages"
+              class="media-thumbnail"
+              [class.selected]="selectedImage === image"
+              (click)="selectImage(image)"
+            >
+              <img [src]="image" alt="Media" />
+            </div>
+          </div> -->
+        </div>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="profile"
+        role="tabpanel"
+        aria-labelledby="profile-tab"
+      >
+        ...
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button (click)="closeMediaLibrary()">Cancel</button>
+      <button
+        class="greenbtn"
+        (click)="chooseImage()"
+        [disabled]="!selectedImage"
+      >
+        Choose
+      </button>
+    </div>
+  </div>
+</div>
