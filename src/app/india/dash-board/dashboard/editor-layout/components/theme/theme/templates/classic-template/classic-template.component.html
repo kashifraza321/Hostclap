@@ -1,5 +1,69 @@
 <div class="classicWrapper">
+  <div *ngIf="preview.announcement?.visible" class="annoucementWrap">
+    <div
+      class="accounmentTxt"
+      [style.font-size.px]="preview?.fontSize"
+      [style.color]="preview?.fontColor"
+      [innerHTML]="preview.announcement?.message"
+    ></div>
+
+    <div
+      [style.font-size.px]="preview?.fontSize"
+      [style.color]="preview?.fontColor"
+      [innerHTML]="preview?.message"
+    >
+      dcdc
+    </div>
+
+    <div *ngIf="preview.announcement?.actionButton">
+      <button>
+        {{ preview.announcement?.buttonText || "Click Me" }}
+      </button>
+    </div>
+  </div>
+  <div *ngIf="state$ | async as state">
+    <div
+      class="top-bar"
+      [ngStyle]="{
+        background: data?.selectedColor?.primary || '#f88d00',
+        'font-size.px': state?.preview?.announcement?.fontSize || 16,
+        color: state?.preview?.announcement?.fontColor || '#fff'
+      }"
+    >
+      <span
+        [innerHTML]="
+          state?.preview?.announcement?.message?.trim()
+            ? state.preview.announcement.message
+            : 'AC Repairing ?'
+        "
+      ></span>
+      <div *ngIf="state?.preview?.announcement?.actionButton !== false">
+        <button>
+          {{ state?.preview?.announcement?.buttonText || "Send a message" }}
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Top Bar -->
+  <div *ngIf="state$ | async as state">
+    <div
+      class="announcement-preview"
+      *ngIf="state.preview.announcement"
+      [ngStyle]="{
+        'font-size.px': state.preview.announcement.fontSize,
+        color: state.preview.announcement.fontColor
+      }"
+      [innerHTML]="state.preview.announcement.message"
+    ></div>
+    <!-- <div *ngIf="state.preview.announcement?.actionButton">
+      <button>
+        {{ state.preview.announcement?.buttonText || "Click Me" }}
+      </button>
+    </div> -->
+  </div>
+
+  <!-- new bar -->
   <div
     class="classic-top-bar"
     [ngStyle]="{
@@ -11,6 +75,9 @@
       Contact Us
     </button>
   </div>
+  <!-- announcement -->
+
+  <!-- announcement -->
 
   <!-- Header Info -->
   <header class="classic-header-info">

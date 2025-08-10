@@ -22,7 +22,7 @@
       <!-- <li><a href=""></a></li> -->
     </ul>
     <ul class="page-list" *ngIf="!showHomePage">
-      <li
+      <!-- <li
         class="pageListItem"
         *ngFor="let page of pagesList; let i = index"
         (click)="openHomePage(page._id)"
@@ -44,6 +44,125 @@
             height="18"
             (click)="deletePage(page._id, $event)"
           />
+        </div>
+      </li> -->
+      <li class="pageListItem" *ngFor="let page of pagesList; let i = index">
+        <!-- Click to open dedicated Home page (index 0) -->
+        <div
+          class="page-header"
+          *ngIf="i === 0"
+          (click)="openHomePage(page._id)"
+        >
+          <div class="d-flex gap-4 align-item-center">
+            <div class="iconWrp">
+              <img
+                src="../../assets/images/icons8-home-50 (1).png"
+                width="18"
+                height="18"
+              />
+            </div>
+            <a href="javascript:void(0)">{{ page.pageName }}</a>
+          </div>
+          <img
+            src="../../../../../assets/images/icons8-chevron-right-24.png"
+            width="18"
+            height="18"
+            (click)="deletePage(page._id, $event)"
+          />
+        </div>
+
+        <!-- Click to expand inline editor (index > 0) -->
+        <div class="page-header" *ngIf="i !== 0" (click)="togglePage(i)">
+          <div class="d-flex gap-4 align-item-center">
+            <div class="iconWrp">
+              <img
+                [src]="getIconForPage(page.pageType)"
+                width="18"
+                height="18"
+              />
+            </div>
+            <a href="javascript:void(0)">{{ page.pageName }}</a>
+          </div>
+          <img
+            src="../../../../../assets/images/icons8-chevron-right-24.png"
+            width="18"
+            height="18"
+          />
+        </div>
+
+        <!-- Expanded inline editor for index > 0 -->
+        <div
+          *ngIf="selectedPageIndex === i && i !== 0"
+          class="expanded-editor"
+          [formGroup]="inlineForm"
+        >
+          <label>Page Name</label>
+          <input type="text" formControlName="pageName" />
+
+          <label>URL</label>
+          <input type="text" formControlName="url" />
+          <div class="flxWrp">
+            <button
+              class="btn btn-success btn-sm"
+              (click)="saveInlinePage(page)"
+            >
+              Save
+            </button>
+            <button class="deleteBtn" (click)="deletePage(page._id, $event)">
+              <img src="../../assets/images/delete.png" alt="" />
+            </button>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" (change)="toggleSection($event)" />
+            <span class="slider"></span>
+          </label>
+
+          <!-- Card Section (Only visible if enabled) -->
+          <div *ngIf="isSectionVisible" class="custom-card">
+            <!-- Header -->
+            <div class="custom-card-header">
+              <div class="info">
+                <span>Sections on this page</span>
+                <span class="icon"
+                  ><img
+                    src="../../assets/images/icons8-info-50.png"
+                    alt="info"
+                    width="16"
+                    height="16"
+                /></span>
+              </div>
+              <button class="editBtn">Edit</button>
+            </div>
+
+            <!-- Add Section -->
+            <div class="add-section">
+              <div class="circle">+</div>
+              <span class="addSectiontxt">Add Section</span>
+            </div>
+
+            <!-- Items -->
+            <div class="section-item">
+              <img
+                src="../../assets/images/icons8-menu-50.png"
+                alt="Main Block Icon"
+              />
+              <span>Main Block</span>
+            </div>
+
+            <div class="section-item">
+              <img
+                src="../../assets/images/icons8-footer-50.png"
+                alt="Footer Icon"
+              />
+              <span>Footer</span>
+              <span class="arrow">
+                <img
+                  src="../../../../../assets/images/icons8-chevron-right-24.png"
+                  width="10"
+                  height="10"
+              /></span>
+            </div>
+          </div>
         </div>
       </li>
     </ul>
@@ -87,8 +206,12 @@
                   formControlName="pageType"
                 >
                   <option value="" disabled>Select type</option>
-                  <option value="spaces">Page</option>
-                  <option value="link">URL</option>
+                  <option value="spaces">spaces</option>
+                  <option value="profile">profile</option>
+                  <option value="media">media</option>
+                  <option value="faq">faq</option>
+                  <option value="blank">blank</option>
+                  <option value="link">link</option>
                 </select>
                 <!-- @Tazeen Fatima  enum:['spaces','profile','media','faq','blank','link'] -->
               </div>

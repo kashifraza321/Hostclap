@@ -137,6 +137,112 @@ select {
 .cancelBtn {
   background: #ccc;
 }
+.expanded-editor {
+  padding: 16px 0;
+  background-color: #fff;
+  border-top: 1px solid #dcdcdc;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  animation: fadeIn 0.3s ease-in-out;
+  border-radius: 0 0 8px 8px;
+  width: 100%;
+  margin-top: 26px;
+}
+
+.expanded-editor label {
+  font-weight: 500;
+  font-size: 18px;
+  color: #333;
+}
+.expanded-editor label:nth-last-child {
+  margin-top: 10px;
+}
+
+.expanded-editor input[type="text"] {
+  padding: 8px 12px;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 15px;
+  width: 100%;
+  transition: border-color 0.3s;
+}
+
+.expanded-editor input:focus {
+  border-color: #4caf50;
+  outline: none;
+}
+
+.expanded-editor .btn {
+  align-self: flex-start;
+  padding: 4px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 4px;
+}
+
+.btnWrp {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding-top: 20px;
+}
+
+.cancelBtn {
+  background-color: #e0e0e0;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.cancelBtn:hover {
+  background-color: #d5d5d5;
+}
+
+.greenBtn {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.greenBtn:disabled {
+  background-color: #9ccc9c;
+  cursor: not-allowed;
+}
+.flxWrp {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.deleteBtn {
+  background: none;
+  border: none;
+  width: 18px;
+  height: 18px;
+}
+
+/* Smooth appear */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scaleY(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
 
 /* // bootstrap */
 .custom-modal {
@@ -246,6 +352,9 @@ select {
   color: #007bff;
   font-weight: 500;
   font-size: 15px;
+}
+.addSectiontxt {
+  color: #000;
 }
 
 .add-section:hover {
@@ -408,4 +517,128 @@ select {
   justify-content: center;
   gap: 30px;
   margin-top: 20px;
+}
+
+/* disable card  */
+/* Toggle switch */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+  text-align: right;
+  margin-left: auto;
+  margin-top: 22px;
+}
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  background-color: #ccc;
+  border-radius: 26px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: 0.4s;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  background-color: white;
+  border-radius: 50%;
+  left: 3px;
+  bottom: 3px;
+  transition: 0.4s;
+}
+input:checked + .slider {
+  background-color: #4caf50;
+}
+input:checked + .slider:before {
+  transform: translateX(24px);
+}
+
+/* Custom card */
+.custom-card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 12px;
+  background: #fff;
+  width: 100%;
+  margin-top: 10px;
+}
+.custom-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+}
+.info {
+  display: flex;
+  align-items: center;
+  gap: 0px;
+}
+.info span {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.icon {
+  background: none;
+  border-radius: 50%;
+  padding: 3px 6px;
+}
+.add-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  cursor: pointer;
+}
+.circle {
+  background: #4caf50;
+  color: white;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.section-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 10px;
+}
+.section-item img {
+  width: 20px;
+  height: 20px;
+}
+.arrow {
+  margin-left: auto;
+}
+.editBtn {
+  background: none;
+  border: none;
+  font-size: 16px;
+  background: #ccc;
+  padding: 3px 14px;
+  border-radius: 7px;
+  color: #fff;
+  width: 60px;
+}
+.iconWrp {
+  background: #c7e0e5;
+  width: 29px;
+  height: 29px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
 }

@@ -1,0 +1,65 @@
+<div class="pageWrapper">
+  <div class="top-bar">
+    <button class="back-btn" (click)="backToHomepage()">
+      <img
+        src="../../../assets/images/icons8-chevron-right-24.png"
+        alt="chevron"
+        width="18"
+      />
+      Back
+    </button>
+    <div class="title">Price list</div>
+  </div>
+
+  <div class="section-card">
+    <label class="label" for="section-title">Price list title</label>
+    <div class="title-row">
+      <input
+        id="section-title"
+        type="text"
+        class="input-field"
+        value="Amenities"
+      />
+      <input type="checkbox" class="checkbox" checked />
+    </div>
+    <label class="label" for="section-subtitle">Section Subtitle</label>
+    <input
+      id="section-subtitle"
+      type="text"
+      class="input-field"
+      value="Get AC Service Now"
+    />
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      Group name
+      <button class="edit-btn">Edit</button>
+    </div>
+
+    <div class="add-group"><span>＋</span> Add new group</div>
+
+    <div class="group-item">
+      <div class="color-bar" style="background-color: orange"></div>
+      <div class="group-name">afreen</div>
+      <div class="arrow">›</div>
+    </div>
+
+    <div class="group-item">
+      <div class="color-bar" style="background-color: #00bcd4"></div>
+      <div class="group-name">afreen 22</div>
+      <div class="arrow">›</div>
+    </div>
+
+    <div class="group-item">
+      <div class="color-bar" style="background-color: green"></div>
+      <div class="group-name">test</div>
+      <div class="arrow">›</div>
+    </div>
+  </div>
+
+  <div class="footer-buttons">
+    <button class="cancel-btn cancelBtn">Cancel</button>
+    <button class="save-btn saveBtn" disabled>Save</button>
+  </div>
+</div>

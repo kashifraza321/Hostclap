@@ -158,3 +158,33 @@
     no-repeat center center/cover;
   height: 500px;
 }
+.annoucementWrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #e7763d;
+  color: #fff;
+}
+.accounmentTxt {
+  font-size: 16px;
+  font-weight: 600;
+}
+.top-bar {
+  background-color: #f96332;
+  color: white;
+  padding: 5px 0;
+  text-align: center;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.top-bar button {
+  background-color: white;
+  color: #f96332;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-weight: bold;
+  margin-left: 10px;
+}

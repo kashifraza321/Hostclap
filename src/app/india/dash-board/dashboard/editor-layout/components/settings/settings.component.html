@@ -1,0 +1,57 @@
+<div class="settings-wrapper">
+  <!-- Header -->
+  <div class="settings-header d-flex align-items-center">
+    <button class="back-btn me-2" (click)="goBack()">
+      <img
+        src="../../../../../../../assets/images/icons8-chevron-right-24.png"
+        alt="chevron icon"
+        width="18"
+        height="18"
+      />
+      Back
+    </button>
+    <h5 class="mb-0">Settings</h5>
+  </div>
+
+  <!-- Tab underline -->
+  <div class="tab-underline my-2"></div>
+
+  <!-- Payment Section -->
+  <div class="payment-box p-3 mb-3">
+    <p class="mb-2 fw-semibold onlineTxt">Activate Online Payments</p>
+    <button class="btn btn-primary w-100 rounded-pill fw-bold stripBtn">
+      Connect with <span class="ps-1">stripe</span>
+    </button>
+  </div>
+
+  <!-- Settings List -->
+  <div class="setting-item">
+    <i class="bi bi-cart3"></i>
+    <span class="name">Shopping Cart</span>
+    <i class="bi bi-chevron-right ms-auto"></i>
+  </div>
+
+  <div class="setting-item">
+    <i class="bi bi-shield-lock"></i>
+    <span class="name">Merchant Policies</span>
+    <i class="bi bi-chevron-right ms-auto"></i>
+  </div>
+
+  <div class="setting-item disabled">
+    <i class="bi bi-code-square"></i>
+    <span class="name">Custom Code</span>
+    <i class="bi bi-lock ms-auto"></i>
+  </div>
+
+  <div class="setting-item">
+    <i class="bi bi-calendar-check"></i>
+    <span class="name">Booking Settings</span>
+    <i class="bi bi-chevron-right ms-auto"></i>
+  </div>
+
+  <!-- Footer Buttons -->
+  <div class="footer-btns btnWrp d-flex justify-content-between mt-4">
+    <button class="btn cancel-btn cancelBtn">Cancel</button>
+    <button class="btn btn-secondary greenBtn" disabled>Save</button>
+  </div>
+</div>

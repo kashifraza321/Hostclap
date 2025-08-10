@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PagesService } from '../pages.service';
 import { CommonModule } from '@angular/common';
 import { QuillModule } from 'ngx-quill';
+import { AlertService } from 'src/app/services/Toaster/alert.service';
 
 @Component({
   selector: 'app-template-header',
@@ -20,12 +21,21 @@ import { QuillModule } from 'ngx-quill';
 })
 export class TemplateHeaderComponent {
   showMediaModal = false;
-  // sectionItems: any[] = [];
-  showAnnouncement = true;
-  showOn: 'all' | 'home' = 'all';
-  // announcementText = "AC isn't <u>working</u>?";
-  editorContent = '';
+  toggleColorPicker = false;
+  toggleCustomize = false;
+  toggleBgPicker = false;
+  toggleTitleColorPicker = false;
+  toggleAddressBgColor = false;
+  toggleAddressFontColor = false;
+  toggleMenuBgColor: boolean = false;
+  toggleMenuFontColor: boolean = false;
+
   pageId: string = '';
+  activeSection: string | null = null;
+  logoUrl = 'assets/logo.png';
+  coverImageUrl: string | null = null;
+  selectedImage: string | null = null;
+
   editorModules = {
     toolbar: '#custom-toolbar',
   };
@@ -35,6 +45,22 @@ export class TemplateHeaderComponent {
     'assets/img3.jpg',
     // replace with dynamic URLs if from server
   ];
+  // Forms
+  announcementForm!: FormGroup;
+  logoForm!: FormGroup;
+  coverForm!: FormGroup;
+  titlesForm!: FormGroup;
+  menuForm!: FormGroup;
+  contactForm!: FormGroup;
+  addressForm!: FormGroup;
+
+  coverSettings = {
+    parallax: false,
+    appearance: 'none',
+    opacity: 100,
+    backgroundColor: '#ffffff',
+  };
+
   sectionItems = [
     {
       id: 'announcement',
@@ -42,84 +68,137 @@ export class TemplateHeaderComponent {
       icon: 'icons8-announcement-50.png',
     },
     { id: 'logo', title: 'Logo', icon: 'icons8-diamond-30.png' },
-    { id: 'cta', title: 'CTA Button', icon: 'icons8-button-24.png' },
+    { id: 'cover', title: 'cover', icon: 'icons8-button-24.png' },
     { id: 'Title', title: 'Title', icon: 'icons8-t-50.png' },
     { id: 'Menu', title: 'Menu', icon: 'icons8-menu-50.png' },
-    { id: 'Freme', title: 'Frame', icon: 'icons8-image-30.png' },
+    { id: 'phone', title: 'phone', icon: 'icons8-image-30.png' },
+    { id: 'address', title: 'address', icon: 'icons8-image-30.png' },
   ];
-  selectedImage: string | null = null;
-  userId: string = '';
-  headerForm!: FormGroup;
-  activeSection: string | null = null;
-  logoUrl = 'assets/logo.png';
-  pages: any[] = [];
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private fb: FormBuilder,
-    private pagesService: PagesService
-  ) {}
-
-  ngOnInit(): void {
-    this.pageId = this.route.snapshot.paramMap.get('pageId') || '';
-    console.log('Page ID:', this.pageId);
-
-    this.headerForm = this.fb.group({
-      announcement: this.fb.group({
-        message: [''],
-        visible: [true],
-        showOn: ['all'],
-      }),
-      logo: this.fb.group({
-        url: [''],
-        size: [50],
-        alignment: ['center'],
-      }),
-      cta: this.fb.group({
-        text: [''],
-        link: [''],
-      }),
-      titles: this.fb.group({
-        businessName: [''],
-        subtitle: [''],
-        color: [''],
-        font: [''],
-        alignment: ['center'],
-      }),
-      menu: this.fb.group({
-        home: [''],
-        services: [''],
-        contact: [''],
-      }),
-    });
-
-    this.getPageDetail(this.pageId);
-  }
-
-  announcementMessage: string = 'AC is not working?';
-
   modules = {
     toolbar: [
       ['bold', 'italic', 'underline'],
+      [{ color: [] }], // color picker
+      [{ size: ['small', false, 'large', 'huge'] }],
       ['link'],
       [{ list: 'bullet' }, { list: 'ordered' }],
       [{ header: [false, 1, 2] }],
       [{ align: [] }],
     ],
   };
-  // [ngModel] = 'announcementMessage';
+  // selectedImage: string | null = null;
+  // userId: string = '';
+  // headerForm!: FormGroup;
+  // activeSection: string | null = null;
+  // logoUrl = 'assets/logo.png';
+  // pages: any[] = [];
+  // coverImageUrl: string | null = null;
+  // toggleBgPicker = false;
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private fb: FormBuilder,
+    private pagesService: PagesService,
+    private alertService: AlertService
+  ) {}
+
+  ngOnInit(): void {
+    console.log(this.route.snapshot.paramMap, 'afreen');
+    this.pageId = this.route.snapshot.paramMap.get('pageId') || '';
+    console.log('Page ID tazz:', this.pageId);
+
+    // this.announcementForm = this.fb.group({
+    //   message: [''],
+    //   visible: [true],
+    //   showOn: ['all'],
+    //   fontSize: [1],
+    //   fontColor: ['#000000'],
+    //   actionButton: [false],
+    //   buttonText: [''],
+    //   linkTo: ['sendMessage'],
+    //   openInNewTab: [false],
+    // });
+    this.announcementForm = this.fb.group({
+      message: [''],
+      visible: [true],
+      showOn: ['all'],
+      fontSize: [16], // px me rakhna best hai
+      fontColor: ['#000000'],
+      actionButton: [false],
+      buttonText: [''],
+      linkTo: ['sendMessage'],
+      openInNewTab: [false],
+    });
+
+    // this.announcementForm.valueChanges.subscribe((val) => {
+    //   this.pagesService.setPreview('announcement', val);
+    // });
+
+    this.logoForm = this.fb.group({
+      logoSize: [50],
+      alignment: ['center'],
+    });
+
+    this.coverForm = this.fb.group({
+      // if using form controls instead of ngModel
+      parallax: [false],
+      appearance: ['none'],
+      opacity: [100],
+      backgroundColor: ['#ffffff'],
+    });
+
+    this.titlesForm = this.fb.group({
+      businessName: [''],
+      subtitle: [''],
+      color: [''],
+      font: [''],
+      alignment: ['center'],
+    });
+
+    this.menuForm = this.fb.group({
+      sticky: [true],
+      inlineLogo: [true],
+      position: ['top'],
+      bgColor: ['#ffffff'],
+      fontSize: [1],
+      alignment: ['left'],
+      fontColor: ['#000000'],
+    });
+    this.contactForm = this.fb.group({
+      showPhone: [true],
+      mobilePhone: [''],
+      officePhone: [''],
+      showWhatsapp: [false],
+      whatsappNumber: [''],
+    });
+    this.addressForm = this.fb.group({
+      showAddress: [false],
+      addressBackgroundColor: ['#ffffff'],
+      addressFontSize: [1], // 0 = small, 1 = medium, 2 = large
+      addressFontColor: ['#000000'],
+    });
+
+    this.getPageDetail(this.pageId);
+  }
+  applyFontStyles() {
+    const data = {
+      message: this.announcementForm.get('message')?.value || '',
+      fontSize: this.announcementForm.get('fontSize')?.value || 14,
+      fontColor: this.announcementForm.get('fontColor')?.value || '#000000',
+    };
+
+    this.pagesService.setPreview('announcement', data);
+  }
+
+  announcementMessage: string = 'AC is not working?';
 
   goBack() {
     this.router.navigateByUrl('/in/insight/editor/home');
   }
 
-  toggleSection(sectionId: string): void {
+  toggleSection(sectionId: string) {
     if (this.activeSection && this.activeSection !== sectionId) {
-      // Save current section before switching
       this.saveSection(this.activeSection);
     }
-
-    // Toggle logic
     this.activeSection = this.activeSection === sectionId ? null : sectionId;
   }
 
@@ -138,7 +217,7 @@ export class TemplateHeaderComponent {
 
   chooseImage(): void {
     if (this.selectedImage) {
-      this.headerForm.patchValue({ logo: this.selectedImage });
+      // this.headerForm.patchValue({ logo: this.selectedImage });
       this.logoUrl = this.selectedImage;
       this.closeMediaLibrary();
     }
@@ -162,7 +241,7 @@ export class TemplateHeaderComponent {
 
   removeLogo(): void {
     this.logoUrl = '';
-    this.headerForm.patchValue({ logo: '' });
+    // this.headerForm.patchValue({ logo: '' });
   }
 
   getPageDetail(id: string): void {
@@ -177,42 +256,55 @@ export class TemplateHeaderComponent {
     });
   }
 
+  editCoverImage() {
+    // Open media library or file selector
+    console.log('Edit cover image');
+  }
+
+  removeCoverImage() {
+    this.coverImageUrl = null;
+  }
+
   // form data
   saveSection(section: string) {
-    let payload: any = {}; // ✅ no userId
-
+    let payload: any;
     switch (section) {
       case 'announcement':
-        payload.announcement = {
-          show: this.headerForm.get('show')?.value,
-          message: this.headerForm.get('message')?.value,
-        };
+        payload = this.announcementForm.value;
         break;
-
       case 'logo':
-        payload.logo = {
-          url: this.headerForm.get('logo')?.value,
-          size: this.headerForm.get('logoSize')?.value,
-          alignment: this.headerForm.get('alignment')?.value,
-        };
+        payload = this.logoForm.value;
         break;
-
+      case 'titles':
+        payload = this.titlesForm.value;
+        break;
+      case 'menu':
+        payload = this.menuForm.value;
+        break;
+      case 'cover':
+        payload = this.coverForm.value;
+        break;
+      case 'phone':
+        payload = this.contactForm.value;
+        break;
+      case 'address':
+        payload = this.addressForm.value;
+        break;
       default:
-        console.warn('Unknown section:', section);
         return;
     }
 
-    // ✅ Use pageId here
-    this.pagesService
-      .updateHeader(this.pageId, section, payload[section])
-      .subscribe({
-        next: (res) => {
-          console.log(`${section} updated`, res);
-          alert(`${section} saved successfully.`);
-        },
-        error: (err) => {
-          console.error(`Failed to update ${section}`, err);
-        },
-      });
+    this.pagesService.updateHeader(this.pageId, section, payload).subscribe({
+      next: (res) => {
+        console.log('Page ID in saveSection:', this.pageId);
+        // alert(`${section} saved successfully.`);
+        this.alertService.success(`${section} saved successfully`);
+        console.log('Alert called!');
+      },
+      error: (err) => {
+        alert(`Failed to save ${section}.`);
+        this.alertService.error(`Failed to save ${section}`);
+      },
+    });
   }
 }

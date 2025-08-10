@@ -45,25 +45,150 @@
       />
       Add Section
     </div>
-    <ul>
-      <p style="color: green">🟢 Section Count: {{ sections.length }}</p>
-      <p style="color: blue">🔵 Sections JSON: {{ sections | json }}</p>
-      <p style="color: orange">🟠 selectedSection = {{ selectedSection }}</p>
-      <li *ngFor="let section of sections">
-        {{ section?.name }}
+    <ul class="sectionList">
+      <li class="section-item" (click)="openHeader(pageId)">
+        header
+
+        <span class="chevron"
+          ><img
+            src="../../../../../../../assets/images/icons8-chevron-right-24.png"
+            alt=""
+            width="17"
+        /></span>
       </li>
-      <li
-        class="section-item"
-        *ngFor="let section of sections"
-        (click)="onSectionClick(section)"
-      >
-        <!-- {{ section | json }} -->
-        tazeen
-        <!-- <p style="color: red">🔍 {{ section | json }}</p> -->
-        <p style="color: red; font-weight: bold">
-          Section: {{ section?.name || "No Name" }}
-          mxsxsm
-        </p>
+      <li class="section-item">
+        Promotion
+
+        <span class="chevron"
+          ><img
+            src="../../../../../../../assets/images/icons8-chevron-right-24.png"
+            alt=""
+            width="17"
+        /></span>
+      </li>
+      <li class="section-item" (click)="openServices()">
+        Services
+
+        <span class="chevron"
+          ><img
+            src="../../../../../../../assets/images/icons8-chevron-right-24.png"
+            alt=""
+            width="17"
+        /></span>
+      </li>
+      <li class="section-item">
+        About us
+
+        <span class="chevron"
+          ><img
+            src="../../../../../../../assets/images/icons8-chevron-right-24.png"
+            alt=""
+            width="17"
+        /></span>
+      </li>
+      <li class="section-item" (click)="navigateToGallery()">
+        Gallery
+
+        <span class="chevron"
+          ><img
+            src="../../../../../../../assets/images/icons8-chevron-right-24.png"
+            alt=""
+            width="17"
+        /></span>
+      </li>
+      <li class="section-item" (click)="navigateToAmenties()">
+        Amenties
+
+        <span class="chevron"
+          ><img
+            src="../../../../../../../assets/images/icons8-chevron-right-24.png"
+            alt=""
+            width="17"
+        /></span>
+      </li>
+      <li class="section-item">
+        Testimonials
+
+        <span class="chevron"
+          ><img
+            src="../../../../../../../assets/images/icons8-chevron-right-24.png"
+            alt=""
+            width="17"
+        /></span>
+      </li>
+      <li class="section-item" (click)="navigateToPriceList()">
+        Prices LIst
+
+        <span class="chevron"
+          ><img
+            src="../../../../../../../assets/images/icons8-chevron-right-24.png"
+            alt=""
+            width="17"
+        /></span>
+      </li>
+      <li class="section-item">
+        Products
+
+        <span class="chevron"
+          ><img
+            src="../../../../../../../assets/images/icons8-chevron-right-24.png"
+            alt=""
+            width="17"
+        /></span>
+      </li>
+      <li class="section-item" (click)="navigateToReview()">
+        Google Reviews
+
+        <span class="chevron"
+          ><img
+            src="../../../../../../../assets/images/icons8-chevron-right-24.png"
+            alt=""
+            width="17"
+        /></span>
+      </li>
+      <li class="section-item" (click)="navigateToContact()">
+        Contact Form
+
+        <span class="chevron"
+          ><img
+            src="../../../../../../../assets/images/icons8-chevron-right-24.png"
+            alt=""
+            width="17"
+        /></span>
+      </li>
+      <li class="section-item">
+        Contact Us
+
+        <span class="chevron"
+          ><img
+            src="../../../../../../../assets/images/icons8-chevron-right-24.png"
+            alt=""
+            width="17"
+        /></span>
+      </li>
+      <li class="section-item">
+        Location
+
+        <span class="chevron"
+          ><img
+            src="../../../../../../../assets/images/icons8-chevron-right-24.png"
+            alt=""
+            width="17"
+        /></span>
+      </li>
+      <li class="section-item" (click)="navigateToOPeningHours()">
+        Opening hours
+
+        <span class="chevron"
+          ><img
+            src="../../../../../../../assets/images/icons8-chevron-right-24.png"
+            alt=""
+            width="17"
+        /></span>
+      </li>
+      <li class="section-item">
+        Footer
+
         <span class="chevron"
           ><img
             src="../../../../../../../assets/images/icons8-chevron-right-24.png"

@@ -15,15 +15,33 @@ export class DefaultTemplateComponent {
   @Input() data!: Data;
   userId: string = '';
   pagesList = [];
+  pages: any[] = [];
+  preview: any = {};
   constructor(
     private pagesService: PagesService,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    this.userId = this.route.snapshot.paramMap.get('id') || '';
-    console.log('User ID:', this.userId);
+    this.userId = localStorage.getItem('userId') || '';
+    console.log('User ID from localStorage:', this.userId);
+    this.pagesService.state$.subscribe((state) => {
+      this.pages = state.pages;
+      this.preview = state.preview;
+    });
     this.getPages();
+    this.getPageDetail('687177a9aa11a48cb4de77db');
+  }
+  getPageDetail(id: string): void {
+    this.pagesService.getPageDetail(id).subscribe({
+      next: (res) => {
+        console.log('Page Detail:', res);
+        // you can update form values here if needed
+      },
+      error: (err) => {
+        console.error('Failed to fetch page detail:', err);
+      },
+    });
   }
   getPages() {
     this.pagesService.getPages().subscribe({

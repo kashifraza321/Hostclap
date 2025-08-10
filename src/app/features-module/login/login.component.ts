@@ -33,7 +33,7 @@ export class LoginComponent {
   ) {}
 
   ngOnInit() {
-    this.alertService.success('Testing Alert!');
+    // this.alertService.success('Login successfully');
 
     this.buildForm();
     gapi.load('auth2', () => {

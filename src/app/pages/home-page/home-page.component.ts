@@ -27,7 +27,14 @@ export class HomePageComponent {
   pageId: string = '';
   pageData: any;
   pages: any[] = [];
-  sections: { name: string; key: string }[] = [];
+  // sections: { name: string; key: string }[] = [];
+  sections = [
+    { name: 'Header', key: 'header' },
+    { name: 'Banner', key: 'banner' },
+    { name: 'About Us', key: 'about' },
+    { name: 'About Us', key: 'about' },
+    { name: 'About Us', key: 'about' },
+  ];
 
   pageForm!: FormGroup;
   constructor(
@@ -38,24 +45,17 @@ export class HomePageComponent {
   ) {}
 
   ngOnInit() {
-    this.pageId = this.route.snapshot.paramMap.get('id') || '';
+    this.pageId = this.route.snapshot.paramMap.get('pageId') || '';
     console.log('Page ID:', this.pageId);
 
     this.homeForm = this.fb.group({
       pageName: ['Home'],
       isActive: [true],
     });
-    this.sections = [
-      { name: 'Header', key: 'header' },
-      { name: 'Banner', key: 'banner' },
-      { name: 'About Us', key: 'about' },
-      { name: 'About Us', key: 'about' },
-      { name: 'About Us', key: 'about' },
-    ];
-
     console.log('Sections list cnsdcndscnd:', this.sections);
-    console.log('✅ Sections Initialized:', this.sections);
-    console.log('✅ selectedSection:', this.selectedSection);
+    console.log('pageID hain kyaaaaa', this.pageId);
+    console.log(' Sections Initialized:', this.sections);
+    console.log(' selectedSection:', this.selectedSection);
     this.getPageData();
   }
   // openSection(section: string) {
@@ -77,7 +77,36 @@ export class HomePageComponent {
     this.router.navigateByUrl('/in/insight/editor/pages');
   }
   openHeader(pageId: string) {
+    console.log(pageId, 'pageidddddddddddd');
     this.router.navigate(['/in/insight/editor/header', pageId]);
+  }
+  openServices() {
+    console.log('pageidddddddddddd');
+    this.router.navigate(['/in/insight/editor/services']);
+  }
+  navigateToGallery() {
+    console.log('pageidddddddddddd');
+    this.router.navigate(['/in/insight/editor/gallery']);
+  }
+  navigateToOPeningHours() {
+    console.log('pageidddddddddddd');
+    this.router.navigate(['/in/insight/editor/opening-hours']);
+  }
+  navigateToContact() {
+    console.log('pageidddddddddddd');
+    this.router.navigate(['/in/insight/editor/contact-us']);
+  }
+  navigateToReview() {
+    console.log('pageidddddddddddd');
+    this.router.navigate(['/in/insight/editor/reviews']);
+  }
+  navigateToAmenties() {
+    console.log('pageidddddddddddd');
+    this.router.navigate(['/in/insight/editor/amenities']);
+  }
+  navigateToPriceList() {
+    console.log('pageidddddddddddd');
+    this.router.navigate(['/in/insight/editor/price-list']);
   }
   openSection(key: string) {
     this.router.navigate(['/in/insight/editor', key]);

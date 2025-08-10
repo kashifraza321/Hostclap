@@ -50,6 +50,9 @@ export class HttpcommanService {
   deleteCall(routeUrl: string, id: any): Observable<any> {
     return this._http.delete<any>(`${this.baseUrl}${routeUrl}/${id}`);
   }
+  // deleteCall(id: any): Observable<any> {
+  //   return this._http.delete<any>(`${this.baseUrl}/${id}`);
+  // }
 
   resetAdminPassword(routeUrl: string, token: any, data: any): Observable<any> {
     const headers = new HttpHeaders({

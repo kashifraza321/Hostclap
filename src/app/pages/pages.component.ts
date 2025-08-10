@@ -30,8 +30,11 @@ declare var bootstrap: any;
 })
 export class PagesComponent {
   userId: string = '';
+  pageId: string = '';
   pageForm!: FormGroup;
+  inlineForm!: FormGroup;
   // pagesList = [];
+  isSectionVisible = false;
   pagesList: any[] = [];
   showHomePage: boolean = false;
   selectedPage: any = null;
@@ -45,17 +48,28 @@ export class PagesComponent {
   ) {}
 
   ngOnInit() {
-    this.userId = this.route.snapshot.paramMap.get('id') || '';
-    console.log('User ID ho tm:', this.userId);
+    // this.userId = this.route.snapshot.paramMap.get('id') || '';
+    // console.log('User ID ho tm:', this.userId);
+    this.userId = localStorage.getItem('userId') || '';
+    console.log('User ID from localStorage:', this.userId);
     this.getPages();
+    console.log('page._id being senttttttttttttt:', this.pageId);
 
     this.pageForm = this.fb.group({
       pageType: ['', Validators.required],
       pageName: ['', Validators.required],
       // pageUrl: ['', Validators.required],
     });
+    this.inlineForm = this.fb.group({
+      pageName: ['', Validators.required],
+      url: ['', Validators.required],
+      pageType: ['', Validators.required],
+    });
   }
-
+  toggleSection(event: Event) {
+    const input = event.target as HTMLInputElement;
+    this.isSectionVisible = input.checked;
+  }
   openHomePage(pageId: string) {
     this.router.navigate(['/in/insight/editor/home', pageId]);
   }
@@ -65,18 +79,110 @@ export class PagesComponent {
   selectedPageIndex: number | null = null;
 
   togglePage(index: number): void {
-    this.selectedPageIndex = this.selectedPageIndex === index ? null : index;
-  }
+    if (this.selectedPageIndex === index) {
+      this.selectedPageIndex = null;
+    } else {
+      this.selectedPageIndex = index;
 
-  deletePage(id: string, event: MouseEvent): void {
+      const selectedPage = this.pagesList[index];
+      if (selectedPage) {
+        this.inlineForm.patchValue({
+          pageName: selectedPage.pageName || '',
+          url: selectedPage.url || '',
+          pageType: selectedPage.pageType || '',
+        });
+      }
+    }
+  }
+  deletePage(pageId: string, event: MouseEvent): void {
     event.stopPropagation();
+
+    if (!confirm('Are you sure you want to delete this page?')) {
+      return;
+    }
+    // const pageId = page._id;
+    this.pagesService.deletePages(pageId).subscribe({
+      next: (res) => {
+        console.log(' Page deleted successfully:', res);
+        this.alertService.success('Page deleted successfully!');
+        this.getPages();
+      },
+      error: (err) => {
+        console.error(' Failed to delete page:', err);
+        this.alertService.error('Failed to delete page.');
+      },
+    });
   }
 
   cancelChanges(): void {
     this.selectedPageIndex = null;
+    this.inlineForm.reset();
   }
+  // Save inline edited page
+  // saveInlinePage(page: any): void {
+  //   const pageId = page._id;
+  //   if (this.inlineForm.invalid) {
+  //     console.warn('Form is invalid:', this.inlineForm.value);
+  //     this.alertService.error('Form is invalid.');
+  //     return;
+  //   }
 
-  savePage(page: any): void {}
+  //   // const section = 'basic'; // or whatever your API expects
+  //   const data = {
+  //     // userId: this.userId,
+  //     pageId: page._id,
+  //     pageType: this.inlineForm.value.pageType,
+  //     pageName: this.inlineForm.value.pageName,
+  //     url: this.inlineForm.value.url,
+  //   };
+
+  //   this.pagesService.editPages(page._id, data).subscribe({
+  //     next: (res) => {
+  //       console.log('page._id being sent:', page._id);
+  //       console.log('Page updated successfully:', res);
+  //       this.alertService.success('Page updated successfully!');
+  //       this.getPages();
+  //       this.selectedPageIndex = null;
+  //     },
+  //     error: (err) => {
+  //       console.error('Failed to update page:', err);
+  //       this.alertService.error('Failed to update page.');
+  //     },
+  //   });
+  // }
+  saveInlinePage(page: any): void {
+    if (this.inlineForm.invalid) {
+      console.warn('Form is invalid:', this.inlineForm.value);
+      this.alertService.error('Form is invalid.');
+      return;
+    }
+
+    const pageId = page._id;
+
+    const data = {
+      pageType: this.inlineForm.value.pageType,
+      pageName: this.inlineForm.value.pageName,
+      url: this.inlineForm.value.url,
+    };
+
+    this.pagesService.editPages(pageId, data).subscribe({
+      next: (res) => {
+        console.log(' Page updated successfully:', res);
+        this.alertService.success('Page updated successfully!');
+        this.getPages();
+        this.selectedPageIndex = null;
+      },
+      error: (err) => {
+        console.error(' Failed to update page:', err);
+        this.alertService.error('Failed to update page.');
+      },
+    });
+  }
+  // // Delete page (basic structure only)
+  // deletePage(id: string, event: MouseEvent): void {
+  //   event.stopPropagation();
+  //   // optional: call delete API
+  // }
   getPages() {
     this.pagesService.getPages().subscribe({
       next: (res) => {
@@ -93,6 +199,7 @@ export class PagesComponent {
       },
     });
   }
+  // Add Page modal submit
   onSubmit() {
     console.log('Submit triggered');
     console.log(this.pageForm.value);
@@ -116,6 +223,12 @@ export class PagesComponent {
               bootstrap.Modal.getInstance(modalEl) ||
               new bootstrap.Modal(modalEl);
             modal.hide();
+            this.pagesService.getPages().subscribe((response: any) => {
+              const list = response?.data?.list || response?.data || [];
+              console.log(' Updated pages fetched', list);
+              this.pagesService.setPages(list);
+              this.pagesList = list;
+            });
           }
           this.getPages();
         },
@@ -131,5 +244,23 @@ export class PagesComponent {
 
   goBack() {
     this.router.navigateByUrl('/in/insight/editor');
+  }
+  getIconForPage(type: string): string {
+    switch (type) {
+      case 'link':
+        return '../../assets/images/icons8-link-50.png';
+      case 'profile':
+        return '../../assets/images/icons8-profiles-50.png';
+      case 'home':
+        return '../../assets/images/icons8-home-50 (1).png';
+      case 'faq':
+        return '../../assets/images/icons8-faq-50.png';
+      case 'media':
+        return '../../assets/images/icons8-media-80.png';
+      case 'blank':
+        return '../../assets/images/icons8-blank-50.png';
+      default:
+        return '../../assets/images/icons8-blank-50.png';
+    }
   }
 }

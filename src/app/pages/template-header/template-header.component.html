@@ -8,65 +8,133 @@
     />
     Back
   </button>
-  <form [formGroup]="headerForm">
-    <!-- Header Section List -->
-    <div class="section-item" *ngFor="let item of sectionItems">
-      <div class="flexWRP" (click)="toggleSection(item.id)">
-        <img
-          [src]="'../../../assets/images/' + item.icon"
-          width="20"
-          height="20"
-        />
-        <span class="title">{{ item.title }}</span>
-        <img
-          src="../../../assets/images/icons8-chevron-right-24.png"
-          width="15"
-        />
-      </div>
-      <button
-        class="save-btn"
-        type="button"
-        (click)="saveSection('announcement')"
+
+  <!-- Header Section List -->
+  <div class="section-item" *ngFor="let item of sectionItems">
+    <div class="flexWRP" (click)="toggleSection(item.id)">
+      <img
+        [src]="'../../../assets/images/' + item.icon"
+        width="20"
+        height="20"
+      />
+      <span class="title">{{ item.title }}</span>
+      <img
+        src="../../../assets/images/icons8-chevron-right-24.png"
+        width="15"
+      />
+    </div>
+    <!-- naya header form================================== -->
+    <!-- ANNOUNCEMENT SECTION -->
+    <ng-container *ngIf="activeSection === item.id">
+      <form
+        *ngIf="item.id === 'announcement'"
+        [formGroup]="announcementForm"
+        (ngSubmit)="saveSection('announcement')"
       >
-        Save Announcement
-      </button>
+        <div class="announcement-editor">
+          <label>
+            <input type="checkbox" formControlName="visible" />
+            Show Announcement
+          </label>
 
-      <ng-container *ngIf="activeSection === item.id">
-        <div *ngIf="item.id === 'announcement'">
-          <div class="announcement-editor">
-            <div class="announcement-toggle">
-              <label>
-                <input type="checkbox" formControlName="show" />
-                Show Announcement
-              </label>
-            </div>
+          <div class="editor-section">
+            <label class="quill-label">Announcement Message</label>
+            <quill-editor
+              [modules]="modules"
+              theme="snow"
+              class="custom-quill"
+              formControlName="message"
+              (input)="applyFontStyles()"
+            >
+              ></quill-editor
+            >
 
-            <div class="editor-section">
-              <div style="max-width: 600px; width: 100%">
-                <label class="quill-label">Announcement Message</label>
-                <quill-editor
-                  [modules]="modules"
-                  theme="snow"
-                  class="custom-quill"
-                  formControlName="message"
-                ></quill-editor>
-              </div>
-            </div>
+            <label>Show On</label>
+            <select formControlName="showOn" class="form-select">
+              <option value="all">All Pages</option>
+              <option value="home">Only Home</option>
+            </select>
           </div>
+
+          <label>Font Size</label>
+          <input
+            type="range"
+            min="13"
+            max="40"
+            step="1"
+            formControlName="fontSize"
+            (input)="applyFontStyles()"
+          />
+
+          <button
+            type="button"
+            class="btn btn-light border w-100"
+            (click)="toggleColorPicker = !toggleColorPicker"
+          >
+            <div class="rainbow-plus-icon">
+              <span>+</span>
+            </div>
+            Set Font Color
+          </button>
+          <input
+            *ngIf="toggleColorPicker"
+            type="color"
+            class="form-control mt-2"
+            formControlName="fontColor"
+            (input)="applyFontStyles()"
+          />
+
+          <div class="form-check form-switch my-2">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="actionButton"
+              formControlName="actionButton"
+            />
+            <label for="actionButton">Action Button</label>
+          </div>
+
+          <input
+            type="text"
+            formControlName="buttonText"
+            class="form-control sendAmsg"
+            placeholder="Send a message"
+            [readonly]="!announcementForm.get('actionButton')?.value"
+          />
+
+          <label>Link To</label>
+          <select formControlName="linkTo" class="form-select">
+            <option value="sendMessage">Send Message</option>
+            <option value="callNow">Call Now</option>
+            <option value="visitWebsite">Visit Website</option>
+          </select>
+
+          <div class="form-check mt-2">
+            <input
+              type="checkbox"
+              formControlName="openInNewTab"
+              class="form-check-input"
+            />
+            <label class="form-check-label">Open in New Tab</label>
+          </div>
+
+          <button type="submit" class="btn saveBtn mt-3">Save</button>
         </div>
-        <div *ngIf="item.id === 'logo'" class="LogoWrap">
-          <div class="add-logo-section">
-            <button class="add-logo-btn" (click)="openMediaLibrary()">
-              Add Logo
-            </button>
-          </div>
+      </form>
+      <!-- logo form -->
+      <form
+        *ngIf="item.id === 'logo'"
+        [formGroup]="logoForm"
+        (ngSubmit)="saveSection('logo')"
+      >
+        <div class="LogoWrap logo-editor">
+          <button type="button" class="add-logo-btn">Add Logo</button>
 
-          <div class="logo-box" *ngIf="logoUrl">
-            <!-- <img [src]="logoUrl" alt="Logo" class="logo" /> -->
+          <div *ngIf="logoUrl" class="logo-box">
             <img
               src="../../../assets/images/businesswoman.jpg"
-              alt="Logo"
               class="logo"
+              alt="Logo"
             />
             <div class="icons">
               <button type="button" (click)="editLogo()">
@@ -90,33 +158,584 @@
 
           <div class="slider-container">
             <label>Size</label>
-            <input type="range" formControlName="logoSize" min="0" max="100" />
+            <input
+              type="range"
+              formControlName="logoSize"
+              min="0"
+              max="100"
+              class="form-range"
+            />
             <div class="slider-labels">
               <span>Small</span>
               <span>Medium</span>
               <span>Large</span>
             </div>
           </div>
-
           <div class="alignment-box">
             <label>Alignment</label>
-            <select formControlName="alignment">
+            <select formControlName="alignment" class="form-select">
               <option value="left">Left</option>
               <option value="center">Center</option>
               <option value="right">Right</option>
             </select>
           </div>
+
+          <button type="submit" class="btn saveBtn mt-3">Save</button>
         </div>
-      </ng-container>
-    </div>
+      </form>
+      <!-- cover form -->
+      <form *ngIf="item.id === 'cover'" (ngSubmit)="saveSection('cover')">
+        <div class="cover-editor card p-3">
+          <!-- Image preview, parallax, opacity, background color -->
+          <div class="form-group">
+            <label>Appearance</label>
+            <select
+              class="form-select"
+              [(ngModel)]="coverSettings.appearance"
+              name="appearance"
+            >
+              <option value="none">No effect</option>
+              <option value="fade">Fade</option>
+              <option value="zoom">Zoom</option>
+            </select>
+          </div>
 
-    <!-- Expanded Section: LOGO -->
+          <label>Opacity</label>
+          <input
+            type="range"
+            min="0"
+            max="100"
+            [(ngModel)]="coverSettings.opacity"
+            name="opacity"
+            class="form-range"
+          />
 
-    <!-- Expanded Section: ANNOUNCEMENT -->
-    <div *ngIf="activeSection === 'announcement'" class="announcement-editor">
-      <!-- Remove *ngIf to always show the editor -->
-    </div>
-  </form>
+          <div class="form-check my-2">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              [(ngModel)]="coverSettings.parallax"
+              name="parallax"
+            />
+            <label class="form-check-label">Parallax Scroll</label>
+          </div>
+
+          <button
+            type="button"
+            class="btn btn-light border w-100 d-flex justify-content-between align-items-center"
+            (click)="toggleBgPicker = !toggleBgPicker"
+          >
+            <div class="rainbow-plus-icon">
+              <span>+</span>
+            </div>
+            Set Background Color
+            <i
+              class="bi"
+              [class.bi-chevron-up]="toggleBgPicker"
+              [class.bi-chevron-down]="!toggleBgPicker"
+            ></i>
+          </button>
+
+          <input
+            *ngIf="toggleBgPicker"
+            type="color"
+            [(ngModel)]="coverSettings.backgroundColor"
+            name="backgroundColor"
+            class="form-control form-control-color mt-2"
+          />
+
+          <button type="submit" class="saveBtn" class="btn saveBtn mt-3">
+            Save
+          </button>
+        </div>
+      </form>
+      <!-- menu form -->
+      <form
+        *ngIf="item.id === 'Menu'"
+        (ngSubmit)="saveSection('menu')"
+        [formGroup]="menuForm"
+        class="menu-settings-form"
+      >
+        <!-- Sticky Menu Toggle -->
+        <div class="menu-toggle-group">
+          <label>
+            <input type="checkbox" formControlName="stickyMenu" />
+            Sticky menu
+          </label>
+        </div>
+
+        <!-- Menu With Logo Inline Toggle -->
+        <div class="menu-toggle-group">
+          <label>
+            <input type="checkbox" formControlName="menuWithLogo" />
+            Menu with Logo in line
+          </label>
+        </div>
+
+        <!-- Menu Position -->
+        <div class="menu-position-section">
+          <label class="form-label">Menu Position</label>
+          <div class="position-options">
+            <button type="button" class="position-btn">↑</button>
+            <button type="button" class="position-btn">↕</button>
+            <button type="button" class="position-btn">↓</button>
+          </div>
+        </div>
+
+        <!-- Menu Background Color -->
+        <div class="color-picker-section">
+          <button
+            type="button"
+            class="color-picker-toggle"
+            (click)="toggleMenuBgColor = !toggleMenuBgColor"
+          >
+            <div class="rainbow-plus-icon">
+              <span>+</span>
+            </div>
+            Menu Background Color
+            <i
+              [class]="
+                toggleMenuBgColor ? 'bi bi-chevron-up' : 'bi bi-chevron-down'
+              "
+            ></i>
+          </button>
+          <div *ngIf="toggleMenuBgColor" class="mt-2">
+            <input type="color" formControlName="backgroundColor" />
+          </div>
+        </div>
+
+        <!-- Font Size -->
+        <div class="font-size-section">
+          <label class="form-label">Font Size</label>
+          <div class="font-size-control">
+            <span class="text-muted fw-bold">A−</span>
+            <input
+              type="range"
+              min="0"
+              max="2"
+              step="1"
+              formControlName="fontSize"
+            />
+            <span class="text-muted fw-bold">A+</span>
+          </div>
+          <div class="font-size-labels">
+            <small>Small</small>
+            <small>Medium</small>
+            <small>Large</small>
+          </div>
+        </div>
+
+        <!-- Font Alignment -->
+        <div class="font-alignment-section">
+          <label class="form-label">Alignment</label>
+          <div class="alignment-buttons">
+            <button type="button" class="alignment-btn">⇤</button>
+            <button type="button" class="alignment-btn">⇆</button>
+            <button type="button" class="alignment-btn">⇥</button>
+          </div>
+        </div>
+
+        <!-- Font Color -->
+        <div class="color-picker-section">
+          <button
+            type="button"
+            class="color-picker-toggle"
+            (click)="toggleMenuFontColor = !toggleMenuFontColor"
+          >
+            <div class="rainbow-plus-icon">
+              <span>+</span>
+            </div>
+            Menu Font Color
+            <i
+              [class]="
+                toggleMenuFontColor ? 'bi bi-chevron-up' : 'bi bi-chevron-down'
+              "
+            ></i>
+          </button>
+          <div *ngIf="toggleMenuFontColor" class="mt-2">
+            <input type="color" formControlName="fontColor" />
+          </div>
+        </div>
+        <button type="submit" class="btn saveBtn mt-3">Save</button>
+      </form>
+
+      <!-- menu form -->
+      <!-- titles form -->
+      <form
+        *ngIf="item.id === 'Title'"
+        [formGroup]="titlesForm"
+        (ngSubmit)="saveSection('titles')"
+        class="titles-form card p-3"
+      >
+        <!-- Business Name -->
+        <div class="mb-4">
+          <label class="form-label fw-bold">Business Name</label>
+          <input
+            type="text"
+            formControlName="businessName"
+            class="form-control"
+            placeholder="Enter business name"
+          />
+          <div class="form-text">
+            Your business name. This will appear in your communications to
+            customers.
+          </div>
+        </div>
+
+        <!-- Page Title -->
+        <div class="mb-4">
+          <label class="form-label fw-bold">Page Title</label>
+          <input
+            type="text"
+            formControlName="pageTitle"
+            class="form-control"
+            placeholder="Enter page title"
+          />
+          <div class="form-text">
+            Set a custom title for your website. Max 80 characters.
+          </div>
+        </div>
+
+        <!-- Alignment -->
+        <div class="mb-4">
+          <label class="form-label fw-bold">Alignment</label>
+          <div class="btn-group w-100" role="group">
+            <input
+              type="radio"
+              class="btn-check"
+              id="align-left"
+              value="left"
+              formControlName="titleAlignment"
+            />
+            <label class="btn btn-outline-secondary" for="align-left">
+              <i class="bi bi-text-left"></i>
+            </label>
+
+            <input
+              type="radio"
+              class="btn-check"
+              id="align-center"
+              value="center"
+              formControlName="titleAlignment"
+            />
+            <label class="btn btn-outline-secondary" for="align-center">
+              <i class="bi bi-text-center"></i>
+            </label>
+
+            <input
+              type="radio"
+              class="btn-check"
+              id="align-right"
+              value="right"
+              formControlName="titleAlignment"
+            />
+            <label class="btn btn-outline-secondary" for="align-right">
+              <i class="bi bi-text-right"></i>
+            </label>
+          </div>
+        </div>
+
+        <!-- Font Size Slider -->
+        <div class="mb-4">
+          <label class="form-label fw-bold">Font Size</label>
+          <div class="d-flex align-items-center justify-content-between">
+            <span class="text-muted fw-bold">A−</span>
+            <input
+              type="range"
+              formControlName="titleFontSize"
+              min="0"
+              max="2"
+              step="1"
+              class="form-range mx-2"
+              style="flex-grow: 1"
+            />
+            <span class="text-muted fw-bold">A+</span>
+          </div>
+          <div
+            class="d-flex justify-content-between px-1 mt-1 small text-muted"
+          >
+            <span>Small</span>
+            <span>Medium</span>
+            <span>Large</span>
+          </div>
+        </div>
+
+        <!-- Title Color Picker Toggle -->
+        <div class="mb-4">
+          <button
+            type="button"
+            class="btn btn-light border w-100 d-flex justify-content-between align-items-center"
+            (click)="toggleTitleColorPicker = !toggleTitleColorPicker"
+          >
+            <span>
+              <div class="rainbow-plus-icon">
+                <span>+</span>
+              </div>
+              Set Title Color
+            </span>
+            <i
+              [class]="
+                toggleTitleColorPicker
+                  ? 'bi bi-chevron-up'
+                  : 'bi bi-chevron-down'
+              "
+            ></i>
+          </button>
+
+          <div *ngIf="toggleTitleColorPicker" class="mt-2">
+            <input
+              type="color"
+              formControlName="titleColor"
+              class="form-control form-control-color"
+            />
+          </div>
+        </div>
+
+        <!-- Subtitle -->
+        <div class="mb-4">
+          <label class="form-label fw-bold">Subtitle</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="subtitle"
+            placeholder="Enter subtitle"
+          />
+          <div class="form-text">Max 200 characters</div>
+        </div>
+
+        <!-- Subtitle Alignment -->
+        <div class="mb-4">
+          <label class="form-label fw-bold">Alignment</label>
+          <select class="form-select" formControlName="subtitleAlignment">
+            <option value="left">Left</option>
+            <option value="center">Center</option>
+            <option value="right">Right</option>
+          </select>
+        </div>
+
+        <!-- Save Button -->
+        <div class="text-center">
+          <button class="btn saveBtn" type="submit">Save</button>
+        </div>
+      </form>
+
+      <!-- titles form -->
+
+      <!-- phone form -->
+      <form
+        *ngIf="item.id === 'phone'"
+        [formGroup]="contactForm"
+        (ngSubmit)="saveSection('phone')"
+      >
+        <!-- Phone Section -->
+        <div class="card p-3">
+          <!-- Toggle: Show phone -->
+          <div class="form-check form-switch switchBox mb-3">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="showPhone"
+              formControlName="showPhone"
+            />
+            <label class="form-check-label fw-bold" for="showPhone">
+              Show phone number on page
+            </label>
+          </div>
+
+          <!-- Mobile Phone -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Mobile Phone</label>
+            <div class="input-group">
+              <span class="input-group-text">🇮🇳</span>
+              <input
+                type="text"
+                class="form-control phoneInput"
+                formControlName="mobilePhone"
+                placeholder="+918102065847"
+              />
+            </div>
+            <small class="text-muted">
+              Enter a phone number to receive SMS notifications & calls.
+            </small>
+          </div>
+
+          <!-- Office Phone -->
+          <div class="mb-2">
+            <label class="form-label fw-semibold">Office Phone</label>
+            <div class="input-group">
+              <span class="input-group-text">🇮🇳</span>
+              <input
+                type="text"
+                class="form-control phoneInput"
+                formControlName="officePhone"
+                placeholder="+91"
+              />
+            </div>
+            <small class="text-muted">
+              Receive calls on your office phone instead of your mobile phone.
+              You will still receive SMS notifications via your mobile phone if
+              you've provided that as well.
+            </small>
+          </div>
+        </div>
+
+        <!-- WhatsApp Section -->
+        <div class="card">
+          <!-- Toggle: Show WhatsApp -->
+          <div class="form-check form-switch switchBox mb-3">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="showWhatsapp"
+              formControlName="showWhatsapp"
+            />
+            <label class="form-check-label fw-bold" for="showWhatsapp">
+              Show WhatsApp number
+            </label>
+          </div>
+
+          <!-- WhatsApp Number -->
+          <div>
+            <label class="form-label fw-semibold">WhatsApp Number</label>
+            <div class="input-group">
+              <span class="input-group-text">🇮🇳</span>
+              <input
+                type="text"
+                class="form-control phoneInput"
+                formControlName="whatsappNumber"
+                placeholder="+918877306675"
+              />
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn saveBtn mt-3">Save</button>
+      </form>
+      <!-- address form -->
+      <!-- Address Visibility Toggle Card -->
+      <form
+        *ngIf="item.id === 'address'"
+        [formGroup]="addressForm"
+        (ngSubmit)="saveSection('address')"
+      >
+        <!-- Show Address Toggle -->
+        <div class="address-section-card">
+          <div
+            class="toggle-row d-flex justify-content-between align-items-center mb-3"
+          >
+            <label class="section-label">Show Address</label>
+            <input
+              type="checkbox"
+              class="form-check-input"
+              formControlName="showAddress"
+            />
+          </div>
+
+          <!-- Background Color Picker -->
+          <button
+            type="button"
+            class="address-color-toggle w-100"
+            (click)="toggleAddressBgColor = !toggleAddressBgColor"
+          >
+            <span class="color-label">
+              <div class="rainbow-plus-icon">
+                <span>+</span>
+              </div>
+              Set Background Color
+            </span>
+            <i
+              [class]="
+                toggleAddressBgColor ? 'bi bi-chevron-up' : 'bi bi-chevron-down'
+              "
+            ></i>
+          </button>
+
+          <div *ngIf="toggleAddressBgColor" class="color-picker-box mt-2">
+            <input
+              type="color"
+              formControlName="addressBackgroundColor"
+              class="form-control form-control-color"
+            />
+          </div>
+        </div>
+
+        <!-- Font Size and Font Color Section -->
+        <div class="address-section-card">
+          <label class="section-label mb-1">Font Size</label>
+
+          <div
+            class="font-range-wrap d-flex justify-content-between align-items-center"
+          >
+            <span class="font-range-icon">A−</span>
+            <input
+              type="range"
+              class="form-range"
+              min="0"
+              max="2"
+              step="1"
+              formControlName="addressFontSize"
+            />
+            <span class="font-range-icon">A+</span>
+          </div>
+
+          <div
+            class="font-labels d-flex justify-content-between small px-1 mt-1"
+          >
+            <span>Small</span>
+            <span>Medium</span>
+            <span>Large</span>
+          </div>
+
+          <!-- Font Color Picker -->
+          <button
+            type="button"
+            class="address-color-toggle w-100 mt-3"
+            (click)="toggleAddressFontColor = !toggleAddressFontColor"
+          >
+            <span class="color-label">
+              <div class="rainbow-plus-icon">
+                <span>+</span>
+              </div>
+              Set Font Color
+            </span>
+            <i
+              [class]="
+                toggleAddressFontColor
+                  ? 'bi bi-chevron-up'
+                  : 'bi bi-chevron-down'
+              "
+            ></i>
+          </button>
+
+          <div *ngIf="toggleAddressFontColor" class="color-picker-box mt-2">
+            <input
+              type="color"
+              formControlName="addressFontColor"
+              class="form-control form-control-color"
+            />
+          </div>
+        </div>
+        <button type="submit" class="btn saveBtn mt-3">Save</button>
+      </form>
+    </ng-container>
+
+    <!-- naya header form================================== -->
+    <!-- purana header form -->
+  </div>
+
+  <!-- purana header form -->
+
+  <!-- Expanded Section: LOGO -->
+
+  <!-- <div class="footer-btns btnWrp d-flex justify-content-center mt-4">
+      <button class="btn cancel-btn cancelBtn">Cancel</button>
+      <button
+        class="btn btn-secondary greenBtn"
+        (click)="saveSection(activeSection!)"
+        [disabled]="!headerForm.get(activeSection!)?.valid"
+      >
+        Save
+      </button>
+    </div> -->
 </div>
 
 <!-- media gallery modal -->
@@ -202,6 +821,110 @@
       >
         Choose
       </button>
+    </div>
+  </div>
+</div>
+
+<!-- cover media gallery  -->
+<div
+  class="modal fade"
+  id="coverEditorModal"
+  tabindex="-1"
+  aria-labelledby="coverEditorLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="coverEditorLabel">Cover Editor</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+
+      <div class="modal-body">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button
+              class="nav-link active"
+              id="home-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#home"
+              type="button"
+              role="tab"
+              aria-controls="home"
+              aria-selected="true"
+            >
+              My Uploads
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button
+              class="nav-link"
+              id="profile-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#profile"
+              type="button"
+              role="tab"
+              aria-controls="profile"
+              aria-selected="false"
+            >
+              URL Upload
+            </button>
+          </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <div
+            class="tab-pane fade show active"
+            id="home"
+            role="tabpanel"
+            aria-labelledby="home-tab"
+          >
+            <div class="upload-gallery">
+              <div class="upload-box">
+                <label>
+                  <input type="file" (change)="uploadFile($event)" hidden />
+                  <div class="upload-placeholder">+</div>
+                </label>
+              </div>
+
+              <!-- <div class="media-items">
+            <div
+              *ngFor="let image of uploadedImages"
+              class="media-thumbnail"
+              [class.selected]="selectedImage === image"
+              (click)="selectImage(image)"
+            >
+              <img [src]="image" alt="Media" />
+            </div>
+          </div> -->
+            </div>
+          </div>
+          <div
+            class="tab-pane fade"
+            id="profile"
+            role="tabpanel"
+            aria-labelledby="profile-tab"
+          >
+            ...
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button (click)="closeMediaLibrary()">Cancel</button>
+          <button
+            class="greenbtn"
+            (click)="chooseImage()"
+            [disabled]="!selectedImage"
+          >
+            Choose
+          </button>
+        </div>
+        <!-- END Cover Editor -->
+      </div>
     </div>
   </div>
 </div>

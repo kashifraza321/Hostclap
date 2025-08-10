@@ -1,0 +1,132 @@
+.settings-wrapper {
+  padding: 1rem;
+  font-family: "Segoe UI", sans-serif;
+  background: #fff;
+  border-radius: 10px;
+  max-width: 400px;
+  margin: auto;
+}
+
+.settings-header {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  font-weight: 500;
+  color: #555;
+  display: flex;
+  align-items: center;
+}
+.bi-cart3::before {
+  content: "\f244";
+  font-size: 20px;
+}
+.bi-shield-lock::before {
+  content: "\f538";
+  font-size: 20px;
+}
+.bi-shield-lock::before {
+  content: "\f538";
+  font-size: 20px;
+}
+.bi-code-square::before {
+  content: "\f2c7";
+  font-size: 20px;
+}
+.bi-calendar-check::before {
+  content: "\f1e2";
+  font-size: 20px;
+}
+.stripBtn {
+  padding: 14px;
+  font-size: 15px;
+}
+.onlineTxt {
+  font-size: 19px;
+  padding-bottom: 23px;
+}
+
+.tab-underline {
+  height: 2px;
+  background-color: #3f51b5;
+  width: 60px;
+}
+
+.payment-box {
+  background-color: #f8f9fa;
+  border-radius: 12px;
+}
+
+.setting-item {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.setting-item i:first-child {
+  margin-right: 12px;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.setting-item.disabled {
+  color: #999;
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+.footer-btns .cancel-btn {
+  background: none;
+  border: none;
+  color: #666;
+}
+.name {
+  font-size: 18px;
+  font-weight: 500;
+}
+.btnWrp {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding-top: 20px;
+}
+
+.cancelBtn {
+  background-color: #e0e0e0;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.cancelBtn:hover {
+  background-color: #d5d5d5;
+}
+
+.greenBtn {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.greenBtn:disabled {
+  background-color: #9ccc9c;
+  cursor: not-allowed;
+}

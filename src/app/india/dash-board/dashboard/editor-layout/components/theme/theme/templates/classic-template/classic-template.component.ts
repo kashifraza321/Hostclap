@@ -15,6 +15,10 @@ export class ClassicTemplateComponent {
   @Input() data!: Data;
   userId: string = '';
   pagesList = [];
+  previewData: any = {};
+  pages: any[] = [];
+  preview: any = {};
+  public state$ = this.pagesService.state$;
   constructor(
     private pagesService: PagesService,
     private route: ActivatedRoute
@@ -23,6 +27,10 @@ export class ClassicTemplateComponent {
   ngOnInit() {
     this.userId = this.route.snapshot.paramMap.get('id') || '';
     console.log('User ID:', this.userId);
+    this.pagesService.state$.subscribe((state) => {
+      this.pages = state.pages;
+      this.preview = state.preview;
+    });
     this.getPages();
   }
   getPages() {

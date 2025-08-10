@@ -29,4 +29,7 @@ export const API_CONSTANTS = {
   GET_PAGES: '/app/website/get-pages',
   GET_PAGE_DETAIL: '/app/website/get-page-detail',
   EDIT_HEADER: '/app/website/edit-headers',
+  EDIT_PAGES: '/app/website/edit-pages',
+  DELETE_PAGES: '/app/website/delete-page',
 };
+// admin/website/delete-page/686635ff8eefd3f716bf88d2

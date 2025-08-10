@@ -1,0 +1,66 @@
+<div class="pageWrapper">
+  <div class="top-bar">
+    <button class="back-btn" (click)="backToHomepage()">
+      <img
+        src="../../../assets/images/icons8-chevron-right-24.png"
+        alt="chevron"
+        width="18"
+      />
+      Back
+    </button>
+    <div class="title">SERVICE</div>
+  </div>
+
+  <div class="section-card">
+    <label class="label" for="section-title">Section Title</label>
+    <div class="title-row">
+      <input
+        id="section-title"
+        type="text"
+        class="input-field"
+        value="SERVICE"
+      />
+      <input type="checkbox" class="checkbox" checked />
+    </div>
+    <label class="label" for="section-subtitle">Section Subtitle</label>
+    <input
+      id="section-subtitle"
+      type="text"
+      class="input-field"
+      value="Get AC Service Now"
+    />
+  </div>
+
+  <div class="service-groups-card">
+    <div class="header-row">
+      <div class="header-title">
+        Service groups
+        <span class="info-icon" title="Info">i</span>
+      </div>
+      <button class="edit-btn">Edit</button>
+    </div>
+
+    <button class="add-group-btn">
+      <span class="plus-icon">+</span> Add new group
+    </button>
+
+    <div class="group-list">
+      <div class="group-item orange-border">
+        Air conditioning services <span class="arrow">&gt;</span>
+      </div>
+      <div class="group-item blue-border">
+        test <span class="arrow">&gt;</span>
+      </div>
+    </div>
+
+    <div class="tip-box">
+      <b>Top Tip:</b> Activate the 'Book' button to allow customers to make
+      bookings directly on your website.
+    </div>
+  </div>
+
+  <div class="footer-buttons">
+    <button class="cancel-btn cancelBtn">Cancel</button>
+    <button class="save-btn saveBtn" disabled>Save</button>
+  </div>
+</div>

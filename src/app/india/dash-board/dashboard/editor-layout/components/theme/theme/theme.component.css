@@ -11,6 +11,10 @@
   color: #000;
   font-weight: 500;
 }
+.themeWrap {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
 
 /* color */
 .color-scheme-card {
@@ -80,7 +84,7 @@
 /* color */
 /* template */
 .card {
-  width: 50% !important;
+  /* width: 50% !important; */
   background: url(../../../../../../../../assets/images/default.png) no-repeat;
   background-position: center;
   background-size: cover;
