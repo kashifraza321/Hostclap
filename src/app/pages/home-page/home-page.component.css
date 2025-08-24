@@ -98,6 +98,10 @@ input:checked + .slider::before {
   border-left: 0;
   border-right: 0;
 }
+.MuiSvgIcon-root {
+  width: 20px;
+  height: 20px;
+}
 
 /* SECTION HEADER */
 .section-header {
@@ -118,8 +122,9 @@ input:checked + .slider::before {
 }
 
 .info-icon {
-  font-size: 16px;
   cursor: pointer;
+  width: 15px;
+  height: 15px;
 }
 
 /* EDIT BUTTON */

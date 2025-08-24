@@ -1,0 +1,66 @@
+<div class="pageWrapper">
+  <div class="top-bar">
+    <button class="back-btn" (click)="backToHomepage()">
+      <img
+        src="../../../assets/images/icons8-chevron-right-24.png"
+        alt="chevron"
+        width="18"
+      />
+      Back
+    </button>
+    <div class="title">Contact Form</div>
+  </div>
+  <form [formGroup]="contactUsForm" (ngSubmit)="saveContactUs()">
+    <div class="section-card">
+      <label class="label" for="section-title"
+        >Contact Form title
+        <img
+          src="../../../assets/images/icons8-info-50.png"
+          alt="info"
+          width="17"
+          height="17"
+      /></label>
+      <div class="title-row">
+        <input
+          id="section-title"
+          type="text"
+          class="input-field"
+          value="offer"
+          formControlName="title"
+        />
+        <p>Max 25 characters</p>
+      </div>
+    </div>
+    <div class="editor-section">
+      <label class="quill-label">Subtitle</label>
+      <quill-editor
+        [modules]="modules"
+        theme="snow"
+        class="custom-quill"
+        formControlName="subtitle"
+      >
+        ></quill-editor
+      >
+      <p class="tip">
+        Pro Tip: explain how you will follow-up with your customers when you
+        receive a message.
+      </p>
+    </div>
+    <div class="editor-section">
+      <label class="quill-label">Warning</label>
+      <quill-editor
+        [modules]="modules"
+        theme="snow"
+        class="custom-quill"
+        formControlName="warningText"
+      >
+        ></quill-editor
+      >
+    </div>
+
+    <div class="footer-buttons">
+      <button class="cancel-btn cancelBtn">Cancel</button>
+      <button class="save-btn saveBtn">Save</button>
+    </div>
+  </form>
+</div>

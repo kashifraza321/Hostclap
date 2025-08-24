@@ -28,8 +28,8 @@
     <div class="left">
       <strong>Sections on this page</strong>
       <span class="info-icon" title="This is where your sections appear."
-        >ℹ️</span
-      >
+        ><img src="../../../assets/images/icons8-info-50.png" alt="info"
+      /></span>
     </div>
     <button class="edit-btn" (click)="editSections()">Edit</button>
   </div>
@@ -47,6 +47,16 @@
     </div>
     <ul class="sectionList">
       <li class="section-item" (click)="openHeader(pageId)">
+        <svg
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+          focusable="false"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16zM16 17H5V7h11l3.55 5L16 17z"
+          ></path>
+        </svg>
         header
 
         <span class="chevron"
@@ -56,7 +66,17 @@
             width="17"
         /></span>
       </li>
-      <li class="section-item">
+      <li class="section-item" (click)="navigateToPromotion(pageId)">
+        <svg
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+          focusable="false"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            d="M22 10V6c0-1.1-.9-2-2-2H4c-1.1 0-1.99.9-1.99 2v4c1.1 0 1.99.9 1.99 2s-.89 2-2 2v4c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-4c-1.1 0-2-.9-2-2s.9-2 2-2zm-2-1.46c-1.19.69-2 1.99-2 3.46s.81 2.77 2 3.46V18H4v-2.54c1.19-.69 2-1.99 2-3.46 0-1.48-.8-2.77-1.99-3.46L4 6h16v2.54zM9.07 16L12 14.12 14.93 16l-.89-3.36 2.69-2.2-3.47-.21L12 7l-1.27 3.22-3.47.21 2.69 2.2z"
+          ></path>
+        </svg>
         Promotion
 
         <span class="chevron"
@@ -66,7 +86,17 @@
             width="17"
         /></span>
       </li>
-      <li class="section-item" (click)="openServices()">
+      <li class="section-item" (click)="openServices(pageId)">
+        <svg
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+          focusable="false"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            d="M11.99 18.54l-7.37-5.73L3 14.07l9 7 9-7-1.63-1.27zM12 16l7.36-5.73L21 9l-9-7-9 7 1.63 1.27L12 16zm0-11.47L17.74 9 12 13.47 6.26 9 12 4.53z"
+          ></path>
+        </svg>
         Services
 
         <span class="chevron"
@@ -76,7 +106,7 @@
             width="17"
         /></span>
       </li>
-      <li class="section-item">
+      <!-- <li class="section-item">
         About us
 
         <span class="chevron"
@@ -85,8 +115,18 @@
             alt=""
             width="17"
         /></span>
-      </li>
+      </li> -->
       <li class="section-item" (click)="navigateToGallery()">
+        <svg
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+          focusable="false"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            d="M1 5h2v14H1zm4 0h2v14H5zm17 0H10c-.55 0-1 .45-1 1v12c0 .55.45 1 1 1h12c.55 0 1-.45 1-1V6c0-.55-.45-1-1-1zm-1 12H11V7h10v10zm-3.57-4.38l-2 2.57L14 13.47l-2 2.52h8z"
+          ></path>
+        </svg>
         Gallery
 
         <span class="chevron"
@@ -96,7 +136,17 @@
             width="17"
         /></span>
       </li>
-      <li class="section-item" (click)="navigateToAmenties()">
+      <li class="section-item" (click)="navigateToAmenties(pageId)">
+        <svg
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+          focusable="false"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z"
+          ></path>
+        </svg>
         Amenties
 
         <span class="chevron"
@@ -107,6 +157,16 @@
         /></span>
       </li>
       <li class="section-item">
+        <svg
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+          focusable="false"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            d="M20 4v13.17L18.83 16H4V4h16m0-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4V4c0-1.1-.9-2-2-2zm-2 10H6v2h12v-2zm0-3H6v2h12V9zm0-3H6v2h12V6z"
+          ></path>
+        </svg>
         Testimonials
 
         <span class="chevron"
@@ -117,6 +177,17 @@
         /></span>
       </li>
       <li class="section-item" (click)="navigateToPriceList()">
+        <svg
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+          focusable="false"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58s1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41s-.23-1.06-.59-1.42zM13 20.01L4 11V4h7v-.01l9 9-7 7.02z"
+          ></path>
+          <circle cx="6.5" cy="6.5" r="1.5"></circle>
+        </svg>
         Prices LIst
 
         <span class="chevron"
@@ -127,6 +198,16 @@
         /></span>
       </li>
       <li class="section-item">
+        <svg
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+          focusable="false"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            d="M15.55 13c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.37-.66-.11-1.48-.87-1.48H5.21l-.94-2H1v2h2l3.6 7.59-1.35 2.44C4.52 15.37 5.48 17 7 17h12v-2H7l1.1-2h7.45zM6.16 6h12.15l-2.76 5H8.53L6.16 6zM7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"
+          ></path>
+        </svg>
         Products
 
         <span class="chevron"
@@ -137,6 +218,16 @@
         /></span>
       </li>
       <li class="section-item" (click)="navigateToReview()">
+        <svg
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+          focusable="false"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm7.48 7.16l-5.01-.43-2-4.71c3.21.19 5.91 2.27 7.01 5.14zm-5.07 6.26L12 13.98l-2.39 1.44.63-2.72-2.11-1.83 2.78-.24L12 8.06l1.09 2.56 2.78.24-2.11 1.83.64 2.73zm-2.86-11.4l-2 4.72-5.02.43c1.1-2.88 3.8-4.97 7.02-5.15zM4 12c0-.64.08-1.26.23-1.86l3.79 3.28-1.11 4.75C5.13 16.7 4 14.48 4 12zm3.84 6.82L12 16.31l4.16 2.5c-1.22.75-2.64 1.19-4.17 1.19-1.52 0-2.94-.44-4.15-1.18zm9.25-.65l-1.11-4.75 3.79-3.28c.14.59.23 1.22.23 1.86 0 2.48-1.14 4.7-2.91 6.17z"
+          ></path>
+        </svg>
         Google Reviews
 
         <span class="chevron"
@@ -146,7 +237,18 @@
             width="17"
         /></span>
       </li>
-      <li class="section-item" (click)="navigateToContact()">
+      <li class="section-item" (click)="navigateToContactForm(pageId)">
+        <svg
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+          focusable="false"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9z"
+          ></path>
+          <circle cx="12" cy="9" r="2.5"></circle>
+        </svg>
         Contact Form
 
         <span class="chevron"
@@ -156,7 +258,18 @@
             width="17"
         /></span>
       </li>
-      <li class="section-item">
+      <li class="section-item" (click)="navigateToContact(pageId)">
+        <svg
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+          focusable="false"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9z"
+          ></path>
+          <circle cx="12" cy="9" r="2.5"></circle>
+        </svg>
         Contact Us
 
         <span class="chevron"
@@ -166,7 +279,19 @@
             width="17"
         /></span>
       </li>
+
       <li class="section-item">
+        <svg
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+          focusable="false"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9z"
+          ></path>
+          <circle cx="12" cy="9" r="2.5"></circle>
+        </svg>
         Location
 
         <span class="chevron"
@@ -177,6 +302,16 @@
         /></span>
       </li>
       <li class="section-item" (click)="navigateToOPeningHours()">
+        <svg
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+          focusable="false"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"
+          ></path>
+        </svg>
         Opening hours
 
         <span class="chevron"
@@ -186,7 +321,7 @@
             width="17"
         /></span>
       </li>
-      <li class="section-item">
+      <li class="section-item" (click)="navigateToFooter(pageId)">
         Footer
 
         <span class="chevron"

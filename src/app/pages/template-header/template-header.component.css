@@ -362,6 +362,10 @@ input[type="range"] {
   background-color: #f8f9fa;
   border: 1px solid #ddd;
   padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin: 20px 0;
 }
 
 /* Color picker input */
@@ -374,10 +378,10 @@ input[type="color"].form-control-color {
 }
 
 /* Form toggles (checkbox/switch) */
-.form-check-input:checked {
+/* .form-check-input:checked {
   background-color: #4caf50;
   border-color: #4caf50;
-}
+} */
 
 /* Readonly input styling */
 input[readonly] {
@@ -589,8 +593,8 @@ form {
 /* Checkbox switch */
 .form-check-input {
   float: right;
-  width: 20px;
-  height: 20px;
+  /* width: 20px;
+  height: 20px; */
   margin-top: -2px;
   cursor: pointer;
 }
@@ -788,7 +792,7 @@ small.text-muted {
   background: none;
   cursor: pointer;
   width: 100%;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .font-size-labels {
@@ -809,6 +813,41 @@ label {
   font-weight: 600;
   margin: 14px 2px;
 }
+.cover-section {
+  padding: 16px;
+}
+
+.cover-image-box {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.image-preview {
+  position: relative;
+  display: inline-block;
+}
+
+.image-preview img {
+  max-width: 100%;
+  border-radius: 12px;
+}
+
+.image-preview button {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: rgba(0, 0, 0, 0.6);
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+.options label {
+  display: block;
+  margin: 8px 0;
+}
+
 /* Responsive tweak */
 @media (max-width: 576px) {
   .card {

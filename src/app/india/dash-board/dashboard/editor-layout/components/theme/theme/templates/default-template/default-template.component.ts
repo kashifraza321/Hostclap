@@ -14,9 +14,14 @@ import { PagesService } from 'src/app/pages/pages.service';
 export class DefaultTemplateComponent {
   @Input() data!: Data;
   userId: string = '';
-  pagesList = [];
+  pageId: string = '';
+  // pagesList = [];
   pages: any[] = [];
   preview: any = {};
+  pagesList: any[] = [];
+  public state$ = this.pagesService.state$;
+  previewData: any = {};
+  pageData: any;
   constructor(
     private pagesService: PagesService,
     private route: ActivatedRoute
@@ -32,23 +37,20 @@ export class DefaultTemplateComponent {
     this.getPages();
     this.getPageDetail('687177a9aa11a48cb4de77db');
   }
-  getPageDetail(id: string): void {
-    this.pagesService.getPageDetail(id).subscribe({
-      next: (res) => {
-        console.log('Page Detail:', res);
-        // you can update form values here if needed
-      },
-      error: (err) => {
-        console.error('Failed to fetch page detail:', err);
-      },
-    });
-  }
+
   getPages() {
     this.pagesService.getPages().subscribe({
       next: (res) => {
         console.log('Fetched pages:', res);
         this.pagesList = res.data || [];
+        this.pageId = res.data[0]?._id;
+
+        console.log(this.pageId, 'pageid yaha s nikal lun');
         console.log(this.pagesList, 'tazzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz');
+        if (this.pageId) {
+          this.getPageDetail(this.pageId);
+          console.log(this.pageData.phones.mobile, 'mobileeeee');
+        }
         // this.data.pageData = this.pagesList;
         // this.parent.updateData({ pageData: this.pagesList });
         this.data = { ...this.data, pageData: this.pagesList };
@@ -56,6 +58,19 @@ export class DefaultTemplateComponent {
       },
       error: (err) => {
         console.error('Error loading pages:', err);
+      },
+    });
+  }
+  getPageDetail(pageId: string): void {
+    this.pagesService.getPageDetail(pageId).subscribe({
+      next: (res) => {
+        this.pageData = res.data;
+
+        console.log('Page Detail:', res);
+        console.log(this.pageData.phones.mobile, 'mobileeeee');
+      },
+      error: (err) => {
+        console.error('Failed to fetch page detail:', err);
       },
     });
   }

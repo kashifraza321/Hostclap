@@ -38,6 +38,7 @@ export class PagesComponent {
   pagesList: any[] = [];
   showHomePage: boolean = false;
   selectedPage: any = null;
+  pageData: any;
   constructor(
     private parent: EditorLayoutComponent,
     private route: ActivatedRoute,
@@ -119,37 +120,7 @@ export class PagesComponent {
     this.inlineForm.reset();
   }
   // Save inline edited page
-  // saveInlinePage(page: any): void {
-  //   const pageId = page._id;
-  //   if (this.inlineForm.invalid) {
-  //     console.warn('Form is invalid:', this.inlineForm.value);
-  //     this.alertService.error('Form is invalid.');
-  //     return;
-  //   }
 
-  //   // const section = 'basic'; // or whatever your API expects
-  //   const data = {
-  //     // userId: this.userId,
-  //     pageId: page._id,
-  //     pageType: this.inlineForm.value.pageType,
-  //     pageName: this.inlineForm.value.pageName,
-  //     url: this.inlineForm.value.url,
-  //   };
-
-  //   this.pagesService.editPages(page._id, data).subscribe({
-  //     next: (res) => {
-  //       console.log('page._id being sent:', page._id);
-  //       console.log('Page updated successfully:', res);
-  //       this.alertService.success('Page updated successfully!');
-  //       this.getPages();
-  //       this.selectedPageIndex = null;
-  //     },
-  //     error: (err) => {
-  //       console.error('Failed to update page:', err);
-  //       this.alertService.error('Failed to update page.');
-  //     },
-  //   });
-  // }
   saveInlinePage(page: any): void {
     if (this.inlineForm.invalid) {
       console.warn('Form is invalid:', this.inlineForm.value);
@@ -189,6 +160,11 @@ export class PagesComponent {
         console.log('Fetched pages:', res);
 
         this.pagesList = res.data?.list || res.data || [];
+        this.pageId = this.pagesList.length > 0 ? this.pagesList[0]._id : null;
+        console.log(this.pageId, 'pageid in pages');
+        if (this.pageId) {
+          this.getPageDetail(this.pageId);
+        }
 
         console.log(this.pagesList, 'kaleshi afreen');
         // this.data.pageData = this.pagesList;
@@ -226,7 +202,7 @@ export class PagesComponent {
             this.pagesService.getPages().subscribe((response: any) => {
               const list = response?.data?.list || response?.data || [];
               console.log(' Updated pages fetched', list);
-              this.pagesService.setPages(list);
+              // this.pagesService.setPages(list);
               this.pagesList = list;
             });
           }
@@ -244,6 +220,20 @@ export class PagesComponent {
 
   goBack() {
     this.router.navigateByUrl('/in/insight/editor');
+  }
+  // get page detail
+  getPageDetail(pageId: string): void {
+    this.pagesService.getPageDetail(pageId).subscribe({
+      next: (res) => {
+        this.pageData = res.data;
+
+        console.log('Page Detail:', res);
+        console.log(this.pageData.phones.mobile, 'mobileeeee');
+      },
+      error: (err) => {
+        console.error('Failed to fetch page detail:', err);
+      },
+    });
   }
   getIconForPage(type: string): string {
     switch (type) {

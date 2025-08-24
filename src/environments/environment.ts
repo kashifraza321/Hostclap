@@ -6,5 +6,5 @@ export const environment = {
   // apiUrl: "https://api.tapcard.ae",
   apiUrl: 'https://hostclab-service-app.onrender.com/api',
   imageUrl: 'https://devserverspace.blr1.digitaloceanspaces.com/',
-  // imagePath: 'https://creditreward-bcket.s3.amazonaws.com/',
+  imageBaseUrl: ' https://hostclap.s3.eu-north-1.amazonaws.com/',
 };

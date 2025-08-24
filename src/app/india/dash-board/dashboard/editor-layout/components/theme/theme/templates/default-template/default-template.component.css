@@ -22,6 +22,12 @@
 .navbar {
   background-color: rgba(0, 0, 0, 0.6);
 }
+.classic-nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
 .hero {
   position: relative;
   text-align: center;
@@ -318,11 +324,11 @@
   display: flex;
   align-items: center;
   background-color: #f5f5f5;
-  border-radius: 30px;
+  border-radius: 17px 17px 0 0;
   padding: 8px 16px;
   width: fit-content;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  font-family: Arial, sans-serif;
+  width: 100%;
 }
 
 .dots {
@@ -353,4 +359,30 @@
 .url-text {
   color: #4a4a4a;
   font-size: 14px;
+}
+.dynamicPages {
+  min-height: 200px;
+  max-height: 200px;
+  margin: 20px 0;
+}
+.dynamicPages .dymanic-page-header {
+  background: #f2f2f2;
+  padding: 30px;
+  font-size: #000;
+  font-weight: 500;
+}
+.dynamicPages h2 {
+  background: #f2f2f2;
+
+  font-size: #000;
+  font-weight: 500;
+  position: relative;
+}
+.dynamicPages h2::after {
+  content: "";
+  height: 3px;
+  width: 30px;
+  background: #f75200;
+  position: absolute;
+  bottom: 11px;
 }

@@ -15,6 +15,9 @@ import { GoogleReviewsComponent } from 'src/app/pages/google-reviews/google-revi
 import { ContactUsComponent } from 'src/app/pages/contact-us/contact-us.component';
 import { OpeningHoursComponent } from 'src/app/pages/opening-hours/opening-hours.component';
 import { PriceListComponent } from 'src/app/pages/price-list/price-list.component';
+import { PromotionComponent } from 'src/app/pages/promotion/promotion.component';
+import { TemplateFooterComponent } from 'src/app/pages/template-footer/template-footer.component';
+import { TemplateContactFormComponent } from 'src/app/pages/template-contact-form/template-contact-form.component';
 
 const routes: Routes = [
   {
@@ -33,7 +36,7 @@ const routes: Routes = [
         component: TemplateHeaderComponent,
       },
       {
-        path: 'services',
+        path: 'services/:pageId',
         component: TemplateServicesComponent,
       },
       {
@@ -41,7 +44,7 @@ const routes: Routes = [
         component: TemplateGalleryComponent,
       },
       {
-        path: 'amenities',
+        path: 'amenities/:pageId',
         component: TemplateAmenitiesComponent,
       },
       {
@@ -49,7 +52,7 @@ const routes: Routes = [
         component: GoogleReviewsComponent,
       },
       {
-        path: 'contact-us',
+        path: 'contact-us/:pageId',
         component: ContactUsComponent,
       },
       {
@@ -59,6 +62,18 @@ const routes: Routes = [
       {
         path: 'price-list',
         component: PriceListComponent,
+      },
+      {
+        path: 'Promotion/:pageId',
+        component: PromotionComponent,
+      },
+      {
+        path: 'template-footer/:pageId',
+        component: TemplateFooterComponent,
+      },
+      {
+        path: 'contact-form/:pageId',
+        component: TemplateContactFormComponent,
       },
       { path: 'sections', component: SectionsComponent },
       { path: 'settings', component: SettingsComponent },

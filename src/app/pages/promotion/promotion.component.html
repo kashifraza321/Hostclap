@@ -1,0 +1,55 @@
+<div class="pageWrapper">
+  <div class="top-bar">
+    <button class="back-btn" (click)="backToHomepage()">
+      <img
+        src="../../../assets/images/icons8-chevron-right-24.png"
+        alt="chevron"
+        width="18"
+      />
+      Back
+    </button>
+    <div class="title">Promotion</div>
+  </div>
+  <form [formGroup]="promotionForm" (ngSubmit)="savePromotion()">
+    <div class="section-card">
+      <label class="label" for="section-title"
+        >Promotion title
+        <img
+          src="../../../assets/images/icons8-info-50.png"
+          alt="info"
+          width="17"
+          height="17"
+      /></label>
+      <div class="title-row">
+        <input
+          id="section-title"
+          type="text"
+          class="input-field"
+          value="offer"
+          formControlName="title"
+          (input)="updatePromotionPreview()"
+        />
+        <p>Max 25 characters</p>
+      </div>
+    </div>
+    <div class="editor-section">
+      <label class="quill-label">Promotion description</label>
+      <quill-editor
+        [modules]="modules"
+        theme="snow"
+        class="custom-quill"
+        formControlName="description"
+        (input)="updatePromotionPreview()"
+      >
+        ></quill-editor
+      >
+    </div>
+    <!-- formControlName="message" -->
+    <!-- (input)="applyFontStyles()" -->
+
+    <div class="footer-buttons">
+      <button class="cancel-btn cancelBtn">Cancel</button>
+      <button class="save-btn saveBtn">Save</button>
+    </div>
+  </form>
+</div>

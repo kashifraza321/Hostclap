@@ -1,0 +1,73 @@
+<div class="pageWrapper">
+  <div class="top-bar">
+    <button class="back-btn" (click)="backToHomepage()">
+      <img
+        src="../../../assets/images/icons8-chevron-right-24.png"
+        alt="chevron"
+        width="18"
+      />
+      Back
+    </button>
+    <div class="title">Footer</div>
+  </div>
+  <form [formGroup]="footerForm" (ngSubmit)="saveFooter()">
+    <div class="section-card">
+      <div class="title-row">
+        <label class="label" for="section-title" formControlName="branding"
+          >Custom Branding</label
+        >
+        <input type="checkbox" class="checkbox" formControlName="branding" />
+      </div>
+      <label class="label" for="section-subtitle">Tagline </label>
+      <input
+        id="section-subtitle"
+        type="text"
+        class="input-field"
+        value="Get AC Service Now"
+        formControlName="tagline"
+      />
+
+      <div class="logo-card">
+        <div class="logo-preview">
+          <img
+            [src]="
+              footerForm.get('logo')?.value ||
+              'assets/images/placeholder-logo.png'
+            "
+            alt="Logo"
+          />
+          <div class="overlay">
+            <button class="edit-btn" (click)="uploadLogo()">
+              <img src="../../../assets/images/icons8-pencil-24.png" alt="" />
+              <input
+                type="file"
+                hidden
+                (change)="onFileSelected($event)"
+                accept="image/*"
+              />
+            </button>
+            <button class="delete-btn">
+              <img
+                src="../../../assets/images/delete.png"
+                alt="delete"
+                (click)="removeLogo()"
+              />
+            </button>
+          </div>
+        </div>
+        <div class="logo-info">
+          <strong>Logo</strong>
+          <ul>
+            <li>Upload a square image: (.png, .gif, .jpg)</li>
+            <li>Recommended: 240px by 240px</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-buttons">
+      <button class="cancel-btn cancelBtn">Cancel</button>
+      <button class="save-btn saveBtn">Save</button>
+    </div>
+  </form>
+</div>

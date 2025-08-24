@@ -37,12 +37,20 @@ export class HttpcommanService {
     return this._http.put<any>(`${this.baseUrl}${routeUrl}`, data);
   }
 
-  patchCall(routeUrl: string, data: any): Observable<any> {
+  patchCall(
+    routeUrl: string,
+    data: any,
+    isFormData: boolean = false
+  ): Observable<any> {
     const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
+    let headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
+      // 'Content-Type': 'application/json',
     });
+    if (!isFormData) {
+      headers = headers.set('Content-Type', 'application/json');
+    }
+
     return this._http.patch<any>(`${this.baseUrl}${routeUrl}`, data, {
       headers,
     });

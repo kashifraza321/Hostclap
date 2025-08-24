@@ -29,7 +29,11 @@ export const API_CONSTANTS = {
   GET_PAGES: '/app/website/get-pages',
   GET_PAGE_DETAIL: '/app/website/get-page-detail',
   EDIT_HEADER: '/app/website/edit-headers',
+  EDIT_MEDIA_HEADER: '/app/website/edit-media-headers',
   EDIT_PAGES: '/app/website/edit-pages',
   DELETE_PAGES: '/app/website/delete-page',
+  CREATE_SECTION: '/app/page/create-section',
+  CREATE_GROUP: '/app/page/create-group',
+  GET_SECTION_DETAIL: '/app/page/section-detail',
 };
 // admin/website/delete-page/686635ff8eefd3f716bf88d2
