@@ -3,8 +3,10 @@
   color: #333;
   background: #f9f9f9;
   max-height: 520px;
-  min-height: 607px;
+  min-height: 700px;
   overflow: auto;
+  height: 100vh;
+  overflow-y: auto;
 }
 
 .classic-top-bar {
@@ -25,6 +27,10 @@
   padding: 5px 12px;
   border-radius: 4px;
   cursor: pointer;
+}
+.topBarText {
+  font-size: 18px;
+  font-weight: 600;
 }
 
 /* .classic-header-info {
@@ -56,13 +62,14 @@
   padding: 10px;
   position: sticky;
   justify-content: space-between;
+  align-items: center;
   top: 0;
   left: 0;
   width: 100%;
   display: flex;
   gap: 20px;
   z-index: 3;
-  padding: 15px 40px;
+  padding: 30px 40px;
   transition: background-color 0.4s ease, backdrop-filter 0.4s ease;
   background: transparent;
 }
@@ -81,7 +88,8 @@
 .classic-nav a {
   color: #ecf0f1;
   text-decoration: none;
-  font-size: 15px;
+  font-size: 18px;
+  font-weight: 500;
 }
 .classic-nav.scrolled {
   background: rgba(0, 0, 0, 0.5) !important; /* Transparent overlay */
@@ -125,6 +133,12 @@
   max-width: 233px;
   width: 100%;
 }
+.hero-text h1 {
+  font-size: 24px;
+}
+.hero-text p {
+  font-size: 20px;
+}
 
 .classic-services {
   padding: 30px 20px;
@@ -157,20 +171,20 @@
 } */
 
 /* new services */
-.announcement {
-  font-size: 15px;
-  font-weight: 600;
+.serviceHeading {
+  font-size: 33px;
+  font-weight: 700;
   padding: 15px 0 5px 43px;
   color: #000;
 }
 
 h2.section-title {
-  font-size: 22px;
+  font-size: 31px;
   font-weight: bold;
   color: #e85627;
   margin-bottom: 5px;
   text-align: center;
-  margin: 20px 0 0 0;
+  margin: 30px 0 0 0;
 }
 
 .section-subtitle {
@@ -181,6 +195,7 @@ h2.section-title {
   max-width: 1280px;
   width: 100%;
   padding: 0 20px;
+  margin: 0 auto;
 }
 
 .service-container {
@@ -197,35 +212,56 @@ h2.section-title {
   padding: 15px;
   border-radius: 10px;
   text-align: center;
+  transition: transform 0.4s ease-in-out;
 }
 
 .service-card img {
   width: 100%;
   height: 180px;
   object-fit: contain;
+  transition: transform 0.4s ease-in-out;
+}
+.service-card .imgWrp:hover img {
+  transform: scale(1.05);
 }
 
 .service-title {
-  font-weight: bold;
-  font-size: 18px;
+  font-weight: 600;
+  font-size: 21px;
   margin: 10px 0;
 }
 
 .service-desc {
-  font-size: 14px;
+  font-size: 17px;
   color: #555;
   min-height: 55px;
 }
-
-.logoSction {
+.logoSection img {
+  width: 100px; /* default size */
+  transition: width 0.4s ease, transform 0.4s ease;
+}
+/* .logoSction {
   width: 80px;
   flex-shrink: 0;
+} */
+.logoSection {
+  position: relative;
+  transform: translateY(31px); /* slightly lower by default */
+  transition: all 0.4s ease;
+}
+
+.logoSection.scrolled {
+  transform: translateY(0); /* move up to align */
+}
+
+.logoSection.scrolled img {
+  width: 65px; /* shrink logo smoothly */
 }
 .learn-more {
   color: #e85627;
   text-decoration: none;
   font-size: 14px;
-  display: block;
+  display: block !important;
   margin: 5px 0 15px;
 }
 
@@ -258,6 +294,7 @@ h2.section-title {
   border-radius: 20px;
   font-size: 14px;
   cursor: pointer;
+  color: #000;
   transition: 0.3s;
 }
 
@@ -376,10 +413,11 @@ button {
   color: #fff;
   border: none;
   padding: 12px 20px;
-  font-size: 15px;
+  font-size: 17px;
   border-radius: 6px;
   cursor: pointer;
   transition: 0.3s;
+  font-weight: 500;
 }
 
 button:hover {
@@ -406,14 +444,26 @@ button:hover {
   color: #ecf0f1;
   padding: 15px 0;
   text-align: center;
-  font-size: 12px;
+  font-size: 20px;
+}
+.classic-footer p {
+  color: #ecf0f1;
+  padding: 15px 0;
+  text-align: center;
+  font-size: 19px;
 }
 .hero {
   position: relative;
   text-align: center;
   color: white;
-  background: url("../../../../../../../../../../assets/images/bg2.webp")
-    no-repeat center center/cover;
+  /* background: url("../../../../../../../../../../assets/images/bg2.webp")
+    no-repeat center center/cover; */
+  height: 500px;
+  position: relative;
+  text-align: center;
+  color: white;
+  background-size: cover;
+  background-position: center;
   height: 500px;
 }
 .annoucementWrap {
@@ -446,8 +496,11 @@ button:hover {
   font-weight: bold;
   margin-left: 10px;
 }
+.addresTXt {
+  font-size: 16px;
+}
 .dynamicPages {
-  margin: 20px 0;
+  margin: 80px 0;
 }
 .dynamicPages .dymanic-page-header {
   background: #f2f2f2;
@@ -529,18 +582,19 @@ button:hover {
 
 .offer-text {
   padding: 12px 20px;
+  margin-left: 34px;
 }
 
 .offer-text h3 {
   margin: 0;
-  font-size: 1.8rem;
+  font-size: 2.2rem;
   font-weight: bold;
   margin-bottom: 10px;
 }
 
 .offer-text span {
   margin: 4px 0 0;
-  font-size: 1.3rem;
+  font-size: 1.7rem;
   font-weight: bold;
 }
 .url-bar {
@@ -594,7 +648,7 @@ button:hover {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   width: fit-content;
   margin: 40px auto;
-  gap: 30px;
+  gap: 49px;
 }
 
 .schedule-card .day {
@@ -616,10 +670,11 @@ button:hover {
   font-weight: 600;
   margin-bottom: 5px;
   color: #333;
+  font-size: 22px;
 }
 
 .schedule-card .day-status {
-  font-size: 14px;
+  font-size: 15px;
   color: #333;
 }
 /* merchant policy */

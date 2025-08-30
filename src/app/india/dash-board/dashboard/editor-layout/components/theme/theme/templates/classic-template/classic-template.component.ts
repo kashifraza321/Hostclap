@@ -1,8 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener, Input } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  Input,
+  ViewChild,
+} from '@angular/core';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Data } from 'src/app/models/data.model';
 import { PagesService } from 'src/app/pages/pages.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-classic-template',
@@ -21,21 +29,27 @@ export class ClassicTemplateComponent {
   preview: any = {};
   sectionId: string = '';
   pageData: any;
+  imgurl = environment.imageBaseUrl;
   serviceData: any;
+  serviceDataForPrice: any;
+  allSubGroups: any[] = [];
+  sanitizedLogoUrl: SafeUrl | null = null;
   days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
   public state$ = this.pagesService.state$;
   aboveContactSections: any[] = [];
   belowContactSections: any[] = [];
   isScrolled = false;
-
-  @HostListener('window:scroll', [])
-  onWindowScroll() {
-    this.isScrolled = window.scrollY > 50; // 50px scroll ke baad class lag jayegi
-  }
+  @ViewChild('scrollContainer', { static: true }) scrollContainer!: ElementRef;
+  // @HostListener('window:scroll', [])
+  // onWindowScroll() {
+  //   this.isScrolled = window.scrollY > 50;
+  //   console.log('isScrolled:', this.isScrolled);
+  // }
   constructor(
     private pagesService: PagesService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit() {
@@ -62,6 +76,20 @@ export class ClassicTemplateComponent {
 
     // this.getPageDetail('687177a9aa11a48cb4de77db');
   }
+  ngAfterViewInit() {
+    setTimeout(() => {
+      if (this.scrollContainer) {
+        this.scrollContainer.nativeElement.addEventListener('scroll', () => {
+          const scrollTop = this.scrollContainer.nativeElement.scrollTop;
+          this.isScrolled = scrollTop > 50;
+          // console.log('Scroll:', scrollTop, 'isScrolled:', this.isScrolled);
+        });
+      } else {
+        console.error('scrollContainer still not found after timeout!');
+      }
+    }, 0);
+  }
+
   getPages() {
     this.pagesService.getPages().subscribe({
       next: (res) => {
@@ -75,6 +103,7 @@ export class ClassicTemplateComponent {
         if (this.pageId) {
           this.getPageDetail(this.pageId);
           this.getSectionDetailData(this.pageId);
+          this.getSectionDetailDataForPriceList(this.pageId);
           console.log(this.pageData.phones.mobile, 'mobileeeee');
           console.log(this.getSectionDetailData, 'gettttttttttt');
         }
@@ -98,19 +127,69 @@ export class ClassicTemplateComponent {
 
         console.log('Page Detail:', res);
         console.log(this.pageData.phones.mobile, 'mobileeeee');
+        // if (this.pageData?.header?.logo?.image) {
+        //   this.sanitizedLogoUrl = this.sanitizer.bypassSecurityTrustUrl(
+        //     this.imgurl + this.pageData.header.logo.image
+        //   );
+        // }
       },
       error: (err) => {
         console.error('Failed to fetch page detail:', err);
       },
     });
   }
+  getSanitizedLogoUrl(): SafeUrl {
+    if (this.pageData?.header?.logo?.image) {
+      return this.sanitizer.bypassSecurityTrustUrl(
+        this.imgurl + this.pageData.header.logo.image
+      );
+    }
+    return '';
+  }
+  // cover patch
+  getSanitizedCoverUrl(): SafeUrl {
+    if (this.pageData?.header?.cover?.image) {
+      return this.sanitizer.bypassSecurityTrustStyle(
+        `url(${this.imgurl + this.pageData.header.cover.image})`
+      );
+    }
+    // fallback agar cover image na ho
+    return this.sanitizer.bypassSecurityTrustStyle(
+      `url('../../../../assets/images/bg2.webp')`
+    );
+  }
+
+  // cover
   getSectionDetailData(pageId: string) {
-    this.pagesService.GET_SECTION_DETAIL(pageId).subscribe({
+    this.pagesService.GET_SECTION_DETAIL(pageId, 'service').subscribe({
       next: (res) => {
         this.serviceData = res.data;
         console.log('Section detail:', res);
         this.aboveContactSections = res.data?.section?.groups || [];
+        this.allSubGroups =
+          res.data?.section?.groups?.flatMap((group: any) => group.subGroups) ||
+          [];
       },
+      error: (err) => {
+        console.error('Error loading section detail', err);
+      },
+    });
+  }
+  getImageUrl(path: string | undefined): SafeUrl {
+    if (!path) {
+      return 'assets/images/bg2.webp';
+    }
+    const fullUrl = path.startsWith('http') ? path : `${this.imgurl}${path}`;
+    return this.sanitizer.bypassSecurityTrustUrl(fullUrl);
+  }
+  getSectionDetailDataForPriceList(pageId: string) {
+    this.pagesService.GET_SECTION_DETAIL(pageId, 'price_list').subscribe({
+      next: (res) => {
+        this.serviceDataForPrice = res.data;
+        console.log('Section detail:', res);
+        this.aboveContactSections = res.data?.section?.groups || [];
+      },
+
       error: (err) => {
         console.error('Error loading section detail', err);
       },

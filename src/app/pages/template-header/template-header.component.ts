@@ -14,6 +14,9 @@ import { QuillModule } from 'ngx-quill';
 import { AlertService } from 'src/app/services/Toaster/alert.service';
 import { merge, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+
+declare var bootstrap: any;
 
 @Component({
   selector: 'app-template-header',
@@ -32,14 +35,14 @@ export class TemplateHeaderComponent {
   toggleAddressFontColor = false;
   toggleMenuBgColor: boolean = false;
   toggleMenuFontColor: boolean = false;
-  logoPreview: string | null = null;
+  logoPreview: SafeResourceUrl | null = null;
   uploadedImages: string[] = [];
   pageData: any;
-  imgurl = environment.imageUrl;
+  imgurl = environment.imageBaseUrl;
   pageId: string = '';
   activeSection: string | null = null;
   logoUrl = 'assets/logo.png';
-  coverImageUrl: string | null = null;
+  coverImageUrl: SafeResourceUrl | null = null;
   selectedImage: string | null = null;
   selectedFile: File | null = null;
   selectedLogoFile: File | null = null;
@@ -103,7 +106,8 @@ export class TemplateHeaderComponent {
     private router: Router,
     private fb: FormBuilder,
     private pagesService: PagesService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
@@ -142,11 +146,14 @@ export class TemplateHeaderComponent {
       type: ['image'],
       image: [''],
       parallax: [false],
-      appearance: ['none'],
+      appearanceEffect: ['none'],
       opacity: [100],
       backgroundColor: ['#ffffff'],
     });
 
+    this.coverForm.get('opacity')?.valueChanges.subscribe((val) => {
+      console.log('🎚️ Opacity changed =>', val, typeof val);
+    });
     this.titlesForm = this.fb.group({
       buisnessName: [''],
       pageTitle: ['', [Validators.maxLength(80)]],
@@ -203,6 +210,9 @@ export class TemplateHeaderComponent {
           // this.pagesService.updatePreviewSection('menu', val)
           this.applyMenuChanges()
         )
+      ),
+      this.coverForm.valueChanges.pipe(
+        tap(() => this.applyCoverChanges()) // 👈 yeh add karna h
       )
     ).subscribe();
 
@@ -257,8 +267,25 @@ export class TemplateHeaderComponent {
     this.pagesService.updatePreviewSection('menu', data);
   }
 
+  applyCoverChanges() {
+    const data = {
+      image: this.coverForm.get('image')?.value || '',
+      appearanceEffect: this.coverForm.get('appearanceEffect')?.value || 'none',
+      opacity: this.coverForm.get('opacity')?.value || 100,
+    };
+
+    this.pagesService.updatePreviewSection('cover', data);
+  }
   announcementMessage: string = 'AC is not working?';
   // realtime data show logic
+  onOpacityChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const value = +input.value; // number me convert
+    this.coverForm.get('opacity')?.setValue(value);
+  }
+  handleImageError(event: any) {
+    event.target.src = 'path-to-fallback-image.jpg'; // Fallback image URL if the selected image fails to load
+  }
 
   goBack() {
     console.log('pageidddddddddddd');
@@ -337,6 +364,16 @@ export class TemplateHeaderComponent {
 
   // logo modal =========
   // cover modal code
+  openCoverModal(): void {
+    const modalEl = document.getElementById('coverEditorModal');
+    if (modalEl) {
+      let modalInstance = bootstrap.Modal.getInstance(modalEl);
+      if (!modalInstance) {
+        modalInstance = new bootstrap.Modal(modalEl);
+      }
+      modalInstance.show();
+    }
+  }
 
   onCoverImageSelected(event: any) {
     const file = event.target.files[0];
@@ -347,17 +384,34 @@ export class TemplateHeaderComponent {
       reader.onload = () => {
         this.coverForm.patchValue({ image: reader.result as string });
         this.coverImageUrl = reader.result as string;
+        this.closeMediaLibrary();
       };
       reader.readAsDataURL(file);
     }
   }
-
   chooseCoverImage(): void {
-    if (this.selectedImage) {
-      this.coverForm.patchValue({ image: this.selectedImage });
-      this.coverImageUrl = this.selectedImage;
-      this.closeMediaLibrary();
+    if (!this.selectedImage) return;
+
+    // Patch the form with selected image
+    this.coverForm.patchValue({ image: this.selectedImage });
+    this.coverImageUrl = this.selectedImage;
+    this.applyCoverChanges();
+
+    // Find modal element
+    const modalEl = document.getElementById('coverEditorModal');
+    if (modalEl) {
+      // Check if modal instance already exists
+      let modalInstance = bootstrap.Modal.getInstance(modalEl);
+      if (!modalInstance) {
+        modalInstance = new bootstrap.Modal(modalEl);
+      }
+      modalInstance.hide();
+    } else {
+      console.error('Modal element not found!');
     }
+
+    // Reset selected image
+    this.selectedImage = null;
   }
 
   removeCoverImage() {
@@ -375,18 +429,47 @@ export class TemplateHeaderComponent {
           this.pageData = res.data;
           console.log('pageData set:', this.pageData);
 
-          const logoData = res.data?.header?.logo || {};
-          console.log('logo data', logoData.value);
-          // form patch
-          this.logoForm.patchValue({
-            image: logoData.image || 'assets/images/dummy-logo.png',
-            alignment: logoData.alignment || 'center',
-          });
-          this.logoPreview = logoData.image
-            ? logoData.image
+          const logo = res?.data?.header?.logo;
+
+          const fullImagePath = logo?.image
+            ? `${this.imgurl}${logo.image}`.trim()
             : 'assets/images/dummy-logo.png';
+
+          const safeImageUrl: SafeResourceUrl =
+            this.sanitizer.bypassSecurityTrustResourceUrl(fullImagePath);
+          this.logoForm.patchValue({
+            image: safeImageUrl,
+            alignment: logo?.alignment || 'center',
+            logoSize: +logo?.size || 50,
+          });
+
+          this.logoPreview = safeImageUrl;
+
+          // --- Cover ---
+          const cover = res.data.header.cover; // assuming your API has cover under header.cover
+          if (cover?.image) {
+            const fullCoverPath = `${this.imgurl}${cover.image}`.trim();
+            // const safeCoverUrl =
+            //   this.sanitizer.bypassSecurityTrustResourceUrl(fullCoverPath);
+            // this.coverImageUrl = safeCoverUrl;
+            this.coverForm.patchValue({
+              image: fullCoverPath,
+              appearanceEffect: cover.appearanceEffect ?? 'none',
+              opacity: Number(cover.opacity) || 100,
+              parallax: cover.parallax ?? false,
+              backgroundColour: cover.backgroundColour ?? '#ffffff',
+            });
+
+            this.coverImageUrl =
+              this.sanitizer.bypassSecurityTrustResourceUrl(fullCoverPath);
+          }
+          console.log(
+            'Form opacity type:',
+            typeof this.coverForm.get('opacity')?.value
+          );
+
+          console.log('📝 LogoForm after patch:', this.logoForm.value);
         }
-        console.log('📝 LogoForm after patch:', this.logoForm.value);
       },
       error: (err) => {
         console.error('Failed to fetch page detail:', err);
@@ -428,17 +511,17 @@ export class TemplateHeaderComponent {
     if (coverImage) {
       this.convertImageToFile(coverImage).then((coverFile) => {
         formData.append('type', 'cover');
-        formData.append('coverImage', coverFile);
-        formData.append('coverType', coverVal.type);
-        formData.append('coverParallax', String(coverVal.parallax));
-        formData.append('coverAppearance', coverVal.appearance);
-        formData.append('coverOpacity', String(coverVal.opacity));
-        formData.append('coverBackgroundColor', coverVal.backgroundColor);
+        formData.append('image', coverFile);
+        formData.append('appearanceEffect', coverVal.appearanceEffect);
+        formData.append('opacity', String(Number(coverVal.opacity)));
+        formData.append('backgroundColour', coverVal.backgroundColour);
+        formData.append('parallax', String(coverVal.parallax));
 
         this.pagesService.updateLogoHeader(this.pageId, formData).subscribe({
           next: () => {
             this.alertService.success('Header updated successfully');
             this.selectedLogoFile = null;
+            this.getPageDetail(this.pageId);
           },
           error: () => {
             this.alertService.error('Failed to update header section');
@@ -546,21 +629,21 @@ export class TemplateHeaderComponent {
         }
 
         break;
-      case 'cover': {
-        const val = this.coverForm.value;
-        payload = {
-          cover: {
-            type: val.type,
-            image: val.image,
-            parallax: val.parallax,
-            appearance: val.appearance,
-            opacity: val.opacity,
-            backgroundColor: val.backgroundColor,
-          },
-        };
+      // case 'cover': {
+      //   const val = this.coverForm.value;
+      //   payload = {
+      //     cover: {
+      //       type: val.type,
+      //       image: val.image,
+      //       parallax: val.parallax,
+      //       appearance: val.appearance,
+      //       opacity: val.opacity,
+      //       backgroundColor: val.backgroundColor,
+      //     },
+      //   };
 
-        break;
-      }
+      //   break;
+      // }
       case 'phone':
         payload = this.contactForm.value;
         break;

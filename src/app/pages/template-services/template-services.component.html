@@ -1,6 +1,6 @@
 <div class="pageWrapper">
   <div class="top-bar">
-    <button class="back-btn" (click)="backToHomepage()">
+    <button class="back-btn" *ngIf="!showSubGroup" (click)="backToHomepage()">
       <img
         src="../../../assets/images/icons8-chevron-right-24.png"
         alt="chevron"
@@ -8,7 +8,15 @@
       />
       Back
     </button>
-    <div class="title">SERVICE</div>
+    <button class="back-btn" *ngIf="showSubGroup" (click)="backToGroupList()">
+      <img
+        src="../../../assets/images/icons8-chevron-right-24.png"
+        alt="chevron"
+        width="18"
+      />
+      back
+    </button>
+    <div class="title">{{ showSubGroup ? "SUBGROUPS" : "SERVICE" }}</div>
   </div>
   <form [formGroup]="sectionForm" (ngSubmit)="saveSection()">
     <div class="section-card">
@@ -18,17 +26,26 @@
           id="section-title"
           type="text"
           class="input-field"
-          formControlName="sectionTitle"
+          [value]="
+            showSubGroup
+              ? selectedGroup?.groupName
+              : sectionForm.value.sectionTitle
+          "
         />
         <input type="checkbox" class="checkbox" checked />
       </div>
-      <label class="label" for="section-subtitle">Section Subtitle</label>
-      <input
-        id="section-subtitle"
-        type="text"
-        class="input-field"
-        formControlName="sectionSubtitle"
-      />
+      <div *ngIf="!showSubGroup">
+        <label class="label" for="section-subtitle">Section Subtitle</label>
+        <input
+          id="section-subtitle"
+          type="text"
+          class="input-field"
+          formControlName="sectionSubtitle"
+          [value]="
+            showSubGroup ? selectedGroup?.groupName : sectionForm.value.subtitle
+          "
+        />
+      </div>
     </div>
 
     <div class="service-groups-card">
@@ -42,23 +59,52 @@
 
       <button
         type="button"
+        *ngIf="!showSubGroup"
         class="add-group-btn"
         data-bs-toggle="modal"
         data-bs-target="#addGroupModal"
       >
         <span class="plus-icon">+</span> Add new group
       </button>
+      <button
+        type="button"
+        *ngIf="showSubGroup"
+        class="add-group-btn"
+        (click)="navigateToSubgroupForm(pageId)"
+      >
+        <span class="plus-icon">+</span> Add new group
+      </button>
+      <!-- Group List -->
+      <div *ngIf="!showSubGroup">
+        <div class="group-list">
+          <div
+            class="group-item"
+            *ngFor="let group of serviceGroups; let i = index"
+            (click)="openSubGroup(group)"
+            [ngClass]="{
+              'orange-border': i % 2 === 0,
+              'blue-border': i % 2 !== 0
+            }"
+          >
+            {{ group.groupName }} <span class="arrow">&gt;</span>
+          </div>
+        </div>
+      </div>
 
-      <div class="group-list">
-        <div
-          class="group-item"
-          *ngFor="let group of serviceGroups; let i = index"
-          [ngClass]="{
-            'orange-border': i % 2 === 0,
-            'blue-border': i % 2 !== 0
-          }"
-        >
-          {{ group.groupName }} <span class="arrow">&gt;</span>
+      <!-- Subgroup List -->
+      <div *ngIf="showSubGroup">
+        <div class="subgroup-list">
+          <div
+            class="subgroup-item group-item"
+            *ngFor="let sub of selectedGroup?.subgroups; let i = index"
+            (click)="navigateToSubgroupForm(pageId)"
+            [ngClass]="{
+              'orange-border': i % 2 === 0,
+              'blue-border': i % 2 !== 0
+            }"
+          >
+            {{ sub.subgroupName }}
+          </div>
         </div>
       </div>
 
@@ -132,3 +178,4 @@
     </div>
   </div>
 </div>
+<!-- sub group started -->

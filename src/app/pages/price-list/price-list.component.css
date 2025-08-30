@@ -29,6 +29,19 @@
   color: #2b2e9b;
   width: 100px;
 }
+.add-group-btn {
+  background: none;
+  border: none;
+  color: #3f51b5;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 6px 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
 
 .section-card {
   border: 1px solid #ddd;
@@ -346,4 +359,42 @@
 
 .arrow {
   color: #888;
+}
+
+.group-item {
+  padding: 10px 15px;
+  font-size: 14px;
+  border-left: 4px solid transparent;
+  border-radius: 2px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.orange-border {
+  border-left-color: #ffb800;
+}
+.group-list {
+  flex-grow: 1;
+}
+
+.group-item {
+  padding: 10px 15px;
+  font-size: 14px;
+  border-left: 4px solid transparent;
+  border-radius: 2px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.orange-border {
+  border-left-color: #ffb800;
+}
+
+.blue-border {
+  border-left-color: #44c8f5;
 }

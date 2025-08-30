@@ -143,8 +143,35 @@ export class HomePageComponent {
   navigateToAmenties(pageId: string) {
     this.router.navigate(['/in/insight/editor/amenities', pageId]);
   }
-  navigateToPriceList() {
-    this.router.navigate(['/in/insight/editor/price-list']);
+  navigateToPriceList(pageId: string) {
+    console.log(pageId, 'pageidddddddddddd');
+
+    if (this.sectionForm.invalid) {
+      this.alertService.error('Please fill all required fields');
+      return;
+    }
+
+    const data = {
+      sectionType: 'price_list',
+      sectionTitle: this.sectionForm.value.sectionTitle,
+      sectionSubtitle: this.sectionForm.value.sectionSubtitle,
+      pageId: pageId,
+    };
+
+    this.pagesService.createSection(data).subscribe({
+      next: (res) => {
+        this.sectionId = res.data._id;
+        this.alertService.success('Service section created successfully');
+
+        this.router.navigate(['/in/insight/editor/price-list', pageId]);
+      },
+      error: () => {
+        this.alertService.error('Failed to create service section');
+
+        // this.router.navigate(['/in/insight/editor/services', pageId]);
+      },
+    });
+    // this.router.navigate(['/in/insight/editor/price-list', pageId]);
   }
   navigateToContactForm(pageId: string) {
     this.router.navigate(['/in/insight/editor/contact-form', pageId]);

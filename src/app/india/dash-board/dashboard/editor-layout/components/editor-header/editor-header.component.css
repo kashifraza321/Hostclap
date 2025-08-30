@@ -60,11 +60,17 @@
   gap: 20px;
   color: #444;
 }
+.links a {
+  font-size: 14px;
+  color: #333;
+}
 
 .right-controls {
   display: flex;
   align-items: center;
   gap: 12px;
+  max-width: 200px;
+  width: 100%;
 }
 
 .help-icon {
@@ -84,13 +90,19 @@
   padding: 6px 14px;
   border: 1px solid #444;
   border-radius: 4px;
-  background-color: transparent;
+  background-color: green;
   cursor: pointer;
   font-weight: 500;
+  max-width: 130px;
+  width: 100%;
+  font-size: 16px;
+  color: #fff;
+  text-align: center;
+  transition: 0.3s all;
 }
 
 .preview-btn:hover {
-  background-color: #e0e0e0;
+  background-color: rgb(2, 95, 2);
 }
 .Desktop {
   border-left: 1px solid #ccc;

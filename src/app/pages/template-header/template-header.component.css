@@ -848,6 +848,31 @@ label {
   margin: 8px 0;
 }
 
+.parallax {
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+}
+.icons.cover .coverImg {
+  height: 155px;
+  max-width: 291px;
+  width: 100%;
+}
+.parralx {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.coverIcons .deleteCover {
+  right: 4px;
+  background: none;
+  bottom: 0px;
+}
+.coverIcons .editCover {
+  background: none !important;
+}
+
 /* Responsive tweak */
 @media (max-width: 576px) {
   .card {

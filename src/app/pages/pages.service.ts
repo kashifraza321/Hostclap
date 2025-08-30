@@ -130,9 +130,12 @@ export class PagesService {
   createGroup(data: any) {
     return this.httpService.postCall(`${API_CONSTANTS.CREATE_GROUP}`, data);
   }
-  GET_SECTION_DETAIL(pageId: string) {
+  CREATE_Sub_GROUP(data: any) {
+    return this.httpService.postCall(`${API_CONSTANTS.CREATE_SubGROUP}`, data);
+  }
+  GET_SECTION_DETAIL(pageId: string, type: string) {
     return this.httpService.getCall(
-      `${API_CONSTANTS.GET_SECTION_DETAIL}/${pageId}/service`
+      `${API_CONSTANTS.GET_SECTION_DETAIL}/${pageId}/${type}`
     );
   }
 }

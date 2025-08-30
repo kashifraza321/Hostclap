@@ -18,6 +18,7 @@ import { PriceListComponent } from 'src/app/pages/price-list/price-list.componen
 import { PromotionComponent } from 'src/app/pages/promotion/promotion.component';
 import { TemplateFooterComponent } from 'src/app/pages/template-footer/template-footer.component';
 import { TemplateContactFormComponent } from 'src/app/pages/template-contact-form/template-contact-form.component';
+import { AddSubgroupFormComponent } from 'src/app/pages/template-services/add-subgroup-form/add-subgroup-form.component';
 
 const routes: Routes = [
   {
@@ -60,7 +61,7 @@ const routes: Routes = [
         component: OpeningHoursComponent,
       },
       {
-        path: 'price-list',
+        path: 'price-list/:pageId',
         component: PriceListComponent,
       },
       {
@@ -74,6 +75,10 @@ const routes: Routes = [
       {
         path: 'contact-form/:pageId',
         component: TemplateContactFormComponent,
+      },
+      {
+        path: 'form/:pageId',
+        component: AddSubgroupFormComponent,
       },
       { path: 'sections', component: SectionsComponent },
       { path: 'settings', component: SettingsComponent },

@@ -6,3 +6,5 @@
   *ngIf="data?.template === 'Classic'"
   [data]="data"
 ></app-classic-template>
+<app-modern-template *ngIf="data?.template === 'Modern'" [data]="data">
+</app-modern-template>

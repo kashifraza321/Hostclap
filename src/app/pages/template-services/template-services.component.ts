@@ -23,8 +23,12 @@ export class TemplateServicesComponent {
   sectionForm!: FormGroup;
   groupForm!: FormGroup;
   serviceGroups: any[] = [];
+  serviceSUbGroups: any[] = [];
   pageId: string = '';
   sectionId: string = '';
+  showSubGroup = false;
+  selectedGroup: any = null;
+  isSubgroupPage = false;
 
   ngOnInit(): void {
     this.pageId = this.route.snapshot.paramMap.get('pageId') || '';
@@ -48,8 +52,18 @@ export class TemplateServicesComponent {
   backToHomepage() {
     this.router.navigateByUrl('/in/insight/editor/pages');
   }
+  openSubGroup(group: any) {
+    this.selectedGroup = group;
+    this.showSubGroup = true;
+  }
+  backToGroupList() {
+    this.showSubGroup = false;
+    this.selectedGroup = null;
+  }
+  backToGroups() {}
+
   getSectionDetailData() {
-    this.pagesService.GET_SECTION_DETAIL(this.pageId).subscribe({
+    this.pagesService.GET_SECTION_DETAIL(this.pageId, 'service').subscribe({
       next: (res) => {
         console.log('Section detail:', res);
         if (res?.data?.section) {
@@ -113,6 +127,7 @@ export class TemplateServicesComponent {
       next: (res) => {
         this.alertService.success('Group added successfully');
         this.serviceGroups.push(res.data);
+        this.serviceSUbGroups.push(res.data);
         this.groupForm.reset();
         this.closeModal();
       },
@@ -127,5 +142,8 @@ export class TemplateServicesComponent {
       const modalInstance = bootstrap.Modal.getInstance(modalEl);
       modalInstance?.hide();
     }
+  }
+  navigateToSubgroupForm(pageId: string) {
+    this.router.navigate(['/in/insight/editor/form', pageId]);
   }
 }

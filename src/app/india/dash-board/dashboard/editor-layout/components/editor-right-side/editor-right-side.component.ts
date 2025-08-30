@@ -5,11 +5,17 @@ import { DefaultTemplateComponent } from '../theme/theme/templates/default-templ
 import { ClassicTemplateComponent } from '../theme/theme/templates/classic-template/classic-template.component';
 import { Data } from 'src/app/models/data.model';
 import { ThemeService } from '../theme/theme/theme.service';
+import { ModernTemplateComponent } from '../theme/theme/templates/modern-template/modern-template.component';
 
 @Component({
   selector: 'app-editor-right-side',
   standalone: true,
-  imports: [CommonModule, DefaultTemplateComponent, ClassicTemplateComponent],
+  imports: [
+    CommonModule,
+    DefaultTemplateComponent,
+    ClassicTemplateComponent,
+    ModernTemplateComponent,
+  ],
   templateUrl: './editor-right-side.component.html',
   styleUrl: './editor-right-side.component.css',
 })

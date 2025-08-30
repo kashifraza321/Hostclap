@@ -34,6 +34,7 @@ export const API_CONSTANTS = {
   DELETE_PAGES: '/app/website/delete-page',
   CREATE_SECTION: '/app/page/create-section',
   CREATE_GROUP: '/app/page/create-group',
+  CREATE_SubGROUP: '/app/page/create-subgroup',
   GET_SECTION_DETAIL: '/app/page/section-detail',
 };
 // admin/website/delete-page/686635ff8eefd3f716bf88d2

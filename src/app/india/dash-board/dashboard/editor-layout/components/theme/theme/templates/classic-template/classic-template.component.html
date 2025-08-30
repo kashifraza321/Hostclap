@@ -1,425 +1,444 @@
-<div class="classicWrapper" *ngIf="state$ | async as state">
-  <div class="url-bar">
-    <div class="dots">
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-    </div>
-    <div class="url-content">
-      <img
-        src="https://upload.wikimedia.org/wikipedia/commons/5/59/Lock-icon.png"
-        alt="lock"
-        class="lock-icon"
-      />
-      <span class="url-text">https://acrserviceranchi.com</span>
-    </div>
-  </div>
-  <div *ngIf="state$ | async as state">
-    <div
-      class="top-bar"
-      [ngStyle]="{
-        background: data?.selectedColor?.primary || '#f88d00',
-        'font-size.px':
-          state?.preview?.announcement?.fontSize ||
-          pageData?.header?.announcement?.fontSize ||
-          '16px',
-
-        color:
-          state?.preview?.announcement?.fontColor ||
-          pageData?.header?.announcement?.fontColor ||
-          '#fff'
-      }"
-    >
-      <span
-        [innerHTML]="
-          state?.preview?.announcement?.message?.trim() ||
-          pageData?.header?.announcement?.message?.trim() ||
-          'AC Repairing ?'
-        "
-      ></span>
-      <div
-        *ngIf="
-          state?.preview?.announcement?.actionButton !== false &&
-          pageData?.header?.announcement?.actionButton !== false
-        "
-      >
-        <button *ngIf="state?.preview?.announcement?.actionButton">
-          {{
-            state?.preview?.announcement?.actionButton?.buttonText ||
-              pageData?.header?.announcement?.actionButton?.buttonText ||
-              "Send a message"
-          }}
-        </button>
+<div class="classicWrapper" #scrollContainer>
+  <ng-container *ngIf="state$ | async as state">
+    <div class="url-bar">
+      <div class="dots">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
       </div>
-    </div>
-  </div>
-
-  <!-- Top Bar -->
-
-  <!-- new bar -->
-  <div
-    class="classic-top-bar"
-    [ngStyle]="{
-      background: data?.selectedColor?.primary || '#9C27B0'
-    }"
-  >
-    <span [ngStyle]="{ 'font-family': data?.font }">Need AC Help?</span>
-    <button class="classic-btn" [ngStyle]="{ 'font-family': data?.font }">
-      Contact Us
-    </button>
-  </div>
-  <!-- announcement -->
-
-  <!-- announcement -->
-
-  <!-- Header Info -->
-  <header class="classic-header-info">
-    <div [ngStyle]="{ 'font-family': data?.font }">
-      <i class="bi bi-geo-alt-fill"></i> Lalpur, Ranchi, Jharkhand
-    </div>
-    <div>
-      <i class="bi bi-telephone-fill"></i>
-      <!-- <pre>{{ pageData | json }}</pre> -->
-      {{ pageData?.header?.phones?.mobile }}
-    </div>
-  </header>
-
-  <!-- Navigation -->
-  <nav
-    [class.scrolled]="isScrolled"
-    class="classic-nav"
-    [ngStyle]="{
-      background: !isScrolled
-        ? state?.preview?.menu?.menuBackgroudColour ||
-          pageData?.header?.menu?.menuBackgroudColour
-        : 'transparent',
-
-      'font-size':
-        state?.preview?.menu?.fontSize ||
-        pageData?.header?.menu?.fontSize ||
-        '16px',
-      'text-align':
-        state?.preview?.menu?.alignment ||
-        pageData?.header?.menu?.alignment ||
-        'left'
-    }"
-  >
-    <div class="logoSction">
-      <img
-        src="../../../../../../../../../../assets/images/logo.png"
-        alt="logo"
-        width="50"
-        height="50"
-      />
-    </div>
-    <ul>
-      <!-- <li *ngFor="let page of data?.pageData">
-        <a href="#">{{ page.pageName }}</a>
-      </li> -->
-      <li *ngFor="let page of pagesList">
-        <a
-          [ngStyle]="{
-            color:
-              state?.preview?.menu?.menuFontColour ||
-              pageData?.header?.menu?.menuFontColour,
-
-            'font-size':
-              state?.preview?.menu?.fontSize ||
-              pageData?.header?.menu?.fontSize ||
-              '15px',
-            'text-align':
-              state?.preview?.menu?.alignment ||
-              pageData?.header?.menu?.alignment ||
-              'left'
-          }"
-          href="#"
-          >{{ page.pageName }}</a
-        >
-      </li>
-    </ul>
-  </nav>
-
-  <!-- Hero -->
-  <section class="classic-hero hero">
-    <div class="overlay">
-      <div class="hero-text" *ngIf="state$ | async as state">
-        <h1
-          [ngStyle]="{
-            'font-family': data?.font,
-            color:
-              state?.preview?.titles?.titleColour ||
-              pageData?.header?.titles?.titleColour,
-
-            'text-align':
-              state?.preview?.titles?.titleAlignment ||
-              pageData?.header?.titles?.titleAlignment ||
-              'left'
-          }"
-        >
-          {{
-            state?.preview?.titles?.buisnessName ||
-              pageData?.header?.titles?.buisnessName ||
-              "Your Main Title"
-          }}
-        </h1>
-        <p
-          [ngStyle]="{
-            'font-family': data?.font,
-            color:
-              state?.preview?.titles?.subtitleColour ||
-              pageData?.header?.titles?.subtitleColour,
-
-            'text-align':
-              state?.preview?.titles?.subtitleAlignment ||
-              pageData?.header?.titles?.subtitleAlignment ||
-              'left'
-          }"
-        >
-          {{
-            state?.preview?.titles?.subtitle ||
-              pageData?.header?.titles?.subtitle ||
-              "Your subtitle"
-          }}
-        </p>
-      </div>
-    </div>
-  </section>
-  <section class="dynamicPages">
-    <div class="dymanic-page-header">
-      <h2 class="">{{ pagesList[0]?.pageName }}</h2>
-    </div>
-  </section>
-  <!-- offer -->
-  <section class="offerSection">
-    <div class="offer-banner">
-      <div class="yellow-polygon">
+      <div class="url-content">
         <img
-          src="../../../../../../../../../../assets/images/icons8-discount-48.png"
-          alt="Offer"
+          src="../../../../../../../../../../assets/images/"
+          alt="lock"
+          class="lock-icon"
         />
-      </div>
-      <div class="offer-text">
-        <h3>
-          {{
-            state?.preview?.offer?.title || pageData?.offer?.title || "offer"
-          }}
-        </h3>
-        <p>
-          <span
-            [innerHTML]="
-              state?.preview?.offer?.description?.trim() ||
-              pageData?.offer?.description?.trim() ||
-              'AC Repairing ?'
-            "
-          >
-          </span>
-        </p>
+        <span class="url-text">https://acrserviceranchi.com</span>
       </div>
     </div>
-  </section>
+    <div *ngIf="state$ | async as state">
+      <div
+        class="top-bar"
+        [ngStyle]="{
+          background: data?.selectedColor?.primary || '#f88d00',
+          'font-size.px':
+            state?.preview?.announcement?.fontSize ||
+            pageData?.header?.announcement?.fontSize ||
+            '16px',
 
-  <!-- Services -->
-  <div class="serviceSection">
-    <div class="mainContainer">
-      <div class="announcement" [ngStyle]="{ 'font-family': data?.font }">
-        Get AC Service Now
-      </div>
-
-      <h2 class="section-title" [ngStyle]="{ 'font-family': data?.font }">
-        {{
-          state?.preview?.offer?.title ||
-            serviceData?.section?.sectionTitle ||
-            "offer"
-        }}
-      </h2>
-
-      <div class="service-container">
+          color:
+            state?.preview?.announcement?.fontColor ||
+            pageData?.header?.announcement?.fontColor ||
+            '#fff'
+        }"
+      >
+        <span
+          [innerHTML]="
+            state?.preview?.announcement?.message?.trim() ||
+            pageData?.header?.announcement?.message?.trim() ||
+            'AC Repairing ?'
+          "
+        ></span>
         <div
-          class="service-card"
-          *ngFor="let group of serviceData?.section?.groups"
+          *ngIf="
+            state?.preview?.announcement?.actionButton !== false &&
+            pageData?.header?.announcement?.actionButton !== false
+          "
         >
-          <img
-            src="../../../../../../../../../../assets/images/bg2.webp"
-            alt="Service Image"
-          />
-
-          <!-- Group ka naam yahan show hoga -->
-          <div class="service-title" [ngStyle]="{ 'font-family': data?.font }">
-            {{ group.groupName }}
-          </div>
-
-          <!-- Agar description bhi group me aati hai to use yahan bind karo -->
-          <div class="service-desc" [ngStyle]="{ 'font-family': data?.font }">
-            Ranchi Service offers efficient and reliable AC repair services in
-            Ranchi. Our skilled technicians...
-          </div>
-
-          <a
-            href="#"
-            class="learn-more"
-            [ngStyle]="{ 'font-family': data?.font }"
-          >
-            Learn more
-          </a>
-
-          <button class="btn" [ngStyle]="{ 'font-family': data?.font }">
-            Request Service
+          <button *ngIf="state?.preview?.announcement?.actionButton">
+            {{
+              state?.preview?.announcement?.actionButton?.buttonText ||
+                pageData?.header?.announcement?.actionButton?.buttonText ||
+                "Send a message"
+            }}
           </button>
         </div>
       </div>
-
-      <div class="load-more">
-        <button>LOAD MORE</button>
-      </div>
     </div>
-  </div>
 
-  <section class="dynamicPages">
-    <div class="dymanic-page-header">
-      <h2 class="">{{ pagesList[1]?.pageName }}</h2>
+    <!-- Top Bar -->
+
+    <!-- new bar -->
+    <div
+      class="classic-top-bar"
+      [ngStyle]="{
+        background: data?.selectedColor?.primary || '#9C27B0'
+      }"
+    >
+      <span class="topBarText" [ngStyle]="{ 'font-family': data?.font }"
+        >Need AC Help?</span
+      >
+      <button class="classic-btn" [ngStyle]="{ 'font-family': data?.font }">
+        Contact Us
+      </button>
     </div>
-    <div class="schedule-card">
-      <div class="day" *ngFor="let day of days; let i = index">
-        <div class="icon">
-          <i class="fas fa-clock" [ngClass]="{ active: i === 6 }"></i>
-        </div>
-        <div class="day-name" [ngStyle]="{ 'font-family': data?.font }">
-          {{ day }}
-        </div>
-        <div class="day-status" [ngStyle]="{ 'font-family': data?.font }">
-          All day
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="dynamicPages">
-    <div class="dymanic-page-header">
-      <h2 class="">{{ pagesList[2]?.pageName }}</h2>
-    </div>
-    <div class="product-grid">
-      <!-- Product 1 -->
-      <div class="product-card">
-        <h3 class="product-name">prpduct 1111</h3>
-        <p class="product-subtitle">vhbjvbhj</p>
-        <a href="#" class="learn-more">Learn more</a>
-        <button class="add-to-cart">Add to Cart</button>
-      </div>
+    <!-- announcement -->
 
-      <!-- Product 2 -->
-      <div class="product-card">
-        <h3 class="product-name highlight">hello</h3>
-        <div class="product-price">₹70.00</div>
-        <p class="product-subtitle">jbkjbhjmhb</p>
-        <p class="product-subtitle">jbjknk</p>
-        <a href="#" class="learn-more">Learn more</a>
-        <button class="add-to-cart">Add to Cart</button>
+    <!-- announcement -->
+
+    <!-- Header Info -->
+    <header class="classic-header-info">
+      <div [ngStyle]="{ 'font-family': data?.font }">
+        <i class="bi bi-geo-alt-fill"></i>
+        <span class="addresTXt">Lalpur, Ranchi, Jharkhand</span>
       </div>
-
-      <!-- Product 3 -->
-      <div class="product-card">
-        <h3 class="product-name small">
-          testing 22 <span class="arrow">›</span>
-        </h3>
-        <div class="product-price">₹70.00</div>
+      <div>
+        <i class="bi bi-telephone-fill"></i>
+        <!-- <pre>{{ pageData | json }}</pre> -->
+        {{ pageData?.header?.phones?.mobile }}
       </div>
-    </div>
-  </section>
+    </header>
 
-  <!-- Contact Form -->
-  <div class="contact-section">
-    <!-- Left Info -->
-    <div class="contact-info">
-      <h2>{{ pageData?.contactUs?.title }}</h2>
+    <!-- Navigation -->
+    <nav
+      [class.scrolled]="isScrolled"
+      class="classic-nav"
+      [ngStyle]="{
+        background: !isScrolled
+          ? state?.preview?.menu?.menuBackgroudColour ||
+            pageData?.header?.menu?.menuBackgroudColour
+          : 'transparent',
 
-      <div class="info-item">
-        <span class="icon">📞</span>
-        <div>
-          <h4>{{ pageData?.contactUs?.subtitle }}</h4>
-          <p>{{ pageData?.contactUs?.phoneNumber }}081020 65847</p>
-        </div>
+        'font-size':
+          state?.preview?.menu?.fontSize ||
+          pageData?.header?.menu?.fontSize ||
+          '16px',
+        'text-align':
+          state?.preview?.menu?.alignment ||
+          pageData?.header?.menu?.alignment ||
+          'left'
+      }"
+    >
+      <div class="logoSection" [class.scrolled]="isScrolled">
+        <!-- <img
+          src="../../../../../../../../../../assets/images/icons8-huawei-logo-64.png"
+          alt="logo"
+          width="70"
+          height="70"
+        /> -->
+        <img [src]="getSanitizedLogoUrl()" alt="logo" width="70" height="70" />
       </div>
+      <ul>
+        <!-- <li *ngFor="let page of data?.pageData">
+        <a href="#">{{ page.pageName }}</a>
+      </li> -->
+        <li *ngFor="let page of pagesList">
+          <a
+            [ngStyle]="{
+              color:
+                state?.preview?.menu?.menuFontColour ||
+                pageData?.header?.menu?.menuFontColour,
 
-      <div class="info-item">
-        <span class="icon">📍</span>
-        <div>
-          <h4>Office location</h4>
-          <p>
-            H No. 7, Ramzan Colony,<br />
-            Lalpur, {{ pageData?.contactUs?.city }},<br />
-            Jharkhand, 834001
+              'font-size':
+                state?.preview?.menu?.fontSize ||
+                pageData?.header?.menu?.fontSize ||
+                '15px',
+              'text-align':
+                state?.preview?.menu?.alignment ||
+                pageData?.header?.menu?.alignment ||
+                'left'
+            }"
+            href="#"
+            >{{ page.pageName }}</a
+          >
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Hero -->
+    <section
+      class="classic-hero hero"
+      *ngIf="state$ | async as state"
+      [ngStyle]="{
+        'background-image': state?.preview?.cover?.image
+          ? 'url(' + state?.preview?.cover?.image + ')'
+          : pageData?.header?.cover?.image
+          ? 'url(' + pageData?.header?.cover?.image + ')'
+          : 'none',
+        opacity:
+          (state?.preview?.cover?.opacity ||
+            pageData?.header?.cover?.opacity ||
+            100) / 100
+      }"
+    >
+      <div class="overlay">
+        <div class="hero-text" *ngIf="state$ | async as state">
+          <h1
+            [ngStyle]="{
+              'font-family': data?.font,
+              color:
+                state?.preview?.titles?.titleColour ||
+                pageData?.header?.titles?.titleColour,
+
+              'text-align':
+                state?.preview?.titles?.titleAlignment ||
+                pageData?.header?.titles?.titleAlignment ||
+                'left'
+            }"
+          >
+            {{
+              state?.preview?.titles?.buisnessName ||
+                pageData?.header?.titles?.buisnessName ||
+                "Your Main Title"
+            }}
+          </h1>
+          <p
+            [ngStyle]="{
+              'font-family': data?.font,
+              color:
+                state?.preview?.titles?.subtitleColour ||
+                pageData?.header?.titles?.subtitleColour,
+
+              'text-align':
+                state?.preview?.titles?.subtitleAlignment ||
+                pageData?.header?.titles?.subtitleAlignment ||
+                'left'
+            }"
+          >
+            {{
+              state?.preview?.titles?.subtitle ||
+                pageData?.header?.titles?.subtitle ||
+                "Your subtitle"
+            }}
           </p>
         </div>
       </div>
+    </section>
+    <section class="dynamicPages">
+      <div class="dymanic-page-header">
+        <h2 class="">{{ pagesList[0]?.pageName }}</h2>
+      </div>
+    </section>
+    <!-- offer -->
+    <section class="offerSection">
+      <div class="mainContainer">
+        <div class="offer-banner">
+          <div class="yellow-polygon">
+            <img
+              src="../../../../../../../../../../assets/images/icons8-discount-48.png"
+              alt="Offer"
+            />
+          </div>
+          <div class="offer-text">
+            <h3>
+              {{
+                state?.preview?.offer?.title ||
+                  pageData?.offer?.title ||
+                  "offer"
+              }}
+            </h3>
+            <p>
+              <span
+                [innerHTML]="
+                  state?.preview?.offer?.description?.trim() ||
+                  pageData?.offer?.description?.trim() ||
+                  'AC Repairing ?'
+                "
+              >
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      <div class="info-item">
-        <span class="icon">✉️</span>
-        <div>
-          <h4>Send us an email</h4>
-          <p>{{ pageData?.contactUs?.email }} inforanchiservice.com</p>
+    <!-- Services -->
+    <div class="serviceSection">
+      <div class="mainContainer">
+        <div class="serviceHeading" [ngStyle]="{ 'font-family': data?.font }">
+          {{
+            state?.preview?.offer?.title ||
+              serviceData?.section?.sectionTitle ||
+              "offer"
+          }}
+        </div>
+        <div *ngFor="let group of serviceData?.section?.groups">
+          <h2 class="section-title" [ngStyle]="{ 'font-family': data?.font }">
+            {{ group.groupName }}
+            <!-- {{ group.groupName }} -->
+          </h2>
+
+          <div class="service-container">
+            <div
+              class="service-card"
+              *ngFor="let sub of serviceData?.section?.groups[0]?.subgroups"
+            >
+              <div class="imgWrp">
+                <img
+                  [src]="getImageUrl(sub.media?.[0])"
+                  alt="{{ sub.subgroupName || 'Service Image' }}"
+                  class="service-image"
+                />
+              </div>
+              <!-- Group ka naam yahan show hoga -->
+              <div
+                class="service-title"
+                [ngStyle]="{ 'font-family': data?.font }"
+              >
+                {{ sub.subgroupName }}
+              </div>
+
+              <!-- Agar description bhi group me aati hai to use yahan bind karo -->
+              <div
+                class="service-desc"
+                [ngStyle]="{ 'font-family': data?.font }"
+              >
+                {{ sub.description }}
+              </div>
+
+              <a
+                href="#"
+                class="learn-more"
+                [ngStyle]="{ 'font-family': data?.font }"
+              >
+                Learn more
+              </a>
+
+              <button class="btn" [ngStyle]="{ 'font-family': data?.font }">
+                Request Service
+              </button>
+            </div>
+          </div>
+
+          <div class="load-more">
+            <button>LOAD MORE</button>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Right Form -->
-    <div class="contact-form">
-      <h3>Available Technician at Your Service!</h3>
-      <p class="subtitle">
-        AC trouble? Choose Ranchi Service for quick solutions.
+    <section class="dynamicPages">
+      <div class="dymanic-page-header">
+        <h2 class="">{{ pagesList[1]?.pageName }}</h2>
+      </div>
+      <div class="schedule-card">
+        <div class="day" *ngFor="let day of days; let i = index">
+          <div class="icon">
+            <i class="fas fa-clock" [ngClass]="{ active: i === 6 }"></i>
+          </div>
+          <div class="day-name" [ngStyle]="{ 'font-family': data?.font }">
+            {{ day }}
+          </div>
+          <div class="day-status" [ngStyle]="{ 'font-family': data?.font }">
+            All day
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="dynamicPages">
+      <div class="dymanic-page-header">
+        <h2 class="">{{ pagesList[2]?.pageName }}</h2>
+      </div>
+      <div class="product-grid">
+        <!-- Product 1 -->
+        <div class="product-card">
+          <h3 class="product-name">prpduct 1111</h3>
+          <p class="product-subtitle">vhbjvbhj</p>
+          <a href="#" class="learn-more">Learn more</a>
+          <button class="add-to-cart">Add to Cart</button>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="product-card">
+          <h3 class="product-name highlight">hello</h3>
+          <div class="product-price">₹70.00</div>
+          <p class="product-subtitle">jbkjbhjmhb</p>
+          <p class="product-subtitle">jbjknk</p>
+          <a href="#" class="learn-more">Learn more</a>
+          <button class="add-to-cart">Add to Cart</button>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="product-card">
+          <h3 class="product-name small">
+            testing 22 <span class="arrow">›</span>
+          </h3>
+          <div class="product-price">₹70.00</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Form -->
+    <div class="contact-section">
+      <!-- Left Info -->
+      <div class="contact-info">
+        <h2>{{ pageData?.contactUs?.title }}</h2>
+
+        <div class="info-item">
+          <span class="icon">📞</span>
+          <div>
+            <h4>{{ pageData?.contactUs?.subtitle }}</h4>
+            <p>{{ pageData?.contactUs?.phoneNumber }}081020 65847</p>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <span class="icon">📍</span>
+          <div>
+            <h4>Office location</h4>
+            <p>
+              H No. 7, Ramzan Colony,<br />
+              Lalpur, {{ pageData?.contactUs?.city }},<br />
+              Jharkhand, 834001
+            </p>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <span class="icon">✉️</span>
+          <div>
+            <h4>Send us an email</h4>
+            <p>{{ pageData?.contactUs?.email }} inforanchiservice.com</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Form -->
+      <div class="contact-form">
+        <h3>Available Technician at Your Service!</h3>
+        <p class="subtitle">
+          AC trouble? Choose Ranchi Service for quick solutions.
+        </p>
+
+        <form>
+          <div class="form-row">
+            <input type="text" placeholder="First name" />
+            <input type="text" placeholder="Last name" />
+          </div>
+          <div class="form-row">
+            <input type="email" placeholder="Email" />
+            <input type="tel" placeholder="e.g. +44 707 354 64 78" />
+          </div>
+          <textarea placeholder="Tell us about your request"></textarea>
+
+          <div class="form-check">
+            <input type="checkbox" id="terms" />
+            <label for="terms">
+              I agree with the <a href="#">Terms & Conditions</a> and the
+              <a href="#">Privacy & Cookies Policy</a>.
+            </label>
+          </div>
+
+          <button type="submit">Submit Request</button>
+        </form>
+      </div>
+    </div>
+
+    <section class="dynamicPages">
+      <div class="dymanic-page-header">
+        <h2 class="">{{ pagesList[3]?.pageName }}</h2>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer
+      class="classic-footer"
+      [ngStyle]="{ background: data?.selectedColor?.primary || '#ccc' }"
+    >
+      <p [ngStyle]="{ 'font-family': data?.font }">
+        📍 Ranchi, Jharkhand | 📞 {{ pageData?.header?.phones?.mobile }} | ✉️
+        inforanchiservice.com
       </p>
-
-      <form>
-        <div class="form-row">
-          <input type="text" placeholder="First name" />
-          <input type="text" placeholder="Last name" />
-        </div>
-        <div class="form-row">
-          <input type="email" placeholder="Email" />
-          <input type="tel" placeholder="e.g. +44 707 354 64 78" />
-        </div>
-        <textarea placeholder="Tell us about your request"></textarea>
-
-        <div class="form-check">
-          <input type="checkbox" id="terms" />
-          <label for="terms">
-            I agree with the <a href="#">Terms & Conditions</a> and the
-            <a href="#">Privacy & Cookies Policy</a>.
-          </label>
-        </div>
-
-        <button type="submit">Submit Request</button>
-      </form>
-    </div>
-  </div>
-
-  <section class="dynamicPages">
-    <div class="dymanic-page-header">
-      <h2 class="">{{ pagesList[3]?.pageName }}</h2>
-    </div>
-  </section>
-
-  <!-- Opening Hours -->
-  <section class="classic-hours">
-    <h2 [ngStyle]="{ 'font-family': data?.font }">Opening Hours</h2>
-    <ul>
-      <li [ngStyle]="{ 'font-family': data?.font }">
-        Mon - Fri: 9:00 AM - 7:00 PM
-      </li>
-      <li [ngStyle]="{ 'font-family': data?.font }">
-        Saturday: 10:00 AM - 5:00 PM
-      </li>
-      <li [ngStyle]="{ 'font-family': data?.font }">Sunday: Closed</li>
-    </ul>
-  </section>
-
-  <!-- Footer -->
-  <footer
-    class="classic-footer"
-    [ngStyle]="{ background: data?.selectedColor?.primary || '#ccc' }"
-  >
-    <p [ngStyle]="{ 'font-family': data?.font }">
-      📍 Ranchi, Jharkhand | 📞 {{ pageData?.header?.phones?.mobile }} | ✉️
-      inforanchiservice.com
-    </p>
-    <span>{{ pageData?.footer?.tagline }}</span>
-  </footer>
+      <span>{{ pageData?.footer?.tagline }}</span>
+    </footer>
+  </ng-container>
 </div>

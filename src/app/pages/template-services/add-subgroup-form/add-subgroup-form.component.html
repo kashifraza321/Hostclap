@@ -1,0 +1,203 @@
+<div class="service-form">
+  <form [formGroup]="subgroupForm" (ngSubmit)="onSubmit()" class="service-form">
+    <div class="header">
+      <button class="back-btn">← Back</button>
+      <h2>AC Repairing Service</h2>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Group -->
+    <div class="form-group serviceNameWrap">
+      <label>Group</label>
+      <select formControlName="group">
+        <option>Air conditioning services</option>
+      </select>
+      <small>You can move service to another group</small>
+    </div>
+    <div class="serviceNameWrap">
+      <!-- Service Name -->
+      <div class="form-group">
+        <label>Service Name</label>
+        <input
+          type="text"
+          formControlName="subgroupName"
+          value="AC Repairing Service"
+        />
+      </div>
+
+      <!-- Price and Unit -->
+      <div class="form-row">
+        <div class="form-group">
+          <label>Price</label>
+          <input type="number" formControlName="price" placeholder="₹" />
+          <div
+            *ngIf="
+              subgroupForm.get('price')?.invalid &&
+              subgroupForm.get('price')?.touched
+            "
+            class="error-text"
+          >
+            Price is required.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Unit</label>
+          <input
+            type="text"
+            formControlName="unit"
+            placeholder="e.g. per hour"
+          />
+          <div
+            *ngIf="
+              subgroupForm.get('unit')?.invalid &&
+              subgroupForm.get('unit')?.touched
+            "
+            class="error-text"
+          >
+            Unit is required.
+          </div>
+        </div>
+      </div>
+
+      <!-- Promotional Price -->
+      <div class="form-group">
+        <label>Promotional Price</label>
+        <input formControlName="promotionPrice" type="number" placeholder="₹" />
+        <small
+          >You can set a promotional pricing to sell your products with a
+          discount.</small
+        >
+      </div>
+
+      <!-- Bookable -->
+      <div class="checkbox-group">
+        <label>Bookable</label>
+        <input formControlName="bookable" type="checkbox" checked />
+      </div>
+
+      <!-- Request Service -->
+      <div class="form-group">
+        <label>Request Service</label>
+        <input
+          formControlName="requestService"
+          type="text"
+          placeholder="Set Booking button label"
+        />
+      </div>
+
+      <!-- Booking Options -->
+      <div class="radio-group">
+        <label>
+          <input
+            formControlName="bookingType"
+            type="radio"
+            name="booking"
+            checked
+          />
+          Bookable on UENI page
+        </label>
+        <label>
+          <input formControlName="bookingType" type="radio" name="booking" />
+          Bookable on 3rd party platform
+        </label>
+      </div>
+    </div>
+
+    <!-- Total Booking Time -->
+    <div class="section serviceNameWrap" formGroupName="totalBookingTime">
+      <h3>Total Booking Time</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Duration</label>
+          <div class="time-inputs">
+            <input type="number" formControlName="hours" placeholder="00" />
+            hour
+            <input type="number" formControlName="hours" placeholder="00" />
+            minutes
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Buffer Time</label>
+          <div class="time-inputs">
+            <input
+              type="number"
+              formControlName="bufferHours"
+              placeholder="00"
+            />
+            hour
+            <input
+              type="number"
+              formControlName="bufferMinutes"
+              placeholder="00"
+            />
+            minutes
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Service Variations -->
+    <div class="form-section serviceNameWrap">
+      <label class="section-label">Service Variations</label>
+      <div class="toggle-container">
+        <input type="checkbox" formControlName="hasServiceVariations" />
+
+        <span>This service has multiple options</span>
+      </div>
+    </div>
+    <!-- Add variations here -->
+    <!-- 🔹 Media Upload -->
+    <div class="media-section serviceNameWrap">
+      <label class="label">Media <small>(Up to 10)</small></label>
+      <div class="upload-box">
+        <!-- Hidden input -->
+        <input
+          type="file"
+          #fileInput
+          (change)="onFileSelect($event)"
+          multiple
+          accept="image/*"
+          hidden
+        />
+        <!-- Click span triggers file dialog -->
+        <span class="upload-text" (click)="fileInput.click()">Upload</span>
+      </div>
+
+      <div class="media-grid">
+        <div
+          class="media-item"
+          *ngFor="let img of uploadedImages; let i = index"
+        >
+          <img [src]="img" alt="media" />
+          <div class="actions">
+            <button type="button" (click)="removeImage(i)">🗑️</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🔹 Description -->
+    <div class="form-section serviceNameWrap">
+      <label class="section-label">Description</label>
+      <textarea
+        formControlName="description"
+        rows="5"
+        placeholder="Enter service description..."
+      ></textarea>
+      <div
+        *ngIf="
+          serviceForm.get('description')?.invalid &&
+          serviceForm.get('description')?.touched
+        "
+        class="error-text"
+      >
+        Description is required.
+      </div>
+    </div>
+    <div class="form-section">
+      <button type="submit" class="submit-btn">Save Service</button>
+    </div>
+  </form>
+</div>
