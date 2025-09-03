@@ -50,12 +50,21 @@ export class TemplateServicesComponent {
     private alertService: AlertService
   ) {}
   backToHomepage() {
-    this.router.navigateByUrl('/in/insight/editor/pages');
+    this.router.navigate(['/in/insight/editor/home', this.pageId]);
   }
-  openSubGroup(group: any) {
-    this.selectedGroup = group;
+
+  openSubGroup(groupId: string) {
+    console.log('Clicked groupId:', groupId);
+
+    this.selectedGroup = this.serviceGroups.find((g) => g._id === groupId);
+
+    if (this.selectedGroup) {
+      this.serviceSUbGroups = this.selectedGroup.subgroups || [];
+    }
+
     this.showSubGroup = true;
   }
+
   backToGroupList() {
     this.showSubGroup = false;
     this.selectedGroup = null;
@@ -144,6 +153,10 @@ export class TemplateServicesComponent {
     }
   }
   navigateToSubgroupForm(pageId: string) {
-    this.router.navigate(['/in/insight/editor/form', pageId]);
+    this.router.navigate([
+      '/in/insight/editor/form',
+      pageId,
+      this.selectedGroup?._id,
+    ]);
   }
 }

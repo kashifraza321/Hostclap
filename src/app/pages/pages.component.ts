@@ -80,6 +80,15 @@ export class PagesComponent {
   selectedPageIndex: number | null = null;
 
   togglePage(index: number): void {
+    const selectedPage = this.pagesList[index];
+    console.log('Clicked index:', index, 'Selected Page:', selectedPage);
+
+    if (!selectedPage) return;
+    if (selectedPage.pageType === 'spaces') {
+      console.log('Blank page detected, navigating to /merchant-policy');
+      this.router.navigate(['/in/insight/editor/merchant-policy']);
+      return;
+    }
     if (this.selectedPageIndex === index) {
       this.selectedPageIndex = null;
     } else {
@@ -247,7 +256,7 @@ export class PagesComponent {
         return '../../assets/images/icons8-faq-50.png';
       case 'media':
         return '../../assets/images/icons8-media-80.png';
-      case 'blank':
+      case 'spaces':
         return '../../assets/images/icons8-blank-50.png';
       default:
         return '../../assets/images/icons8-blank-50.png';

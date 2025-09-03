@@ -82,8 +82,9 @@ export class PromotionComponent {
   }
 
   backToHomepage() {
-    this.router.navigateByUrl('/in/insight/editor/pages');
+    this.router.navigate(['/in/insight/editor/home', this.pageId]);
   }
+
   savePromotion() {
     if (this.promotionForm.invalid) {
       this.alertService.error('Form is invalid.');

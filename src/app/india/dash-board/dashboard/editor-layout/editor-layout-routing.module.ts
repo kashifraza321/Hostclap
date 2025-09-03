@@ -19,6 +19,9 @@ import { PromotionComponent } from 'src/app/pages/promotion/promotion.component'
 import { TemplateFooterComponent } from 'src/app/pages/template-footer/template-footer.component';
 import { TemplateContactFormComponent } from 'src/app/pages/template-contact-form/template-contact-form.component';
 import { AddSubgroupFormComponent } from 'src/app/pages/template-services/add-subgroup-form/add-subgroup-form.component';
+import { PricelistSubGroupFormComponent } from 'src/app/pages/price-list/pricelist-sub-group-form/pricelist-sub-group-form.component';
+import { LocationComponent } from 'src/app/pages/location/location.component';
+import { MerchantPolicyComponent } from 'src/app/pages/merchant-policy/merchant-policy.component';
 
 const routes: Routes = [
   {
@@ -57,6 +60,10 @@ const routes: Routes = [
         component: ContactUsComponent,
       },
       {
+        path: 'location/:pageId',
+        component: LocationComponent,
+      },
+      {
         path: 'opening-hours',
         component: OpeningHoursComponent,
       },
@@ -77,8 +84,16 @@ const routes: Routes = [
         component: TemplateContactFormComponent,
       },
       {
-        path: 'form/:pageId',
+        path: 'form/:pageId/:groupId',
         component: AddSubgroupFormComponent,
+      },
+      {
+        path: 'price-form/:pageId/:groupId',
+        component: PricelistSubGroupFormComponent,
+      },
+      {
+        path: 'merchant-policy',
+        component: MerchantPolicyComponent,
       },
       { path: 'sections', component: SectionsComponent },
       { path: 'settings', component: SettingsComponent },

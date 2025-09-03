@@ -10,12 +10,13 @@ import { CommonModule } from '@angular/common';
 import { LoginService } from '../../services/login.service';
 import { AlertService } from '../../services/Toaster/alert.service';
 import { gapi } from 'gapi-script';
+import { LoaderComponent } from 'src/app/commonComponent/loader/loader.component';
 @Component({
   selector: 'app-login',
   standalone: true,
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  imports: [ReactiveFormsModule, CommonModule, RouterModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterModule, LoaderComponent],
   providers: [LoginService],
 })
 export class LoginComponent {
@@ -23,6 +24,7 @@ export class LoginComponent {
   submitted = false;
   loginForm!: FormGroup;
   passwordVisible: boolean = false;
+  isLoading = false;
 
   constructor(
     private _login: LoginService,
@@ -80,6 +82,7 @@ export class LoginComponent {
       email: this.loginForm.value.email,
       password: this.loginForm.value.password,
     };
+    this.isLoading = true;
 
     this._login.login(login).subscribe(
       (result) => {
@@ -106,6 +109,9 @@ export class LoginComponent {
         this.alertService.error(
           'An error occurred during login. Please try again.'
         );
+      },
+      () => {
+        this.isLoading = false; // 👈 loader stop (complete hone par)
       }
     );
   }

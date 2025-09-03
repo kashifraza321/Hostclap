@@ -6,8 +6,9 @@ import {
   Input,
   ViewChild,
 } from '@angular/core';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { DomSanitizer, SafeStyle, SafeUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { LoaderComponent } from 'src/app/commonComponent/loader/loader.component';
 import { Data } from 'src/app/models/data.model';
 import { PagesService } from 'src/app/pages/pages.service';
 import { environment } from 'src/environments/environment';
@@ -15,7 +16,7 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-classic-template',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, LoaderComponent],
   templateUrl: './classic-template.component.html',
   styleUrl: './classic-template.component.css',
 })
@@ -33,6 +34,8 @@ export class ClassicTemplateComponent {
   serviceData: any;
   serviceDataForPrice: any;
   allSubGroups: any[] = [];
+  state: any;
+  isLoading = false;
   sanitizedLogoUrl: SafeUrl | null = null;
   days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
@@ -69,6 +72,7 @@ export class ClassicTemplateComponent {
     // this.pagesService.state$.subscribe((state) => {
     //   console.log('preview data', state.preview.titles);
     // });
+    // this.getPageDetail(pageID)
     this.pagesService.state$.subscribe((state) => {
       this.preview = state.preview;
     });
@@ -91,9 +95,11 @@ export class ClassicTemplateComponent {
   }
 
   getPages() {
+    this.isLoading = true;
     this.pagesService.getPages().subscribe({
       next: (res) => {
         console.log('Fetched pages:', res);
+
         this.pagesList = res.data || [];
         this.pageId = res.data[0]?._id;
 
@@ -116,6 +122,9 @@ export class ClassicTemplateComponent {
       error: (err) => {
         console.error('Error loading pages:', err);
       },
+      complete: () => {
+        this.isLoading = false; // loader stop
+      },
     });
   }
 
@@ -123,6 +132,7 @@ export class ClassicTemplateComponent {
     this.pagesService.getPageDetail(pageId).subscribe({
       next: (res) => {
         this.pageData = res.data;
+
         console.log(this.pageData.contactUs.title, 'mobileeeee');
 
         console.log('Page Detail:', res);
@@ -135,31 +145,60 @@ export class ClassicTemplateComponent {
       },
       error: (err) => {
         console.error('Failed to fetch page detail:', err);
+        this.isLoading = false;
       },
     });
   }
-  getSanitizedLogoUrl(): SafeUrl {
+  getLogoUrl(): SafeUrl {
+    // console.log(this.pageData?.header?.logo?.image, 'logooooooo img');
+    if (this.preview?.logo?.image) {
+      return this.sanitizer.bypassSecurityTrustUrl(this.preview.logo.image);
+    }
+
     if (this.pageData?.header?.logo?.image) {
       return this.sanitizer.bypassSecurityTrustUrl(
         this.imgurl + this.pageData.header.logo.image
       );
     }
-    return '';
+
+    return 'assets/images/default-logo.png';
   }
+
   // cover patch
-  getSanitizedCoverUrl(): SafeUrl {
-    if (this.pageData?.header?.cover?.image) {
+  getCoverUrl(state: any): SafeStyle {
+    // console.log(this.pageData?.header?.cover?.image, 'coverrr img');
+    if (state?.preview?.cover?.image) {
       return this.sanitizer.bypassSecurityTrustStyle(
-        `url(${this.imgurl + this.pageData.header.cover.image})`
+        `url("${state.preview.cover.image}")`
       );
     }
-    // fallback agar cover image na ho
+
+    if (state?.pageData?.header?.cover?.image) {
+      return this.sanitizer.bypassSecurityTrustStyle(
+        `url("${this.imgurl + state.pageData.header.cover.image}")`
+      );
+    }
+
     return this.sanitizer.bypassSecurityTrustStyle(
-      `url('../../../../assets/images/bg2.webp')`
+      `url("assets/images/bg2.webp")`
     );
   }
 
   // cover
+
+  getFullAddress(): string {
+    const address = this.pageData?.contactUs?.address || '';
+    const state = this.pageData?.contactUs?.state || '';
+    const zip = this.pageData?.contactUs?.zip || '';
+    const country = this.pageData?.contactUs?.country || '';
+    return `${address}, ${state}, ${zip}, ${country}`;
+  }
+
+  getGoogleMapsUrl(address: string): string {
+    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+      address
+    )}`;
+  }
   getSectionDetailData(pageId: string) {
     this.pagesService.GET_SECTION_DETAIL(pageId, 'service').subscribe({
       next: (res) => {
@@ -181,6 +220,12 @@ export class ClassicTemplateComponent {
     }
     const fullUrl = path.startsWith('http') ? path : `${this.imgurl}${path}`;
     return this.sanitizer.bypassSecurityTrustUrl(fullUrl);
+  }
+  scrollToSection(sectionId: string) {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
   getSectionDetailDataForPriceList(pageId: string) {
     this.pagesService.GET_SECTION_DETAIL(pageId, 'price_list').subscribe({

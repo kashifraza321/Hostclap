@@ -1,0 +1,159 @@
+.product-edit-wrapper {
+  max-width: 500px;
+  margin: 20px auto;
+  font-family: "Roboto", sans-serif;
+}
+
+/* Header */
+.product-edit-wrapper .header {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+}
+
+.product-edit-wrapper .header h4 {
+  font-weight: 500;
+  font-size: 18px;
+}
+
+/* Tabs */
+.product-edit-wrapper .nav-tabs {
+  border-bottom: 1px solid #eee;
+}
+
+.product-edit-wrapper .nav-tabs .nav-link {
+  border: none;
+  color: #777;
+  font-weight: 500;
+}
+
+.product-edit-wrapper .nav-tabs .nav-link.active {
+  color: #000;
+  border-bottom: 2px solid #3f51b5;
+  background: transparent;
+}
+
+/* Form Cards */
+.product-edit-wrapper form .mb-3 {
+  background: #fff;
+  border-radius: 6px;
+  padding: 15px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+}
+
+.product-edit-wrapper .form-label {
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+/* Input */
+.product-edit-wrapper .form-control,
+.product-edit-wrapper .form-select {
+  border-radius: 4px;
+  box-shadow: none;
+  border: none;
+  border-bottom: 1px solid #ddd;
+}
+
+.save-btn {
+  background: #ddd;
+  border: none;
+  color: #aaa;
+  font-size: 14px;
+  padding: 8px 25px;
+  border-radius: 5px;
+  cursor: not-allowed;
+}
+
+.save-btn:enabled {
+  background: green;
+  color: white;
+  cursor: pointer;
+}
+.saveBtn {
+  background: green;
+  width: 100px;
+  padding: 11px;
+  font-size: 18px;
+  color: #fff;
+  border-radius: 10px;
+}
+.cancelBtn {
+  color: #fff;
+  border-radius: 10px;
+  width: 100px;
+  font-size: 18px;
+  color: #fff;
+  border-radius: 10px;
+  padding: 9px;
+  border: none;
+  background: #ccc;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  color: #6b6b6b;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Checkbox */
+.product-edit-wrapper .form-check {
+  background: #fff;
+  border-radius: 6px;
+  padding: 10px 15px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+.inputWrp {
+  margin-top: 35px;
+}
+
+/* quill */
+.editor-section {
+  margin-top: 20px;
+
+  .editor-title {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+}
+.quill-label {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 8px;
+  display: block;
+  color: #3f51b5;
+}
+
+::ng-deep .custom-quill .ql-container {
+  min-height: 150px;
+  height: auto;
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 0 0 6px 6px;
+}
+
+::ng-deep .custom-quill .ql-toolbar {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
+}
+
+::ng-deep .custom-quill .ql-editor {
+  min-height: 100px;
+}
+::ng-deep .ql-picker {
+  height: auto !important;
+}
+
+::ng-deep .ql-picker-options {
+  max-height: 200px;
+  overflow-y: auto;
+}

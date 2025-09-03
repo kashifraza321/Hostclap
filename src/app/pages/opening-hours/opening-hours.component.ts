@@ -9,8 +9,14 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './opening-hours.component.css',
 })
 export class OpeningHoursComponent {
+  pageId: string = '';
   constructor(private router: Router, private route: ActivatedRoute) {}
+  ngOnInit() {
+    this.route.paramMap.subscribe((params) => {
+      this.pageId = params.get('pageId') || '';
+    });
+  }
   backToHomepage() {
-    this.router.navigateByUrl('/in/insight/editor/pages');
+    this.router.navigate(['/in/insight/editor/home', this.pageId]);
   }
 }

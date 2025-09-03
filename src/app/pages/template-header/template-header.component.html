@@ -141,6 +141,7 @@
             style="display: none"
             #fileInput
             (change)="onFileSelected($event)"
+            (change)="applyLogoChanges()"
           />
 
           <div *ngIf="logoForm.get('image')?.value" class="logo-box">
@@ -174,6 +175,7 @@
               min="0"
               max="100"
               class="form-range"
+              (change)="applyLogoChanges()"
             />
             <div class="slider-labels">
               <span>Small</span>
@@ -183,7 +185,11 @@
           </div>
           <div class="alignment-box">
             <label>Alignment</label>
-            <select formControlName="alignment" class="form-select">
+            <select
+              formControlName="alignment"
+              (change)="applyLogoChanges()"
+              class="form-select"
+            >
               <option value="left">Left</option>
               <option value="center">Center</option>
               <option value="right">Right</option>

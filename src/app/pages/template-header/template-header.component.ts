@@ -211,9 +211,8 @@ export class TemplateHeaderComponent {
           this.applyMenuChanges()
         )
       ),
-      this.coverForm.valueChanges.pipe(
-        tap(() => this.applyCoverChanges()) // 👈 yeh add karna h
-      )
+      this.coverForm.valueChanges.pipe(tap(() => this.applyCoverChanges())),
+      this.logoForm.valueChanges.pipe(tap(() => this.applyLogoChanges()))
     ).subscribe();
 
     this.getPageDetail(this.pageId);
@@ -276,6 +275,15 @@ export class TemplateHeaderComponent {
 
     this.pagesService.updatePreviewSection('cover', data);
   }
+  applyLogoChanges() {
+    const data = {
+      image: this.logoForm.get('image')?.value || '',
+      logoSize: this.logoForm.get('logoSize')?.value || 100,
+      alignment: this.logoForm.get('alignment')?.value || 'center',
+    };
+
+    this.pagesService.updatePreviewSection('logo', data);
+  }
   announcementMessage: string = 'AC is not working?';
   // realtime data show logic
   onOpacityChange(event: Event) {
@@ -284,12 +292,12 @@ export class TemplateHeaderComponent {
     this.coverForm.get('opacity')?.setValue(value);
   }
   handleImageError(event: any) {
-    event.target.src = 'path-to-fallback-image.jpg'; // Fallback image URL if the selected image fails to load
+    event.target.src = 'path-to-fallback-image.jpg';
   }
 
   goBack() {
     console.log('pageidddddddddddd');
-    this.router.navigate(['/in/insight/editor/home']);
+    this.router.navigate(['/in/insight/editor/home', this.pageId]);
   }
 
   toggleSection(sectionId: string) {

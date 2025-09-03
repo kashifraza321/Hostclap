@@ -25,6 +25,9 @@ export class PriceListComponent {
   serviceGroups: any[] = [];
   pageId: string = '';
   sectionId: string = '';
+  showSubGroup = false;
+  selectedGroup: any = null;
+  serviceSUbGroups: any[] = [];
 
   ngOnInit(): void {
     this.pageId = this.route.snapshot.paramMap.get('pageId') || '';
@@ -46,8 +49,25 @@ export class PriceListComponent {
     private alertService: AlertService
   ) {}
   backToHomepage() {
-    this.router.navigateByUrl('/in/insight/editor/pages');
+    this.router.navigate(['/in/insight/editor/home', this.pageId]);
   }
+  openSubGroup(groupId: string) {
+    console.log('Clicked groupIdddddddddddddddd:', groupId);
+
+    this.selectedGroup = this.serviceGroups.find((g) => g._id === groupId);
+
+    if (this.selectedGroup) {
+      this.serviceSUbGroups = this.selectedGroup.subgroups || [];
+    }
+
+    this.showSubGroup = true;
+  }
+
+  backToGroupList() {
+    this.showSubGroup = false;
+    this.selectedGroup = null;
+  }
+
   getSectionDetailData() {
     this.pagesService.GET_SECTION_DETAIL(this.pageId, 'price_list').subscribe({
       next: (res) => {
@@ -127,5 +147,12 @@ export class PriceListComponent {
       const modalInstance = bootstrap.Modal.getInstance(modalEl);
       modalInstance?.hide();
     }
+  }
+  navigateToSubgroupForm(pageId: string) {
+    this.router.navigate([
+      '/in/insight/editor/price-form',
+      pageId,
+      this.selectedGroup?._id,
+    ]);
   }
 }

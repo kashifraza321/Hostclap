@@ -238,7 +238,7 @@
 }
 
 .save-btn:enabled {
-  background: #2b2e9b;
+  background: green;
   color: white;
   cursor: pointer;
 }

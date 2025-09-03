@@ -90,7 +90,8 @@
 }
 .pageWrapper {
   padding: 10px 14px;
-  max-height: 400px;
+  max-height: 600px;
+  min-height: 600px;
   overflow: auto;
 }
 

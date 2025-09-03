@@ -11,6 +11,7 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { PagesService } from '../../pages.service';
 import { AlertService } from 'src/app/services/Toaster/alert.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-add-subgroup-form',
@@ -28,6 +29,7 @@ export class AddSubgroupFormComponent {
   selectedFiles: File[] = [];
   groupId: string = '';
   sectionId: string = '';
+  imgurl = environment.imageBaseUrl;
 
   constructor(
     private fb: FormBuilder,
@@ -40,6 +42,8 @@ export class AddSubgroupFormComponent {
   ngOnInit(): void {
     this.pageId = this.route.snapshot.paramMap.get('pageId') || '';
     console.log(this.pageId, ' pageId found');
+    this.groupId = this.route.snapshot.paramMap.get('groupId') || '';
+    console.log(this.groupId, ' groupId found');
     // this.serviceForm = this.fb.group({
     //   group: ['', Validators.required],
     //   serviceName: ['', Validators.required],
@@ -119,34 +123,36 @@ export class AddSubgroupFormComponent {
           const groups = res.data.section.groups;
 
           if (groups && groups.length > 0) {
-            this.groupId = groups[0]._id;
-            console.log('Group ID found:', this.groupId);
+            const currentGroup = groups.find(
+              (g: any) => g._id === this.groupId
+            );
 
-            const firstService = groups[0].services?.[0];
+            if (currentGroup) {
+              console.log('Current Group ID:', currentGroup._id);
 
-            if (firstService) {
-              // ✅ Patch values to subgroupForm instead of serviceForm
-              this.subgroupForm.patchValue({
-                subgroupName: firstService.subgroupName || '',
-                price: firstService.price || '',
-                unit: firstService.unit || '',
-                promotionPrice: firstService.promotionPrice || '',
-                description: firstService.description || '',
-                bookable: firstService.bookable || false,
-                totalBookingTime: {
-                  hours: firstService.totalBookingTime?.[0]?.hours || '',
-                  minutes: firstService.totalBookingTime?.[0]?.minutes || '',
-                },
-              });
+              const firstService = currentGroup.services?.[0];
+              if (firstService) {
+                this.subgroupForm.patchValue({
+                  subgroupName: firstService.subgroupName || '',
+                  price: firstService.price || '',
+                  unit: firstService.unit || '',
+                  promotionPrice: firstService.promotionPrice || '',
+                  description: firstService.description || '',
+                  bookable: firstService.bookable || false,
+                  totalBookingTime: {
+                    hours: firstService.totalBookingTime?.[0]?.hours || '',
+                    minutes: firstService.totalBookingTime?.[0]?.minutes || '',
+                  },
+                });
 
-              // ✅ Load media preview
-              this.uploadedImages =
-                firstService.media?.map(
-                  (m: string) => `https://your-base-url/${m}` // Replace with correct URL
-                ) || [];
+                this.uploadedImages =
+                  firstService.media?.map(
+                    (m: string) => `${this.imgurl}${m}`
+                  ) || [];
+              }
+            } else {
+              console.warn('No group found for groupId:', this.groupId);
             }
-          } else {
-            console.warn('No groups found in this section');
           }
         }
       },
@@ -180,17 +186,19 @@ export class AddSubgroupFormComponent {
     formData.append('description', this.subgroupForm.value.description);
 
     // Append totalBookingTime as JSON array
-    const totalBookingTime = this.subgroupForm.value.totalBookingTime;
-    const totalBookingArray = [
-      { hours: totalBookingTime.hours, minutes: totalBookingTime.minutes },
-    ];
-    formData.append('totalBookingTime', JSON.stringify(totalBookingArray));
+    // const totalBookingTime = this.subgroupForm.value.totalBookingTime;
+    // const totalBookingArray = [
+    //   { hours: totalBookingTime.hours, minutes: totalBookingTime.minutes },
+    // ];
+    formData.append(
+      'totalBookingTime',
+      JSON.stringify([{ hours: '02', minutes: '30' }])
+    );
 
     // Append media files
     this.selectedFiles.forEach((file) => {
       formData.append('media', file);
     });
-
     // Call API
     this.pagesService.CREATE_Sub_GROUP(formData).subscribe({
       next: (res) => {

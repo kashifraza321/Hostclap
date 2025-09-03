@@ -1,0 +1,96 @@
+<div class="pageWrapper">
+  <div class="top-bar">
+    <button class="back-btn" (click)="backToHomepage()">
+      <img
+        src="../../../assets/images/icons8-chevron-right-24.png"
+        alt="chevron"
+        width="18"
+      />
+      Back
+    </button>
+    <div class="title">Location</div>
+  </div>
+  <form [formGroup]="locationForm" (ngSubmit)="saveContact()">
+    <div class="section-card">
+      <label class="label" for="section-title">Location title</label>
+      <div class="title-row">
+        <input
+          id="section-title"
+          type="text"
+          class="input-field"
+          formControlName="title"
+        />
+        <input type="checkbox" class="checkbox" />
+      </div>
+      <label class="label" for="section-subtitle">Section Subtitle</label>
+      <input
+        id="section-subtitle"
+        type="text"
+        class="input-field"
+        formControlName="subtitle"
+      />
+    </div>
+    <div class="section-card">
+      <h3>Business address</h3>
+      <div>
+        <label class="label" for="section-subtitle">Country/Region</label>
+        <input
+          id="section-subtitle"
+          type="text"
+          class="input-field"
+          formControlName="country"
+        />
+      </div>
+      <div class="inputWrap">
+        <label class="label" for="section-subtitle">Address</label>
+        <input
+          id="section-subtitle"
+          type="text"
+          class="input-field"
+          formControlName="address"
+        />
+      </div>
+      <div class="inputWrap">
+        <label class="label" for="section-subtitle">City</label>
+        <input
+          id="section-subtitle"
+          type="text"
+          class="input-field"
+          formControlName="city"
+        />
+      </div>
+      <div class="inputWrap">
+        <label class="label" for="section-subtitle">State </label>
+        <input
+          id="section-subtitle"
+          type="text"
+          class="input-field"
+          formControlName="state"
+        />
+      </div>
+      <div class="inputWrap">
+        <label class="label" for="section-subtitle">Postal / ZIP Code </label>
+        <input
+          id="section-subtitle"
+          type="text"
+          class="input-field"
+          formControlName="zip"
+        />
+      </div>
+      <div class="inputWrap">
+        <label class="label" for="section-subtitle">Mobile phone number </label>
+        <input
+          id="section-subtitle"
+          type="text"
+          class="input-field"
+          formControlName="phoneNumber"
+        />
+      </div>
+    </div>
+
+    <div class="footer-buttons">
+      <button class="cancel-btn cancelBtn">Cancel</button>
+      <button class="save-btn saveBtn">Save</button>
+    </div>
+  </form>
+</div>

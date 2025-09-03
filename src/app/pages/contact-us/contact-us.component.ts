@@ -32,40 +32,84 @@ export class ContactUsComponent {
       title: ['Get in Touch'],
       subtitle: ['We’d love to hear from you'],
       country: ['USA'],
-      city: ['New York'],
-      state: ['NY'],
+      city: [''],
+      state: [''],
       zip: ['10001'],
       address: ['123 Main Street'],
       phoneNumber: ['+1-800-555-1234'],
       email: ['support@example.com'],
     });
     this.pageId = this.route.snapshot.paramMap.get('pageId') || '';
+    this.pagesService.getPageDetail(this.pageId).subscribe({
+      next: (pageData) => {
+        console.log('Page data:', pageData);
+        // Patch the form with contactUs data
+        if (pageData?.contactUs) {
+          this.contactForm.patchValue(pageData.contactUs);
+        }
+      },
+      error: (err) => {
+        this.alertService.error('Failed to fetch page data.');
+      },
+    });
   }
 
   backToHomepage() {
     this.router.navigateByUrl('/in/insight/editor/pages');
   }
+  // saveContact(): void {
+  //   if (this.contactForm.invalid) {
+  //     this.alertService.error('Form is invalid.');
+  //     return;
+  //   }
+
+  //   const payload = {
+  //     contactus: this.contactForm.value,
+  //   };
+
+  //   console.log(payload, 'payload before API');
+
+  //   this.pagesService.editPages(this.pageId, payload).subscribe({
+  //     next: (res) => {
+  //       console.log('contact updated successfully:', res);
+  //       this.alertService.success('Contact info updated successfully!');
+  //     },
+  //     error: (err) => {
+  //       console.error('Failed to update contact:', err);
+  //       this.alertService.error('Failed to update contact.');
+  //     },
+  //   });
+  // }
   saveContact(): void {
     if (this.contactForm.invalid) {
       this.alertService.error('Form is invalid.');
       return;
     }
 
-    const payload = {
-      service: this.contactForm.value,
-    };
+    this.pagesService.getPageDetail(this.pageId).subscribe({
+      next: (pageData) => {
+        console.log('Existing page data:', pageData);
 
-    console.log(payload, 'payload before API');
+        const updatedPayload = {
+          contactUs: this.contactForm.value,
+        };
 
-    this.pagesService.editPages(this.pageId, payload).subscribe({
-      next: (res) => {
-        console.log('contact updated successfully:', res);
-        this.alertService.success('Service updated successfully!');
-        // this.getPageData(); // refresh page data after update
+        console.log('Payload to be sent:', updatedPayload);
+
+        this.pagesService.editPages(this.pageId, updatedPayload).subscribe({
+          next: (res) => {
+            console.log('Update success response:', res);
+            this.alertService.success('Contact info updated successfully!');
+          },
+          error: (err) => {
+            console.error('Failed to update contact:', err);
+            this.alertService.error('Failed to update contact.');
+          },
+        });
       },
       error: (err) => {
-        console.error('Failed to update contact:', err);
-        this.alertService.error('Failed to update service.');
+        console.error('Failed to fetch existing page data:', err);
+        this.alertService.error('Failed to fetch existing data.');
       },
     });
   }

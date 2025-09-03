@@ -131,6 +131,9 @@ export class HomePageComponent {
   navigateToContact(pageId: string) {
     this.router.navigate(['/in/insight/editor/contact-us', pageId]);
   }
+  navigateToLocation(pageId: string) {
+    this.router.navigate(['/in/insight/editor/location', pageId]);
+  }
   navigateToFooter(pageId: string) {
     this.router.navigate(['/in/insight/editor/template-footer', pageId]);
   }

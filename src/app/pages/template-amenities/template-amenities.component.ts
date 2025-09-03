@@ -57,8 +57,9 @@ export class TemplateAmenitiesComponent {
     return this.amenitiesForm.get('amenitiesNames') as FormArray;
   }
   backToHomepage() {
-    this.router.navigateByUrl('/in/insight/editor/pages');
+    this.router.navigate(['/in/insight/editor/home', this.pageId]);
   }
+
   toggleAmenity(event: any, amenity: string) {
     if (event.target.checked) {
       this.amenitiesNames.push(this.fb.control(amenity));

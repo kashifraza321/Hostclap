@@ -236,9 +236,14 @@ h2.section-title {
   color: #555;
   min-height: 55px;
 }
+.logoSection {
+  max-width: 110px;
+  width: 100%;
+}
 .logoSection img {
-  width: 100px; /* default size */
+  width: 100px;
   transition: width 0.4s ease, transform 0.4s ease;
+  display: inline-block;
 }
 /* .logoSction {
   width: 80px;
@@ -750,4 +755,68 @@ button:hover {
 
 .add-to-cart:hover {
   background: #d94e00;
+}
+
+/* service  */
+.group {
+  display: none;
+}
+input[name="groupStep"]:checked + .group {
+  display: block;
+}
+.controls {
+  margin-top: 20px;
+}
+
+.group {
+  display: none;
+}
+
+/* jis radio pe check hoga, uske immediately baad wala group dikhe */
+input[name="groupStep"]:checked + .group {
+  display: block;
+}
+
+.map-container {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.map-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: grayscale(100%);
+}
+
+.location-tooltip {
+  position: absolute;
+  top: 40%;
+  left: 45%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  max-width: 300px;
+}
+
+.location-tooltip p {
+  margin: 0 0 6px;
+  font-size: 14px;
+}
+
+.phone {
+  color: gray;
+}
+
+.directions {
+  color: #ff5722;
+  font-weight: bold;
+  text-decoration: none;
 }

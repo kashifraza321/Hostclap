@@ -1,0 +1,81 @@
+<div class="product-edit-wrapper">
+  <form [formGroup]="priceItemForm" (ngSubmit)="onSubmit()">
+    <!-- Header -->
+    <div class="header d-flex align-items-center mb-3">
+      <button class="back-btn" (click)="back(pageId)">
+        <img
+          src="../../../assets/images/icons8-chevron-right-24.png"
+          alt="chevron"
+          width="18"
+        />
+        Back
+      </button>
+      <h4 class="ms-2 mb-0">{{ priceItemForm.get("subgroupName")?.value }}</h4>
+    </div>
+
+    <!-- Tabs (sirf ek tab for now) -->
+    <!-- <ul class="nav nav-tabs mb-3">
+    <li class="nav-item">
+      <a class="nav-link active" href="#">Details</a>
+    </li>
+  </ul> -->
+
+    <!-- Category -->
+    <div class="mb-3">
+      <label class="form-label">Category</label>
+      <select class="form-select" formControlName="category">
+        <option *ngFor="let c of categories" [value]="c">{{ c }}</option>
+      </select>
+      <div class="inputWrp">
+        <label class="form-label">Item Name</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="subgroupName"
+        />
+      </div>
+    </div>
+
+    <!-- Item Name -->
+
+    <!-- Price -->
+
+    <!-- Checkbox -->
+    <!-- <div class="form-check mb-3">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        formControlName="showAddToCart"
+      />
+      <label class="form-check-label">Show "Add to Cart" button</label>
+    </div> -->
+
+    <div class="mb-3">
+      <label class="form-label">Price</label>
+      <div class="input-group">
+        <span class="input-group-text">₹</span>
+        <input type="number" class="form-control" formControlName="price" />
+      </div>
+
+      <div class="editor-section">
+        <label class="quill-label">Description</label>
+        <quill-editor
+          [modules]="modules"
+          theme="snow"
+          class="custom-quill"
+          formControlName="description"
+        ></quill-editor>
+      </div>
+    </div>
+
+    <!-- Footer Buttons -->
+    <div class="footer-buttons d-flex gap-2">
+      <button type="button" class="cancelBtn" (click)="onCancel()">
+        Cancel
+      </button>
+      <button type="submit" class="saveBtn" [disabled]="!priceItemForm.valid">
+        Save
+      </button>
+    </div>
+  </form>
+</div>

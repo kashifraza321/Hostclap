@@ -80,7 +80,7 @@
           <div
             class="group-item"
             *ngFor="let group of serviceGroups; let i = index"
-            (click)="openSubGroup(group)"
+            (click)="openSubGroup(group._id)"
             [ngClass]="{
               'orange-border': i % 2 === 0,
               'blue-border': i % 2 !== 0
