@@ -1,0 +1,232 @@
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+.pagewrapper {
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  margin-bottom: 16px;
+  color: #666;
+  cursor: pointer;
+}
+
+label {
+  display: block;
+  font-size: 19px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: #444;
+}
+
+input[type="text"],
+input[type="date"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 17px;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  outline: none;
+}
+
+.stars {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 22px;
+  color: #fbc02d;
+}
+.ratingWrp {
+  margin-top: 50px;
+}
+
+.ratinglabel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.stars span {
+  cursor: pointer;
+}
+
+.stars .rating-value {
+  font-size: 14px;
+  margin-left: 8px;
+  color: #444;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  margin: 8px 0;
+}
+
+.avatar-wrapper {
+  margin-top: 16px;
+  font-family: Arial, sans-serif;
+  max-width: 350px;
+  width: 100%;
+}
+.labelWrp {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.avatar-type {
+  display: flex;
+  gap: 16px;
+  margin: 8px 0;
+}
+
+.avatar-radio {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+}
+
+.upload-box {
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  cursor: pointer;
+  background-color: #fafafa;
+  position: relative;
+  min-height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-icon {
+  font-size: 24px;
+  color: #999;
+}
+
+.upload-text {
+  font-size: 13px;
+  color: #666;
+  margin-top: 6px;
+}
+
+.image-preview {
+  position: relative;
+  width: 100%;
+  height: 150px;
+}
+
+.image-preview img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: fill;
+  border-radius: 4px;
+
+  width: 100%;
+}
+
+.delete-btn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.quote-editor {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 8px;
+  min-height: 120px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btn-cancel {
+  background: transparent;
+  color: #666;
+}
+
+.btn-save {
+  background: #ccc;
+  color: #fff;
+  cursor: not-allowed;
+}
+
+.stars span {
+  font-size: 24px;
+  cursor: pointer;
+  color: lightgray;
+  user-select: none;
+  transition: color 0.3s;
+}
+
+.stars span.filled {
+  color: #fbc02d;
+}
+textarea {
+  min-height: 100px;
+  resize: none;
+  padding: 15px;
+  font-size: 17px;
+}
+.saveBtn {
+  background: green;
+  width: 100px;
+  padding: 11px;
+  font-size: 18px;
+  color: #fff;
+  border-radius: 10px;
+}
+.cancelBtn {
+  color: #fff;
+  border-radius: 10px;
+  width: 100px;
+  font-size: 18px;
+  color: #fff;
+  border-radius: 10px;
+  padding: 9px;
+  border: none;
+  background: #ccc;
+}
+.back-btn {
+  background: none;
+  border: none;
+  color: #6b6b6b;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

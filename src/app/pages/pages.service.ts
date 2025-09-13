@@ -121,6 +121,14 @@ export class PagesService {
       data
     );
   }
+  UpdateTestimonial(data: any) {
+    return this.httpService.patchCall(
+      `${API_CONSTANTS.UPDATE_TESTIMONIALS}`,
+      data,
+      true
+    );
+  }
+
   deletePages(pageId: string) {
     return this.httpService.deleteCall(`${API_CONSTANTS.DELETE_PAGES}`, pageId);
   }
@@ -137,5 +145,8 @@ export class PagesService {
     return this.httpService.getCall(
       `${API_CONSTANTS.GET_SECTION_DETAIL}/${pageId}/${type}`
     );
+  }
+  updateGallery(data: any) {
+    return this.httpService.postCall(`${API_CONSTANTS.UPDATE_GALLERY}`, data);
   }
 }

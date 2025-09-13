@@ -1,0 +1,85 @@
+<div class="pageWrapper">
+  <div class="top-bar">
+    <button class="back-btn" (click)="backToHomepage()">
+      <img
+        src="../../../assets/images/icons8-chevron-right-24.png"
+        alt="chevron"
+        width="18"
+      />
+      Back
+    </button>
+
+    <div class="title">Testimonials</div>
+  </div>
+  <form [formGroup]="TestiminialForm" (ngSubmit)="saveSection()">
+    <div class="section-card">
+      <label class="label" for="section-title">Section Title</label>
+      <div class="title-row">
+        <input
+          id="section-title"
+          type="text"
+          class="input-field"
+          formControlName="sectionTitle"
+        />
+        <input type="checkbox" class="checkbox" checked />
+      </div>
+      <div>
+        <label class="label" for="section-subtitle">Section Subtitle</label>
+        <input
+          id="section-subtitle"
+          type="text"
+          class="input-field"
+          formControlName="sectionSubtitle"
+        />
+      </div>
+    </div>
+
+    <div class="service-groups-card">
+      <div class="header-row">
+        <div class="header-title">
+          Testimonials
+          <span class="info-icon" title="Info">i</span>
+        </div>
+        <!-- <button class="edit-btn">Edit</button> -->
+      </div>
+
+      <button type="button" class="add-group-btn" (click)="openForm(pageId)">
+        <span class="plus-icon">+</span> Add new Testimonials
+      </button>
+
+      <!-- Group List -->
+      <div>
+        <div class="group-list">
+          <div
+            class="group-item"
+            *ngFor="let group of testimonialGroups; let i = index"
+            (click)="openForm(pageId, group._id)"
+            [ngClass]="{
+              'orange-border': i % 2 === 0,
+              'blue-border': i % 2 !== 0
+            }"
+          >
+            {{ group.testimonial?.reviewerName
+            }}<span class="arrow"
+              ><img
+                src="../../../assets/images/icons8-chevron-right-24.png"
+                alt=""
+                width="15"
+                height="15"
+            /></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tip-box">
+        <b>Top Tip:</b> Activate the 'Book' button to allow customers to make
+        bookings directly on your website.
+      </div>
+    </div>
+
+    <div class="footer-buttons">
+      <button class="cancel-btn cancelBtn">Cancel</button>
+      <button class="saveBtn" [disabled]="TestiminialForm.invalid">Save</button>
+    </div>
+  </form>
+</div>

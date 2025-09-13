@@ -84,9 +84,12 @@ export class PagesComponent {
     console.log('Clicked index:', index, 'Selected Page:', selectedPage);
 
     if (!selectedPage) return;
-    if (selectedPage.pageType === 'spaces') {
+    if (selectedPage.pageType === 'blank') {
       console.log('Blank page detected, navigating to /merchant-policy');
-      this.router.navigate(['/in/insight/editor/merchant-policy']);
+      this.router.navigate([
+        '/in/insight/editor/merchant-policy',
+        selectedPage._id,
+      ]);
       return;
     }
     if (this.selectedPageIndex === index) {
@@ -259,7 +262,7 @@ export class PagesComponent {
       case 'spaces':
         return '../../assets/images/icons8-blank-50.png';
       default:
-        return '../../assets/images/icons8-blank-50.png';
+        return '../../assets/images/icons8-space.png';
     }
   }
 }

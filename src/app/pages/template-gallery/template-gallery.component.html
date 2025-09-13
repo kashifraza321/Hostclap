@@ -1,64 +1,83 @@
 <div class="pageWrapper">
-  <div class="top-bar">
-    <button class="back-btn" (click)="backToHomepage()">
-      <img
-        src="../../../assets/images/icons8-chevron-right-24.png"
-        alt="chevron"
-        width="18"
-      />
-      Back
-    </button>
-    <div class="title">SERVICE</div>
-  </div>
-
-  <div class="section-card">
-    <label class="label" for="section-title">Section Title</label>
-    <div class="title-row">
-      <input
-        id="section-title"
-        type="text"
-        class="input-field"
-        value="SERVICE"
-      />
-      <input type="checkbox" class="checkbox" checked />
+  <form [formGroup]="galleryForm">
+    <div class="top-bar">
+      <button class="back-btn" (click)="backToHomepage()">
+        <img
+          src="../../../assets/images/icons8-chevron-right-24.png"
+          alt="chevron"
+          width="18"
+        />
+        Back
+      </button>
+      <div class="title">{{ galleryForm.get("title")?.value }}</div>
     </div>
-    <label class="label" for="section-subtitle">Section Subtitle</label>
-    <input
-      id="section-subtitle"
-      type="text"
-      class="input-field"
-      value="Get AC Service Now"
-    />
-  </div>
+    <div>
+      <div class="section-card">
+        <label class="label" for="section-title">Section Title</label>
+        <div class="title-row">
+          <input
+            id="section-title"
+            type="text"
+            class="input-field"
+            formControlName="title"
+          />
+          <input
+            type="checkbox"
+            class="checkbox"
+            formControlName="titleVisible"
+          />
+        </div>
 
-  <div class="gallery-header">
-    <span>Gallery</span>
-    <a href="#" class="upload-link">Upload</a>
-  </div>
-  <div class="subtitle">Add images or videos</div>
-  <div class="image-container">
-    <img
-      src="/mnt/data/9a858818-be4b-43c5-aeaa-ac1b606d430a.png"
-      alt="Gallery Image"
-    />
-    <div class="icon-btn delete-btn" title="Delete">
-      <img src="../../../assets/images/delete.png" alt="delete" width="18" />
-    </div>
-    <div class="icon-btn edit-btn" title="Edit">
-      <img
-        src="../../../assets/images/icons8-pencil-24.png"
-        alt="edit"
-        width="18"
-      />
-    </div>
-  </div>
-  <div class="remove-all" title="Remove all">
-    <img src="../../../assets/images/delete.png" alt="delete" width="18" />
-    Remove all
-  </div>
+        <label class="label" for="section-subtitle">Section Subtitle</label>
+        <input
+          id="section-subtitle"
+          type="text"
+          class="input-field"
+          formControlName="subtitle"
+        />
+      </div>
 
-  <div class="footer-buttons">
-    <button class="cancel-btn cancelBtn">Cancel</button>
-    <button class="save-btn saveBtn" disabled>Save</button>
-  </div>
+      <div class="gallery-header">
+        <span>Gallery</span>
+        <input
+          type="file"
+          multiple
+          (change)="onFileSelected($event)"
+          hidden
+          #fileInput
+        />
+        <button class="upload-link" (click)="fileInput.click()">Upload</button>
+      </div>
+      <div class="subtitle">Add images or videos</div>
+      <div class="imgWrp">
+        <div
+          class="image-container"
+          *ngFor="let file of selectedFiles; let i = index"
+        >
+          <img [src]="file.preview" alt="Gallery Image" class="gallery-image" />
+          <div
+            class="icon-btn delete-btn"
+            title="Delete"
+            (click)="removeImage(i)"
+          >
+            <img
+              src="../../../assets/images/delete.png"
+              alt="delete"
+              width="18"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="remove-all" title="Remove all" (click)="removeAll()">
+        <img src="../../../assets/images/delete.png" alt="delete" width="18" />
+        Remove all
+      </div>
+
+      <div class="footer-buttons">
+        <button class="cancel-btn cancelBtn">Cancel</button>
+        <button class="save-btn saveBtn" (click)="saveGallery()">Save</button>
+      </div>
+    </div>
+  </form>
 </div>

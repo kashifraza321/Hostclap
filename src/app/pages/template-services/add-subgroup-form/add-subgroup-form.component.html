@@ -1,29 +1,32 @@
 <div class="service-form">
-  <form [formGroup]="subgroupForm" (ngSubmit)="onSubmit()" class="service-form">
+  <form [formGroup]="subgroupForm" (ngSubmit)="onSubmit()">
     <div class="header">
-      <button class="back-btn">← Back</button>
+      <button class="back-btn" (click)="backToHomepage()">
+        <img
+          src="../../../assets/images/icons8-chevron-right-24.png"
+          alt="chevron"
+          width="18"
+        />
+        Back
+      </button>
       <h2>AC Repairing Service</h2>
     </div>
 
     <div class="divider"></div>
 
     <!-- Group -->
-    <div class="form-group serviceNameWrap">
+    <!-- <div class="form-group serviceNameWrap">
       <label>Group</label>
       <select formControlName="group">
         <option>Air conditioning services</option>
       </select>
       <small>You can move service to another group</small>
-    </div>
+    </div> -->
     <div class="serviceNameWrap">
       <!-- Service Name -->
       <div class="form-group">
         <label>Service Name</label>
-        <input
-          type="text"
-          formControlName="subgroupName"
-          value="AC Repairing Service"
-        />
+        <input type="text" formControlName="subgroupName" />
       </div>
 
       <!-- Price and Unit -->
@@ -96,7 +99,7 @@
             name="booking"
             checked
           />
-          Bookable on UENI page
+          Bookable on Hostclap page
         </label>
         <label>
           <input formControlName="bookingType" type="radio" name="booking" />
@@ -197,7 +200,7 @@
       </div>
     </div>
     <div class="form-section">
-      <button type="submit" class="submit-btn">Save Service</button>
+      <button type="submit" class="submit-btn">Save</button>
     </div>
   </form>
 </div>

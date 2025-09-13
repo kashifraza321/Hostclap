@@ -136,10 +136,11 @@
 }
 .upload-link {
   font-weight: normal;
-  font-size: 13px;
+  font-size: 18px;
   color: #5a5aee;
   cursor: pointer;
   text-decoration: none;
+  border: none;
 }
 .upload-link:hover {
   text-decoration: underline;
@@ -256,4 +257,9 @@
   padding: 9px;
   border: none;
   background: #ccc;
+}
+
+.imgWrp {
+  display: flex;
+  gap: 11px;
 }

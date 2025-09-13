@@ -17,6 +17,7 @@ declare var bootstrap: any;
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './price-list.component.html',
+
   styleUrl: './price-list.component.css',
 })
 export class PriceListComponent {

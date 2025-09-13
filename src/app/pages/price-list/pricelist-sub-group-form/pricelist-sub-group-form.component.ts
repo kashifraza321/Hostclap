@@ -55,7 +55,6 @@ export class PricelistSubGroupFormComponent {
     this.groupId = this.route.snapshot.paramMap.get('groupId') || '';
     console.log(this.groupId, ' groupId found');
     this.priceItemForm = this.fb.group({
-      category: ['', Validators.required],
       sectionType: ['price_list', Validators.required],
       subgroupName: ['', Validators.required],
       price: [''],
@@ -97,9 +96,8 @@ export class PricelistSubGroupFormComponent {
       const formData = new FormData();
       formData.append('pageId', this.pageId);
       formData.append('groupId', this.groupId);
-      formData.append('sectionType', 'service'); // fixed hai
+      formData.append('sectionType', 'price_list');
 
-      // only those fields jo form me hain
       formData.append('subgroupName', formValue.subgroupName);
       formData.append('price', formValue.price);
       formData.append('description', formValue.description);

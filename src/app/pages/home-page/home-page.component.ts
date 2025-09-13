@@ -22,6 +22,7 @@ import { AlertService } from 'src/app/services/Toaster/alert.service';
 })
 export class HomePageComponent {
   homeForm!: FormGroup;
+
   sectionForm!: FormGroup;
   userId: string = '';
   showHeader = false;
@@ -69,6 +70,37 @@ export class HomePageComponent {
   // openSection(section: string) {
   //   this.selectedSection = section;
   // }
+
+  // home edit
+  saveHomePage(): void {
+    if (this.homeForm.invalid) {
+      console.warn('Form is invalid:', this.homeForm.value);
+      this.alertService.error('Form is invalid.');
+      return;
+    }
+
+    // Suppose you have the page ID stored somewhere, e.g. this.pageId
+    const pageId = this.pageId;
+
+    const data = {
+      pageName: this.homeForm.value.pageName,
+      isActive: this.homeForm.value.isActive,
+    };
+
+    this.pagesService.editPages(pageId, data).subscribe({
+      next: (res) => {
+        console.log('Page updated successfully:', res);
+        this.alertService.success('Page updated successfully!');
+        // this.getPages();
+      },
+      error: (err) => {
+        console.error('Failed to update page:', err);
+        this.alertService.error('Failed to update page.');
+      },
+    });
+  }
+
+  // home edit
   openServices(pageId: string) {
     console.log(pageId, 'pageidddddddddddd');
 
@@ -99,6 +131,66 @@ export class HomePageComponent {
     });
   }
 
+  navigateToTestimonial(pageId: string) {
+    console.log(pageId, 'pageidddddddddddd');
+
+    if (this.sectionForm.invalid) {
+      this.alertService.error('Please fill all required fields');
+      return;
+    }
+
+    const data = {
+      sectionType: 'testimonials',
+      sectionTitle: this.sectionForm.value.sectionTitle,
+      sectionSubtitle: this.sectionForm.value.sectionSubtitle,
+      pageId: pageId,
+    };
+
+    this.pagesService.createSection(data).subscribe({
+      next: (res) => {
+        this.sectionId = res.data._id;
+        this.alertService.success('Service section created successfully');
+
+        this.router.navigate(['/in/insight/editor/Testimonials', pageId]);
+      },
+      error: () => {
+        this.alertService.error('Failed to create service section');
+
+        // this.router.navigate(['/in/insight/editor/services', pageId]);
+      },
+    });
+  }
+  // for opening houres
+  // navigateToTestimonial(pageId: string) {
+  //   console.log(pageId, 'pageidddddddddddd');
+
+  //   if (this.sectionForm.invalid) {
+  //     this.alertService.error('Please fill all required fields');
+  //     return;
+  //   }
+
+  //   const data = {
+  //     sectionType: 'testimonials',
+  //     sectionTitle: this.sectionForm.value.sectionTitle,
+  //     sectionSubtitle: this.sectionForm.value.sectionSubtitle,
+  //     pageId: pageId,
+  //   };
+
+  //   this.pagesService.createSection(data).subscribe({
+  //     next: (res) => {
+  //       this.sectionId = res.data._id;
+  //       this.alertService.success('Service section created successfully');
+
+  //       this.router.navigate(['/in/insight/editor/Testimonials', pageId]);
+  //     },
+  //     error: () => {
+  //       this.alertService.error('Failed to create service section');
+
+  //       // this.router.navigate(['/in/insight/editor/services', pageId]);
+  //     },
+  //   });
+  // }
+
   addSection(): void {
     console.log('Add Section Clicked');
   }
@@ -121,13 +213,15 @@ export class HomePageComponent {
   //   console.log(pageId, 'pageidddddddddddd');
   //   this.router.navigate(['/in/insight/editor/services', pageId]);
   // }
-  navigateToGallery() {
+  navigateToGallery(pageId: string) {
     console.log('pageidddddddddddd');
-    this.router.navigate(['/in/insight/editor/gallery']);
+    this.router.navigate(['/in/insight/editor/gallery', pageId]);
   }
-  navigateToOPeningHours() {
-    this.router.navigate(['/in/insight/editor/opening-hours']);
+
+  navigateToOPeningHours(pageId: string) {
+    this.router.navigate(['/in/insight/editor/opening-hours', pageId]);
   }
+
   navigateToContact(pageId: string) {
     this.router.navigate(['/in/insight/editor/contact-us', pageId]);
   }

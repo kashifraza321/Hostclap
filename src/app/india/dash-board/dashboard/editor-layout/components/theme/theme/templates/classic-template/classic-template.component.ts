@@ -36,13 +36,21 @@ export class ClassicTemplateComponent {
   allSubGroups: any[] = [];
   state: any;
   isLoading = false;
+  visibleSubgroupsCount: number = 3;
   sanitizedLogoUrl: SafeUrl | null = null;
   days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
+  testimonialGroups: any[] = [];
+  imagePreviewSafeUrl: SafeUrl | null = null;
   public state$ = this.pagesService.state$;
   aboveContactSections: any[] = [];
   belowContactSections: any[] = [];
   isScrolled = false;
+  itemsToShow = 3;
+  selectedGroupIndex: number = 0; // initially first group select hoga
+  abovePriceContactSections: any[] = []; // groups from API
+  subgroupsToShowForPrice: any[] = [];
+  selectedPriceGroupIndex = 0;
+
   @ViewChild('scrollContainer', { static: true }) scrollContainer!: ElementRef;
   // @HostListener('window:scroll', [])
   // onWindowScroll() {
@@ -110,6 +118,7 @@ export class ClassicTemplateComponent {
           this.getPageDetail(this.pageId);
           this.getSectionDetailData(this.pageId);
           this.getSectionDetailDataForPriceList(this.pageId);
+          this.getSectionDetailDataForTestimonials(this.pageId);
           console.log(this.pageData.phones.mobile, 'mobileeeee');
           console.log(this.getSectionDetailData, 'gettttttttttt');
         }
@@ -214,9 +223,21 @@ export class ClassicTemplateComponent {
       },
     });
   }
+
   getImageUrl(path: string | undefined): SafeUrl {
     if (!path) {
       return 'assets/images/bg2.webp';
+    }
+    const fullUrl = path.startsWith('http') ? path : `${this.imgurl}${path}`;
+    return this.sanitizer.bypassSecurityTrustUrl(fullUrl);
+  }
+  loadMore(): void {
+    this.visibleSubgroupsCount += 100;
+  }
+  // Gallery section
+  getGalleryImageUrl(path: string | undefined): SafeUrl {
+    if (!path) {
+      return 'assets/images/gallery-placeholder.png';
     }
     const fullUrl = path.startsWith('http') ? path : `${this.imgurl}${path}`;
     return this.sanitizer.bypassSecurityTrustUrl(fullUrl);
@@ -230,14 +251,55 @@ export class ClassicTemplateComponent {
   getSectionDetailDataForPriceList(pageId: string) {
     this.pagesService.GET_SECTION_DETAIL(pageId, 'price_list').subscribe({
       next: (res) => {
-        this.serviceDataForPrice = res.data;
-        console.log('Section detail:', res);
-        this.aboveContactSections = res.data?.section?.groups || [];
+        this.abovePriceContactSections = res.data?.section?.groups || [];
+        this.setSelectedGroup(0, 'price_list');
+      },
+      error: (err) => {
+        console.error('Error loading section detail', err);
+      },
+    });
+  }
+
+  setSelectedGroup(index: number, type: 'service' | 'price_list') {
+    if (type === 'price_list') {
+      this.selectedPriceGroupIndex = index;
+      this.subgroupsToShowForPrice =
+        this.abovePriceContactSections[index]?.subgroups || [];
+    }
+  }
+  getSectionDetailDataForTestimonials(pageId: string) {
+    this.pagesService.GET_SECTION_DETAIL(pageId, 'testimonials').subscribe({
+      next: (res) => {
+        const groups = res.data?.section?.groups || [];
+
+        this.testimonialGroups = groups.map((group: any) => {
+          // Build full image URL safely
+          if (group.testimonial?.imageUrl) {
+            const baseUrl = this.imgurl.endsWith('/')
+              ? this.imgurl
+              : this.imgurl + '/';
+            const fullUrl = baseUrl + group.testimonial.imageUrl;
+
+            // Sanitize and replace imageUrl with SafeUrl
+            group.testimonial.imageUrlSafe =
+              this.sanitizer.bypassSecurityTrustUrl(fullUrl);
+          } else {
+            group.testimonial.imageUrlSafe = null;
+          }
+
+          return group;
+        });
       },
 
       error: (err) => {
         console.error('Error loading section detail', err);
       },
     });
+  }
+
+  setSelectedPriceGroup(index: number) {
+    if (index >= 0 && index < this.abovePriceContactSections.length) {
+      this.selectedPriceGroupIndex = index;
+    }
   }
 }

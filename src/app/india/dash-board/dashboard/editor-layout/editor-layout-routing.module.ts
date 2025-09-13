@@ -22,6 +22,8 @@ import { AddSubgroupFormComponent } from 'src/app/pages/template-services/add-su
 import { PricelistSubGroupFormComponent } from 'src/app/pages/price-list/pricelist-sub-group-form/pricelist-sub-group-form.component';
 import { LocationComponent } from 'src/app/pages/location/location.component';
 import { MerchantPolicyComponent } from 'src/app/pages/merchant-policy/merchant-policy.component';
+import { TestimonialsComponent } from 'src/app/pages/testimonials/testimonials.component';
+import { TestimonialFormComponent } from 'src/app/pages/testimonials/testimonial-form/testimonial-form.component';
 
 const routes: Routes = [
   {
@@ -44,7 +46,7 @@ const routes: Routes = [
         component: TemplateServicesComponent,
       },
       {
-        path: 'gallery',
+        path: 'gallery/:pageId',
         component: TemplateGalleryComponent,
       },
       {
@@ -64,7 +66,7 @@ const routes: Routes = [
         component: LocationComponent,
       },
       {
-        path: 'opening-hours',
+        path: 'opening-hours/:pageId',
         component: OpeningHoursComponent,
       },
       {
@@ -74,6 +76,14 @@ const routes: Routes = [
       {
         path: 'Promotion/:pageId',
         component: PromotionComponent,
+      },
+      {
+        path: 'Testimonials/:pageId',
+        component: TestimonialsComponent,
+      },
+      {
+        path: 'testimonialform/:pageId/:groupId',
+        component: TestimonialFormComponent,
       },
       {
         path: 'template-footer/:pageId',
@@ -92,7 +102,7 @@ const routes: Routes = [
         component: PricelistSubGroupFormComponent,
       },
       {
-        path: 'merchant-policy',
+        path: 'merchant-policy/:pageId',
         component: MerchantPolicyComponent,
       },
       { path: 'sections', component: SectionsComponent },

@@ -44,25 +44,7 @@ export class AddSubgroupFormComponent {
     console.log(this.pageId, ' pageId found');
     this.groupId = this.route.snapshot.paramMap.get('groupId') || '';
     console.log(this.groupId, ' groupId found');
-    // this.serviceForm = this.fb.group({
-    //   group: ['', Validators.required],
-    //   serviceName: ['', Validators.required],
-    //   price: [null, Validators.required],
-    //   pricingUnit: ['', Validators.required],
-    //   promotionalPrice: [''],
-    //   bookable: [false],
-    //   requestService: [''],
-    //   bookingType: ['ueni'],
-    //   totalBookingTime: this.fb.group({
-    //     durationHours: [0],
-    //     durationMinutes: [0],
-    //     bufferHours: [0],
-    //     bufferMinutes: [0],
-    //   }),
-    //   hasServiceVariations: [false],
-    //   media: this.fb.array([]), // image preview base64
-    //   description: ['', Validators.required],
-    // });
+
     this.subgroupForm = this.fb.group({
       sectionType: ['service', Validators.required],
       subgroupName: ['', Validators.required],
@@ -78,6 +60,9 @@ export class AddSubgroupFormComponent {
       description: ['', Validators.required],
     });
     this.getSectionDetailData();
+  }
+  backToHomepage() {
+    this.router.navigate(['/in/insight/editor/service', this.pageId]);
   }
 
   // Getter for media array
