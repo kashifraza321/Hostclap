@@ -153,7 +153,7 @@ export class ModernTemplateComponent {
     });
   }
   getLogoUrl(): SafeUrl {
-    // console.log(this.pageData?.header?.logo?.image, 'logooooooo img');
+    console.log(this.pageData?.header?.logo?.image, 'logooooooo img');
     if (this.preview?.logo?.image) {
       return this.sanitizer.bypassSecurityTrustUrl(this.preview.logo.image);
     }
@@ -169,7 +169,7 @@ export class ModernTemplateComponent {
 
   // cover patch
   getCoverUrl(state: any): SafeStyle {
-    // console.log(this.pageData?.header?.cover?.image, 'coverrr img');
+    console.log(this.pageData?.header?.cover?.image, 'coverrr img');
     if (state?.preview?.cover?.image) {
       return this.sanitizer.bypassSecurityTrustStyle(
         `url("${state.preview.cover.image}")`
