@@ -158,19 +158,16 @@ export class ClassicTemplateComponent {
       },
     });
   }
-  getLogoUrl(): SafeUrl {
-    console.log(this.pageData?.header?.logo?.image, 'logooooooo img');
+  getLogoUrl(): string {
     if (this.preview?.logo?.image) {
-      return this.sanitizer.bypassSecurityTrustUrl(this.preview.logo.image);
+      return this.preview.logo.image;
     }
 
     if (this.pageData?.header?.logo?.image) {
-      return this.sanitizer.bypassSecurityTrustUrl(
-        this.imgurl + this.pageData.header.logo.image
-      );
+      return this.imgurl + this.pageData.header.logo.image;
     }
 
-    return 'assets/images/default-logo.png';
+    return 'https://via.placeholder.com/150x50?text=Logo';
   }
 
   // cover patch
