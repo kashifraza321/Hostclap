@@ -1,9 +1,14 @@
 .pageWrapper {
-  padding: 20px 0 0 20px;
+  padding-top: 20px 0 0;
+  position: relative;
+  height: 100vh;
 }
 
 .accordion {
   margin-top: 30px;
+  padding: 0 20px;
+  flex: 1; /* bachi hui height lega */
+  overflow-y: auto;
 }
 .accordion-button {
   min-height: 64px;
@@ -107,10 +112,13 @@ select {
   align-items: center;
   justify-content: center;
   gap: 30px;
+  /* position: sticky; */
+  bottom: 0;
 }
 .accordion {
   overflow: auto;
   min-height: 444px;
+  max-height: 450px;
 }
 .btnWRap button {
   font-size: 18px;
@@ -122,4 +130,38 @@ select {
 }
 .cancelBtn {
   background: #ccc;
+}
+.btnWRap {
+  display: flex;
+  justify-content: space-between; /* buttons right side par */
+  gap: 16px;
+  padding: 12px 16px;
+  /* background: #fff; */
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  z-index: 20;
+  /* max-width: 304px; */
+  /* width: 100%; */
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.btnWRap button {
+  font-size: 16px;
+  padding: 10px 10px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 500;
+  width: 114px;
+}
+
+.cancelBtn {
+  background: #ccc;
+  color: #000;
+}
+
+.btn-success {
+  background: #4caf50;
+  color: #fff;
 }

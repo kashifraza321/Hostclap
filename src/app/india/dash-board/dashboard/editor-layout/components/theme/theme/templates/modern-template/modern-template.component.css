@@ -6,7 +6,8 @@
   font-family: "Montserrat", sans-serif;
   background: #121212;
   color: #f5f5f5;
-  min-height: 100vh;
+  min-height: 700px;
+  height: 100vh;
   overflow-y: auto;
 }
 
@@ -141,7 +142,7 @@
 /* HERO */
 .classic-hero {
   position: relative;
-  height: 70vh;
+  height: 90vh;
   background-size: cover;
   background-position: center;
 }
@@ -153,11 +154,17 @@
   align-items: center;
   text-align: center;
   padding: 0 20px;
+
+  margin: 0 auto;
 }
 .hero-text {
   background: #ffffff94;
   border-radius: 24px;
   padding: 30px;
+  width: 100%;
+  max-width: 478px;
+  width: 100%;
+  min-height: 236px;
 }
 .hero-text h1 {
   font-size: 42px;
@@ -248,7 +255,7 @@
 /* GALLERY */
 .gallery-section {
   background: #181818;
-  padding: 50px 20px;
+  /* padding: 50px 20px; */
 }
 .gallery-title {
   color: #fff;
@@ -305,7 +312,7 @@
 /* gallery section */
 .gallery-section {
   margin: 40px auto;
-  padding: 8rem 20px;
+  /* padding: 8rem 20px; */
   background: #121212;
   color: #f5f5f5;
 }
@@ -500,6 +507,9 @@ h2.section-title {
   gap: 32px;
   justify-content: center;
 }
+.group {
+  position: relative;
+}
 
 .service-card {
   position: relative;
@@ -611,7 +621,7 @@ h2.section-title {
 .controls {
   margin-top: 20px;
   position: absolute;
-  top: 10px;
+  top: 47px;
   right: 0;
 }
 
@@ -626,6 +636,7 @@ h2.section-title {
   cursor: pointer;
   font-size: 14px;
   transition: 0.3s;
+  margin-left: 10px;
 }
 
 .btn:hover {
@@ -712,10 +723,27 @@ h2.section-title {
   gap: 29px;
   margin: 57px 0;
 }
+.map-container {
+  position: relative;
+  width: 100%;
+  max-width: 813px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.map-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: grayscale(100%);
+}
+
+/* Tooltip (always visible) */
 .location-tooltip {
   position: absolute;
-  top: 40%;
-  left: 45%;
+  top: 40%; /* adjust based on map */
+  left: 45%; /* adjust based on map */
   transform: translate(-50%, -50%);
   background: white;
   padding: 16px;
@@ -724,6 +752,7 @@ h2.section-title {
   text-align: center;
   max-width: 300px;
   color: #000;
+  z-index: 10;
 }
 
 .location-tooltip p {
@@ -740,19 +769,13 @@ h2.section-title {
   font-weight: bold;
   text-decoration: none;
 }
+
 .contact-info {
   max-width: 317px;
   width: 100%;
   flex-shrink: 0;
 }
-.map-container {
-  position: relative;
-  width: 100%;
-  max-width: 813px;
-  margin: 0 auto;
-  overflow: hidden;
-  border-radius: 10px;
-}
+
 .addTocart {
   background: #e74c3c;
   color: #fff;
@@ -765,11 +788,44 @@ h2.section-title {
   font-weight: 500;
 }
 
-.map-image {
+/* 🔶 Orange Dot */
+.map-marker {
+  position: absolute;
+  top: 40%; /* same as tooltip so they overlap */
+  left: 45%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  z-index: 11;
+  max-width: 250px;
   width: 100%;
-  height: auto;
-  display: block;
-  filter: grayscale(100%);
+}
+
+.dot {
+  width: 20px;
+  height: 20px;
+  background: #f88d00;
+  border-radius: 50%;
+  position: relative;
+  bottom: -52px;
+  left: 17px;
+}
+
+/* Pulse only on hover */
+.map-marker:hover .dot {
+  animation: pulse 1.5s infinite;
+}
+
+/* Pulse animation */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(248, 141, 0, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 20px rgba(248, 141, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(248, 141, 0, 0);
+  }
 }
 .buttonCont {
   text-align: right;
@@ -791,7 +847,7 @@ h2.section-title {
 .info-item p {
   margin: 4px 0 0;
   font-size: 14px;
-  color: #555;
+  color: #fff;
 }
 .dynamicPages {
   margin: 10rem 0;
@@ -803,7 +859,8 @@ h2.section-title {
 }
 /* contact form */
 .contact-section {
-  margin: 5rem;
+  /* margin: 5rem; */
+  background: #343131;
 }
 .contact-form {
   background-color: #1e1e1e;
@@ -811,6 +868,7 @@ h2.section-title {
   border-radius: 10px;
   max-width: 600px;
   margin: auto;
+  transform: translateY(86px);
 }
 
 .contact-form h3 {

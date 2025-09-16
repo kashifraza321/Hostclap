@@ -70,6 +70,7 @@ export class PromotionComponent {
         )
       )
     ).subscribe();
+    this.getPageData();
   }
 
   updatePromotionPreview() {
@@ -114,13 +115,17 @@ export class PromotionComponent {
       next: (res) => {
         if (res?.status === 200) {
           console.log('Full API Response:', res);
-          this.pageData = res.data;
 
-          console.log('Page Data:', this.pageData);
-          if (this.pageData?.offer) {
-            this.promotionForm.patchValue(this.pageData.offer, {
-              emitEvent: true,
+          const offerData = res.data?.offer;
+          console.log('Offer data from API:', offerData);
+
+          if (offerData) {
+            this.promotionForm.patchValue({
+              title: offerData.title || '',
+              description: offerData.description || '',
             });
+
+            console.log('Form value after patch:', this.promotionForm.value);
           }
         }
       },

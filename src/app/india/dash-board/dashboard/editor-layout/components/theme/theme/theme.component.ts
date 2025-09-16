@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ThemeService } from './theme.service';
 import { Data } from 'src/app/models/data.model';
 import { Router } from '@angular/router';
+import { AlertService } from 'src/app/services/Toaster/alert.service';
 
 @Component({
   selector: 'app-theme',
@@ -16,7 +17,8 @@ export class ThemeComponent {
   constructor(
     private themeService: ThemeService,
     private parent: EditorLayoutComponent,
-    private router: Router
+    private router: Router,
+    private alertService: AlertService
   ) {}
   ngOnInIt() {
     // this.GetWebsiteTheme();
@@ -48,13 +50,21 @@ export class ThemeComponent {
       primary: '#FF9800', // Orange
       secondary: '#FFEB3B', // Yellow
     },
+    {
+      primary: '#ffbe33', // Orange
+      secondary: '#212529', // Yellow
+    },
+    {
+      primary: '#baddf3', // Orange
+      secondary: '#f3baba', // Yellow
+    },
+    {
+      primary: '#477d02', // Orange
+      secondary: '#fae367', // Yellow
+    },
     // ...add as many as you like
   ];
 
-  restoreColors() {
-    console.log('Restore to original colors.');
-    // handle restore logic
-  }
   fonts = [
     'Roboto',
     'Open Sans',
@@ -90,11 +100,13 @@ export class ThemeComponent {
     this.themeService.saveTheme(themeData).subscribe({
       next: (response) => {
         console.log('Theme saved successfully:', response);
-        alert('Theme saved successfully!');
+        // alert('Theme saved successfully!');
+        this.alertService.success('Theme saved successfully');
       },
       error: (error) => {
         console.error('Error saving theme:', error);
-        alert('Error while saving theme!');
+        // alert('Error while saving theme!');
+        this.alertService.error('Error while saving theme');
       },
     });
   }

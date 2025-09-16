@@ -4,6 +4,7 @@ import { PagesService } from '../pages.service';
 import {
   FormArray,
   FormBuilder,
+  FormControl,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
@@ -52,23 +53,55 @@ export class TemplateAmenitiesComponent {
 
     this.pageId = this.route.snapshot.paramMap.get('pageId') || '';
     console.log(this.pageId, 'pageidddddddddd');
+    this.getPageData();
   }
-  get amenitiesNames(): FormArray {
-    return this.amenitiesForm.get('amenitiesNames') as FormArray;
-  }
+
   backToHomepage() {
     this.router.navigate(['/in/insight/editor/home', this.pageId]);
   }
 
-  toggleAmenity(event: any, amenity: string) {
-    if (event.target.checked) {
-      this.amenitiesNames.push(this.fb.control(amenity));
+  // Getter for amenitiesNames control
+  get amenitiesNames() {
+    return this.amenitiesForm.get('amenitiesNames') as FormControl;
+  }
+
+  // Toggle amenity selection
+  toggleAmenity(event: Event, amenity: string) {
+    const checked = (event.target as HTMLInputElement).checked;
+    const current = this.amenitiesNames.value || [];
+
+    if (checked) {
+      this.amenitiesNames.setValue([...current, amenity]);
     } else {
-      const index = this.amenitiesNames.value.indexOf(amenity);
-      if (index !== -1) {
-        this.amenitiesNames.removeAt(index);
-      }
+      this.amenitiesNames.setValue(
+        current.filter((a: string) => a !== amenity)
+      );
     }
+  }
+
+  getPageData(): void {
+    this.pagesService.getPageDetail(this.pageId).subscribe({
+      next: (res) => {
+        console.log('🔵 API full response:', res);
+
+        if (res?.status === 200) {
+          const amenities = res.data?.amenities;
+          console.log('🟢 Amenities from API:', amenities);
+
+          if (amenities) {
+            this.amenitiesForm.patchValue({
+              title: amenities.title || '',
+              titleVisible: amenities.titleVisible || false,
+              subtitle: amenities.subtitle || '',
+              amenitiesNames: amenities.amenitiesNames || [],
+            });
+          }
+
+          console.log(' Form after patch:', this.amenitiesForm.value);
+        }
+      },
+      error: (err) => console.error('🔴 API Error:', err),
+    });
   }
 
   saveAmenities(): void {
@@ -94,19 +127,5 @@ export class TemplateAmenitiesComponent {
       },
     });
   }
-  getPageData(): void {
-    this.pagesService.getPageDetail(this.pageId).subscribe({
-      next: (res) => {
-        if (res?.status === 200) {
-          console.log('Full API Response:', res);
-          this.pageData = res.data;
-
-          console.log('Page Data:', this.pageData);
-        }
-      },
-      error: (err) => {
-        console.error('API Error:', err);
-      },
-    });
-  }
+  cancel() {}
 }

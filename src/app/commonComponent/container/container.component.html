@@ -1,5 +1,8 @@
 <ng-container *ngIf="isLoggedIn; else publicHeader">
-  <app-insight-header style="background: lightgreen"></app-insight-header>
+  <app-insight-header
+    *ngIf="showLayout"
+    style="background: lightgreen"
+  ></app-insight-header>
   <!-- <p style="color: red">isLoggedIn: {{ isLoggedIn }}</p> -->
   <!-- <p style="color: blue">
     localStorage isLoggedIn: {{ localStorage.getItem("isLoggedIn") }}
@@ -21,4 +24,4 @@
   <router-outlet></router-outlet>
 </main>
 
-<app-footer></app-footer>
+<app-footer *ngIf="showLayout"></app-footer>

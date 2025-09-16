@@ -122,7 +122,7 @@ export class TemplateHeaderComponent {
       fontSize: [16],
       fontColor: ['#000000'],
       actionButton: this.fb.group({
-        enabled: [false],
+        enabled: [],
         buttonName: [''],
         linkType: ['external'],
         link: [''],
@@ -159,11 +159,11 @@ export class TemplateHeaderComponent {
       pageTitle: ['', [Validators.maxLength(80)]],
       titleFont: ['Roboto'],
       titleAlignment: ['center'],
-      titleColour: ['#333333'],
+      titleColour: [''],
       subtitle: ['', [Validators.maxLength(200)]],
       subtitleFont: ['Open Sans'],
-      subtitleAlignment: ['left'],
-      subtitleColour: ['#666666'],
+      subtitleAlignment: [''],
+      subtitleColour: [''],
       branding: [true],
     });
 
@@ -171,7 +171,7 @@ export class TemplateHeaderComponent {
       stickyMenu: [true],
       logoInLine: [true],
       menuPosition: ['top'],
-      menuBackgroudColour: ['#ffffff'],
+      menuBackgroudColour: [''],
       menuFontColour: ['#000000'],
       fontSize: ['16'],
       alignment: ['middle'],
@@ -258,7 +258,7 @@ export class TemplateHeaderComponent {
       logoInLine: this.menuForm.get('logoInLine')?.value ?? true,
       menuPosition: this.menuForm.get('menuPosition')?.value || 'top',
       menuBackgroudColour:
-        this.menuForm.get('menuBackgroudColour')?.value || '#ffffff',
+        this.menuForm.get('menuBackgroudColour')?.value || '',
       menuFontColour: this.menuForm.get('menuFontColour')?.value || '#000000',
       fontSize: this.menuForm.get('fontSize')?.value + 'px',
       alignment: this.menuForm.get('alignment')?.value || 'middle',

@@ -12,9 +12,8 @@
         </div>
         <div class="url-content">
           <img
-            src="../../../../../../../../../../assets/images/"
+            src="../../../../../../../../../../assets/images/icons8-lock-30 (2).png"
             alt="lock"
-            class="lock-icon"
           />
           <span class="url-text">https://acrserviceranchi.com</span>
         </div>
@@ -65,7 +64,7 @@
       <div
         class="classic-top-bar"
         [ngStyle]="{
-          background: data?.selectedColor?.primary || '#9C27B0'
+          background: data?.selectedColor?.secondary || '#9C27B0'
         }"
       >
         <span class="topBarText" [ngStyle]="{ 'font-family': data?.font }"
@@ -83,9 +82,12 @@
       <header class="classic-header-info">
         <div [ngStyle]="{ 'font-family': data?.font }">
           <i class="bi bi-geo-alt-fill"></i>
-          <span class="addresTXt">Lalpur, Ranchi, Jharkhand</span>
+          <span class="addresTXt" [ngStyle]="{ 'font-family': data?.font }">
+            {{ pageData?.contactUs?.address }} {{ pageData?.contactUs?.city }}
+            {{ pageData?.contactUs?.state }}</span
+          >
         </div>
-        <div>
+        <div [ngStyle]="{ 'font-family': data?.font }">
           <i class="bi bi-telephone-fill"></i>
           <!-- <pre>{{ pageData | json }}</pre> -->
           {{ pageData?.header?.phones?.mobile }}
@@ -173,7 +175,7 @@
                 'text-align':
                   state?.preview?.menu?.alignment ||
                   pageData?.header?.menu?.alignment ||
-                  'left'
+                  'center'
               }"
               >{{ page.pageName }}</a
             >
@@ -182,7 +184,7 @@
       </nav>
 
       <!-- Hero -->
-      <!-- {{ getCoverUrl() | json }} -->
+
       <section
         class="classic-hero hero"
         *ngIf="state$ | async as state"
@@ -194,6 +196,7 @@
               100) / 100
         }"
       >
+        <!-- {{ getCoverUrl(state) | json }} -->
         <div class="overlay">
           <div class="hero-text" *ngIf="state$ | async as state">
             <h1
@@ -206,7 +209,7 @@
                 'text-align':
                   state?.preview?.titles?.titleAlignment ||
                   pageData?.header?.titles?.titleAlignment ||
-                  'left'
+                  'center'
               }"
             >
               {{
@@ -252,7 +255,7 @@
                 alt="Offer"
               />
             </div>
-            <div class="offer-text">
+            <div class="offer-text" [ngStyle]="{ 'font-family': data?.font }">
               <h3>
                 {{
                   state?.preview?.offer?.title ||
@@ -277,7 +280,10 @@
       <!-- gallery section -->
       <section class="gallery-section">
         <div class="mainContainer">
-          <div *ngIf="pageData?.gallery?.images?.length">
+          <div
+            *ngIf="pageData?.gallery?.images?.length"
+            [ngStyle]="{ 'font-family': data?.font }"
+          >
             <h2 class="gradientHeading" *ngIf="pageData?.gallery?.titleVisible">
               {{ pageData.gallery.title }}
             </h2>
@@ -318,48 +324,6 @@
       </section>
 
       <!-- gallery section -->
-      <!-- testimonial section -->
-      <div class="testimonial-section dynamicPages">
-        <div class="mainContainer">
-          <div class="dymanic-page-header">
-            <h2 class="gradientHeading">Testimonials</h2>
-          </div>
-          <div class="testiWrap">
-            <div
-              *ngFor="let group of testimonialGroups"
-              class="testimonial-card"
-            >
-              <div class="testIMg">
-                <img
-                  *ngIf="group.testimonial.imageUrlSafe"
-                  [src]="group.testimonial.imageUrlSafe"
-                  alt="Avatar"
-                  class="avatar"
-                />
-              </div>
-              <h3>{{ group.testimonial.reviewerName }}</h3>
-              <p class="quote">{{ group.testimonial.quote }}</p>
-              <p class="date">
-                {{ group.testimonial.date | date : "mediumDate" }}
-              </p>
-
-              <!-- Rating stars -->
-              <div class="rating">
-                <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
-                  <span
-                    class="star"
-                    [class.filled]="star <= +group.testimonial.rating"
-                    [style.color]="group.testimonial.ratingColour || 'red'"
-                    >&#9733;</span
-                  >
-                </ng-container>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- testimonial section -->
 
       <div class="serviceSection">
         <div class="mainContainer">
@@ -487,7 +451,11 @@
 
       <!-- Services -->
 
-      <section id="page-1" class="dynamicPages">
+      <section
+        id="page-1"
+        class="dynamicPages"
+        [ngStyle]="{ 'font-family': data?.font }"
+      >
         <div class="mainContainer">
           <div class="dymanic-page-header">
             <h2 class="gradientHeading">{{ pagesList[1]?.pageName }}</h2>
@@ -510,7 +478,12 @@
         </div>
       </section>
 
-      <section id="page-2" class="dynamicPages" style="position: relative">
+      <section
+        id="page-2"
+        class="dynamicPages"
+        [ngStyle]="{ 'font-family': data?.font }"
+        style="position: relative"
+      >
         <div class="dymanic-page-header">
           <div class="mainContainer">
             <h2 class="gradientHeading">{{ pagesList[2]?.pageName }}</h2>
@@ -586,9 +559,58 @@
           </div>
         </div>
       </section>
+      <!-- testimonial section -->
+      <div class="testimonial-section dynamicPages">
+        <div class="mainContainer">
+          <div
+            class="dymanic-page-header"
+            [ngStyle]="{ 'font-family': data?.font }"
+          >
+            <h2 class="gradientHeading">Testimonials</h2>
+          </div>
+          <div class="testiWrap">
+            <div
+              *ngFor="let group of testimonialGroups"
+              class="testimonial-card"
+            >
+              <div class="testIMg">
+                <img
+                  *ngIf="group.testimonial.imageUrlSafe"
+                  [src]="group.testimonial.imageUrlSafe"
+                  alt="Avatar"
+                  class="avatar"
+                />
+              </div>
+              <h3>{{ group.testimonial.reviewerName }}</h3>
+              <p class="quote">{{ group.testimonial.quote }}</p>
+              <p class="date">
+                {{ group.testimonial.date | date : "mediumDate" }}
+              </p>
+
+              <!-- Rating stars -->
+              <div class="rating">
+                <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+                  <span
+                    class="star"
+                    [class.filled]="star <= +group.testimonial.rating"
+                    [style.color]="group.testimonial.ratingColour || '#f9f916'"
+                    >&#9733;</span
+                  >
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- testimonial section -->
 
       <!-- location -->
-      <section id="page-1" class="dynamicPages">
+      <section
+        id="page-1"
+        class="dynamicPages"
+        [ngStyle]="{ 'font-family': data?.font }"
+      >
         <div class="mainContainer">
           <div class="dymanic-page-header">
             <h2 class="gradientHeading">Where To Find Us</h2>
@@ -635,22 +657,27 @@
                 class="map-image"
               />
 
-              <div class="location-tooltip">
-                <p>
-                  <strong
-                    >{{ pageData?.contactUs?.address }} <br />
-                    {{ pageData?.contactUs?.state }}
-                    {{ pageData?.contactUs?.zip }}</strong
+              <div class="map-marker">
+                <div class="dot"></div>
+
+                <!-- Tooltip (always visible) -->
+                <div class="location-tooltip">
+                  <p>
+                    <strong>
+                      {{ pageData?.contactUs?.address }},
+                      {{ pageData?.contactUs?.state }},
+                      {{ pageData?.contactUs?.zip }}
+                    </strong>
+                  </p>
+                  <p class="phone">📞 {{ pageData?.contactUs?.phoneNumber }}</p>
+                  <a
+                    class="directions"
+                    target="_blank"
+                    [href]="getGoogleMapsUrl(getFullAddress())"
                   >
-                </p>
-                <p class="phone">📞 {{ pageData?.contactUs?.phoneNumber }}</p>
-                <a
-                  class="directions"
-                  target="_blank"
-                  [href]="getGoogleMapsUrl(getFullAddress())"
-                >
-                  Directions →
-                </a>
+                    Directions →
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -682,7 +709,7 @@
 
             <div class="form-check">
               <input type="checkbox" id="terms" />
-              <label for="terms">
+              <label for="terms" [ngStyle]="{ 'font-family': data?.font }">
                 I agree with the <a href="#">Terms & Conditions</a> and the
                 <a href="#">Privacy & Cookies Policy</a>.
               </label>
@@ -693,7 +720,7 @@
         </div>
       </div>
 
-      <section class="dynamicPages">
+      <section class="dynamicPages" [ngStyle]="{ 'font-family': data?.font }">
         <div class="dymanic-page-header">
           <h2 class="gradientHeading">{{ pagesList[3]?.pageName }}</h2>
         </div>
@@ -702,11 +729,13 @@
       <!-- Footer -->
       <footer
         class="classic-footer"
-        [ngStyle]="{ background: data?.selectedColor?.primary || '#ccc' }"
+        [ngStyle]="{ background: data?.selectedColor?.secondary || '#ccc' }"
       >
         <p [ngStyle]="{ 'font-family': data?.font }">
-          📍 Ranchi, Jharkhand | 📞 {{ pageData?.header?.phones?.mobile }} | ✉️
-          inforanchiservice.com
+          📍 {{ pageData?.contactUs?.address }},
+          {{ pageData?.contactUs?.city }}, {{ pageData?.contactUs?.state }} | 📞
+          {{ pageData?.header?.phones?.mobile }} | ✉️
+          {{ pageData?.contactUs?.email }}
         </p>
         <span>{{ pageData?.footer?.tagline }}</span>
       </footer>

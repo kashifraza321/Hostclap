@@ -2,13 +2,19 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { SidebarComponent } from '../sidebar/sidebar.component';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  Router,
+  RouterModule,
+} from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MaterialModule } from '../../../Module/material.module';
 import { LoginService } from '../../services/login.service';
 import { environment } from '../../../environments/environment';
 import { FooterComponent } from '../footer/footer.component';
 import { InsightHeaderComponent } from 'src/app/india/dash-board/dashboard/insight-board/components/insight-header/insight-header.component';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-container',
@@ -40,10 +46,18 @@ export class ContainerComponent implements OnInit {
   defaultUser = 'assets/images/user.avif';
   // isLoggedIn = true;
   isLoggedIn: boolean = false;
+  showLayout = true;
 
   @Output() dataEvent = new EventEmitter<boolean>();
 
-  constructor(private loginService: LoginService) {}
+  constructor(private loginService: LoginService, private router: Router) {
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event: any) => {
+        // ✅ Agar editor page hai to header/footer hide kar do
+        this.showLayout = !event.urlAfterRedirects.includes('/editor');
+      });
+  }
 
   private carousel: any;
 

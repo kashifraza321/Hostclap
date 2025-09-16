@@ -10,6 +10,7 @@
     </button>
     <div class="title">Amenities</div>
   </div>
+
   <form [formGroup]="amenitiesForm" (ngSubmit)="saveAmenities()">
     <div class="section-card">
       <label class="label" for="section-title">Amenities title</label>
@@ -18,22 +19,20 @@
           id="section-title"
           type="text"
           class="input-field"
-          value="Amenities"
           formControlName="title"
         />
         <input
           type="checkbox"
           class="checkbox"
-          checked
           formControlName="titleVisible"
         />
       </div>
+
       <label class="label" for="section-subtitle">Section Subtitle</label>
       <input
         id="section-subtitle"
         type="text"
         class="input-field"
-        value="Get AC Service Now"
         formControlName="subtitle"
       />
     </div>
@@ -44,17 +43,18 @@
         <div class="amenity-item" *ngFor="let amenity of suggestedAmenities">
           <input
             type="checkbox"
-            [checked]="amenitiesNames.value.includes(amenity)"
+            [checked]="amenitiesNames.value?.includes(amenity)"
             (change)="toggleAmenity($event, amenity)"
           />
-
           <label>{{ amenity }}</label>
         </div>
       </div>
     </div>
 
     <div class="footer-buttons">
-      <button class="cancel-btn cancelBtn">Cancel</button>
+      <button type="button" class="cancel-btn cancelBtn" (click)="cancel()">
+        Cancel
+      </button>
       <button type="submit" class="save-btn saveBtn">Save</button>
     </div>
   </form>

@@ -95,6 +95,9 @@ export class ModernTemplateComponent {
       }
     }, 0);
   }
+  updateData(update: Partial<Data>) {
+    this.data = { ...this.data, ...update };
+  }
 
   getPages() {
     this.isLoading = true;

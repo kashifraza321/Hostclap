@@ -362,6 +362,7 @@ input:checked + .slider::before {
 .sectionList {
   max-height: 400px;
   overflow: auto;
+  min-height: 600px;
 }
 
 .section-item i {
