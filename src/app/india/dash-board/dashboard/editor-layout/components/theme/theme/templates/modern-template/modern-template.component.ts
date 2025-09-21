@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { DomSanitizer, SafeStyle, SafeUrl } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
 import { LoaderComponent } from 'src/app/commonComponent/loader/loader.component';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-modern-template',
@@ -54,7 +55,8 @@ export class ModernTemplateComponent {
   constructor(
     private pagesService: PagesService,
     private route: ActivatedRoute,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private sharedService: SharedService
   ) {}
 
   ngOnInit() {
@@ -75,10 +77,17 @@ export class ModernTemplateComponent {
     //   console.log('preview data', state.preview.titles);
     // });
     // this.getPageDetail(pageID)
+    this.getPages();
     this.pagesService.state$.subscribe((state) => {
       this.preview = state.preview;
+      if (this.preview?.logo?.image) {
+        this.sharedService.setLogoUrl(this.preview.logo.image);
+    }else if (this.pageData?.header?.logo?.image) {
+        this.sharedService.setLogoUrl(this.pageData?.header?.logo?.image);
+        
+    }
     });
-    this.getPages();
+    
 
     // this.getPageDetail('687177a9aa11a48cb4de77db');
   }
@@ -139,12 +148,19 @@ export class ModernTemplateComponent {
         console.log(this.pageData.contactUs.title, 'mobileeeee');
 
         console.log('Page Detail:', res);
-        console.log(this.pageData.phones.mobile, 'mobileeeee');
+      //  console.log(this.pageData.phones.mobile, 'mobileeeee');
         // if (this.pageData?.header?.logo?.image) {
         //   this.sanitizedLogoUrl = this.sanitizer.bypassSecurityTrustUrl(
         //     this.imgurl + this.pageData.header.logo.image
         //   );
         // }
+        const logoImg = this.pageData?.header?.logo?.image;
+        if (logoImg) {
+          this.sharedService.setLogoUrl(this.imgurl + logoImg);
+          // this.logoUrl.set(this.imgurl + logoImg);
+          
+        }
+        debugger
       },
       error: (err) => {
         console.error('Failed to fetch page detail:', err);
@@ -153,19 +169,13 @@ export class ModernTemplateComponent {
     });
   }
   getLogoUrl(): SafeUrl {
-    console.log(this.pageData?.header?.logo?.image, 'logooooooo img');
-    if (this.preview?.logo?.image) {
-      return this.sanitizer.bypassSecurityTrustUrl(this.preview.logo.image);
-    }
-
-    if (this.pageData?.header?.logo?.image) {
-      return this.sanitizer.bypassSecurityTrustUrl(
-        this.imgurl + this.pageData.header.logo.image
-      );
-    }
-
-    return 'assets/images/default-logo.png';
-  }
+    // Only read the signal value, do not write to it here
+    
+    if (this.preview?.logo?.image && typeof this.sharedService.logoUrl() === 'object') {
+      return this.sharedService.logoUrl();}
+    else{
+      return this.sanitizer.bypassSecurityTrustUrl(this.sharedService.logoUrl());
+    }  }
 
   // cover patch
   getCoverUrl(state: any): SafeStyle {

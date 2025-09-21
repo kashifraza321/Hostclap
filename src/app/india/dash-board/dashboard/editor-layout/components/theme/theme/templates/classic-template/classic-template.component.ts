@@ -50,7 +50,7 @@ export class ClassicTemplateComponent {
   abovePriceContactSections: any[] = []; // groups from API
   subgroupsToShowForPrice: any[] = [];
   selectedPriceGroupIndex = 0;
-  logoUrl!: SafeUrl;
+
   @ViewChild('scrollContainer', { static: true }) scrollContainer!: ElementRef;
   // @HostListener('window:scroll', [])
   // onWindowScroll() {
@@ -69,7 +69,7 @@ export class ClassicTemplateComponent {
 
     console.log('User ID:', this.userId);
     console.log('Page ID:', this.pageId);
-     this.logoUrl = this.getLogoUrl();
+
     // this.pagesService.state$.subscribe((state) => {
     //   this.pages = state.pages;
     //   this.preview = state.preview;
@@ -158,25 +158,20 @@ export class ClassicTemplateComponent {
       },
     });
   }
-getLogoUrl(): SafeUrl {
-  if (this.preview?.logo?.image) {
-    return this.sanitizer.bypassSecurityTrustUrl(this.preview.logo.image);
+  getLogoUrl(): SafeUrl {
+    // console.log(this.pageData?.header?.logo?.image, 'logooooooo img');
+    if (this.preview?.logo?.image) {
+      return this.sanitizer.bypassSecurityTrustUrl(this.preview.logo.image);
+    }
+
+   // if (this.pageData?.header?.logo?.image) {
+      return this.sanitizer.bypassSecurityTrustUrl(
+        this.imgurl + this.pageData.header.logo.image
+      );
+   // }
+
+   // return 'assets/images/default-logo.png';
   }
-  if (this.pageData?.header?.logo?.image) {
-    return this.sanitizer.bypassSecurityTrustUrl(
-      this.imgurl + this.pageData.header.logo.image
-    );
-  }
-  return this.sanitizer.bypassSecurityTrustUrl(
-    'https://ui-avatars.com/api/?name=Default+Logo&background=random'
-  );
-}
-
-
-ngOnChanges(): void {
-  this.logoUrl = this.getLogoUrl();
-}
-
 
   // cover patch
   getCoverUrl(state: any): SafeStyle {
