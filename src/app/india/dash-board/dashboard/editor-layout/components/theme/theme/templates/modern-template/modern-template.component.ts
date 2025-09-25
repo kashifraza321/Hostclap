@@ -307,7 +307,8 @@ export class ModernTemplateComponent {
   }
   getLogoUrl(): SafeUrl {
     console.log(this.pageData?.header?.logo?.image, 'logooooooo img');
-    if (this.preview?.logo?.image) {
+ 
+    if (this.preview?.logo?.image && typeof this.pageData?.header?.logo?.image === 'object') {
       return this.sanitizer.bypassSecurityTrustUrl(this.preview.logo.image);
     }
 
