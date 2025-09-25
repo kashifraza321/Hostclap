@@ -24,6 +24,10 @@ import { LocationComponent } from 'src/app/pages/location/location.component';
 import { MerchantPolicyComponent } from 'src/app/pages/merchant-policy/merchant-policy.component';
 import { TestimonialsComponent } from 'src/app/pages/testimonials/testimonials.component';
 import { TestimonialFormComponent } from 'src/app/pages/testimonials/testimonial-form/testimonial-form.component';
+import { ProductComponent } from 'src/app/pages/product/product.component';
+import { AddProductComponent } from 'src/app/pages/product/add-product/add-product.component';
+import { AboutUsComponent } from 'src/app/pages/about-us/about-us.component';
+import { NewContentComponent } from 'src/app/pages/about-us/new-content/new-content.component';
 
 const routes: Routes = [
   {
@@ -104,6 +108,22 @@ const routes: Routes = [
       {
         path: 'merchant-policy/:pageId',
         component: MerchantPolicyComponent,
+      },
+      {
+        path: 'products/:pageId',
+        component: ProductComponent,
+      },
+      {
+        path: 'new-content/:pageId',
+        component: NewContentComponent,
+      },
+      {
+        path: 'about-us/:pageId',
+        component: AboutUsComponent,
+      },
+      {
+        path: 'add-products/:pageId/:groupId',
+        component: AddProductComponent,
       },
       { path: 'sections', component: SectionsComponent },
       { path: 'settings', component: SettingsComponent },

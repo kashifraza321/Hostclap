@@ -1,0 +1,48 @@
+<div class="slider">
+  <h2 class="mainHeading">Review</h2>
+  <div class="review-box">
+    <div class="stars">
+      <span class="star full">&#9733;</span>
+      <span class="star full">&#9733;</span>
+      <span class="star full">&#9733;</span>
+      <span class="star full">&#9733;</span>
+      <span class="star half">&#9733;</span>
+    </div>
+    <div class="review-text">174 reviews</div>
+    <div class="powered-by">
+      powered by
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg"
+        alt="Google"
+        class="google-logo"
+      />
+    </div>
+  </div>
+  <div
+    class="slides"
+    [style.transform]="'translateX(-' + currentIndex * (100 / 3) + '%)'"
+  >
+    <div class="slide" *ngFor="let review of reviews">
+      <div class="review-card">
+        <div class="review-user">
+          <div class="avatar">{{ review.initial }}</div>
+          <div class="name">{{ review.name }}</div>
+        </div>
+        <p class="review-text">
+          {{ review.text.substring(0, 120) }}...
+          <a href="#">Read more</a>
+        </p>
+        <p class="review-date">{{ review.date }}</p>
+        <div class="stars">
+          <span *ngFor="let s of [].constructor(review.rating)">⭐</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- navigation -->
+  <div class="btnWrp">
+    <button class="nav prev" (click)="prev()">❮</button>
+    <button class="nav next" (click)="next()">❯</button>
+  </div>
+</div>

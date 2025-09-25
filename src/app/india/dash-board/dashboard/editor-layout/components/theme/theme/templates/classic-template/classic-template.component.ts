@@ -46,11 +46,17 @@ export class ClassicTemplateComponent {
   belowContactSections: any[] = [];
   isScrolled = false;
   itemsToShow = 3;
-  selectedGroupIndex: number = 0; // initially first group select hoga
+  selectedGroupIndex: number = 0;
   abovePriceContactSections: any[] = []; // groups from API
   subgroupsToShowForPrice: any[] = [];
   selectedPriceGroupIndex = 0;
+  aboveProductContactSections: any[] = []; // Product groups with subgroups (products)
+
+  // Initial settings
+  selectedProductGroupIndex: number = 0; // Initially, first group is selected
+  visibleProductsCount: number = 3;
   logoUrl!: SafeUrl;
+
   @ViewChild('scrollContainer', { static: true }) scrollContainer!: ElementRef;
   // @HostListener('window:scroll', [])
   // onWindowScroll() {
@@ -69,7 +75,7 @@ export class ClassicTemplateComponent {
 
     console.log('User ID:', this.userId);
     console.log('Page ID:', this.pageId);
-     this.logoUrl = this.getLogoUrl();
+    this.logoUrl = this.getLogoUrl();
     // this.pagesService.state$.subscribe((state) => {
     //   this.pages = state.pages;
     //   this.preview = state.preview;
@@ -119,6 +125,7 @@ export class ClassicTemplateComponent {
           this.getSectionDetailData(this.pageId);
           this.getSectionDetailDataForPriceList(this.pageId);
           this.getSectionDetailDataForTestimonials(this.pageId);
+          this.getSectionDetailDataForProducts(this.pageId);
           console.log(this.pageData.phones.mobile, 'mobileeeee');
           console.log(this.getSectionDetailData, 'gettttttttttt');
         }
@@ -158,25 +165,23 @@ export class ClassicTemplateComponent {
       },
     });
   }
-getLogoUrl(): SafeUrl {
-  if (this.preview?.logo?.image) {
-    return this.sanitizer.bypassSecurityTrustUrl(this.preview.logo.image);
-  }
-  if (this.pageData?.header?.logo?.image) {
+  getLogoUrl(): SafeUrl {
+    if (this.preview?.logo?.image) {
+      return this.sanitizer.bypassSecurityTrustUrl(this.preview.logo.image);
+    }
+    if (this.pageData?.header?.logo?.image) {
+      return this.sanitizer.bypassSecurityTrustUrl(
+        this.imgurl + this.pageData.header.logo.image
+      );
+    }
     return this.sanitizer.bypassSecurityTrustUrl(
-      this.imgurl + this.pageData.header.logo.image
+      'https://ui-avatars.com/api/?name=Default+Logo&background=random'
     );
   }
-  return this.sanitizer.bypassSecurityTrustUrl(
-    'https://ui-avatars.com/api/?name=Default+Logo&background=random'
-  );
-}
 
-
-ngOnChanges(): void {
-  this.logoUrl = this.getLogoUrl();
-}
-
+  ngOnChanges(): void {
+    this.logoUrl = this.getLogoUrl();
+  }
 
   // cover patch
   getCoverUrl(state: any): SafeStyle {
@@ -265,7 +270,7 @@ ngOnChanges(): void {
     });
   }
 
-  setSelectedGroup(index: number, type: 'service' | 'price_list') {
+  setSelectedGroup(index: number, type: 'service' | 'price_list' | 'products') {
     if (type === 'price_list') {
       this.selectedPriceGroupIndex = index;
       this.subgroupsToShowForPrice =
@@ -302,9 +307,52 @@ ngOnChanges(): void {
     });
   }
 
-  setSelectedPriceGroup(index: number) {
-    if (index >= 0 && index < this.abovePriceContactSections.length) {
-      this.selectedPriceGroupIndex = index;
+  loadMoree(): void {
+    this.visibleProductsCount += 3; // Increase count to show more products
+  }
+
+  // Method to set the selected group when clicked on "View Group"
+  setproductSelectedGroup(index: number): void {
+    this.selectedProductGroupIndex = index;
+  }
+  setPriceSelectedGroup(index: number): void {
+    this.selectedProductGroupIndex = index;
+  }
+
+  // Fetching image URL and sanitizing the path
+  getproductImageUrl(path: string | undefined): SafeUrl {
+    if (!path) {
+      return 'assets/images/default-image.png'; // Default placeholder if no media is provided
     }
+    const fullUrl = path.startsWith('http') ? path : `assets/images/${path}`;
+    return this.sanitizer.bypassSecurityTrustUrl(fullUrl);
+  }
+  // You might be fetching data like this (example)
+  getSectionDetailDataForProducts(pageId: string) {
+    console.log('Fetching product section details for page:', pageId);
+
+    // Ensure this sectionType is 'products' for product data
+    this.pagesService.GET_SECTION_DETAIL(pageId, 'products').subscribe({
+      next: (res) => {
+        console.log('API Response:', res);
+
+        // Check the sectionType after fetching
+        const sectionType = res.data?.section?.sectionType;
+        console.log('Section Type from API:', sectionType);
+
+        if (sectionType === 'products') {
+          this.aboveProductContactSections = res.data?.section?.groups || [];
+          console.log(
+            'Updated Product Groups:',
+            this.aboveProductContactSections
+          );
+        } else {
+          console.error('Received incorrect section type:', sectionType);
+        }
+      },
+      error: (err) => {
+        console.error('Error loading section detail for products:', err);
+      },
+    });
   }
 }

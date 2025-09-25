@@ -1,0 +1,182 @@
+<p>product works!</p>
+<div class="pageWrapper">
+  <div class="top-bar">
+    <button class="back-btn" *ngIf="!showSubGroup" (click)="backToHomepage()">
+      <img
+        src="../../../assets/images/icons8-chevron-right-24.png"
+        alt="chevron"
+        width="18"
+      />
+      Back
+    </button>
+    <button class="back-btn" *ngIf="showSubGroup" (click)="backToGroupList()">
+      <img
+        src="../../../assets/images/icons8-chevron-right-24.png"
+        alt="chevron"
+        width="18"
+      />
+      back
+    </button>
+    <div class="title">{{ showSubGroup ? "SUBGROUPS" : "Products" }}</div>
+  </div>
+  <form [formGroup]="sectionForm" (ngSubmit)="saveSection()">
+    <div class="section-card">
+      <label class="label" for="section-title">Section Title</label>
+      <div class="title-row">
+        <input
+          id="section-title"
+          type="text"
+          class="input-field"
+          [value]="
+            showSubGroup
+              ? selectedGroup?.groupName
+              : sectionForm.value.sectionTitle
+          "
+        />
+        <input type="checkbox" class="checkbox" checked />
+      </div>
+      <div *ngIf="!showSubGroup">
+        <label class="label" for="section-subtitle">Section Subtitle</label>
+        <input
+          id="section-subtitle"
+          type="text"
+          class="input-field"
+          formControlName="sectionSubtitle"
+          [value]="
+            showSubGroup ? selectedGroup?.groupName : sectionForm.value.subtitle
+          "
+        />
+      </div>
+    </div>
+
+    <div class="service-groups-card">
+      <div class="header-row">
+        <div class="header-title">
+          Service groups
+          <span class="info-icon" title="Info">i</span>
+        </div>
+        <button class="edit-btn">Edit</button>
+      </div>
+
+      <button
+        type="button"
+        *ngIf="!showSubGroup"
+        class="add-group-btn"
+        data-bs-toggle="modal"
+        data-bs-target="#addGroupModal"
+      >
+        <span class="plus-icon">+</span> Add new group
+      </button>
+      <button
+        type="button"
+        *ngIf="showSubGroup"
+        class="add-group-btn"
+        (click)="navigateToaddproductForm(pageId)"
+      >
+        <span class="plus-icon">+</span> Add new group
+      </button>
+      <!-- Group List -->
+      <div *ngIf="!showSubGroup">
+        <div class="group-list">
+          <div
+            class="group-item"
+            *ngFor="let group of serviceGroups; let i = index"
+            (click)="openSubGroup(group._id)"
+            [ngClass]="{
+              'orange-border': i % 2 === 0,
+              'blue-border': i % 2 !== 0
+            }"
+          >
+            {{ group.groupName }} <span class="arrow">&gt;</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Subgroup List -->
+      <div *ngIf="showSubGroup">
+        <div class="subgroup-list">
+          <div
+            class="subgroup-item group-item"
+            *ngFor="let sub of selectedGroup?.subgroups; let i = index"
+            (click)="navigateToaddproductForm(pageId)"
+            [ngClass]="{
+              'orange-border': i % 2 === 0,
+              'blue-border': i % 2 !== 0
+            }"
+          >
+            {{ sub.subgroupName }}
+          </div>
+        </div>
+      </div>
+
+      <div class="tip-box">
+        <b>Top Tip:</b> Activate the 'Book' button to allow customers to make
+        bookings directly on your website.
+      </div>
+    </div>
+
+    <div class="footer-buttons">
+      <button class="cancel-btn cancelBtn">Cancel</button>
+      <button class="save-btn saveBtn" [disabled]="sectionForm.invalid">
+        Save
+      </button>
+    </div>
+  </form>
+</div>
+
+<!-- modal -->
+<div
+  class="modal fade"
+  id="addGroupModal"
+  tabindex="-1"
+  aria-labelledby="addGroupModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <form [formGroup]="groupForm" (ngSubmit)="addGroup()">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addGroupModalLabel">Add new group</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+
+        <div class="modal-body">
+          <div class="mb-3">
+            <input
+              type="text"
+              class="form-control inputField"
+              placeholder="Group name"
+              formControlName="groupName"
+            />
+            <small class="text-muted">
+              You will be able to add multiple services to this service group
+            </small>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            data-bs-dismiss="modal"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            class="btn btn-success"
+            [disabled]="groupForm.invalid"
+          >
+            Add group
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- sub group started -->

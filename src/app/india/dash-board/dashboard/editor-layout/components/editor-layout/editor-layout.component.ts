@@ -28,11 +28,23 @@ export class EditorLayoutComponent {
   currentComponent: any = null;
   data: Data = {
     template: 'default',
-    font: 'Roboto',
+    font: '',
     selectedColor: null,
   };
+  // updateData(newData: Partial<Data>) {
+  //   this.data = { ...this.data, ...newData };
+  //   console.log('EditorLayoutComponent updated data:', this.data);
+  // }
   updateData(newData: Partial<Data>) {
-    this.data = { ...this.data, ...newData };
+    this.data = {
+      ...this.data, // purane values safe rakho
+      ...newData, // naye values overwrite karo
+    };
+
+    if (!this.data.template) {
+      this.data.template = 'Origins'; // ya jo default tum chaho
+    }
+
     console.log('EditorLayoutComponent updated data:', this.data);
   }
 }

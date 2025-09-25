@@ -1,4 +1,12 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  HostListener,
+  Input,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PagesService } from 'src/app/pages/pages.service';
 import { Data } from 'src/app/models/data.model';
@@ -6,11 +14,24 @@ import { CommonModule } from '@angular/common';
 import { DomSanitizer, SafeStyle, SafeUrl } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
 import { LoaderComponent } from 'src/app/commonComponent/loader/loader.component';
-
+import { ReviewSliderComponent } from './review-slider/review-slider.component';
+import { AboutUsSliderComponent } from './about-us-slider/about-us-slider.component';
+// import { SlickCarouselModule } from 'ngx-slick-carousel';
+// import { SwiperModule } from 'swiper/angular';
+interface TeamMember {
+  name: string;
+  role: string;
+  img: string;
+}
 @Component({
   selector: 'app-modern-template',
   standalone: true,
-  imports: [CommonModule, LoaderComponent],
+  imports: [
+    CommonModule,
+    LoaderComponent,
+    ReviewSliderComponent,
+    AboutUsSliderComponent,
+  ],
   templateUrl: './modern-template.component.html',
   styleUrl: './modern-template.component.css',
 })
@@ -44,7 +65,48 @@ export class ModernTemplateComponent {
   abovePriceContactSections: any[] = []; // groups from API
   subgroupsToShowForPrice: any[] = [];
   selectedPriceGroupIndex = 0;
+  teamImages: string[] = [];
+  currentindex = 0;
+  itemsPerView = 3;
+  teamMembers: { img: string; name: string; role: string }[] = [];
+  testimonials: any[] = [];
+  currentIndex = 0;
+  isAnimating = false;
+  reviews = [
+    {
+      text: 'Huge shoutout to Zoe and team, for making me feel so beautiful 💖 ...',
+      date: 'Jul 2, 2025',
+      rating: 5,
+      name: 'Sis Tee',
+      initial: 'S',
+    },
+    {
+      text: 'Thnkyou soo soo much Zoe for the amazing makeup for my nikah...',
+      date: 'Jun 26, 2025',
+      rating: 5,
+      name: 'Arshi Saniya',
+      initial: 'A',
+    },
+    {
+      text: 'Loved the experience with Aziza and the team...',
+      date: 'May 20, 2025',
+      rating: 5,
+      name: 'Avni Mohan',
+      initial: 'A',
+    },
+    {
+      text: 'Best makeup artist in Ranchi nowadays. Such a kind nature she has...',
+      date: 'May 15, 2025',
+      rating: 5,
+      name: 'Anshika Sahay',
+      initial: 'A',
+    },
+  ];
 
+  currentTestimonialIndex = 0;
+  testimonialsPerView = 3;
+
+  isTestimonialAnimating = false;
   @ViewChild('scrollContainer', { static: true }) scrollContainer!: ElementRef;
   // @HostListener('window:scroll', [])
   // onWindowScroll() {
@@ -54,15 +116,18 @@ export class ModernTemplateComponent {
   constructor(
     private pagesService: PagesService,
     private route: ActivatedRoute,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
     this.userId = this.route.snapshot.paramMap.get('id') || '';
     console.log('User ID:', this.userId);
+    console.log('ngOnInit - data received:', this.data);
 
     console.log('User ID:', this.userId);
     console.log('Page ID:', this.pageId);
+    this.updateCarousel(0);
 
     // this.pagesService.state$.subscribe((state) => {
     //   this.pages = state.pages;
@@ -79,9 +144,27 @@ export class ModernTemplateComponent {
       this.preview = state.preview;
     });
     this.getPages();
+    this.updateTestimonialsPerView();
+    // window.addEventListener('resize', () => this.updateTestimonialsPerView());
 
     // this.getPageDetail('687177a9aa11a48cb4de77db');
   }
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['data'] && changes['data'].currentValue) {
+      this.data = { ...this.data, ...changes['data'].currentValue };
+
+      console.log('Data updated in ModernTemplate:', this.data);
+
+      // agar template / color update hai to usko preview me bhi reflect karao
+      if (this.data.selectedColor) {
+        this.preview = {
+          ...this.preview,
+          selectedColor: this.data.selectedColor,
+        };
+      }
+    }
+  }
+
   ngAfterViewInit() {
     setTimeout(() => {
       if (this.scrollContainer) {
@@ -94,10 +177,62 @@ export class ModernTemplateComponent {
         console.error('scrollContainer still not found after timeout!');
       }
     }, 0);
+
+    // slider
+    this.updateCarousel(this.currentIndex);
   }
   updateData(update: Partial<Data>) {
     this.data = { ...this.data, ...update };
+    console.log('Updated Data:', this.data);
   }
+  // slider
+  testimonialCurrentIndex = 0;
+
+  testimonialNext() {
+    if (this.testimonialCurrentIndex < this.testimonialGroups.length - 3) {
+      this.testimonialCurrentIndex++;
+    }
+  }
+
+  testimonialPrev() {
+    if (this.testimonialCurrentIndex > 0) {
+      this.testimonialCurrentIndex--;
+    }
+  }
+
+  updateTestimonialsPerView() {
+    if (window.innerWidth < 600) this.testimonialsPerView = 1;
+    else if (window.innerWidth < 900) this.testimonialsPerView = 2;
+    else this.testimonialsPerView = 3;
+  }
+  // testimonial
+
+  updateCarousel(newIndex: number): void {
+    if (this.isAnimating) return;
+    this.isAnimating = true;
+
+    const length = this.teamImages.length;
+    this.currentIndex = (newIndex + length) % length;
+
+    setTimeout(() => {
+      this.isAnimating = false;
+    }, 800);
+  }
+
+  // Move to the previous image
+  prev(): void {
+    this.updateCarousel(this.currentIndex - 1);
+  }
+
+  // Move to the next image
+  next(): void {
+    this.updateCarousel(this.currentIndex + 1);
+  }
+  selectIndex(index: number): void {
+    this.currentIndex = index;
+  }
+
+  // slider
 
   getPages() {
     this.isLoading = true;
@@ -142,7 +277,11 @@ export class ModernTemplateComponent {
         console.log(this.pageData.contactUs.title, 'mobileeeee');
 
         console.log('Page Detail:', res);
-        console.log(this.pageData.phones.mobile, 'mobileeeee');
+        if (this.pageData?.gallery?.images?.length) {
+          this.teamImages = this.pageData.gallery.images;
+          console.log('Gallery Images:', this.teamImages);
+          this.updateCarousel(0);
+        }
         // if (this.pageData?.header?.logo?.image) {
         //   this.sanitizedLogoUrl = this.sanitizer.bypassSecurityTrustUrl(
         //     this.imgurl + this.pageData.header.logo.image
@@ -154,6 +293,17 @@ export class ModernTemplateComponent {
         this.isLoading = false;
       },
     });
+  }
+  amenityIcons: { [key: string]: string } = {
+    'Free consultation': 'assets/images/icons8-star-48.png',
+    'Wheelchair accessible': 'assets/images/icons8-wheelchair-50.png',
+    '24/7 availability': 'assets/images/icons8-clock-48.png',
+    'Advance booking': 'assets/images/icons8-star-48.png',
+    'Get Free Quotation': 'assets/icons/quotation.png',
+    'Wifi on the premises': 'assets/images/icons8-wifi-24.png',
+  };
+  getAmenityIcon(name: string): string {
+    return this.amenityIcons[name] || 'assets/icons/default.png';
   }
   getLogoUrl(): SafeUrl {
     console.log(this.pageData?.header?.logo?.image, 'logooooooo img');
@@ -299,4 +449,5 @@ export class ModernTemplateComponent {
       this.selectedPriceGroupIndex = index;
     }
   }
+  // slider
 }

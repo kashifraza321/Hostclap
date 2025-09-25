@@ -35,7 +35,11 @@
       >
         <div class="announcement-editor">
           <label>
-            <input type="checkbox" formControlName="show" />
+            <input
+              type="checkbox"
+              formControlName="show"
+              (input)="applyFontStyles()"
+            />
             Show Announcement
           </label>
 
@@ -86,7 +90,7 @@
             (input)="applyFontStyles()"
           />
           <div formGroupName="actionButton">
-            <div class="form-check form-switch my-2">
+            <!-- <div class="form-check form-switch my-2">
               <input
                 class="form-check-input"
                 type="checkbox"
@@ -94,24 +98,38 @@
                 formControlName="enabled"
                 (change)="applyFontStyles()"
               />
-              <label for="actionButton">Action Button</label>
-            </div>
+            </div> -->
+            <label for="actionButton">Action Button</label>
 
             <input
               type="text"
               formControlName="buttonName"
               class="form-control sendAmsg"
               placeholder="Send a message"
-              [readonly]="!announcementForm.get('actionButton.enabled')?.value"
             />
 
             <label>Link To</label>
             <select formControlName="linkType" class="form-select">
+              <option value="external">External Link</option>
+              <option value="internal">Internal Link</option>
               <option value="sendMessage">Send Message</option>
-              <option value="callNow">Call Now</option>
-              <option value="visitWebsite">Visit Website</option>
             </select>
+            <div class="mt-3 text-center">
+              <button
+                type="button"
+                class="btn btn-primary px-4"
+                [disabled]="
+                  !announcementForm.get('actionButton.buttonName')?.value
+                "
+              >
+                {{
+                  announcementForm.get("actionButton.buttonName")?.value ||
+                    "Button"
+                }}
+              </button>
+            </div>
           </div>
+
           <!-- <div class="form-check mt-2">
             <input
               type="checkbox"
@@ -339,19 +357,9 @@
         class="menu-settings-form"
       >
         <!-- Sticky Menu Toggle -->
-        <div class="menu-toggle-group">
-          <label>
-            <input
-              type="checkbox"
-              formControlName="stickyMenu"
-              (click)="applyMenuChanges()"
-            />
-            Sticky menu
-          </label>
-        </div>
 
         <!-- Menu With Logo Inline Toggle -->
-        <div class="menu-toggle-group">
+        <!-- <div class="menu-toggle-group">
           <label>
             <input
               type="checkbox"
@@ -360,7 +368,7 @@
             />
             Menu with Logo in line
           </label>
-        </div>
+        </div> -->
 
         <!-- Menu Position -->
         <!-- <div class="menu-position-section">
@@ -650,90 +658,59 @@
         [formGroup]="contactForm"
         (ngSubmit)="saveSection('phone')"
       >
-        <!-- Phone Section -->
-        <div class="card p-3">
-          <!-- Toggle: Show phone -->
-          <div class="form-check form-switch switchBox mb-3">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              id="showPhone"
-              formControlName="showPhone"
-            />
-            <label class="form-check-label fw-bold" for="showPhone">
-              Show phone number on page
-            </label>
-          </div>
-          <div formGroupName="phones">
-            <!-- Mobile Phone -->
-            <div class="mb-3">
-              <label class="form-label fw-semibold">Mobile Phone</label>
-              <div class="input-group">
-                <span class="input-group-text">🇮🇳</span>
-                <input
-                  type="text"
-                  class="form-control phoneInput"
-                  formControlName="mobile"
-                  placeholder="+918102065847"
-                />
-              </div>
-              <small class="text-muted">
-                Enter a phone number to receive SMS notifications & calls.
-              </small>
-            </div>
-
-            <!-- Office Phone -->
-            <div class="mb-2">
-              <label class="form-label fw-semibold">Office Phone</label>
-              <div class="input-group">
-                <span class="input-group-text">🇮🇳</span>
-                <input
-                  type="text"
-                  class="form-control phoneInput"
-                  formControlName="office"
-                  placeholder="+91"
-                />
-              </div>
-              <small class="text-muted">
-                Receive calls on your office phone instead of your mobile phone.
-                You will still receive SMS notifications via your mobile phone
-                if you've provided that as well.
-              </small>
-            </div>
-          </div>
-
-          <!-- WhatsApp Section -->
-          <div class="card">
-            <!-- Toggle: Show WhatsApp -->
-            <div class="form-check form-switch switchBox mb-3">
+        <div class="card p-3" formGroupName="phones">
+          <!-- Mobile Phone -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Mobile Phone</label>
+            <div class="input-group">
+              <span class="input-group-text">🇮🇳</span>
               <input
-                class="form-check-input"
-                type="checkbox"
-                id="showWhatsapp"
-                formControlName="showWhatsapp"
+                type="text"
+                class="form-control phoneInput"
+                formControlName="mobile"
+                placeholder="+918102065847"
               />
-              <label class="form-check-label fw-bold" for="showWhatsapp">
-                Show WhatsApp number
-              </label>
             </div>
+            <small class="text-muted">
+              Enter a phone number to receive SMS notifications & calls.
+            </small>
+          </div>
 
-            <!-- WhatsApp Number -->
-            <div>
-              <label class="form-label fw-semibold">WhatsApp Number</label>
-              <div class="input-group">
-                <span class="input-group-text">🇮🇳</span>
-                <input
-                  type="text"
-                  class="form-control phoneInput"
-                  formControlName="whatsapp"
-                  placeholder="+918877306675"
-                />
-              </div>
+          <!-- Office Phone -->
+          <div class="mb-2">
+            <label class="form-label fw-semibold">Office Phone</label>
+            <div class="input-group">
+              <span class="input-group-text">🇮🇳</span>
+              <input
+                type="text"
+                class="form-control phoneInput"
+                formControlName="office"
+                placeholder="+91"
+              />
+            </div>
+            <small class="text-muted">
+              Receive calls on your office phone instead of your mobile phone.
+            </small>
+          </div>
+
+          <!-- WhatsApp Number -->
+          <div>
+            <label class="form-label fw-semibold">WhatsApp Number</label>
+            <div class="input-group">
+              <span class="input-group-text">🇮🇳</span>
+              <input
+                type="text"
+                class="form-control phoneInput"
+                formControlName="whatsapp"
+                placeholder="+918877306675"
+              />
             </div>
           </div>
         </div>
+
         <button type="submit" class="btn saveBtn mt-3">Save</button>
       </form>
+
       <!-- address form -->
       <!-- Address Visibility Toggle Card -->
       <form
@@ -741,103 +718,30 @@
         [formGroup]="addressForm"
         (ngSubmit)="saveSection('address')"
       >
-        <!-- Show Address Toggle -->
-        <div class="address-section-card">
-          <div
-            class="toggle-row d-flex justify-content-between align-items-center mb-3"
-          >
-            <label class="section-label">Show Address</label>
+        <div class="card p-3">
+          <!-- Address Line 1 -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Address Line 1</label>
             <input
-              type="checkbox"
-              class="form-check-input"
-              formControlName="showAddress"
+              type="text"
+              class="form-control"
+              formControlName="line1"
+              placeholder="123 Main Street"
             />
           </div>
 
-          <!-- Background Color Picker -->
-          <button
-            type="button"
-            class="address-color-toggle w-100"
-            (click)="toggleAddressBgColor = !toggleAddressBgColor"
-          >
-            <span class="color-label">
-              <div class="rainbow-plus-icon">
-                <span>+</span>
-              </div>
-              Set Background Color
-            </span>
-            <i
-              [class]="
-                toggleAddressBgColor ? 'bi bi-chevron-up' : 'bi bi-chevron-down'
-              "
-            ></i>
-          </button>
-
-          <div *ngIf="toggleAddressBgColor" class="color-picker-box mt-2">
+          <!-- Address Line 2 -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Address Line 2</label>
             <input
-              type="color"
-              formControlName="addressBackgroundColor"
-              class="form-control form-control-color"
+              type="text"
+              class="form-control"
+              formControlName="line2"
+              placeholder="Near Central Park, New York"
             />
           </div>
         </div>
 
-        <!-- Font Size and Font Color Section -->
-        <div class="address-section-card">
-          <label class="section-label mb-1">Font Size</label>
-
-          <div
-            class="font-range-wrap d-flex justify-content-between align-items-center"
-          >
-            <span class="font-range-icon">A−</span>
-            <input
-              type="range"
-              class="form-range"
-              min="0"
-              max="2"
-              step="1"
-              formControlName="addressFontSize"
-            />
-            <span class="font-range-icon">A+</span>
-          </div>
-
-          <div
-            class="font-labels d-flex justify-content-between small px-1 mt-1"
-          >
-            <span>Small</span>
-            <span>Medium</span>
-            <span>Large</span>
-          </div>
-
-          <!-- Font Color Picker -->
-          <button
-            type="button"
-            class="address-color-toggle w-100 mt-3"
-            (click)="toggleAddressFontColor = !toggleAddressFontColor"
-          >
-            <span class="color-label">
-              <div class="rainbow-plus-icon">
-                <span>+</span>
-              </div>
-              Set Font Color
-            </span>
-            <i
-              [class]="
-                toggleAddressFontColor
-                  ? 'bi bi-chevron-up'
-                  : 'bi bi-chevron-down'
-              "
-            ></i>
-          </button>
-
-          <div *ngIf="toggleAddressFontColor" class="color-picker-box mt-2">
-            <input
-              type="color"
-              formControlName="addressFontColor"
-              class="form-control form-control-color"
-            />
-          </div>
-        </div>
         <button type="submit" class="btn saveBtn mt-3">Save</button>
       </form>
     </ng-container>

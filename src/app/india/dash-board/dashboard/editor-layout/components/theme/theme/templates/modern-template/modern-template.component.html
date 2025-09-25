@@ -35,22 +35,21 @@
           }"
         >
           <span
+            *ngIf="
+              state?.preview?.announcement?.show ??
+              pageData?.header?.announcement?.show
+            "
             [innerHTML]="
               state?.preview?.announcement?.message?.trim() ||
               pageData?.header?.announcement?.message?.trim() ||
               'AC Repairing ?'
             "
           ></span>
-          <div
-            *ngIf="
-              state?.preview?.announcement?.actionButton !== false &&
-              pageData?.header?.announcement?.actionButton !== false
-            "
-          >
-            <button *ngIf="state?.preview?.announcement?.actionButton">
+          <div>
+            <button>
               {{
-                state?.preview?.announcement?.actionButton?.buttonText ||
-                  pageData?.header?.announcement?.actionButton?.buttonText ||
+                state?.preview?.announcement?.actionButton?.buttonName ||
+                  pageData?.header?.announcement?.actionButton?.buttonName ||
                   "Send a message"
               }}
             </button>
@@ -61,7 +60,7 @@
       <!-- Top Bar -->
 
       <!-- new bar -->
-      <div
+      <!-- <div
         class="classic-top-bar"
         [ngStyle]="{
           background: data?.selectedColor?.secondary || '#9C27B0'
@@ -73,7 +72,7 @@
         <button class="classic-btn" [ngStyle]="{ 'font-family': data?.font }">
           Contact Us
         </button>
-      </div>
+      </div> -->
       <!-- announcement -->
 
       <!-- announcement -->
@@ -237,19 +236,72 @@
                   "Your subtitle"
               }}
             </p>
+            <div class="mesgBtn">
+              <span>088773 06675</span>
+              <button
+                [ngStyle]="{
+                  'font-family': data?.font,
+                  background: data?.selectedColor?.primary
+                }"
+              >
+                send a message
+              </button>
+            </div>
+            <div
+              class="review-box"
+              [ngStyle]="{
+                'font-family': data?.font,
+                background: data?.selectedColor?.secondary
+              }"
+            >
+              <div class="stars">
+                <span
+                  class="star full"
+                  [ngStyle]="{
+                    background: data?.selectedColor?.primary
+                  }"
+                  >&#9733;</span
+                >
+                <span class="star full">&#9733;</span>
+                <span class="star full">&#9733;</span>
+                <span class="star full">&#9733;</span>
+                <span class="star half">&#9733;</span>
+              </div>
+              <div class="review-text">174 reviews</div>
+              <div class="powered-by">
+                powered by
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg"
+                  alt="Google"
+                  class="google-logo"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>
-      <section id="page-0" class="dynamicPages">
-        <div class="dymanic-page-header">
-          <h2 class="">{{ pagesList[0]?.pageName }}</h2>
-        </div>
-      </section>
+
       <!-- offer -->
-      <section class="offerSection">
+      <section
+        class="offerSection"
+        [ngStyle]="{
+          'font-family': data?.font,
+          background: data?.selectedColor?.accent
+        }"
+      >
         <div class="mainContainer">
-          <div class="offer-banner">
-            <div class="yellow-polygon">
+          <div
+            class="offer-banner"
+            [ngStyle]="{
+              background: data?.selectedColor?.primary || '#FF9800'
+            }"
+          >
+            <div
+              class="yellow-polygon"
+              [ngStyle]="{
+                background: data?.selectedColor?.primary || '#FF9800'
+              }"
+            >
               <img
                 src="../../../../../../../../../../assets/images/icons8-discount-48.png"
                 alt="Offer"
@@ -277,8 +329,11 @@
           </div>
         </div>
       </section>
+      <!-- about us section  -->
+      <app-about-us-slider></app-about-us-slider>
+      <!-- about us section  -->
       <!-- gallery section -->
-      <section class="gallery-section">
+      <section *ngIf="" class="gallery-section">
         <div class="mainContainer">
           <div
             *ngIf="pageData?.gallery?.images?.length"
@@ -324,6 +379,27 @@
       </section>
 
       <!-- gallery section -->
+      <!-- amenties section -->
+      <section class="amenities-section">
+        <div class="mainContainer">
+          <h2>{{ pageData?.amenities.title }}</h2>
+          <p>{{ pageData?.amenities.subtitle }}</p>
+          <p>Spoken languages: English, Hindi</p>
+
+          <div class="amenities">
+            <div
+              class="amenity"
+              *ngFor="let item of pageData?.amenities?.amenitiesNames"
+            >
+              <div class="icon">
+                <img [src]="getAmenityIcon(item)" alt="" width="40" />
+              </div>
+              <p>{{ item }}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- amenties section -->
 
       <div class="serviceSection">
         <div class="mainContainer">
@@ -386,8 +462,11 @@
                       {{ sub.description }}
                     </h4>
                     <button
-                      class="btn"
-                      [ngStyle]="{ 'font-family': data?.font }"
+                      class="btn requtBtn"
+                      [ngStyle]="{
+                        'font-family': data?.font,
+                        background: data?.selectedColor?.primary
+                      }"
                     >
                       Request Service
                     </button>
@@ -466,6 +545,9 @@
               class="day"
               *ngFor="let day of days; let i = index"
               [class.today]="i === 0"
+              [ngStyle]="{
+                background: data?.selectedColor?.primary
+              }"
             >
               <div class="day-name" [ngStyle]="{ 'font-family': data?.font }">
                 {{ day }}
@@ -478,13 +560,22 @@
         </div>
       </section>
 
+      <!-- review setion -->
+      <app-review-slider></app-review-slider>
+      <!-- review setion -->
       <section
         id="page-2"
         class="dynamicPages"
         [ngStyle]="{ 'font-family': data?.font }"
         style="position: relative"
       >
-        <div class="dymanic-page-header">
+        <div
+          class="dymanic-page-header"
+          [ngStyle]="{
+            'font-family': data?.font,
+            background: data?.selectedColor?.secondary
+          }"
+        >
           <div class="mainContainer">
             <h2 class="gradientHeading">{{ pagesList[2]?.pageName }}</h2>
           </div>
@@ -520,7 +611,14 @@
                   ></p>
                   <div class="subgroup-actions">
                     <a href="#" class="learnBtn">Learn more</a>
-                    <button class="add-to-cart">Add to Cart</button>
+                    <button
+                      [ngStyle]="{
+                        'font-family': data?.selectedColor?.secondary
+                      }"
+                      class="add-to-cart"
+                    >
+                      Add to Cart
+                    </button>
                   </div>
                 </div>
               </div>
@@ -559,8 +657,9 @@
           </div>
         </div>
       </section>
+
       <!-- testimonial section -->
-      <div class="testimonial-section dynamicPages">
+      <div *ngIf="" class="testimonial-section dynamicPages">
         <div class="mainContainer">
           <div
             class="dymanic-page-header"
@@ -602,54 +701,152 @@
           </div>
         </div>
       </div>
+      <div
+        class="testimonial-slider testimonial-section dynamicPages"
+        *ngIf="testimonialGroups?.length"
+      >
+        <div class="mainContainer">
+          <div
+            class="dymanic-page-header"
+            [ngStyle]="{ 'font-family': data?.font }"
+          >
+            <h2 class="testimonial-heading">Testimonials</h2>
+          </div>
+
+          <!-- slides wrapper -->
+          <div
+            class="testimonial-slides"
+            [style.transform]="
+              'translateX(-' + testimonialCurrentIndex * (100 / 3) + '%)'
+            "
+          >
+            <div
+              class="testimonial-slide"
+              *ngFor="let group of testimonialGroups; let i = index"
+            >
+              <div
+                class="testimonial-card"
+                [ngStyle]="{
+                  'background-color':
+                    i % 2 === 0
+                      ? data?.selectedColor?.primary
+                      : data?.selectedColor?.secondary
+                }"
+              >
+                <div class="testimonial-user">
+                  <div class="testimonial-img">
+                    <img
+                      *ngIf="group.testimonial.imageUrlSafe"
+                      [src]="group.testimonial.imageUrlSafe"
+                      alt="Avatar"
+                      class="testimonial-avatar"
+                    />
+                    <div
+                      *ngIf="!group.testimonial.imageUrlSafe"
+                      class="testimonial-avatar fallback"
+                    >
+                      {{ group.testimonial.reviewerName?.charAt(0) }}
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div class="testimonial-name">
+                    {{ group.testimonial.reviewerName }}
+                  </div>
+                  <p class="testimonial-text">
+                    {{ group.testimonial.quote | slice : 0 : 120 }}...
+                    <a href="#">Read more</a>
+                  </p>
+
+                  <p class="testimonial-date">
+                    {{ group.testimonial.date | date : "mediumDate" }}
+                  </p>
+
+                  <!-- Rating stars -->
+                  <div class="testimonial-stars">
+                    <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+                      <span
+                        class="testimonial-star"
+                        [class.filled]="star <= +group.testimonial.rating"
+                        [style.color]="
+                          group.testimonial.ratingColour || '#e91e63'
+                        "
+                        >&#9733;</span
+                      >
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- navigation -->
+          <div class="testimonial-btnWrp">
+            <button class="testimonial-nav prev" (click)="testimonialPrev()">
+              ❮
+            </button>
+            <button class="testimonial-nav next" (click)="testimonialNext()">
+              ❯
+            </button>
+          </div>
+        </div>
+      </div>
 
       <!-- testimonial section -->
 
-      <!-- location -->
-      <section
-        id="page-1"
-        class="dynamicPages"
-        [ngStyle]="{ 'font-family': data?.font }"
-      >
-        <div class="mainContainer">
+      <section>
+        <h2 class="sectionHeading">
+          {{ pageData?.gallery?.title }}
+        </h2>
+        <div class="carousel-container" *ngIf="!isLoading">
+          <button class="nav-arrow left" (click)="prev()">‹</button>
+
+          <div class="carousel-track">
+            <div
+              class="card"
+              *ngFor="let img of teamImages; let i = index"
+              [class.center]="i === currentIndex"
+              [class.left-1]="
+                i === (currentIndex - 1 + teamImages.length) % teamImages.length
+              "
+              [class.left-2]="
+                i === (currentIndex - 2 + teamImages.length) % teamImages.length
+              "
+              [class.right-1]="i === (currentIndex + 1) % teamImages.length"
+              [class.right-2]="i === (currentIndex + 2) % teamImages.length"
+              [class.hidden]="
+                i !== currentIndex &&
+                i !==
+                  (currentIndex - 1 + teamImages.length) % teamImages.length &&
+                i !==
+                  (currentIndex - 2 + teamImages.length) % teamImages.length &&
+                i !== (currentIndex + 1) % teamImages.length &&
+                i !== (currentIndex + 2) % teamImages.length
+              "
+              (click)="updateCarousel(i)"
+            >
+              <img
+                [src]="getGalleryImageUrl(img)"
+                [alt]="'Gallery Image ' + (i + 1)"
+              />
+            </div>
+          </div>
+
+          <button class="nav-arrow right" (click)="next()">›</button>
+        </div>
+
+        <!-- slider  -->
+        <!-- location -->
+        <section
+          id="page-1"
+          class="dynamicPages"
+          [ngStyle]="{ 'font-family': data?.font }"
+        >
           <div class="dymanic-page-header">
             <h2 class="gradientHeading">Where To Find Us</h2>
           </div>
 
           <div class="contactFlex">
-            <div class="contact-info">
-              <h2 class="gradientHeading">{{ pageData?.contactUs?.title }}</h2>
-
-              <div class="info-item">
-                <span class="icon">📞</span>
-                <div>
-                  <h4>{{ pageData?.contactUs?.subtitle }}</h4>
-                  <p>{{ pageData?.contactUs?.phoneNumber }}</p>
-                </div>
-              </div>
-
-              <div class="info-item">
-                <span class="icon">📍</span>
-                <div>
-                  <h4>Office location</h4>
-                  <p>
-                    {{ pageData?.contactUs?.address }},<br />
-                    {{ pageData?.contactUs?.city }},<br />
-                    {{ pageData?.contactUs?.state }},
-                    {{ pageData?.contactUs?.zip }}
-                  </p>
-                </div>
-              </div>
-
-              <div class="info-item">
-                <span class="icon">✉️</span>
-                <div>
-                  <h4>Send us an email</h4>
-                  <p>{{ pageData?.contactUs?.email }}</p>
-                </div>
-              </div>
-            </div>
-            <!-- contact info -->
             <div class="map-container">
               <img
                 src="../../../../../../../../../../assets/images/News_gm_demo_Large-1920x0_900x900_crop_center.webp"
@@ -681,50 +878,129 @@
               </div>
             </div>
           </div>
+        </section>
+        <!-- location -->
+
+        <!-- Contact Form -->
+        <div
+          class="contact-section"
+          [ngStyle]="{
+            'font-family': data?.font,
+            background: data?.selectedColor?.secondary
+          }"
+        >
+          <!-- Left Info -->
+
+          <!-- Right Form -->
+          <div
+            class="contact-form"
+            [ngStyle]="{
+              'font-family': data?.font,
+              background: data?.selectedColor?.primary
+            }"
+          >
+            <h3>Send a Message</h3>
+            <p class="subtitle">Have Questions? Contact Us!</p>
+
+            <form>
+              <div class="form-row">
+                <input type="text" placeholder="First name" />
+                <input type="text" placeholder="Last name" />
+              </div>
+              <div class="form-row">
+                <input type="email" placeholder="Email" />
+                <input type="tel" placeholder="e.g. +44 707 354 64 78" />
+              </div>
+              <textarea placeholder="Tell us about your request"></textarea>
+
+              <div class="form-check">
+                <input type="checkbox" id="terms" />
+                <label for="terms" [ngStyle]="{ 'font-family': data?.font }">
+                  I agree with the <a href="#">Terms & Conditions</a> and the
+                  <a href="#">Privacy & Cookies Policy</a>.
+                </label>
+              </div>
+
+              <button
+                type="submit"
+                [ngStyle]="{
+                  background: data?.selectedColor?.primary
+                }"
+              >
+                Submit Request
+              </button>
+            </form>
+          </div>
         </div>
       </section>
-      <!-- location -->
-
-      <!-- Contact Form -->
-      <div class="contact-section">
-        <!-- Left Info -->
-
-        <!-- Right Form -->
-        <div class="contact-form">
-          <h3>Available Technician at Your Service!</h3>
-          <p class="subtitle">
-            AC trouble? Choose Ranchi Service for quick solutions.
-          </p>
-
-          <form>
-            <div class="form-row">
-              <input type="text" placeholder="First name" />
-              <input type="text" placeholder="Last name" />
-            </div>
-            <div class="form-row">
-              <input type="email" placeholder="Email" />
-              <input type="tel" placeholder="e.g. +44 707 354 64 78" />
-            </div>
-            <textarea placeholder="Tell us about your request"></textarea>
-
-            <div class="form-check">
-              <input type="checkbox" id="terms" />
-              <label for="terms" [ngStyle]="{ 'font-family': data?.font }">
-                I agree with the <a href="#">Terms & Conditions</a> and the
-                <a href="#">Privacy & Cookies Policy</a>.
-              </label>
-            </div>
-
-            <button type="submit">Submit Request</button>
-          </form>
-        </div>
-      </div>
 
       <section class="dynamicPages" [ngStyle]="{ 'font-family': data?.font }">
         <div class="dymanic-page-header">
           <h2 class="gradientHeading">{{ pagesList[3]?.pageName }}</h2>
         </div>
       </section>
+
+      <!-- contact us  -->
+      <div
+        class="contact-info"
+        [ngStyle]="{
+          'font-family': data?.font,
+          background: data?.selectedColor?.primary
+        }"
+      >
+        <div class="mainContainer">
+          <div class="infoFlex">
+            <div class="info-item">
+              <span class="icon"
+                ><img
+                  src="../../../../../../../../../../assets/images/icons8-phone-30.png"
+                  alt="location"
+                  width="20"
+                  height="20"
+              /></span>
+              <div>
+                <!-- <h4>{{ pageData?.contactUs?.subtitle }}</h4> -->
+                <p>{{ pageData?.contactUs?.phoneNumber }}</p>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <span class="icon"
+                ><img
+                  src="../../../../../../../../../../assets/images/icons8-location-24.png"
+                  alt="location"
+                  width="20"
+                  height="20"
+              /></span>
+              <div>
+                <h4>Office location</h4>
+                <p>
+                  {{ pageData?.contactUs?.address }},<br />
+                  {{ pageData?.contactUs?.city }},<br />
+                  {{ pageData?.contactUs?.state }},
+                  {{ pageData?.contactUs?.zip }}
+                </p>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <span class="icon"
+                ><img
+                  src="../../../../../../../../../../assets/images/email.png"
+                  alt="location"
+                  width="20"
+                  height="20"
+              /></span>
+              <div>
+                <h4>Send us an email</h4>
+                <p>{{ pageData?.contactUs?.email }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- contact info -->
+      <!-- contact us  -->
 
       <!-- Footer -->
       <footer

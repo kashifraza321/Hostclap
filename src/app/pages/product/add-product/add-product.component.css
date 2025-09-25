@@ -1,0 +1,93 @@
+.form-container {
+  /* width: 60%; */
+  margin: auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+.section {
+  margin-bottom: 20px;
+}
+
+.section label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.section input[type="text"],
+.section input[type="number"],
+.section textarea,
+.section select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.section textarea {
+  height: 150px;
+}
+
+.section .btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.section .btn:hover {
+  background-color: #45a049;
+}
+
+/* Media upload section */
+.media-upload {
+  padding: 10px 0;
+}
+
+.product-image {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.product-image img {
+  max-width: 100px;
+  height: auto;
+}
+
+.price-info input,
+.inventory-info input {
+  width: 60%;
+}
+
+.price-info,
+.inventory-info,
+.product-info,
+.product-settings {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Add additional styles for fields */
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.checkbox-container input {
+  width: auto;
+}

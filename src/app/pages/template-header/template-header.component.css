@@ -337,7 +337,7 @@ form {
 /* Section title labels */
 label.form-label {
   font-weight: 600;
-  font-size: 14px;
+  font-size: 20px;
   margin-bottom: 6px;
   color: #333;
 }
@@ -450,6 +450,7 @@ select.form-select {
   font-weight: 500;
   cursor: pointer;
   margin-bottom: 10px;
+  width: 100%;
 }
 
 .color-picker-toggle i {
@@ -626,7 +627,8 @@ input.form-control {
   border-bottom: 1px solid #ccc;
   border-radius: 0;
   padding: 4px 0;
-  font-size: 0.95rem;
+  font-size: 19px;
+  font-weight: 400;
   width: 100%;
   box-shadow: none !important;
 }

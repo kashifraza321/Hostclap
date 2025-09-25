@@ -122,10 +122,10 @@ export class TemplateHeaderComponent {
       fontSize: [16],
       fontColor: ['#000000'],
       actionButton: this.fb.group({
-        enabled: [],
+        // enabled: [],
         buttonName: [''],
         linkType: ['external'],
-        link: [''],
+        // link: [''],
       }),
       openInNewTab: [false],
     });
@@ -185,10 +185,8 @@ export class TemplateHeaderComponent {
       }),
     });
     this.addressForm = this.fb.group({
-      showAddress: [false],
-      addressBackgroundColor: ['#ffffff'],
-      addressFontSize: [1],
-      addressFontColor: ['#000000'],
+      line1: [''],
+      line2: [''],
     });
     // ==== Short realtime update ====
     merge(
@@ -220,6 +218,8 @@ export class TemplateHeaderComponent {
   // realtime data show logic
   applyFontStyles() {
     const val = this.announcementForm.value;
+    const showAnnouncement = val.show;
+
     const data = {
       message: this.announcementForm.get('message')?.value || '',
       fontSize: this.announcementForm.get('fontSize')?.value || 14,
@@ -236,6 +236,7 @@ export class TemplateHeaderComponent {
             fontSize: this.announcementForm.get('fontSize')?.value || 14,
           }
         : false,
+      show: showAnnouncement,
     };
 
     this.pagesService.updatePreviewSection('announcement', data);
@@ -478,6 +479,66 @@ export class TemplateHeaderComponent {
 
           console.log('📝 LogoForm after patch:', this.logoForm.value);
         }
+        const titles = res.data.header.titles;
+        if (titles) {
+          this.titlesForm.patchValue({
+            buisnessName: titles.buisnessName || 'My Business',
+            pageTitle: titles.pageTitle || 'Welcome to My Page',
+            titleFont: titles.titleFont || 'Roboto',
+            titleAlignment: titles.titleAlignment || 'center',
+            titleColour: titles.titleColour || '#000000',
+            subtitle: titles.subtitle || '',
+            subtitleFont: titles.subtitleFont || 'Open Sans',
+            subtitleAlignment: titles.subtitleAlignment || 'center',
+            subtitleColour: titles.subtitleColour || '#000000',
+          });
+        }
+        const announcement = res?.data?.header?.announcement;
+
+        if (announcement) {
+          this.announcementForm.patchValue({
+            show: announcement.show || false,
+            message: announcement.message || '',
+            fontSize: announcement.fontSize || 16,
+            fontColor: announcement.fontColor || '#000000',
+            actionButton: {
+              // enabled: announcement.actionButton?.enabled ?? false,
+              buttonName: announcement.actionButton?.buttonName || '',
+              linkType: announcement.actionButton?.linkType || 'sendMessage',
+            },
+          });
+        }
+        const menu = res.data.header.menu;
+        if (menu) {
+          this.menuForm.patchValue({
+            stickyMenu: menu.stickyMenu ?? false,
+            logoInLine: menu.logoInLine ?? false,
+            menuBackgroudColour: menu.menuBackgroudColour || '#ffffff',
+            fontSize: menu.fontSize || 16,
+            alignment: menu.alignment || 'left',
+            menuFontColour: menu.menuFontColour || '#000000',
+          });
+
+          console.log('📝 MenuForm after patch:', this.menuForm.value);
+        }
+        const phones = res.data.header?.phones;
+        if (phones) {
+          this.contactForm.patchValue({
+            phones: {
+              mobile: phones.mobile || '',
+              office: phones.office || '',
+              whatsapp: phones.whatsapp || '',
+            },
+          });
+        }
+        const data = res?.data?.header?.addressLine;
+
+        if (data) {
+          this.addressForm.patchValue({
+            line1: data.line1 || '',
+            line2: data.line2 || '',
+          });
+        }
       },
       error: (err) => {
         console.error('Failed to fetch page detail:', err);
@@ -561,18 +622,21 @@ export class TemplateHeaderComponent {
     switch (section) {
       case 'announcement':
         const val = this.announcementForm.value;
+        let cleanMsg = val.message?.replace(/<\/?[^>]+(>|$)/g, '').trim();
+
         payload = {
           announcement: {
-            show: val.show,
-            message: val.message,
-            fontSize: `${val.fontSize}px`,
+            show: !!val.show,
+            message: cleanMsg || 'Announcement', // empty avoid karo
+            fontSize: `${val.fontSize}`,
             actionButton: {
-              buttonName: val.actionButton.buttonName,
-              linkType: val.actionButton.linkType,
-              link: val.actionButton.link,
+              buttonName: val.actionButton?.buttonName || '',
+              linkType: val.actionButton?.linkType || 'external', // safe default
+              link: val.actionButton?.link || '',
             },
           },
         };
+
         break;
       // case 'logo': {
       //   const val = this.logoForm.value;
@@ -652,12 +716,27 @@ export class TemplateHeaderComponent {
 
       //   break;
       // }
-      case 'phone':
-        payload = this.contactForm.value;
+      case 'phone': {
+        const val = this.contactForm.get('phones')?.value;
+        payload = {
+          phones: {
+            mobile: val.mobile,
+            office: val.office,
+            whatsapp: val.whatsapp,
+          },
+        };
         break;
-      case 'address':
-        payload = this.addressForm.value;
+      }
+      case 'address': {
+        const val = this.addressForm.value;
+        payload = {
+          addressLine: {
+            line1: val.line1,
+            line2: val.line2,
+          },
+        };
         break;
+      }
       default:
         return;
     }

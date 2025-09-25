@@ -245,8 +245,14 @@
       <!-- offer -->
       <section class="offerSection">
         <div class="mainContainer">
-          <div class="offer-banner">
-            <div class="yellow-polygon">
+          <div
+            class="offer-banner"
+            [ngStyle]="{ background: data?.selectedColor?.primary }"
+          >
+            <div
+              class="yellow-polygon"
+              [ngStyle]="{ background: data?.selectedColor?.secondary }"
+            >
               <img
                 src="../../../../../../../../../../assets/images/icons8-discount-48.png"
                 alt="Offer"
@@ -596,7 +602,7 @@
             <!-- Navigation Buttons -->
             <div class="controlBtn" style="margin-top: 10px">
               <button
-                (click)="setSelectedPriceGroup(selectedPriceGroupIndex - 1)"
+                (click)="setPriceSelectedGroup(selectedPriceGroupIndex - 1)"
                 [disabled]="selectedPriceGroupIndex === 0"
               >
                 <img
@@ -609,7 +615,7 @@
               </button>
 
               <button
-                (click)="setSelectedPriceGroup(selectedPriceGroupIndex + 1)"
+                (click)="setPriceSelectedGroup(selectedPriceGroupIndex + 1)"
                 [disabled]="
                   selectedPriceGroupIndex ===
                   abovePriceContactSections.length - 1
@@ -626,7 +632,54 @@
           </div>
         </div>
       </section>
+      <!-- products section -->
+      <!-- <section>
+        <div *ngFor="let group of aboveProductContactSections; let i = index">
+          <div class="product-group-header">
+            <h3>{{ group.groupName }}</h3>
+            <button (click)="setproductSelectedGroup(i)" class="view-group-btn">
+              View Group
+            </button>
+          </div>
 
+          <div *ngIf="selectedProductGroupIndex === i" class="product-list">
+            <div
+              *ngFor="
+                let subgroup of group.subgroups
+                  | slice : 0 : visibleProductsCount
+              "
+              class="product-item"
+            >
+              <div class="product-card">
+                <div class="product-image">
+                  <img
+                    [src]="getproductImageUrl(subgroup?.media?.[0])"
+                    alt="Product Image"
+                    class="product-img"
+                  />
+                </div>
+                <div class="product-info">
+                  <h4>{{ subgroup?.subgroupName || "Unnamed Subgroup" }}</h4>
+                  <p>
+                    {{ subgroup?.description || "No description available" }}
+                  </p>
+                  <p class="product-price">$ {{ subgroup?.price }}</p>
+                </div>
+              </div>
+            </div>
+
+            <button
+              *ngIf="group.subgroups.length > visibleProductsCount"
+              (click)="loadMoree()"
+              class="load-more-btn"
+            >
+              Load More
+            </button>
+          </div>
+        </div>
+      </section> -->
+
+      <!-- products section -->
       <!-- location -->
       <section id="page-1" class="dynamicPages">
         <div class="dymanic-page-header">

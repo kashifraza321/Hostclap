@@ -139,12 +139,12 @@ select {
   /* background: #fff; */
   bottom: 0;
   left: 0;
-  position: absolute;
+  /* position: absolute; */
   width: 100%;
   z-index: 20;
   /* max-width: 304px; */
   /* width: 100%; */
-  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.12);
+  /* box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.12); */
 }
 
 .btnWRap button {
@@ -164,4 +164,93 @@ select {
 .btn-success {
   background: #4caf50;
   color: #fff;
+}
+
+/* color */
+.color-scheme-card {
+  padding: 10px;
+}
+
+.color-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.color-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid #eee;
+}
+
+.set-custom-colors {
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+}
+
+.picker-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.picker-input {
+  width: 40px;
+  height: 40px;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.code-input {
+  max-width: 100px;
+}
+
+.color-preview {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid #eee;
+}
+
+.restore-text {
+  color: #0d6efd;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/*  */
+.color-picker-container {
+  margin: 38px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.color-picker-container label {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 22px;
+}
+
+.color-picker-container input {
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  box-shadow: 0px 1px 14px 0px rgba(0, 0, 0, 0.16);
+  border: 1px solid #fff;
+}
+
+.colorWrp {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+}
+
+.fontLabel {
+  font-size: 19px;
+  font-weight: 500;
+  margin-bottom: 13px;
 }

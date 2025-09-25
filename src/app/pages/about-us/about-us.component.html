@@ -1,0 +1,126 @@
+<form [formGroup]="sectionForm">
+  <button class="back-btn" (click)="backToHomepage()">
+    <img
+      src="../../../assets/images/icons8-chevron-right-24.png"
+      alt="chevron"
+      width="18"
+    />
+    Back
+  </button>
+  <div class="about-us-section">
+    <h2 class="section-title">About Us</h2>
+
+    <!-- Section Title Input -->
+    <div class="section-card">
+      <label class="label" for="section-title">Section Title</label>
+      <div class="title-row">
+        <input id="section-title" type="text" class="input-field" />
+        <input type="checkbox" class="checkbox" checked />
+      </div>
+      <div>
+        <label class="label" for="section-subtitle">Section Subtitle</label>
+        <input
+          id="section-subtitle"
+          type="text"
+          class="input-field"
+          formControlName="sectionSubtitle"
+        />
+      </div>
+    </div>
+    <!-- Section Subtitle Input -->
+    <div class="service-groups-card">
+      <div class="header-row">
+        <div class="header-title">
+          Edit block
+          <span class="info-icon" title="Info">i</span>
+        </div>
+        <h3></h3>
+      </div>
+
+      <button
+        type="button"
+        class="add-group-btn"
+        (click)="navigateTonewContent(pageId)"
+      >
+        <span class="plus-icon">+</span> New content block
+      </button>
+    </div>
+
+    <!-- Sliders for Desktop Padding and Block Size -->
+    <div class="slider-oneGroup">
+      <div class="slider-group">
+        <label for="desktopPaddingTop">Desktop Padding Top</label>
+        <input
+          id="desktopPaddingTop"
+          formControlName="desktopPaddingTop"
+          type="range"
+          min="0"
+          max="100"
+        />
+        <span>{{ sectionForm.value.desktopPaddingTop }}%</span>
+      </div>
+      <div class="slider-group">
+        <label for="desktopPaddingBottom">Desktop Padding Bottom</label>
+        <input
+          id="desktopPaddingBottom"
+          formControlName="desktopPaddingBottom"
+          type="range"
+          min="0"
+          max="100"
+        />
+        <span>{{ sectionForm.value.desktopPaddingBottom }}%</span>
+      </div>
+    </div>
+
+    <div class="slider-oneGroup">
+      <div class="slider-group">
+        <label for="desktopImageSize">Desktop Image Size</label>
+        <input
+          id="desktopImageSize"
+          formControlName="desktopImageSize"
+          type="range"
+          min="0"
+          max="100"
+        />
+        <span>{{ sectionForm.value.desktopImageSize }}%</span>
+      </div>
+      <div class="slider-group">
+        <label for="height">Height</label>
+        <input
+          id="height"
+          formControlName="height"
+          type="range"
+          min="0"
+          max="100"
+        />
+        <span>{{ sectionForm.value.height }}%</span>
+      </div>
+      <div class="slider-group">
+        <label for="width">Width</label>
+        <input
+          id="width"
+          formControlName="width"
+          type="range"
+          min="0"
+          max="100"
+        />
+        <span>{{ sectionForm.value.width }}%</span>
+      </div>
+    </div>
+
+    <!-- Height and Width Sliders -->
+
+    <!-- Save Button -->
+
+    <div class="footer-buttons">
+      <button class="cancelBtn">Cancel</button>
+      <button
+        class="saveBtn"
+        (click)="saveSection()"
+        [disabled]="sectionForm.invalid"
+      >
+        Save
+      </button>
+    </div>
+  </div>
+</form>

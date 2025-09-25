@@ -1,0 +1,129 @@
+.slider {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 1195px;
+  margin: auto;
+  margin: 8rem auto 0;
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  flex: 0 0 35%; /* ✅ 4 slides ek row me */
+  box-sizing: border-box;
+  padding: 15px;
+}
+
+.review-card {
+  background: #f7f7f7;
+  padding: 20px;
+  border-radius: 12px;
+  height: 100%;
+  text-align: center;
+  color: #000;
+}
+.review-text {
+  color: #000;
+  font-size: 15px;
+}
+.avatar {
+  max-width: 50px;
+  width: 100%;
+  margin: 16px auto;
+  border-radius: 50%;
+  height: 50px;
+}
+.btnWrp {
+  display: flex;
+  gap: 10px;
+}
+.btnWrp button {
+  width: 20px;
+  display: grid;
+  place-items: center;
+  padding: 0px;
+  border-radius: 6px;
+  font-size: 16px;
+  /* font-size: 16px; */
+  border: none;
+  background: none;
+}
+
+.review-box {
+  display: flex;
+  align-items: center;
+
+  padding: 8px 15px;
+  border-radius: 8px;
+
+  font-family: Arial, sans-serif;
+  gap: 12px;
+  max-width: 400px;
+  text-align: center;
+  margin: 0 auto;
+
+  flex-direction: column;
+}
+.mainHeading {
+  font-size: 35px;
+  text-align: center;
+  text-decoration: underline;
+  color: #000;
+}
+
+.stars {
+  display: flex;
+  color: #e91e63; /* pink color like example */
+  font-size: 18px;
+  position: relative;
+}
+
+.star {
+  margin-right: 2px;
+}
+
+/* half star style using gradient */
+.star.half {
+  position: relative;
+  color: #e91e63;
+}
+
+.star.half::before {
+  content: "\2605";
+  position: absolute;
+  left: 0;
+  width: 50%;
+  overflow: hidden;
+  color: #e91e63;
+  z-index: 2;
+  clip-path: inset(0 50% 0 0);
+}
+
+.star.half {
+  color: #ddd; /* gray for half star background */
+}
+
+.review-text {
+  font-size: 14px;
+  color: #333;
+  font-weight: 600;
+}
+
+.powered-by {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  color: #666;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.google-logo {
+  height: 18px;
+  width: auto;
+  object-fit: contain;
+}

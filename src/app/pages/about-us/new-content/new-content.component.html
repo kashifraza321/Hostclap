@@ -1,0 +1,89 @@
+<div class="content-block">
+  <button class="back-btn" (click)="backTo(pageId)">
+    <img
+      src="../../../assets/images/icons8-chevron-right-24.png"
+      alt="chevron"
+      width="18"
+    />
+    Back
+  </button>
+  <form [formGroup]="contentBlockForm" (ngSubmit)="onSubmit()">
+    <label for="title">Title</label>
+    <input
+      id="title"
+      formControlName="title"
+      type="text"
+      placeholder="Provide your title"
+    />
+
+    <!-- Alignment Buttons -->
+    <label>Desktop Alignment</label>
+    <div class="alignment-buttons">
+      <button type="button" (click)="setAlignment('left')">Left</button>
+      <button type="button" (click)="setAlignment('center')">Center</button>
+      <button type="button" (click)="setAlignment('right')">Right</button>
+    </div>
+
+    <!-- Font Size Slider -->
+    <label for="fontSize">Desktop Font Size</label>
+    <input
+      #fontSizeInput
+      type="range"
+      id="fontSize"
+      formControlName="fontSize"
+      min="12"
+      max="40"
+      step="1"
+      (input)="updateFontSize(fontSizeInput.value)"
+    />
+    <span>{{ fontSizeLabel }}</span>
+
+    <!-- Color Picker -->
+    <label for="color">Set Title Color</label>
+    <input
+      #colorInput
+      type="color"
+      id="color"
+      formControlName="color"
+      (input)="updateTitleColor(colorInput.value)"
+    />
+
+    <!-- Text Area -->
+    <label for="text">Text</label>
+    <textarea
+      id="text"
+      formControlName="text"
+      placeholder="Add custom text"
+    ></textarea>
+    <!-- Media Upload -->
+    <label for="media">Media</label>
+    <input
+      id="media"
+      type="file"
+      (change)="onMediaSelected($event)"
+      accept="image/*,video/*"
+    />
+
+    <!-- Preview Selected File -->
+    <div *ngIf="mediaPreview" class="media-preview">
+      <p>Selected File: {{ selectedMedia?.name }}</p>
+      <img
+        *ngIf="mediaPreviewType === 'image'"
+        [src]="mediaPreview"
+        alt="Preview"
+        style="max-width: 100%; max-height: 200px; margin-top: 10px"
+      />
+      <video
+        *ngIf="mediaPreviewType === 'video'"
+        [src]="mediaPreview"
+        controls
+        style="max-width: 100%; max-height: 200px; margin-top: 10px"
+      ></video>
+    </div>
+    <!-- Buttons -->
+    <div class="buttons">
+      <button type="button" (click)="cancelChanges()">Cancel</button>
+      <button type="submit" [disabled]="contentBlockForm.invalid">Save</button>
+    </div>
+  </form>
+</div>
