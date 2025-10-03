@@ -329,7 +329,7 @@ export class ModernTemplateComponent {
     return this.amenityIcons[name] || 'assets/icons/default.png';
   }
   getLogoUrl(): SafeUrl {
-    console.log(this.pageData?.header?.logo?.image, 'logooooooo img');
+    // console.log(this.pageData?.header?.logo?.image, 'logooooooo img');
 
     if (
       (this.preview?.logo?.image &&
@@ -348,25 +348,49 @@ export class ModernTemplateComponent {
     return 'assets/images/default-logo.png';
   }
 
-  // cover patch
   getCoverUrl(state: any): SafeStyle {
-    // console.log(this.pageData?.header?.cover?.image, 'coverrr img');
-    if (state?.preview?.cover?.image) {
+    console.log(this.pageData?.header?.cover?.image, 'coverrr img');
+    if (
+      (this.preview?.cover?.image &&
+        typeof this.pageData?.cover?.image === 'object') ||
+      typeof this.preview?.cover?.image === 'string'
+    ) {
       return this.sanitizer.bypassSecurityTrustStyle(
         `url("${state.preview.cover.image}")`
       );
     }
 
+    // Check if the pageData has a valid cover image
     if (state?.pageData?.header?.cover?.image) {
       return this.sanitizer.bypassSecurityTrustStyle(
         `url("${this.imgurl + state.pageData.header.cover.image}")`
       );
     }
 
+    // Default fallback image if no cover image is provided
     return this.sanitizer.bypassSecurityTrustStyle(
       `url("assets/images/bg2.webp")`
     );
   }
+  // cover patch
+  // getCoverUrl(state: any): SafeStyle {
+  //   console.log(this.pageData?.header?.cover?.image, 'coverrr img');
+  //   if (state?.preview?.cover?.image) {
+  //     return this.sanitizer.bypassSecurityTrustStyle(
+  //       `url("${state.preview.cover.image}")`
+  //     );
+  //   }
+
+  //   if (state?.pageData?.header?.cover?.image) {
+  //     return this.sanitizer.bypassSecurityTrustStyle(
+  //       `url("${this.imgurl + state.pageData.header.cover.image}")`
+  //     );
+  //   }
+
+  //   return this.sanitizer.bypassSecurityTrustStyle(
+  //     `url("assets/images/bg2.webp")`
+  //   );
+  // }
 
   // cover
 
