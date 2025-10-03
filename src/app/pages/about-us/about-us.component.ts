@@ -65,18 +65,13 @@ export class AboutUsComponent {
     this.router.navigate(['/in/insight/editor/home', this.pageId]);
   }
   getSectionDetailData() {
-    this.pagesService.GET_SECTION_DETAIL(this.pageId, 'about_us').subscribe({
+    this.pagesService.GET_SECTION_DETAIL(this.pageId, 'aboutus').subscribe({
       next: (res) => {
         if (res?.data?.section) {
           this.sectionId = res.data.section._id;
           this.sectionForm.patchValue({
             sectionTitle: res.data.section.sectionTitle || '',
             sectionSubtitle: res.data.section.subtitle || '',
-            desktopPaddingTop: res.data.section.desktopPaddingTop || 0,
-            desktopPaddingBottom: res.data.section.desktopPaddingBottom || 0,
-            desktopImageSize: res.data.section.desktopImageSize || 50,
-            height: res.data.section.height || 50,
-            width: res.data.section.width || 100,
           });
         }
       },
@@ -92,7 +87,7 @@ export class AboutUsComponent {
     }
 
     const data = {
-      sectionType: 'about_us',
+      sectionType: 'aboutus',
       sectionTitle: this.sectionForm.value.sectionTitle,
       subtitle: this.sectionForm.value.sectionSubtitle,
       desktopPaddingTop: this.sectionForm.value.desktopPaddingTop,

@@ -2,13 +2,14 @@
   position: relative;
   overflow: hidden;
   width: 100%;
-  max-width: 1195px;
+  /* max-width: 1195px; */
   margin: auto;
   margin: 8rem auto 0;
 }
 
 .slides {
   display: flex;
+  margin-top: 40px;
   transition: transform 0.5s ease-in-out;
 }
 
@@ -16,6 +17,10 @@
   flex: 0 0 35%; /* ✅ 4 slides ek row me */
   box-sizing: border-box;
   padding: 15px;
+}
+.name {
+  font-size: 20px;
+  margin-bottom: 10px;
 }
 
 .review-card {
@@ -40,6 +45,7 @@
 .btnWrp {
   display: flex;
   gap: 10px;
+  margin: 15px 36px;
 }
 .btnWrp button {
   width: 20px;
@@ -77,9 +83,15 @@
 
 .stars {
   display: flex;
-  color: #e91e63; /* pink color like example */
+  color: #e91e63;
   font-size: 18px;
-  position: relative;
+
+  font-size: 18px;
+
+  margin: 14px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
 }
 
 .star {
@@ -102,13 +114,16 @@
   z-index: 2;
   clip-path: inset(0 50% 0 0);
 }
+.review-date {
+  font-size: 16px;
+}
 
 .star.half {
   color: #ddd; /* gray for half star background */
 }
 
 .review-text {
-  font-size: 14px;
+  font-size: 18px;
   color: #333;
   font-weight: 600;
 }

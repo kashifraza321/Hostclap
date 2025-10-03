@@ -1,5 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { PagesService } from 'src/app/pages/pages.service';
+import { ThemeService } from '../../../theme.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-about-us-slider',
@@ -10,6 +14,10 @@ import { Component } from '@angular/core';
 })
 export class AboutUsSliderComponent {
   currentSlide: number = 0;
+  userId: string = '';
+  data: any;
+  pageData: any;
+  isLoading: boolean = false;
 
   slides = [
     {
@@ -41,17 +49,70 @@ export class AboutUsSliderComponent {
       link: '#',
     },
   ];
+  constructor(
+    private pagesService: PagesService,
+    private route: ActivatedRoute,
+    private sanitizer: DomSanitizer,
+    private themeService: ThemeService
+  ) {}
+  ngOnInit() {
+    this.userId = this.route.snapshot.paramMap.get('id') || '';
+    console.log('User ID:', this.userId);
 
-  constructor() {}
+    // this.pagesService.state$.subscribe((state) => {
+    //   this.preview = state.preview;
+    // });
 
-  ngOnInit(): void {}
+    this.GetWebsiteTheme();
+    // this.getPageDetail('687177a9aa11a48cb4de77db');
+  }
 
   selectSlide(index: number): void {
     this.currentSlide = index;
   }
+
   moveSlide(direction: number): void {
     const totalSlides = this.slides.length;
     this.currentSlide =
       (this.currentSlide + direction + totalSlides) % totalSlides;
+  }
+
+  getPrevIndex(): number {
+    return (this.currentSlide - 1 + this.slides.length) % this.slides.length;
+  }
+
+  getNextIndex(): number {
+    return (this.currentSlide + 1) % this.slides.length;
+  }
+  GetWebsiteTheme() {
+    this.themeService.getTheme().subscribe({
+      next: (response) => {
+        if (response.data) {
+          this.data = {
+            ...this.data,
+            ...response.data,
+          };
+          console.log('Merged theme data:', this.data);
+        }
+      },
+      error: (err) => {
+        console.error('Error fetching theme:', err);
+      },
+    });
+  }
+  getPageDetail(pageId: string): void {
+    this.pagesService.getPageDetail(pageId).subscribe({
+      next: (res) => {
+        this.pageData = res.data;
+
+        console.log(this.pageData.contactUs.title, 'mobileeeee');
+
+        console.log('Page Detail:', res);
+      },
+      error: (err) => {
+        console.error('Failed to fetch page detail:', err);
+        this.isLoading = false;
+      },
+    });
   }
 }

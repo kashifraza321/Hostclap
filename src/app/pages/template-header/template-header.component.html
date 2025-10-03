@@ -241,13 +241,13 @@
                 <button
                   type="button"
                   data-bs-toggle="modal"
+                  class="editCover"
                   data-bs-target="#coverEditorModal"
                 >
                   <img
                     src="../../../assets/images/icons8-pencil-24.png"
                     alt="edit"
                     width="20"
-                    class="editCover"
                     height="20"
                   />
                 </button>
@@ -278,7 +278,7 @@
               </button>
             </ng-template>
           </div>
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label>Appearance</label>
             <select
               class="form-select"
@@ -289,7 +289,7 @@
               <option value="fade">Fade</option>
               <option value="zoom">Zoom</option>
             </select>
-          </div>
+          </div> -->
 
           <label>
             Opacity
@@ -305,7 +305,7 @@
             {{ coverForm.get("opacity")?.value }}%
           </label>
 
-          <div class="form-check parralx my-2">
+          <!-- <div class="form-check parralx my-2">
             <input
               class="form-check-input"
               type="checkbox"
@@ -313,7 +313,7 @@
               name="parallax"
             />
             <label class="form-check-label">Parallax Scroll</label>
-          </div>
+          </div> -->
 
           <button
             type="button"

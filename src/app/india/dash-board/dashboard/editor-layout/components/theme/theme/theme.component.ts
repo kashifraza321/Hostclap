@@ -18,12 +18,13 @@ export class ThemeComponent {
   themeForm: FormGroup;
 
   colorOptions = [
-    { primary: '#9C27B0', secondary: '#E91E63', accent: '#2196F3' },
-    { primary: '#2196F3', secondary: '#03A9F4', accent: '#8BC34A' },
-    { primary: '#FF9800', secondary: '#FFEB3B', accent: '#4CAF50' },
+    { primary: '#e92984e6', secondary: '#e6e6e6', accent: '#f9eee9' },
+    { primary: '#29B6F6', secondary: '#ff827c', accent: '#ededed' },
+    { primary: '#294FDA', secondary: '#F6F8FC', accent: '#ededed' },
     { primary: '#ffbe33', secondary: '#212529', accent: '#f8f9fa' },
     { primary: '#baddf3', secondary: '#f3baba', accent: '#333333' },
-    { primary: '#477d02', secondary: '#fae367', accent: '#ff4081' },
+    { primary: '#C36D5F', secondary: '#944232', accent: '#ededed' },
+    { primary: '#915ED1', secondary: '#F96290', accent: '#ededed' },
   ];
 
   fonts = [
@@ -65,7 +66,7 @@ export class ThemeComponent {
       font: ['Roboto'],
       primary: ['#9C27B0'],
       secondary: ['#E91E63'],
-      accent: ['#2196F3'],
+      accent: [''],
     });
 
     // Watch form changes to update parent data
@@ -122,7 +123,7 @@ export class ThemeComponent {
   }
 
   saveTheme() {
-    this.updateParentData(); // Ensure latest form data is pushed
+    this.updateParentData();
     const themeData: Data = this.parent.data;
 
     this.themeService.saveTheme(themeData).subscribe({

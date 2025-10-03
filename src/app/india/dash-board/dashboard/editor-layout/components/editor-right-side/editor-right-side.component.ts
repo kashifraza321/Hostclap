@@ -58,8 +58,8 @@ export class EditorRightSideComponent {
       next: (response) => {
         if (response.data) {
           this.data = {
-            ...this.data, // jo pehle se hai
-            ...response.data, // API se naya data
+            ...this.data,
+            ...response.data,
           };
           console.log('Merged theme data:', this.data);
         }

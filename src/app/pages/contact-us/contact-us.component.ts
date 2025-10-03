@@ -9,6 +9,7 @@ import {
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { PagesService } from '../pages.service';
 import { AlertService } from 'src/app/services/Toaster/alert.service';
+import { merge, tap } from 'rxjs';
 
 @Component({
   selector: 'app-contact-us',
@@ -20,6 +21,7 @@ import { AlertService } from 'src/app/services/Toaster/alert.service';
 export class ContactUsComponent {
   contactForm!: FormGroup;
   pageId: string = '';
+  state$ = this.pagesService.state$;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -41,6 +43,19 @@ export class ContactUsComponent {
     });
     this.pageId = this.route.snapshot.paramMap.get('pageId') || '';
     this.getPageData();
+
+    merge(
+      this.contactForm.valueChanges.pipe(
+        tap((val) => {
+          console.log('Form Value Changed:', val);
+          this.applyContactUsChanges();
+        })
+      )
+    ).subscribe();
+
+    this.state$.subscribe((state) => {
+      console.log('State Changed:', state);
+    });
   }
 
   backToHomepage() {
@@ -110,4 +125,10 @@ export class ContactUsComponent {
   //     },
   //   });
   // }
+
+  applyContactUsChanges() {
+    const val = this.contactForm.value;
+    console.log('Applying Contact Us changes:', val);
+    this.pagesService.updatePreviewSection('contactUs', val);
+  }
 }

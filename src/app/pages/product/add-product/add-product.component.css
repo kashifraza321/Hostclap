@@ -5,6 +5,8 @@
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  min-height: 700px;
+  height: 100vh;
 }
 
 h1 {
@@ -18,8 +20,9 @@ h1 {
 
 .section label {
   display: block;
-  font-weight: bold;
-  margin-bottom: 8px;
+  font-weight: 500;
+  margin-bottom: 11px;
+  font-size: 21px;
 }
 
 .section input[type="text"],
@@ -31,6 +34,9 @@ h1 {
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  font-size: 18px;
+  border: none;
+  border-bottom: 1px solid #ccc;
 }
 
 .section textarea {
@@ -90,4 +96,156 @@ h1 {
 
 .checkbox-container input {
   width: auto;
+}
+
+.saveBtn {
+  background: green;
+  max-width: 100px;
+  width: 100%;
+  padding: 9px;
+  font-size: 18px;
+  color: #fff;
+  border-radius: 10px;
+}
+.cancelBtn {
+  color: #fff;
+  border-radius: 10px;
+  max-width: 100px;
+  width: 100%;
+  font-size: 18px;
+  color: #fff;
+  border-radius: 10px;
+  padding: 9px;
+  border: none;
+  background: #ccc;
+}
+.media-upload-box {
+  width: 100%;
+  padding: 20px;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.upload-label {
+  display: block;
+  cursor: pointer;
+}
+
+.upload-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #666;
+}
+
+.upload-area svg {
+  width: 30px;
+  height: 30px;
+  margin-bottom: 10px;
+  color: #4245a8;
+}
+
+.upload-instructions {
+  font-size: 14px;
+  margin: 0;
+}
+
+.media-upload-box {
+  width: 100%;
+  padding: 20px;
+  border: 2px dashed #ccc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.upload-instructions {
+  font-size: 14px;
+  color: #888;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.media-preview {
+  margin-top: 15px;
+  width: 100%;
+  height: auto;
+}
+
+.media-preview img {
+  max-width: 100%;
+  height: auto;
+}
+
+.editor-section {
+  margin-top: 20px;
+
+  .editor-title {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+}
+.quill-label {
+  font-weight: 600;
+  font-size: 20px;
+  margin-bottom: 8px;
+  display: block;
+  color: #000;
+}
+.btnFlex {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 15px;
+}
+
+::ng-deep .custom-quill .ql-container {
+  min-height: 150px;
+  height: auto;
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 0 0 6px 6px;
+}
+::ng-deep .ql-container .ql-snow {
+  min-height: 150px;
+}
+
+.custom-quill .ql-toolbar {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
+}
+::ng-deep .ql-toolbar.ql-snow + .ql-container.ql-snow {
+  border-top: 0;
+  min-height: 150px;
+}
+
+::ng-deep .custom-quill .ql-editor {
+  min-height: 100px;
+}
+::ng-deep .ql-picker {
+  height: auto !important;
+}
+
+::ng-deep .ql-picker-options {
+  max-height: 200px;
+  overflow-y: auto;
+}
+.imageWrap {
+  margin: 40px 0;
+}
+.imageWrap h3 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+#media-upload {
+  position: absolute;
+  left: -1000px;
 }

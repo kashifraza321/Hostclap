@@ -9,6 +9,7 @@
   min-height: 700px;
   height: 100vh;
   overflow-y: auto;
+  background: #fff;
 }
 
 /* URL BAR */
@@ -29,7 +30,7 @@
 .dots .dot {
   width: 10px;
   height: 10px;
-  background: #555;
+
   border-radius: 50%;
 }
 .url-content {
@@ -44,6 +45,57 @@
 .url-text {
   color: #bbb;
   font-size: 14px;
+}
+classic-header-info {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px); /* blur apply */
+  -webkit-backdrop-filter: blur(10px); /* Safari ke liye */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  width: 100%;
+}
+
+.classic-nav {
+  background: #34495e;
+  padding: 10px;
+  position: sticky;
+  justify-content: space-between;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  z-index: 3;
+  padding: 30px 40px;
+  transition: background-color 0.4s ease, backdrop-filter 0.4s ease;
+  background: transparent;
+}
+.classic-nav.scrolled {
+  background: rgba(0, 0, 0, 0.6); /* Transparent overlay with color */
+  backdrop-filter: blur(10px); /* Glassy blur */
+}
+
+.classic-nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.classic-nav a {
+  color: #ecf0f1;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 500;
+}
+.classic-nav.scrolled {
+  background: rgba(0, 0, 0, 0.5) !important; /* Transparent overlay */
+  backdrop-filter: blur(8px) !important;
 }
 
 /* ANNOUNCEMENT BAR */
@@ -144,14 +196,32 @@
   font-weight: 500;
   transition: color 0.3s;
 }
+.classic-nav ul li {
+  position: relative;
+  padding-bottom: 8px;
+}
 .classic-nav ul li a:hover {
   color: #f88d00;
+}
+.classic-nav ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0px;
+  width: 0;
+  height: 4px;
+  background-color: currentColor;
+  transition: width 0.3s ease;
+}
+
+.classic-nav ul li:hover::before {
+  width: 100%;
 }
 
 /* HERO */
 .classic-hero {
   position: relative;
-  height: 90vh;
+  height: 74vh;
   background-size: cover;
   background-position: center;
 }
@@ -198,7 +268,7 @@
   overflow: hidden;
   max-width: 800px;
   width: 100%;
-  min-height: 148px;
+  min-height: 183px;
   margin: 0 auto;
 }
 
@@ -241,10 +311,11 @@
   font-weight: 500;
 }
 .offer-text h3 {
-  font-size: 2.8rem;
+  font-size: 3rem;
+  font-weight: 600;
 }
 .offer-text p {
-  font-size: 2rem;
+  font-size: 2.3rem;
 }
 .gradientHeading {
   /* background: linear-gradient(270deg, #2241d3, #fc5c7d, #6f81f7);
@@ -259,6 +330,7 @@
   font-weight: 700;
   text-transform: capitalize;
   letter-spacing: 0.5px;
+  text-decoration: underline;
 }
 
 /* GALLERY */
@@ -317,6 +389,9 @@
   color: #f88d00;
 }
 
+.serviceSection {
+  margin-top: 11rem;
+}
 /* SERVICES */
 /* gallery section */
 .gallery-section {
@@ -756,7 +831,7 @@ h2.section-title {
 /* Tooltip (always visible) */
 .location-tooltip {
   position: absolute;
-  top: 40%; /* adjust based on map */
+  top: -12px;
   left: 45%; /* adjust based on map */
   transform: translate(-50%, -50%);
   background: white;
@@ -764,14 +839,33 @@ h2.section-title {
   border-radius: 10px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
   text-align: center;
-  max-width: 300px;
+  width: 164px;
   color: #000;
   z-index: 10;
+  min-height: 130px;
+  text-align: left;
 }
 
 .location-tooltip p {
   margin: 0 0 6px;
-  font-size: 14px;
+  font-size: 15px;
+  color: #fff;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+
+/* Triangle pointing down */
+.map-marker:before {
+  content: "";
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 20px solid #3498db;
 }
 
 .phone {
@@ -782,6 +876,7 @@ h2.section-title {
   color: #ff5722;
   font-weight: bold;
   text-decoration: none;
+  font-size: 15px;
 }
 .sectionHeading {
   color: #000;
@@ -835,9 +930,9 @@ h2.section-title {
   position: relative;
   bottom: -52px;
   left: 17px;
+  animation: pulse 1.5s infinite;
 }
 
-/* Pulse only on hover */
 .map-marker:hover .dot {
   animation: pulse 1.5s infinite;
 }
@@ -987,12 +1082,24 @@ textarea {
   padding: 15px 0;
   text-align: center;
   font-size: 20px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 8rem;
 }
 .classic-footer p {
   color: #ecf0f1;
   padding: 15px 0;
   text-align: center;
   font-size: 19px;
+  display: flex;
+  gap: 15px;
+  border-left: 1px solid #ccc;
+  padding-left: 20px;
+}
+.product-name.highlight {
+  color: #f25c05;
 }
 
 /* price list  */
@@ -1001,7 +1108,7 @@ textarea {
   display: flex;
   justify-content: center;
   padding: 30px;
-  background: #0f172a; /* dark navy */
+  /* background: #0f172a;  */
   margin-top: 23px;
 }
 
@@ -1024,7 +1131,7 @@ textarea {
   font-size: 24px;
   margin-bottom: 20px;
   color: #f8fafc;
-  text-shadow: 0 0 6px rgba(37, 99, 235, 0.6);
+  color: #000;
 }
 
 /* Subgroup Card */
@@ -1039,6 +1146,7 @@ textarea {
   color: #e2e8f0;
   max-width: 200px;
   width: 100%;
+  border: none;
 }
 .subgroup-card:hover {
   transform: translateY(-3px);
@@ -1147,6 +1255,8 @@ textarea {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: 100%;
   margin: 50px auto;
+  max-width: 1150px;
+  width: 100%;
 }
 
 .amenities-section h2 {
@@ -1227,7 +1337,7 @@ textarea {
   max-width: 100%;
   height: 450px;
   position: relative;
-  perspective: 1000px;
+  /* perspective: 1000px; */
   margin-top: 80px;
 }
 
@@ -1244,8 +1354,8 @@ textarea {
 
 .card {
   position: absolute;
-  width: 280px;
-  height: 380px;
+  width: 374px;
+  height: 468px;
   background: white;
   border-radius: 20px;
   overflow: hidden;
@@ -1366,20 +1476,6 @@ textarea {
   margin-top: 60px;
 }
 
-.dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: rgba(8, 42, 123, 0.2);
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.dot.active {
-  background: rgb(8, 42, 123);
-  transform: scale(1.2);
-}
-
 .nav-arrow {
   position: absolute;
   top: 50%;
@@ -1395,10 +1491,10 @@ textarea {
   cursor: pointer;
   z-index: 20;
   transition: all 0.3s ease;
-  font-size: 1.5rem;
+  font-size: 2rem;
   border: none;
   outline: none;
-  padding-bottom: 4px;
+  /* padding-bottom: 4px; */
 }
 
 .nav-arrow:hover {
@@ -1429,11 +1525,18 @@ textarea {
   position: absolute;
   bottom: 0;
   right: 16%;
+  max-width: 300px;
+  width: 100%;
+  flex-direction: column;
+}
+.reviewFlex {
+  display: flex;
+  align-items: center;
 }
 
 .stars {
   display: flex;
-  color: #e91e63; /* pink color like example */
+  color: #e91e63;
   font-size: 18px;
   position: relative;
 }
@@ -1464,7 +1567,7 @@ textarea {
 }
 
 .review-text {
-  font-size: 14px;
+  font-size: 18px;
   color: #333;
   font-weight: 600;
   white-space: nowrap;
@@ -1473,7 +1576,7 @@ textarea {
 .powered-by {
   display: flex;
   align-items: center;
-  font-size: 12px;
+  font-size: 18px;
   color: #666;
   gap: 5px;
   white-space: nowrap;
@@ -1509,7 +1612,7 @@ textarea {
   color: #000;
 }
 .offerSection {
-  margin: 7rem 0;
+  margin: 7rem 0 10rem 0;
 }
 /* testimonial slider */
 /* ---------- Testimonial Slider ---------- */
@@ -1517,7 +1620,7 @@ textarea {
   position: relative;
   overflow: hidden;
   width: 100%;
-  max-width: 1195px;
+  /* max-width: 1195px; */
   margin: auto;
 }
 

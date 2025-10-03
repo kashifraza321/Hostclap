@@ -15,7 +15,6 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* rest of your CSS (no changes needed to the inside styles) */
 .header-left,
 .header-right {
   display: flex;

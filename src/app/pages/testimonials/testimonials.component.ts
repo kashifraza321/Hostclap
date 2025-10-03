@@ -61,19 +61,36 @@ export class TestimonialsComponent {
         },
       });
   }
-  openForm(pageId: string, groupId?: string) {
-    if (groupId) {
-      this.router.navigate([
-        '/in/insight/editor/testimonialform',
-        pageId,
-        groupId,
-      ]);
-    } else {
-      this.router.navigate(['/in/insight/editor/testimonialform', pageId]);
-    }
-  }
+  // openForm(pageId: string, groupId?: string) {
+  //   if (groupId) {
+  //     this.router.navigate([
+  //       '/in/insight/editor/testimonialform',
+  //       pageId,
+  //       this.selectedGroup?._id,
+  //     ]);
+  //   } else {
+  //     // this.router.navigate(['/in/insight/editor/testimonialform', pageId]);
+  //   }
+  // }
+
   backToHomepage() {
     this.router.navigate(['/in/insight/editor/home', this.pageId]);
   }
+  openForm() {
+    this.router.navigate([
+      '/in/insight/editor/testimonialform',
+      this.pageId,
+      'add',
+    ]);
+  }
+
+  navigateToForm(groupId: string) {
+    this.router.navigate([
+      '/in/insight/editor/testimonialform',
+      this.pageId,
+      groupId,
+    ]);
+  }
+
   saveSection() {}
 }

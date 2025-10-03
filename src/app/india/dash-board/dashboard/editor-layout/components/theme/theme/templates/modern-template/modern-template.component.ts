@@ -16,6 +16,7 @@ import { environment } from 'src/environments/environment';
 import { LoaderComponent } from 'src/app/commonComponent/loader/loader.component';
 import { ReviewSliderComponent } from './review-slider/review-slider.component';
 import { AboutUsSliderComponent } from './about-us-slider/about-us-slider.component';
+import { ThemeService } from '../../theme.service';
 // import { SlickCarouselModule } from 'ngx-slick-carousel';
 // import { SwiperModule } from 'swiper/angular';
 interface TeamMember {
@@ -61,8 +62,8 @@ export class ModernTemplateComponent {
   belowContactSections: any[] = [];
   isScrolled = false;
   itemsToShow = 3;
-  selectedGroupIndex: number = 0; // initially first group select hoga
-  abovePriceContactSections: any[] = []; // groups from API
+  selectedGroupIndex: number = 0;
+  abovePriceContactSections: any[] = [];
   subgroupsToShowForPrice: any[] = [];
   selectedPriceGroupIndex = 0;
   teamImages: string[] = [];
@@ -108,16 +109,17 @@ export class ModernTemplateComponent {
 
   isTestimonialAnimating = false;
   @ViewChild('scrollContainer', { static: true }) scrollContainer!: ElementRef;
-  // @HostListener('window:scroll', [])
-  // onWindowScroll() {
-  //   this.isScrolled = window.scrollY > 50;
-  //   console.log('isScrolled:', this.isScrolled);
-  // }
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    this.isScrolled = window.scrollY > 50;
+  }
+
   constructor(
     private pagesService: PagesService,
     private route: ActivatedRoute,
     private sanitizer: DomSanitizer,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private themeService: ThemeService
   ) {}
 
   ngOnInit() {
@@ -128,7 +130,7 @@ export class ModernTemplateComponent {
     console.log('User ID:', this.userId);
     console.log('Page ID:', this.pageId);
     this.updateCarousel(0);
-
+    this.GetWebsiteTheme();
     // this.pagesService.state$.subscribe((state) => {
     //   this.pages = state.pages;
     //   this.preview = state.preview;
@@ -139,10 +141,18 @@ export class ModernTemplateComponent {
     // this.pagesService.state$.subscribe((state) => {
     //   console.log('preview data', state.preview.titles);
     // });
-    // this.getPageDetail(pageID)
+    /////////////////////////////////////////////////
     this.pagesService.state$.subscribe((state) => {
       this.preview = state.preview;
     });
+    // this.pagesService.state$.subscribe((state) => {
+    //   this.preview = {
+    //     ...state.preview,
+    //     contactus: state.contactUs,
+    //   };
+    //   console.log('Preview updated:', this.preview);
+    // });
+
     this.getPages();
     this.updateTestimonialsPerView();
     // window.addEventListener('resize', () => this.updateTestimonialsPerView());
@@ -159,6 +169,7 @@ export class ModernTemplateComponent {
       if (this.data.selectedColor) {
         this.preview = {
           ...this.preview,
+
           selectedColor: this.data.selectedColor,
         };
       }
@@ -177,9 +188,6 @@ export class ModernTemplateComponent {
         console.error('scrollContainer still not found after timeout!');
       }
     }, 0);
-
-    // slider
-    this.updateCarousel(this.currentIndex);
   }
   updateData(update: Partial<Data>) {
     this.data = { ...this.data, ...update };
@@ -219,7 +227,6 @@ export class ModernTemplateComponent {
     }, 800);
   }
 
-  // Move to the previous image
   prev(): void {
     this.updateCarousel(this.currentIndex - 1);
   }
@@ -233,6 +240,22 @@ export class ModernTemplateComponent {
   }
 
   // slider
+  GetWebsiteTheme() {
+    this.themeService.getTheme().subscribe({
+      next: (response) => {
+        if (response.data) {
+          this.data = {
+            ...this.data,
+            ...response.data,
+          };
+          console.log('Merged theme data:', this.data);
+        }
+      },
+      error: (err) => {
+        console.error('Error fetching theme:', err);
+      },
+    });
+  }
 
   getPages() {
     this.isLoading = true;
@@ -306,9 +329,12 @@ export class ModernTemplateComponent {
     return this.amenityIcons[name] || 'assets/icons/default.png';
   }
   getLogoUrl(): SafeUrl {
-    console.log(this.pageData?.header?.logo?.image, 'logooooooo img');
- 
-    if (this.preview?.logo?.image && typeof this.pageData?.header?.logo?.image === 'object') {
+    // console.log(this.pageData?.header?.logo?.image, 'logooooooo img');
+
+    if (
+      this.preview?.logo?.image &&
+      typeof this.pageData?.header?.logo?.image === 'object'
+    ) {
       return this.sanitizer.bypassSecurityTrustUrl(this.preview.logo.image);
     }
 
@@ -323,7 +349,7 @@ export class ModernTemplateComponent {
 
   // cover patch
   getCoverUrl(state: any): SafeStyle {
-    console.log(this.pageData?.header?.cover?.image, 'coverrr img');
+    // console.log(this.pageData?.header?.cover?.image, 'coverrr img');
     if (state?.preview?.cover?.image) {
       return this.sanitizer.bypassSecurityTrustStyle(
         `url("${state.preview.cover.image}")`

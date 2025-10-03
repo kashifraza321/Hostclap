@@ -152,11 +152,25 @@ export class TemplateServicesComponent {
       modalInstance?.hide();
     }
   }
-  navigateToSubgroupForm(pageId: string) {
-    this.router.navigate([
-      '/in/insight/editor/form',
-      pageId,
-      this.selectedGroup?._id,
-    ]);
+  // navigateToSubgroupForm(pageId: string) {
+  //   this.router.navigate([
+  //     '/in/insight/editor/form',
+  //     pageId,
+  //     this.selectedGroup?._id,
+  //   ]);
+  // }
+  navigateToSubgroupForm(pageId: string, groupId: string, subgroupId?: string) {
+    if (subgroupId) {
+      // Editing existing
+      this.router.navigate([
+        '/in/insight/editor/form',
+        pageId,
+        groupId,
+        subgroupId,
+      ]);
+    } else {
+      // Creating new
+      this.router.navigate(['/in/insight/editor/form', pageId, groupId]);
+    }
   }
 }

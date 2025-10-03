@@ -26,6 +26,8 @@ export class PriceListComponent {
   serviceGroups: any[] = [];
   pageId: string = '';
   sectionId: string = '';
+  groupId: string = '';
+  sectionType: string = '';
   showSubGroup = false;
   selectedGroup: any = null;
   serviceSUbGroups: any[] = [];
@@ -54,6 +56,7 @@ export class PriceListComponent {
   }
   openSubGroup(groupId: string) {
     console.log('Clicked groupIdddddddddddddddd:', groupId);
+    this.groupId = groupId;
 
     this.selectedGroup = this.serviceGroups.find((g) => g._id === groupId);
 
@@ -75,6 +78,7 @@ export class PriceListComponent {
         console.log('Section detail:', res);
         if (res?.data?.section) {
           this.sectionId = res.data.section._id;
+          // this.sectionType = res.data.section.sectionType;
 
           this.sectionForm.patchValue({
             sectionTitle: res.data.section.sectionTitle || '',
@@ -149,11 +153,38 @@ export class PriceListComponent {
       modalInstance?.hide();
     }
   }
-  navigateToSubgroupForm(pageId: string) {
-    this.router.navigate([
-      '/in/insight/editor/price-form',
-      pageId,
-      this.selectedGroup?._id,
-    ]);
+
+  deleteGroup(subgroupId: string, sectionType: string) {
+    console.log(sectionType, 'pricelist sectiontype');
+    this.pagesService.deleteServiesBlock(sectionType, subgroupId).subscribe({
+      next: (res) => {
+        console.log('Group deleted:', res);
+        this.alertService.success('Group deleted successfully');
+
+        // Remove from UI list
+        this.serviceSUbGroups = this.serviceSUbGroups.filter(
+          (g) => g._id !== subgroupId
+        );
+      },
+      error: (err) => {
+        console.error('Error deleting group:', err);
+        this.alertService.error('Failed to delete group');
+      },
+    });
+  }
+
+  navigateToSubgroupForm(pageId: string, groupId: string, subgroupId?: string) {
+    if (subgroupId) {
+      // Editing existing
+      this.router.navigate([
+        '/in/insight/editor/price-form',
+        pageId,
+        groupId,
+        subgroupId,
+      ]);
+    } else {
+      // Creating new
+      this.router.navigate(['/in/insight/editor/price-form', pageId, groupId]);
+    }
   }
 }

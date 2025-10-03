@@ -45,7 +45,7 @@
 } */
 
 .classic-header-info {
-  background: rgba(255, 255, 255, 0.08); /* halka transparent */
+  background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(10px); /* blur apply */
   -webkit-backdrop-filter: blur(10px); /* Safari ke liye */
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -719,7 +719,7 @@ button:hover {
 }
 
 .product-name.highlight {
-  color: #f25c05; /* orange highlight */
+  color: #f25c05;
 }
 
 .product-name.small {

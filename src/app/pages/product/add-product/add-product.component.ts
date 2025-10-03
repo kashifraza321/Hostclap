@@ -24,7 +24,11 @@ export class AddProductComponent {
   pageId: string = '';
   groupId: string = '';
   sectionId: string = '';
+  subgroupId: string = '';
   selectedFiles: File[] = [];
+  selectedMedia: File | null = null;
+  mediaPreview: string | null = null;
+  mediaPreviewType: 'image' | 'video' | null = null;
   categories = ['Electronics', 'Clothes', 'Toys'];
   editorModules = {
     toolbar: '#custom-toolbar',
@@ -53,8 +57,10 @@ export class AddProductComponent {
   ngOnInit(): void {
     this.pageId = this.route.snapshot.paramMap.get('pageId') || '';
     this.groupId = this.route.snapshot.paramMap.get('groupId') || '';
+    this.subgroupId = this.route.snapshot.paramMap.get('subgroupId') || '';
     console.log(this.pageId, ' pageId found');
     console.log(this.groupId, ' groupId found');
+    console.log(this.subgroupId, ' subgroupId found');
 
     // Initialize the form group for product creation
     this.productForm = this.fb.group({
@@ -71,14 +77,80 @@ export class AddProductComponent {
       productTags: [''], // Tags field
     });
 
-    this.getSectionDetailData();
+    if (this.subgroupId) {
+      this.getSubGroupDetail(this.subgroupId);
+    }
   }
 
-  onFileChange(event: any) {
-    // Get selected files and store them in selectedFiles array
-    if (event.target.files && event.target.files.length > 0) {
-      this.selectedFiles = Array.from(event.target.files); // Save selected files
+  onMediaSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+
+    if (!input.files || input.files.length === 0) {
+      return;
     }
+
+    const file = input.files[0];
+    this.selectedMedia = file;
+
+    this.productForm.patchValue({
+      image: file,
+    });
+
+    const fileReader = new FileReader();
+
+    // Only allow images to be selected
+    if (!file.type.startsWith('image/')) {
+      this.mediaPreview = null; // Clear preview if not an image
+      return;
+    }
+
+    this.mediaPreviewType = 'image';
+
+    fileReader.onload = () => {
+      // Set the preview image as the file's data URL
+      this.mediaPreview = fileReader.result as string;
+    };
+
+    // Read the file as a data URL to show the preview
+    fileReader.readAsDataURL(file);
+  }
+
+  resetFileInput() {
+    const fileInput = document.querySelector(
+      '#media-upload'
+    ) as HTMLInputElement;
+    if (fileInput) {
+      fileInput.value = ''; // Resets the file input
+    }
+  }
+  getSubGroupDetail(subgroupId: string) {
+    this.pagesService.GetSubgroup_Detail(subgroupId).subscribe({
+      next: (res) => {
+        console.log('Subgroup details:', res);
+        if (res?.data) {
+          // Assuming res.data contains the necessary details
+          const subgroup = res.data;
+
+          // Patching the form with the fetched data
+          this.productForm.patchValue({
+            subgroupName: subgroup.subgroupName || '',
+            price: subgroup.price || '',
+            description: subgroup.description || '',
+            unit: subgroup.unit || '',
+            promotionPrice: subgroup.promotionPrice || '',
+          });
+
+          console.log(
+            'Form patched with subgroup data:',
+            this.productForm.value
+          );
+        }
+      },
+      error: (err) => {
+        console.error('Error fetching subgroup details:', err);
+        this.alertService.error('Failed to fetch subgroup details.');
+      },
+    });
   }
   // Fetch section details if needed
   getSectionDetailData() {

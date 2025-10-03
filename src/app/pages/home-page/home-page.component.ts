@@ -63,8 +63,8 @@ export class HomePageComponent {
     console.log(' selectedSection:', this.selectedSection);
     this.getPageData();
     this.sectionForm = this.fb.group({
-      sectionTitle: ['service title', Validators.required],
-      sectionSubtitle: ['service subtitle', Validators.required],
+      sectionTitle: [' Title', Validators.required],
+      sectionSubtitle: [' subtitle', Validators.required],
     });
   }
   // openSection(section: string) {
@@ -189,36 +189,36 @@ export class HomePageComponent {
       },
     });
   }
-  navigateToaboutUs(pageId: string) {
-    this.router.navigate(['/in/insight/editor/about-us', pageId]);
-  }
   // navigateToaboutUs(pageId: string) {
-  //   console.log(pageId, 'pageidddddddddddd');
-
-  //   if (this.sectionForm.invalid) {
-  //     this.alertService.error('Please fill all required fields');
-  //     return;
-  //   }
-
-  //   const data = {
-  //     sectionType: 'about_us',
-  //     sectionTitle: this.sectionForm.value.sectionTitle,
-  //     sectionSubtitle: this.sectionForm.value.sectionSubtitle,
-  //     pageId: pageId,
-  //   };
-
-  //   this.pagesService.createSection(data).subscribe({
-  //     next: (res) => {
-  //       this.sectionId = res.data._id;
-  //       this.alertService.success(' section created successfully');
-
-  //       this.router.navigate(['/in/insight/editor/about-us', pageId]);
-  //     },
-  //     error: () => {
-  //       this.alertService.error('Failed to create service section');
-  //     },
-  //   });
+  //   this.router.navigate(['/in/insight/editor/about-us', pageId]);
   // }
+  navigateToaboutUs(pageId: string) {
+    console.log(pageId, 'pageidddddddddddd');
+
+    if (this.sectionForm.invalid) {
+      this.alertService.error('Please fill all required fields');
+      return;
+    }
+
+    const data = {
+      sectionType: 'aboutus',
+      sectionTitle: this.sectionForm.value.sectionTitle,
+      sectionSubtitle: this.sectionForm.value.sectionSubtitle,
+      pageId: pageId,
+    };
+
+    this.pagesService.createSection(data).subscribe({
+      next: (res) => {
+        this.sectionId = res.data._id;
+        this.alertService.success(' section created successfully');
+
+        this.router.navigate(['/in/insight/editor/about-us', pageId]);
+      },
+      error: () => {
+        this.alertService.error('Failed to create service section');
+      },
+    });
+  }
 
   // for opening houres
   // navigateToTestimonial(pageId: string) {

@@ -43,7 +43,7 @@
         <!-- <button class="edit-btn">Edit</button> -->
       </div>
 
-      <button type="button" class="add-group-btn" (click)="openForm(pageId)">
+      <button type="button" class="add-group-btn" (click)="openForm()">
         <span class="plus-icon">+</span> Add new Testimonials
       </button>
 
@@ -53,7 +53,7 @@
           <div
             class="group-item"
             *ngFor="let group of testimonialGroups; let i = index"
-            (click)="openForm(pageId, group._id)"
+            (click)="navigateToForm(group._id)"
             [ngClass]="{
               'orange-border': i % 2 === 0,
               'blue-border': i % 2 !== 0

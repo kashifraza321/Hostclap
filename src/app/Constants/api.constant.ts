@@ -38,5 +38,9 @@ export const API_CONSTANTS = {
   GET_SECTION_DETAIL: '/app/page/section-detail',
   UPDATE_GALLERY: '/app/page/update-gallery',
   UPDATE_TESTIMONIALS: '/app/page/update-testimonial',
+  UPDATE_ABOUTUS: '/app/page/update-about-us',
+  UPDATE_SUBGROUPS: '/app/page/update-subgroup',
+  GET_SUBGROUP_DETAIL: '/app/page/get-subgroup',
+  DELETE_SERVICESBLOCK: '/app/page/delete-service-blocks',
 };
 // admin/website/delete-page/686635ff8eefd3f716bf88d2

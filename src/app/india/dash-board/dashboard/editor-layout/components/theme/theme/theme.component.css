@@ -1,5 +1,5 @@
 .pageWrapper {
-  padding-top: 20px 0 0;
+  padding: 20px 0 0 10px;
   position: relative;
   height: 100vh;
 }
@@ -7,7 +7,7 @@
 .accordion {
   margin-top: 30px;
   padding: 0 20px;
-  flex: 1; /* bachi hui height lega */
+  flex: 1;
   overflow-y: auto;
 }
 .accordion-button {

@@ -14,7 +14,12 @@
     <div class="section-card">
       <label class="label" for="section-title">Section Title</label>
       <div class="title-row">
-        <input id="section-title" type="text" class="input-field" />
+        <input
+          id="section-title"
+          type="text"
+          class="input-field"
+          formControlName="sectionTitle"
+        />
         <input type="checkbox" class="checkbox" checked />
       </div>
       <div>
@@ -23,7 +28,7 @@
           id="section-subtitle"
           type="text"
           class="input-field"
-          formControlName="sectionSubtitle"
+          formControlName="subtitle"
         />
       </div>
     </div>
@@ -46,8 +51,7 @@
       </button>
     </div>
 
-    <!-- Sliders for Desktop Padding and Block Size -->
-    <div class="slider-oneGroup">
+    <!-- <div class="slider-oneGroup">
       <div class="slider-group">
         <label for="desktopPaddingTop">Desktop Padding Top</label>
         <input
@@ -106,9 +110,7 @@
         />
         <span>{{ sectionForm.value.width }}%</span>
       </div>
-    </div>
-
-    <!-- Height and Width Sliders -->
+    </div> -->
 
     <!-- Save Button -->
 

@@ -56,7 +56,9 @@ export class TestimonialFormComponent {
       quote: ['', Validators.required],
       image: [null],
     });
-    this.getSectionDetailData();
+    if (this.groupId) {
+      this.getSectionDetailData();
+    }
   }
   getSectionDetailData() {
     this.pagesService
@@ -70,7 +72,6 @@ export class TestimonialFormComponent {
               sectionId: this.sectionId,
             });
 
-            // ✅ Find the correct group using groupId
             const group = res.data.section.groups.find(
               (g: any) => g._id === this.groupId
             );
@@ -143,6 +144,59 @@ export class TestimonialFormComponent {
     this.testimonialForm.patchValue({ quote: content });
   }
 
+  // save() {
+  //   if (this.testimonialForm.invalid) return;
+
+  //   const formData = new FormData();
+  //   formData.append('pageId', this.pageId);
+  //   formData.append('sectionId', this.sectionId);
+  //   formData.append('sectionType', 'testimonials');
+
+  //   formData.append(
+  //     'reviewerName',
+  //     this.testimonialForm.get('reviewerName')?.value || ''
+  //   );
+  //   formData.append(
+  //     'date',
+  //     new Date(this.testimonialForm.get('date')?.value)
+  //       .toISOString()
+  //       .split('T')[0]
+  //   );
+  //   formData.append('rating', this.testimonialForm.get('rating')?.value || '0');
+  //   formData.append(
+  //     'ratingColour',
+  //     this.testimonialForm.get('ratingColour')?.value || ''
+  //   );
+  //   formData.append(
+  //     'avatar',
+  //     this.testimonialForm.get('avatar')?.value ? 'true' : 'false'
+  //   );
+  //   formData.append(
+  //     'avatarType',
+  //     this.testimonialForm.get('avatarType')?.value || 'image'
+  //   );
+  //   formData.append('quote', this.testimonialForm.get('quote')?.value || '');
+
+  //   if (this.selectedFile) {
+  //     formData.append('image', this.selectedFile, this.selectedFile.name);
+  //   }
+
+  //   console.log('Payload being sent:');
+  //   formData.forEach((value, key) => {
+  //     console.log(key, value);
+  //   });
+
+  //   this.pagesService.UpdateTestimonial(formData).subscribe({
+  //     next: (res) => {
+  //       console.log(' Success:', res);
+  //       this.alertService.success('Testimonial updated successfully');
+  //     },
+  //     error: (err) => {
+  //       console.error(' Error:', err);
+  //       this.alertService.error('Failed to update testimonial');
+  //     },
+  //   });
+  // }
   save() {
     if (this.testimonialForm.invalid) return;
 
@@ -151,16 +205,12 @@ export class TestimonialFormComponent {
     formData.append('sectionId', this.sectionId);
     formData.append('sectionType', 'testimonials');
 
+    // Append form values to formData
     formData.append(
       'reviewerName',
       this.testimonialForm.get('reviewerName')?.value || ''
     );
-    formData.append(
-      'date',
-      new Date(this.testimonialForm.get('date')?.value)
-        .toISOString()
-        .split('T')[0]
-    );
+    formData.append('date', this.testimonialForm.get('date')?.value || '');
     formData.append('rating', this.testimonialForm.get('rating')?.value || '0');
     formData.append(
       'ratingColour',
@@ -180,22 +230,27 @@ export class TestimonialFormComponent {
       formData.append('image', this.selectedFile, this.selectedFile.name);
     }
 
-    console.log('Payload being sent:');
-    formData.forEach((value, key) => {
-      console.log(key, value);
-    });
+    if (this.groupId === 'add') {
+      // formData.append('groupId', '');
+    } else {
+      formData.append('groupId', this.groupId);
+    }
 
     this.pagesService.UpdateTestimonial(formData).subscribe({
-      next: (res) => {
-        console.log(' Success:', res);
-        this.alertService.success('Testimonial updated successfully');
+      next: () => {
+        const successMessage =
+          this.groupId === 'add'
+            ? 'Testimonial created successfully'
+            : 'Testimonial updated successfully';
+        this.alertService.success(successMessage);
+        this.backTo();
       },
-      error: (err) => {
-        console.error(' Error:', err);
-        this.alertService.error('Failed to update testimonial');
+      error: () => {
+        this.alertService.error('Failed to save testimonial');
       },
     });
   }
+
   backTo() {
     this.router.navigate(['/in/insight/editor/Testimonials', this.pageId]);
   }

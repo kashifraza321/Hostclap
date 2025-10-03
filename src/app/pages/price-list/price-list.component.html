@@ -126,7 +126,7 @@
         type="button"
         *ngIf="showSubGroup"
         class="add-group-btn"
-        (click)="navigateToSubgroupForm(pageId)"
+        (click)="navigateToSubgroupForm(pageId, selectedGroup?._id)"
       >
         <span class="plus-icon">+</span> Add new group
       </button>
@@ -143,6 +143,7 @@
             }"
           >
             {{ group.groupName }} <span class="arrow">&gt;</span>
+            <button (click)="deleteGroup(group._id, 'group')">Delete</button>
           </div>
         </div>
       </div>
@@ -153,13 +154,16 @@
           <div
             class="subgroup-item group-item"
             *ngFor="let sub of selectedGroup?.subgroups; let i = index"
-            (click)="navigateToSubgroupForm(pageId)"
+            (click)="
+              navigateToSubgroupForm(pageId, selectedGroup?._id, sub._id)
+            "
             [ngClass]="{
               'orange-border': i % 2 === 0,
               'blue-border': i % 2 !== 0
             }"
           >
             {{ sub.subgroupName }}
+            <button (click)="deleteGroup(sub._id, 'subgroup')">Delete</button>
           </div>
         </div>
       </div>

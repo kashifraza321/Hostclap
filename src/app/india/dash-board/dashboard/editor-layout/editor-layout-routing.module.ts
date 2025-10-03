@@ -102,7 +102,15 @@ const routes: Routes = [
         component: AddSubgroupFormComponent,
       },
       {
+        path: 'form/:pageId/:groupId/:subgroupId',
+        component: AddSubgroupFormComponent,
+      },
+      {
         path: 'price-form/:pageId/:groupId',
+        component: PricelistSubGroupFormComponent,
+      },
+      {
+        path: 'price-form/:pageId/:groupId/:subgroupId',
         component: PricelistSubGroupFormComponent,
       },
       {
@@ -123,6 +131,10 @@ const routes: Routes = [
       },
       {
         path: 'add-products/:pageId/:groupId',
+        component: AddProductComponent,
+      },
+      {
+        path: 'add-products/:pageId/:groupId/:subgroupId',
         component: AddProductComponent,
       },
       { path: 'sections', component: SectionsComponent },

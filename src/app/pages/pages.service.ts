@@ -48,6 +48,7 @@ export class PagesService {
       address: {},
       offer: {},
       services: {},
+      contactUs: {},
     },
   });
   state$ = this.stateSubject.asObservable();
@@ -128,6 +129,20 @@ export class PagesService {
       true
     );
   }
+  UpdateAboutus(data: any) {
+    return this.httpService.patchCall(
+      `${API_CONSTANTS.UPDATE_ABOUTUS}`,
+      data,
+      true
+    );
+  }
+  UpdateSubgroups(data: any) {
+    return this.httpService.patchCall(
+      `${API_CONSTANTS.UPDATE_SUBGROUPS}`,
+      data,
+      true
+    );
+  }
 
   deletePages(pageId: string) {
     return this.httpService.deleteCall(`${API_CONSTANTS.DELETE_PAGES}`, pageId);
@@ -146,7 +161,20 @@ export class PagesService {
       `${API_CONSTANTS.GET_SECTION_DETAIL}/${pageId}/${type}`
     );
   }
+  GetSubgroup_Detail(subgroupId: string) {
+    return this.httpService.getCall(
+      `${API_CONSTANTS.GET_SUBGROUP_DETAIL}/${subgroupId}`
+    );
+  }
   updateGallery(data: any) {
     return this.httpService.postCall(`${API_CONSTANTS.UPDATE_GALLERY}`, data);
+  }
+  deleteServiesBlock(sectionType: string, subgroupId: string) {
+    console.log(sectionType, 'seectiontypepeee');
+    const idParam = `${subgroupId}/${sectionType}`;
+    return this.httpService.deleteCall(
+      API_CONSTANTS.DELETE_SERVICESBLOCK,
+      idParam
+    );
   }
 }

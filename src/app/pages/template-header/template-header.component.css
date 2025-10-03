@@ -836,13 +836,22 @@ label {
 }
 
 .image-preview button {
-  position: absolute;
-  top: 4px;
-  right: 4px;
   background: rgba(0, 0, 0, 0.6);
   border: none;
   color: #fff;
   cursor: pointer;
+}
+.image-preview .deleteCover {
+  right: 4px;
+  background: none;
+  bottom: 0px;
+  height: 70px;
+  position: absolute;
+}
+.image-preview .editCover {
+  position: absolute;
+  top: 20px;
+  right: 4px;
 }
 
 .options label {

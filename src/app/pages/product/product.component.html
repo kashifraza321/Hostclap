@@ -71,7 +71,7 @@
         type="button"
         *ngIf="showSubGroup"
         class="add-group-btn"
-        (click)="navigateToaddproductForm(pageId)"
+        (click)="navigateToaddproductForm(pageId, selectedGroup?._id)"
       >
         <span class="plus-icon">+</span> Add new group
       </button>
@@ -98,7 +98,9 @@
           <div
             class="subgroup-item group-item"
             *ngFor="let sub of selectedGroup?.subgroups; let i = index"
-            (click)="navigateToaddproductForm(pageId)"
+            (click)="
+              navigateToaddproductForm(pageId, selectedGroup?._id, sub._id)
+            "
             [ngClass]="{
               'orange-border': i % 2 === 0,
               'blue-border': i % 2 !== 0

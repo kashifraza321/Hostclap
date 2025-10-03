@@ -24,6 +24,8 @@ export class PricelistSubGroupFormComponent {
   pageId: string = '';
   groupId: string = '';
   sectionId: string = '';
+  subgroupId: string = '';
+  group: any;
   serviceSUbGroups: any[] = [];
   categories = ['categrory one  ', 'electronics', 'clothes', 'toys'];
   editorModules = {
@@ -51,9 +53,13 @@ export class PricelistSubGroupFormComponent {
 
   ngOnInit(): void {
     this.pageId = this.route.snapshot.paramMap.get('pageId') || '';
-    console.log(this.pageId, ' pageId found');
+    this.subgroupId = this.route.snapshot.paramMap.get('subgroupId') || '';
     this.groupId = this.route.snapshot.paramMap.get('groupId') || '';
-    console.log(this.groupId, ' groupId found');
+
+    console.log(this.pageId, ' pageId found');
+    console.log(this.subgroupId, ' subgroupId found');
+    console.log(this.groupId, 'groupId found');
+
     this.priceItemForm = this.fb.group({
       sectionType: ['price_list', Validators.required],
       subgroupName: ['', Validators.required],
@@ -61,7 +67,12 @@ export class PricelistSubGroupFormComponent {
       showAddToCart: [true],
       description: [''],
     });
-    this.getSectionDetailData();
+
+    // this.getSectionDetailData();
+
+    if (this.subgroupId) {
+      this.getSubGroupDetail(this.subgroupId);
+    }
   }
 
   getSectionDetailData() {
@@ -71,15 +82,21 @@ export class PricelistSubGroupFormComponent {
         if (res?.data?.section) {
           this.sectionId = res.data.section._id;
 
-          // Agar subgroupName patch karna ho
-          if (
-            res.data.section.groups?.length > 0 &&
-            res.data.section.groups[0].subGroups?.length > 0
-          ) {
-            const firstSubgroup = res.data.section.groups[0].subGroups[0];
-            this.priceItemForm.patchValue({
-              subgroupName: firstSubgroup.subgroupName || '',
-            });
+          // Look through the groups to find the relevant subgroupId
+          const group = res.data.section.groups?.find(
+            (group: { _id: string }) => group._id === this.groupId
+          );
+
+          if (group) {
+            // Choose the first subgroup (or based on your logic) for the second API call
+            const subgroup = group.subgroups[0]; // Adjust this logic to select the correct subgroup
+            if (subgroup) {
+              this.subgroupId = subgroup._id;
+              console.log('Subgroup ID found:', this.subgroupId);
+
+              // Now, call the second API to get the specific subgroup details
+              this.getSubGroupDetail(this.subgroupId);
+            }
           }
         }
       },
@@ -89,6 +106,57 @@ export class PricelistSubGroupFormComponent {
     });
   }
 
+  getSubGroupDetail(subgroupId: string) {
+    this.pagesService.GetSubgroup_Detail(subgroupId).subscribe({
+      next: (res) => {
+        console.log('Subgroup details:', res);
+        if (res?.data) {
+          // Assuming res.data contains the necessary details
+          const subgroup = res.data;
+
+          // Patching the form with the fetched data
+          this.priceItemForm.patchValue({
+            subgroupName: subgroup.subgroupName || '',
+            price: subgroup.price || '', // Default empty if undefined
+            description: subgroup.description || '', // Default empty if undefined
+          });
+
+          console.log(
+            'Form patched with subgroup data:',
+            this.priceItemForm.value
+          );
+        }
+      },
+      error: (err) => {
+        console.error('Error fetching subgroup details:', err);
+        this.alertService.error('Failed to fetch subgroup details.');
+      },
+    });
+  }
+
+  // onSubmit() {
+  //   if (this.priceItemForm.valid) {
+  //     const formValue = this.priceItemForm.value;
+
+  //     const formData = new FormData();
+  //     formData.append('pageId', this.pageId);
+  //     formData.append('groupId', this.groupId);
+  //     formData.append('sectionType', 'price_list');
+
+  //     formData.append('subgroupName', formValue.subgroupName);
+  //     formData.append('price', formValue.price);
+  //     formData.append('description', formValue.description);
+
+  //     this.pagesService.CREATE_Sub_GROUP(formData).subscribe({
+  //       next: (res) => {
+  //         this.alertService.success('Service subgroup created successfully!');
+  //       },
+  //       error: (err) => {
+  //         this.alertService.error('Failed to create service subgroup.');
+  //       },
+  //     });
+  //   }
+  // }
   onSubmit() {
     if (this.priceItemForm.valid) {
       const formValue = this.priceItemForm.value;
@@ -96,20 +164,36 @@ export class PricelistSubGroupFormComponent {
       const formData = new FormData();
       formData.append('pageId', this.pageId);
       formData.append('groupId', this.groupId);
+      formData.append('subgroupId', this.subgroupId);
       formData.append('sectionType', 'price_list');
 
       formData.append('subgroupName', formValue.subgroupName);
-      formData.append('price', formValue.price);
-      formData.append('description', formValue.description);
+      formData.append('price', formValue.price || '');
+      formData.append('description', formValue.description || '');
+      formData.append('showAddToCart', formValue.showAddToCart);
 
-      this.pagesService.CREATE_Sub_GROUP(formData).subscribe({
-        next: (res) => {
-          this.alertService.success('Service subgroup created successfully!');
-        },
-        error: (err) => {
-          this.alertService.error('Failed to create service subgroup.');
-        },
-      });
+      if (this.subgroupId) {
+        this.pagesService.UpdateSubgroups(formData).subscribe({
+          next: (res) => {
+            this.alertService.success('Service subgroup updated successfully!');
+            this.back(this.pageId);
+          },
+          error: () => {
+            this.alertService.error('Failed to update service subgroup.');
+          },
+        });
+      } else {
+        // CREATE subgroup
+        this.pagesService.CREATE_Sub_GROUP(formData).subscribe({
+          next: (res) => {
+            this.alertService.success('Service subgroup created successfully!');
+            this.back(this.pageId);
+          },
+          error: () => {
+            this.alertService.error('Failed to create service subgroup.');
+          },
+        });
+      }
     }
   }
 

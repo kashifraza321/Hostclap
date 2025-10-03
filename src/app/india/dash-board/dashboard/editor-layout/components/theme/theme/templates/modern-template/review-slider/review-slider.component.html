@@ -23,7 +23,13 @@
     [style.transform]="'translateX(-' + currentIndex * (100 / 3) + '%)'"
   >
     <div class="slide" *ngFor="let review of reviews">
-      <div class="review-card">
+      <div
+        class="review-card"
+        [ngStyle]="{
+          'font-family': data?.font,
+          background: data?.selectedColor?.accent
+        }"
+      >
         <div class="review-user">
           <div class="avatar">{{ review.initial }}</div>
           <div class="name">{{ review.name }}</div>

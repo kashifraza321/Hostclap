@@ -47,13 +47,12 @@ export class ClassicTemplateComponent {
   isScrolled = false;
   itemsToShow = 3;
   selectedGroupIndex: number = 0;
-  abovePriceContactSections: any[] = []; // groups from API
+  abovePriceContactSections: any[] = [];
   subgroupsToShowForPrice: any[] = [];
   selectedPriceGroupIndex = 0;
-  aboveProductContactSections: any[] = []; // Product groups with subgroups (products)
-
+  aboveProductContactSections: any[] = [];
   // Initial settings
-  selectedProductGroupIndex: number = 0; // Initially, first group is selected
+  selectedProductGroupIndex: number = 0;
   visibleProductsCount: number = 3;
   logoUrl!: SafeUrl;
 

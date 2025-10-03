@@ -42,14 +42,14 @@
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 30px;
 }
 
 .form-group label {
-  font-size: 14px;
-  font-weight: bold;
+  font-size: 20px;
+  font-weight: 500;
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 16px;
 }
 
 .form-group input,
@@ -113,8 +113,9 @@
 }
 
 .section-label {
-  font-weight: bold;
-  margin-bottom: 8px;
+  font-weight: 500;
+  margin-bottom: 16px;
+  font-size: 21px;
 }
 
 .toggle-container {
@@ -157,7 +158,7 @@
 .media-item img {
   width: 100%;
   height: 100px;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .actions {
@@ -233,5 +234,5 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 }

@@ -151,11 +151,33 @@ export class ProductComponent {
       modalInstance?.hide();
     }
   }
-  navigateToaddproductForm(pageId: string) {
-    this.router.navigate([
-      '/in/insight/editor/add-products',
-      pageId,
-      this.selectedGroup?._id,
-    ]);
+  // navigateToaddproductForm(pageId: string) {
+  //   this.router.navigate([
+  //     '/in/insight/editor/add-products',
+  //     pageId,
+  //     this.selectedGroup?._id,
+  //   ]);
+  // }
+  navigateToaddproductForm(
+    pageId: string,
+    groupId: string,
+    subgroupId?: string
+  ) {
+    if (subgroupId) {
+      // Editing existing
+      this.router.navigate([
+        '/in/insight/editor/add-products',
+        pageId,
+        groupId,
+        subgroupId,
+      ]);
+    } else {
+      // Creating new
+      this.router.navigate([
+        '/in/insight/editor/add-products',
+        pageId,
+        groupId,
+      ]);
+    }
   }
 }

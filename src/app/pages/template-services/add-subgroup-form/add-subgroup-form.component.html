@@ -1,15 +1,15 @@
 <div class="service-form">
+  <button class="back-btn" (click)="backToHomepage()">
+    <img
+      src="../../../assets/images/icons8-chevron-right-24.png"
+      alt="chevron"
+      width="18"
+    />
+    Back
+  </button>
   <form [formGroup]="subgroupForm" (ngSubmit)="onSubmit()">
     <div class="header">
-      <button class="back-btn" (click)="backToHomepage()">
-        <img
-          src="../../../assets/images/icons8-chevron-right-24.png"
-          alt="chevron"
-          width="18"
-        />
-        Back
-      </button>
-      <h2>AC Repairing Service</h2>
+      <h2>{{ subgroupForm.get("subgroupName")?.value || "New Service" }}</h2>
     </div>
 
     <div class="divider"></div>
@@ -167,7 +167,6 @@
         <!-- Click span triggers file dialog -->
         <span class="upload-text" (click)="fileInput.click()">Upload</span>
       </div>
-
       <div class="media-grid">
         <div
           class="media-item"
@@ -175,7 +174,14 @@
         >
           <img [src]="img" alt="media" />
           <div class="actions">
-            <button type="button" (click)="removeImage(i)">🗑️</button>
+            <button type="button" (click)="removeImage(i)">
+              <img
+                src="../../../../assets/images/delete.png"
+                alt=" delete"
+                width="18"
+                height="18"
+              />
+            </button>
           </div>
         </div>
       </div>
