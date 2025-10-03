@@ -329,11 +329,12 @@ export class ModernTemplateComponent {
     return this.amenityIcons[name] || 'assets/icons/default.png';
   }
   getLogoUrl(): SafeUrl {
-    // console.log(this.pageData?.header?.logo?.image, 'logooooooo img');
+    console.log(this.pageData?.header?.logo?.image, 'logooooooo img');
 
     if (
-      this.preview?.logo?.image &&
-      typeof this.pageData?.header?.logo?.image === 'object'
+      (this.preview?.logo?.image &&
+        typeof this.pageData?.header?.logo?.image === 'object') ||
+      typeof this.preview?.logo?.image === 'string'
     ) {
       return this.sanitizer.bypassSecurityTrustUrl(this.preview.logo.image);
     }
