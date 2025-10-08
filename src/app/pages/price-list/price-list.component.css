@@ -398,3 +398,18 @@
 .blue-border {
   border-left-color: #44c8f5;
 }
+.GroupTitle{
+  width: 70%;
+}
+
+.deleteBtn{
+border: none;
+background: none;
+}
+.edit-btn {
+  background: #f1f1f1;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}

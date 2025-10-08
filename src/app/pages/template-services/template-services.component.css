@@ -213,15 +213,7 @@
   background-color: #f0f0f0;
 }
 
-.save-btn {
-  background: #ddd;
-  border: none;
-  color: #aaa;
-  font-size: 14px;
-  padding: 8px 25px;
-  border-radius: 5px;
-  cursor: not-allowed;
-}
+
 
 .save-btn:enabled {
   background: #2b2e9b;
@@ -246,4 +238,13 @@
   padding: 9px;
   border: none;
   background: #ccc;
+}
+
+.GroupTitle{
+  width: 70%;
+}
+
+.deleteBtn{
+border: none;
+background: none;
 }

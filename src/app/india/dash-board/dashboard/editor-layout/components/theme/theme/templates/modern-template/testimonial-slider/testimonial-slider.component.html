@@ -1,0 +1,45 @@
+<section class="testimonial-slider-section">
+  <h2 class="slider-heading">Happy <u>Bride's</u> Stories</h2>
+  <p class="slider-subheading">Stories of satisfaction</p>
+
+  <ngx-slick-carousel
+    class="testimonial-slider"
+    #slickModal="slick-carousel"
+    [config]="testimonialConfig"
+  >
+    <div
+      ngxSlickItem
+      *ngFor="let testimonial of testimonials let i = index"
+      class="testimonial-card"
+        [ngStyle]="{
+                  'background-color':
+                    i % 2 === 0
+                      ? data?.selectedColor?.accent
+                      : data?.selectedColor?.secondary
+                }"
+    >
+      <div class="testimonial-header">
+        <div class="testimonInfoWrp">
+          <div class="testimonialText">
+            <h3>{{ testimonial.name }}</h3>
+            <p class="testimonial-text">{{ testimonial.review }}</p>
+
+            <div class="stars">
+              <i
+                class="fa fa-star"
+                *ngFor="let s of [1,2,3,4,5]; let i = index"
+                [class.filled]="i < testimonial.rating"
+              ></i>
+            </div>
+
+            <p class="testimonial-date">{{ testimonial.date }}</p>
+          </div>
+
+          <div class="profile" *ngIf="testimonial.image">
+            <img [src]="testimonial.image" alt="{{ testimonial.name }}" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </ngx-slick-carousel>
+</section>

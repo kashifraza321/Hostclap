@@ -86,7 +86,9 @@
               'blue-border': i % 2 !== 0
             }"
           >
-            {{ group.groupName }} <span class="arrow">&gt;</span>
+           
+                <span class="GroupTitle"> {{ group.groupName }} </span>  
+            <button  class="deleteBtn" (click)="deleteGroup(group._id, 'group')"> <img  src="../../../assets/images/delete.png" alt="delete" width="20"></button>
           </div>
         </div>
       </div>
@@ -105,7 +107,9 @@
               'blue-border': i % 2 !== 0
             }"
           >
-            {{ sub.subgroupName }}
+           
+              <span class="GroupTitle">  {{ sub.subgroupName }}</span>
+            <button  class="deleteBtn" (click)="deleteGroup(sub._id, 'subgroup')"><img  src="../../../assets/images/delete.png" alt="delete" width="20"></button>
           </div>
         </div>
       </div>

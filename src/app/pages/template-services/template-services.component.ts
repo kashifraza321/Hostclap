@@ -152,6 +152,24 @@ export class TemplateServicesComponent {
       modalInstance?.hide();
     }
   }
+   deleteGroup(subgroupId: string, sectionType: string) {
+    console.log(sectionType, 'pricelist sectiontype');
+    this.pagesService.deleteServiesBlock(sectionType, subgroupId).subscribe({
+      next: (res) => {
+        console.log('Group deleted:', res);
+        this.alertService.success('Group deleted successfully');
+
+        // Remove from UI list
+        this.serviceSUbGroups = this.serviceSUbGroups.filter(
+          (g) => g._id !== subgroupId
+        );
+      },
+      error: (err) => {
+        console.error('Error deleting group:', err);
+        this.alertService.error('Failed to delete group');
+      },
+    });
+  }
   // navigateToSubgroupForm(pageId: string) {
   //   this.router.navigate([
   //     '/in/insight/editor/form',

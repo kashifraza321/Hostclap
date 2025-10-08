@@ -126,6 +126,10 @@ const routes: Routes = [
         component: NewContentComponent,
       },
       {
+        path: 'new-content/:pageId/:groupId',
+        component: NewContentComponent,
+      },
+      {
         path: 'about-us/:pageId',
         component: AboutUsComponent,
       },

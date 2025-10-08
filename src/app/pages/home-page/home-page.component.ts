@@ -213,6 +213,7 @@ export class HomePageComponent {
         this.alertService.success(' section created successfully');
 
         this.router.navigate(['/in/insight/editor/about-us', pageId]);
+        
       },
       error: () => {
         this.alertService.error('Failed to create service section');

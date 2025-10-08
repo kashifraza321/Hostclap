@@ -17,6 +17,7 @@ import { LoaderComponent } from 'src/app/commonComponent/loader/loader.component
 import { ReviewSliderComponent } from './review-slider/review-slider.component';
 import { AboutUsSliderComponent } from './about-us-slider/about-us-slider.component';
 import { ThemeService } from '../../theme.service';
+import { TestimonialSliderComponent } from './testimonial-slider/testimonial-slider.component';
 // import { SlickCarouselModule } from 'ngx-slick-carousel';
 // import { SwiperModule } from 'swiper/angular';
 interface TeamMember {
@@ -32,6 +33,7 @@ interface TeamMember {
     LoaderComponent,
     ReviewSliderComponent,
     AboutUsSliderComponent,
+    TestimonialSliderComponent
   ],
   templateUrl: './modern-template.component.html',
   styleUrl: './modern-template.component.css',
@@ -106,7 +108,7 @@ export class ModernTemplateComponent {
 
   currentTestimonialIndex = 0;
   testimonialsPerView = 3;
-
+ currentDay: string;
   isTestimonialAnimating = false;
   @ViewChild('scrollContainer', { static: true }) scrollContainer!: ElementRef;
   @HostListener('window:scroll', [])
@@ -120,7 +122,11 @@ export class ModernTemplateComponent {
     private sanitizer: DomSanitizer,
     private cdr: ChangeDetectorRef,
     private themeService: ThemeService
-  ) {}
+  ) {
+     const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const today = new Date().getDay(); // Get the current day (0-6)
+    this.currentDay = daysOfWeek[today];
+  }
 
   ngOnInit() {
     this.userId = this.route.snapshot.paramMap.get('id') || '';
@@ -153,11 +159,15 @@ export class ModernTemplateComponent {
     //   console.log('Preview updated:', this.preview);
     // });
 
+    
     this.getPages();
     this.updateTestimonialsPerView();
     // window.addEventListener('resize', () => this.updateTestimonialsPerView());
 
-    // this.getPageDetail('687177a9aa11a48cb4de77db');
+ 
+  }
+     isToday(day: string): boolean {
+    return day === this.currentDay; 
   }
   ngOnChanges(changes: SimpleChanges) {
     if (changes['data'] && changes['data'].currentValue) {
@@ -348,30 +358,30 @@ export class ModernTemplateComponent {
     return 'assets/images/default-logo.png';
   }
 
-  getCoverUrl(state: any): SafeStyle {
-    console.log(this.pageData?.header?.cover?.image, 'coverrr img');
-    if (
-      (this.preview?.cover?.image &&
-        typeof this.pageData?.cover?.image === 'object') ||
-      typeof this.preview?.cover?.image === 'string'
-    ) {
-      return this.sanitizer.bypassSecurityTrustStyle(
-        `url("${state.preview.cover.image}")`
-      );
-    }
-
-    // Check if the pageData has a valid cover image
-    if (state?.pageData?.header?.cover?.image) {
-      return this.sanitizer.bypassSecurityTrustStyle(
-        `url("${this.imgurl + state.pageData.header.cover.image}")`
-      );
-    }
-
-    // Default fallback image if no cover image is provided
+getCoverUrl(): SafeStyle {
+  // If preview has a cover image (either as an object or string)
+  if (
+    (this.preview?.cover?.image && typeof this.pageData?.cover?.image === 'object') ||
+    typeof this.preview?.cover?.image === 'string'
+  ) {
     return this.sanitizer.bypassSecurityTrustStyle(
-      `url("assets/images/bg2.webp")`
+      `url("${this.preview.cover.image}")`
     );
   }
+
+  // If pageData has a cover image
+  if (this.pageData?.header?.cover?.image) {
+    return this.sanitizer.bypassSecurityTrustStyle(
+      `url("${this.imgurl + this.pageData.header.cover.image}")`
+    );
+  }
+
+  // Fallback default cover image
+  return this.sanitizer.bypassSecurityTrustStyle(
+    `url("assets/images/bg2.webp")`
+  );
+}
+
   // cover patch
   // getCoverUrl(state: any): SafeStyle {
   //   console.log(this.pageData?.header?.cover?.image, 'coverrr img');

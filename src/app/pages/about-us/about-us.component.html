@@ -36,19 +36,44 @@
     <div class="service-groups-card">
       <div class="header-row">
         <div class="header-title">
-          Edit block
           <span class="info-icon" title="Info">i</span>
+       
+        <button class="edit-btn">Edit</button>
         </div>
-        <h3></h3>
-      </div>
-
-      <button
+         <button
         type="button"
         class="add-group-btn"
         (click)="navigateTonewContent(pageId)"
       >
         <span class="plus-icon">+</span> New content block
       </button>
+        
+        <div class="group-list">
+        <div
+          class="group-item"
+          *ngFor="let group of serviceGroups; let i = index"
+      
+          [ngClass]="{
+            'orange-border': i % 2 === 0,
+            'blue-border': i % 2 !== 0
+          }"
+        >
+         <span   (click)="navigateTonewContent(pageId, group._id)" class="GroupTitle">{{ group.aboutus?.alignment || 'No Alignment' }} - {{ group._id | slice:0:8 }}</span> 
+         
+
+          <button
+           (click)="deleteGroup(group._id, 'group')"
+            type="button"
+            class="deleteBtn"
+          >
+          <img  src="../../../assets/images/delete.png" alt="delete" width="20">
+            
+          </button>
+        </div>
+      </div>
+      </div>
+
+     
     </div>
 
     <!-- <div class="slider-oneGroup">

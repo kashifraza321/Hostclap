@@ -3,7 +3,7 @@
   <p class="gallery-subtitle">Explore Now</p>
 
   <div class="slider-wrapper">
-    <!-- Left: Slider with layered images -->
+    <!-- Slider Images -->
     <div class="carousel">
       <div
         class="slide"
@@ -12,34 +12,34 @@
         [class.prev]="i === getPrevIndex()"
         [class.next]="i === getNextIndex()"
       >
-        <img [src]="slide.image" [alt]="slide.title" />
+        <img [src]="slide.imageUrl" alt="Slide Image" />
       </div>
     </div>
 
+    <!-- Slide Content -->
     <div
+      class="slide-content"
       [ngStyle]="{
         'font-family': data?.font,
-      
+        'color': slides[currentSlide]?.textColour,
+        'text-align': slides[currentSlide]?.alignment
       }"
-      class="slide-content"
     >
-      <h3>{{ slides[currentSlide].title }}</h3>
-      <p>{{ slides[currentSlide].description }}</p>
+      <h3>{{ slides[currentSlide]?.title }}</h3>
+      <p [innerHTML]="slides[currentSlide]?.sanitizedDescription"></p>
       <a
-        [ngStyle]="{
-          background: data?.selectedColor?.secondary
-        }"
-        [href]="slides[currentSlide].link"
         class="learn-more-btn"
+        [href]="slides[currentSlide]?.link"
+        [ngStyle]="{ background: data?.selectedColor?.secondary }"
       >
-        {{ slides[currentSlide].linkText }}
+        {{ slides[currentSlide]?.linkText }}
       </a>
     </div>
   </div>
 
-  <!-- Optional: Navigation Arrows -->
+  <!-- Navigation Buttons -->
   <div class="slider-nav">
-    <button (click)="moveSlide(-1)">‹</button>
-    <button (click)="moveSlide(1)">›</button>
+    <button (click)="moveSlide(-1)"><img src="../../../../../../../../../../../assets/images/icons8-chevron-left-24.png" alt=""></button>
+    <button (click)="moveSlide(1)"><img src="../../../../../../../../../../../assets/images/icons8-chevron-right-24.png" alt=""></button>
   </div>
 </div>

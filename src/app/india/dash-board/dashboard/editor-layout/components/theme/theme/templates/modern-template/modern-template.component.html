@@ -5,11 +5,7 @@
   <div class="classicWrapper" #scrollContainer>
     <ng-container *ngIf="state$ | async as state">
       <div class="url-bar">
-        <div class="dots">
-          <span class="dot"></span>
-          <span class="dot"></span>
-          <span class="dot"></span>
-        </div>
+      
         <div class="url-content">
           <img
             src="../../../../../../../../../../assets/images/icons8-lock-30 (2).png"
@@ -200,7 +196,7 @@
       <section
         class="classic-hero hero"
         *ngIf="state$ | async as state"
-        [style.background-image]="getCoverUrl(state)"
+        [style.background-image]="getCoverUrl()"
         [ngStyle]="{
           opacity:
             (state?.preview?.cover?.opacity ||
@@ -320,8 +316,8 @@
               <img
                 src="../../../../../../../../../../assets/images/icons8-discount-48.png"
                 alt="Offer"
-                width="80"
-                height="80"
+                width="100"
+                height="100"
               />
             </div>
             <div class="offer-text" [ngStyle]="{ 'font-family': data?.font }">
@@ -347,7 +343,7 @@
         </div>
       </section>
       <!-- about us section  -->
-      <app-about-us-slider></app-about-us-slider>
+      <app-about-us-slider [pageId]="pageId"></app-about-us-slider>
       <!-- about us section  -->
       <!-- gallery section -->
       <section *ngIf="" class="gallery-section">
@@ -406,7 +402,10 @@
           }"
           *ngIf="!isLoading"
         >
-          <button class="nav-arrow left" (click)="prev()">‹</button>
+          <button  [ngStyle]="{
+           
+            background: data?.selectedColor?.primary
+          }" class="nav-arrow left" (click)="prev()"><img class="white-icon" src="../../../../../../../../../../../assets/images/icons8-chevron-left-24.png" alt=""></button>
 
           <div class="carousel-track">
             <div
@@ -443,16 +442,19 @@
             </div>
           </div>
 
-          <button class="nav-arrow right" (click)="next()">›</button>
+          <button  [ngStyle]="{
+           
+            background: data?.selectedColor?.primary
+          }"  class="nav-arrow right" (click)="next()"><img class="white-icon" src="../../../../../../../../../../../assets/images/icons8-chevron-right-24.png" alt=""></button>
         </div>
       </section>
       <!-- gallery section -->
       <!-- amenties section -->
       <section class="amenities-section">
         <div class="mainContainer">
-          <h2>{{ pageData?.amenities.title }}</h2>
-          <p>{{ pageData?.amenities.subtitle }}</p>
-          <p>Spoken languages: English, Hindi</p>
+          <h2 class="gradientHeading">{{ pageData?.amenities.title }}</h2>
+          <p class="subHeading_para">{{ pageData?.amenities.subtitle }}</p>
+          <p class="subHeading_para">Spoken languages: English, Hindi</p>
 
           <div class="amenities">
             <div
@@ -465,7 +467,7 @@
               <div class="icon">
                 <img [src]="getAmenityIcon(item)" alt="" width="40" />
               </div>
-              <p>{{ item }}</p>
+              <p class="subHeading_para">{{ item }}</p>
             </div>
           </div>
         </div>
@@ -834,6 +836,8 @@
           </div>
         </div>
       </div>
+      <app-testimonial-slider [pageId]="pageId"></app-testimonial-slider>
+
 
       <!-- testimonial section -->
 
@@ -873,7 +877,7 @@
                     {{
                       state?.preview?.contactUs?.address ||
                         pageData?.contactUs?.address
-                    }},
+                    }}, <br>
                     {{
                       state?.preview?.contactUs?.city ||
                         pageData?.contactUs?.city
@@ -881,7 +885,7 @@
                     {{
                       state?.preview?.contactUs?.state ||
                         pageData?.contactUs?.state
-                    }},
+                    }},<br>
                     {{
                       state?.preview?.contactUs?.zip ||
                         pageData?.contactUs?.zip
@@ -1057,29 +1061,72 @@
         class="dynamicPages"
         [ngStyle]="{ 'font-family': data?.font }"
       >
-        <div class="mainContainer">
-          <div class="dymanic-page-header">
-            <h2 class="gradientHeading">{{ pagesList[1]?.pageName }}</h2>
-          </div>
+      <div class="opening">
+  <h2 class="gradientHeading">Opening Hours</h2>
+  <table  cellspacing="10" cellpadding="10">
+    <tr>
+      <td [ngClass]="{'highlight': isToday('Sunday')}"  [ngStyle]="isToday('Sunday') ? {
+        'font-family': data?.font,
+        'background': data?.selectedColor?.secondary
+      } : null">Sunday</td>
+      <td [ngClass]="{'highlight': isToday('Monday')}"  [ngStyle]="isToday('Monday') ? {
+        'font-family': data?.font,
+        'background': data?.selectedColor?.secondary
+      } : null">Monday</td>
+      <td [ngClass]="{'highlight': isToday('Tuesday')}"  [ngStyle]="isToday('Tuesday') ? {
+        'font-family': data?.font,
+        'background': data?.selectedColor?.secondary
+      } : null">Tuesday</td>
+      <td [ngClass]="{'highlight': isToday('Wednesday')}"  [ngStyle]="isToday('Wednesday') ? {
+        'font-family': data?.font,
+        'background': data?.selectedColor?.secondary
+      } : null">Wednesday</td>
+      <td [ngClass]="{'highlight': isToday('Thursday')}"  [ngStyle]="isToday('Thursday') ? {
+        'font-family': data?.font,
+        'background': data?.selectedColor?.secondary
+      } : null">Thursday</td>
+      <td [ngClass]="{'highlight': isToday('Friday')}"  [ngStyle]="isToday('Friday') ? {
+        'font-family': data?.font,
+        'background': data?.selectedColor?.secondary
+      } : null">Friday</td>
+      <td [ngClass]="{'highlight': isToday('Saturday')}"  [ngStyle]="isToday('Saturday') ? {
+        'font-family': data?.font,
+        'background': data?.selectedColor?.secondary
+      } : null">Saturday</td>
+    </tr>
+    <tr>
+      <td [ngClass]="{'highlight': isToday('Sunday')}"  [ngStyle]="isToday('Sunday') ? {
+        'font-family': data?.font,
+        'background': data?.selectedColor?.secondary
+      } : null">8:00 AM - 11:59 PM</td>
+      <td  [ngClass]="{'highlight': isToday('Monday')}"  [ngStyle]="isToday('Monday') ? {
+        'font-family': data?.font,
+        'background': data?.selectedColor?.secondary
+      } : null">8:00 AM - 11:59 PM</td>
+      <td  [ngClass]="{'highlight': isToday('Tuesday')}"  [ngStyle]="isToday('Tuesday') ? {
+        'font-family': data?.font,
+        'background': data?.selectedColor?.secondary
+      } : null">8:00 AM - 11:59 PM</td>
+      <td [ngClass]="{'highlight': isToday('Wednesday')}"  [ngStyle]="isToday('Wednesday') ? {
+        'font-family': data?.font,
+        'background': data?.selectedColor?.secondary
+      } : null">8:00 AM - 11:59 PM</td>
+      <td [ngClass]="{'highlight': isToday('Thursday')}"  [ngStyle]="isToday('Thursday') ? {
+        'font-family': data?.font,
+        'background': data?.selectedColor?.secondary
+      } : null">8:00 AM - 11:59 PM</td>
+      <td [ngClass]="{'highlight': isToday('Friday')}"  [ngStyle]="isToday('Friday') ? {
+        'font-family': data?.font,
+        'background': data?.selectedColor?.secondary
+      } : null">8:00 AM - 11:59 PM</td>
+      <td [ngClass]="{'highlight': isToday('Saturday')}"  [ngStyle]="isToday('Saturday') ? {
+        'font-family': data?.font,
+        'background': data?.selectedColor?.secondary
+      } : null">8:00 AM - 11:59 PM</td>
+    </tr>
+  </table>
+</div>
 
-          <div class="schedule-card">
-            <div
-              class="day"
-              *ngFor="let day of days; let i = index"
-              [class.today]="i === 0"
-              [ngStyle]="{
-                background: data?.selectedColor?.secondary
-              }"
-            >
-              <div class="day-name" [ngStyle]="{ 'font-family': data?.font }">
-                {{ day }}
-              </div>
-              <div class="day-status" [ngStyle]="{ 'font-family': data?.font }">
-                All day
-              </div>
-            </div>
-          </div>
-        </div>
       </section>
       <!-- Footer -->
       <footer

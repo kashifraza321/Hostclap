@@ -21,9 +21,12 @@ import { CommonModule } from '@angular/common';
 export class AboutUsComponent {
   sectionForm!: FormGroup;
 
-  // For later use (API)
+ serviceGroups: any[] = [];
   sectionId: string = '';
   pageId: string = '';
+  groupId: string = '';
+  
+  
   constructor(
     private fb: FormBuilder,
     private pagesService: PagesService,
@@ -73,6 +76,7 @@ export class AboutUsComponent {
             sectionTitle: res.data.section.sectionTitle || '',
             sectionSubtitle: res.data.section.subtitle || '',
           });
+            this.serviceGroups = res.data.section.groups || [];
         }
       },
       error: (err) => {
@@ -108,7 +112,31 @@ export class AboutUsComponent {
       },
     });
   }
-  navigateTonewContent(pageId: string) {
-    this.router.navigate(['/in/insight/editor/new-content', pageId]);
+    deleteGroup(subgroupId: string, sectionType: string) {
+    console.log(sectionType, 'pricelist sectiontype');
+    this.pagesService.deleteServiesBlock(sectionType, subgroupId).subscribe({
+      next: (res) => {
+        console.log('Group deleted:', res);
+        this.alertService.success('Group deleted successfully');
+
+        // Remove from UI list
+        this.serviceGroups = this.serviceGroups.filter(
+          (g) => g._id !== subgroupId
+        );
+      },
+      error: (err) => {
+        console.error('Error deleting group:', err);
+        this.alertService.error('Failed to delete group');
+      },
+    });
+  }
+  navigateTonewContent(pageId: string, groupId?: string) {
+    if (groupId) {
+   console.log(groupId, 'Navigating to edit existing group');
+      this.router.navigate(['/in/insight/editor/new-content', pageId, groupId]);
+    } else {
+      // Creating new content block
+      this.router.navigate(['/in/insight/editor/new-content', pageId]);
+    }
   }
 }

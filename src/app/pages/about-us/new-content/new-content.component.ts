@@ -11,6 +11,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { QuillModule } from 'ngx-quill';
 import { PagesService } from '../../pages.service';
 import { AlertService } from 'src/app/services/Toaster/alert.service';
+import { environment } from 'src/environments/environment';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-new-content',
@@ -32,11 +34,14 @@ export class NewContentComponent {
   fontSize: number = 16; // Default font size (Medium)
   fontSizeLabel: string = 'Medium';
   selectedMedia: File | null = null;
-  mediaPreview: string | null = null;
+ 
   mediaPreviewType: 'image' | 'video' | null = null;
   pageId: string = '';
+  groupId: string = '';
+  mediaPreview: SafeUrl | null = null;
   sectionId: string = '';
   sectionType: string = '';
+   imageUrl: string = environment.imageBaseUrl;
   editorModules = {
     toolbar: '#custom-toolbar',
   };
@@ -57,11 +62,14 @@ export class NewContentComponent {
     private route: ActivatedRoute,
     private router: Router,
     private pagesService: PagesService,
-    private alertService: AlertService
+    private alertService: AlertService,
+      private sanitizer: DomSanitizer
   ) {}
   ngOnInit(): void {
     this.pageId = this.route.snapshot.paramMap.get('pageId') || '';
-    console.log(this.pageId, ' pageId found');
+     this.groupId = this.route.snapshot.paramMap.get('groupId') || '';
+     console.log(this.groupId, ' groupId found');
+     console.log(this.pageId, ' pageId found');
     this.contentBlockForm = this.fb.group({
       title: ['', Validators.required],
       alignment: ['left'],
@@ -70,36 +78,50 @@ export class NewContentComponent {
       quote: ['', Validators.required],
       image: [null],
     });
-    this.getSectionDetailData();
+     console.log(this.groupId, "group id in newww")
+ if (this.groupId) {
+  console.log(this.groupId, "group id in newww")
+      this.getSectionDetailData();
+    }
   }
 
-  getSectionDetailData() {
-    this.pagesService.GET_SECTION_DETAIL(this.pageId, 'aboutus').subscribe({
-      next: (res) => {
-        console.log('Full API response:', res);
-        if (res?.data?.section) {
-          const section = res.data.section;
-          this.sectionId = section._id;
-          this.sectionType = section.sectionType;
+getSectionDetailData() {
+  this.pagesService.GET_SECTION_DETAIL(this.pageId, 'aboutus').subscribe({
+    next: (res) => {
+      const section = res.data?.section;
+      if (!section) return;
 
-          console.log('sectionId:', this.sectionId);
-          console.log('sectionType:', this.sectionType);
+      this.sectionId = section._id;
+      this.sectionType = section.sectionType;
 
-          // Patch form values from API
-          this.contentBlockForm.patchValue({
-            title: section.sectionTitle || '',
-            alignment: this.alignment,
-            fontSize: this.fontSize,
-            textColour: '#FF0000',
-            quote: '',
-          });
+      const matchedGroup = section.groups.find(
+        (group: any) => group._id === this.groupId
+      );
+
+      if (matchedGroup) {
+        const aboutus = matchedGroup.aboutus;
+        this.contentBlockForm.patchValue({
+          title: section.sectionTitle || '',
+          alignment: aboutus?.alignment || 'left',
+          fontSize: this.fontSize,
+          textColour: aboutus?.textColour || '#000000',
+          quote: aboutus?.quote || '',
+        });
+
+         const fullImageUrl = `${this.imageUrl}${aboutus.imageUrl}`;
+        if (aboutus?.imageUrl) {
+          this.mediaPreview = `${this.imageUrl}${aboutus.imageUrl}`;
+           this.mediaPreview = this.sanitizer.bypassSecurityTrustUrl(fullImageUrl);
+          this.mediaPreviewType = 'image';
         }
-      },
-      error: (err) => {
-        console.error('Error loading section detail', err);
-      },
-    });
-  }
+      }
+    },
+    error: (err) => {
+      console.error('Error loading section detail', err);
+    },
+  });
+}
+
 
   // Font size slider change
   updateFontSize(event: Event): void {

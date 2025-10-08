@@ -1,6 +1,6 @@
 .about-us-slider {
   padding: 40px;
-  max-width: 1200px;
+  max-width: 1440px;
   margin: auto;
   position: relative;
 }
@@ -59,8 +59,9 @@
 
 .slide.active {
   opacity: 1;
-  transform: scale(1);
+  transform: scale(1.2);
   z-index: 3;
+      left: -45px;
 }
 
 .slide.prev {
@@ -71,7 +72,7 @@
 
 .slide.next {
   opacity: 0.6;
-  transform: scale(1) translateX(32px);
+  transform: scale(1.1) translateX(32px);
   z-index: 2;
 }
 
@@ -109,9 +110,11 @@
 }
 
 .slider-nav {
-  margin-top: 35px;
+  margin-top: 116px;
   text-align: center;
   display: flex;
+  border: none;
+  
 }
 
 .slider-nav button {

@@ -6,6 +6,7 @@
   padding: 15px;
   min-height: 700px;
   height: 100vh;
+  overflow: auto;
 }
 
 .back-btn {

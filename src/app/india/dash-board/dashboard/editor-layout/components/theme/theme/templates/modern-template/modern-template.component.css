@@ -169,7 +169,7 @@ classic-header-info {
   background: #1f1f1f;
   padding: 12px 20px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-around;
   align-items: center;
   gap: 106px;
 }
@@ -246,13 +246,14 @@ classic-header-info {
   min-height: 236px;
 }
 .hero-text h1 {
-  font-size: 42px;
+  font-size: 50px;
   color: #fff;
   margin-bottom: 15px;
 }
 .hero-text p {
-  font-size: 18px;
-  color: #ccc;
+font-size: 28px;
+    color: #ccc;
+    margin-top: 31px;
 }
 
 /* OFFER SECTION */
@@ -268,7 +269,7 @@ classic-header-info {
   overflow: hidden;
   max-width: 800px;
   width: 100%;
-  min-height: 183px;
+  min-height: 237px;
   margin: 0 auto;
 }
 
@@ -311,11 +312,11 @@ classic-header-info {
   font-weight: 500;
 }
 .offer-text h3 {
-  font-size: 3rem;
+  font-size: 40px;
   font-weight: 600;
 }
 .offer-text p {
-  font-size: 2.3rem;
+  font-size: 2.5rem;
 }
 .gradientHeading {
   /* background: linear-gradient(270deg, #2241d3, #fc5c7d, #6f81f7);
@@ -324,9 +325,9 @@ classic-header-info {
   background-clip: text;
   text-fill-color: transparent; */
   color: #000;
-
+margin-bottom: 43px;
   text-align: center;
-  font-size: 36px;
+  font-size: 40px;
   font-weight: 700;
   text-transform: capitalize;
   letter-spacing: 0.5px;
@@ -566,13 +567,13 @@ classic-header-info {
 /* Section Heading */
 h2.section-title {
   font-size: 31px;
-  font-weight: bold;
-  color: #fff; /* coral/orange accent */
+  font-weight: 500;
+  color: #fff; 
   margin-bottom: 5px;
   text-align: center;
   margin: 58px 0 79px 0;
   background: #101511;
-  padding: 17px;
+  padding: 20px;
 }
 
 .section-subtitle {
@@ -639,9 +640,9 @@ h2.section-title {
 }
 
 .service-title {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
-  margin: 0 0 6px 0;
+  margin: 0 0 6=8px 0;
 }
 
 .service-desc {
@@ -762,45 +763,45 @@ h2.section-title {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   margin-top: 47px;
 }
-
-.day {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: #fff;
+.opening {
+  background-color: #fff;
+  padding: 30px;
   border-radius: 8px;
-  padding: 15px 10px;
-  transition: all 0.3s ease;
-  border: 1px solid #eaeaea;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
 }
 
-.day:hover {
-  background: #f0f4ff;
-  transform: translateY(-3px);
+h1 {
+  font-size: 32px;
+  margin-bottom: 20px;
 }
 
-.day-name {
+table {
+  width: 100%;
+ 
+   border-collapse: separate; 
+  border-spacing: 8px; 
+}
+
+td {
+  padding:  29px 15px;
+  font-size: 18px;
+  text-align: center;
+  border: 1px solid #ddd;
+  color: #000;
+  font-weight: 500;
+}
+
+td.highlight {
+  background-color: #f48fb1;
+  color: white;
   font-weight: 600;
-  font-size: 14px;
-  margin-bottom: 8px;
-  color: #333;
 }
 
-.day-status {
-  font-size: 13px;
-  color: #555;
-}
 
-.day.today {
-  background: #f87d47;
-  color: #fff;
-  border: none;
-}
 
-.day.today .day-name,
-.day.today .day-status {
-  color: #fff;
-}
 /* location */
 .contactFlex {
   display: flex;
@@ -848,10 +849,13 @@ h2.section-title {
 
 .location-tooltip p {
   margin: 0 0 6px;
-  font-size: 15px;
+  font-size: 16px;
   color: #fff;
   font-weight: 300;
-  margin-bottom: 20px;
+
+}
+.white-icon {
+  filter: brightness(0) invert(1);
 }
 
 /* Triangle pointing down */
@@ -880,8 +884,8 @@ h2.section-title {
 }
 .sectionHeading {
   color: #000;
-  font-size: 30px;
-  font-size: 35px;
+
+  font-size: 44px;
   text-align: center;
   text-decoration: underline;
 }
@@ -889,7 +893,8 @@ h2.section-title {
 .contact-info {
   /* max-width: 317px; */
   width: 100%;
-  padding: 20px 0;
+  padding: 63px 0;
+  min-height: 336px;
 }
 
 .addTocart {
@@ -908,6 +913,13 @@ h2.section-title {
   align-items: center;
   gap: 40px;
   justify-content: flex-start;
+}
+
+.linksss a{
+      font-size: 23px;
+    color: #000;
+    padding-right: 37px;
+
 }
 
 /* 🔶 Orange Dot */
@@ -962,13 +974,13 @@ h2.section-title {
 
 .info-item h4 {
   margin: 0;
-  font-size: 16px;
+  font-size: 23px;
   font-weight: 500;
 }
 
 .info-item p {
-  margin: 4px 0 0;
-  font-size: 14px;
+  margin: 7px 0 0;
+  font-size: 19px;
   color: #fff;
 }
 .dynamicPages {
@@ -994,7 +1006,7 @@ h2.section-title {
   background-color: #1e1e1e;
   padding: 30px;
   border-radius: 10px;
-  max-width: 600px;
+  max-width: 750px;
   margin: auto;
   transform: translateY(86px);
 }
@@ -1019,21 +1031,24 @@ h2.section-title {
 .form-row input,
 .form-row select {
   flex: 1;
-  padding: 10px;
+  padding: 13px;
   background-color: #fff;
-  border: 1px solid #444;
+  font-size: 16px;
   color: #fff;
   border-radius: 5px;
+  color: #000;
 }
 
 textarea {
   width: 100%;
   background-color: #fff;
   border: 1px solid #444;
-  color: #fff;
+  color: #000;
   border-radius: 5px;
   padding: 10px;
+  font-size: 18px;
   margin-bottom: 15px;
+  resize: none;
 }
 
 .form-check {
@@ -1252,25 +1267,13 @@ textarea {
   padding: 30px;
   text-align: center;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+ 
   width: 100%;
   margin: 50px auto;
-  max-width: 1150px;
+
   width: 100%;
 }
 
-.amenities-section h2 {
-  font-size: 36px;
-  margin-bottom: 10px;
-  color: #000;
-  text-decoration: underline;
-}
-
-.amenities-section p {
-  font-size: 18px;
-  color: #555;
-  margin-bottom: 20px;
-}
 
 .amenities {
   display: flex;
@@ -1279,6 +1282,8 @@ textarea {
   margin-top: 40px;
   flex-wrap: wrap;
   gap: 20px;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+   padding: 20px;
 }
 
 .amenity {
@@ -1335,7 +1340,7 @@ textarea {
 .carousel-container {
   width: 100%;
   max-width: 100%;
-  height: 450px;
+  height: 662px;
   position: relative;
   /* perspective: 1000px; */
   margin-top: 80px;
@@ -1354,7 +1359,7 @@ textarea {
 
 .card {
   position: absolute;
-  width: 374px;
+  width: 440px;
   height: 468px;
   background: white;
   border-radius: 20px;
@@ -1373,11 +1378,23 @@ textarea {
 
 .card.center {
   z-index: 10;
-  transform: scale(1.1) translateZ(0);
+  transform: scale(1.2) translateZ(0);
 }
 
 .card.center img {
   filter: none;
+}
+.subHeading_para{
+  font-size: 25px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+
+
+.amenities-section p {
+  font-size: 18px;
+
 }
 
 .card.left-2 {
@@ -1519,11 +1536,11 @@ textarea {
   background: #fff;
   padding: 8px 15px;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
-  font-family: Arial, sans-serif;
+
+ 
   gap: 12px;
   position: absolute;
-  bottom: 0;
+  bottom: -8px;
   right: 16%;
   max-width: 300px;
   width: 100%;
@@ -1532,6 +1549,9 @@ textarea {
 .reviewFlex {
   display: flex;
   align-items: center;
+      flex-direction: column;
+    gap: 7px;
+
 }
 
 .stars {

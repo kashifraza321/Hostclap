@@ -20,6 +20,8 @@ export class ReviewSliderComponent {
   pageData: any;
   isLoading = false;
   userId: string = '';
+  autoplayInterval: any;
+
 
   reviews = [
     {
@@ -83,6 +85,9 @@ export class ReviewSliderComponent {
     this.userId = this.route.snapshot.paramMap.get('id') || '';
     console.log('User ID:', this.userId);
     console.log('ngOnInit - data received:', this.data);
+this.autoplayInterval = setInterval(() => {
+  this.next();
+}, 3000); // autoplay every 3 seconds
 
     console.log('User ID:', this.userId);
     this.GetWebsiteTheme();
@@ -103,10 +108,18 @@ export class ReviewSliderComponent {
     // });
     // this.getPages();
   }
+  ngOnDestroy() {
+  if (this.autoplayInterval) {
+    clearInterval(this.autoplayInterval);
+  }
+}
+
 
   next() {
     if (this.currentIndex < this.reviews.length - 3) {
       this.currentIndex++;
+    } else{
+      this.currentIndex = 0;
     }
   }
 

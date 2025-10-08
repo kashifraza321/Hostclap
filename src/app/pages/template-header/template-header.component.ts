@@ -477,7 +477,7 @@ export class TemplateHeaderComponent {
             typeof this.coverForm.get('opacity')?.value
           );
 
-          console.log('📝 LogoForm after patch:', this.logoForm.value);
+          console.log(' LogoForm after patch:', this.logoForm.value);
         }
         const titles = res.data.header.titles;
         if (titles) {
