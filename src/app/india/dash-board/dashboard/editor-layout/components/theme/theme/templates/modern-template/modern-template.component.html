@@ -2,7 +2,7 @@
   <app-loader></app-loader>
 </ng-container>
 <ng-template #content>
-  <div class="classicWrapper" #scrollContainer>
+  <div class="classicWrapper" id="scrollContainer" #scrollContainer>
     <ng-container *ngIf="state$ | async as state">
       <div class="url-bar">
       
@@ -98,6 +98,7 @@
           <!-- <pre>{{ pageData | json }}</pre> -->
           {{ pageData?.header?.phones?.mobile }}
         </div>
+        
       </header>
 
       <!-- Navigation -->
@@ -105,12 +106,7 @@
         [class.scrolled]="isScrolled"
         class="classic-nav"
         [ngStyle]="{
-          background: !isScrolled
-            ? state?.preview?.menu?.menuBackgroudColour ||
-              pageData?.header?.menu?.menuBackgroudColour ||
-              data?.selectedColor?.primary ||
-              '#f88d00'
-            : 'transparent',
+       
 
           'font-size':
             state?.preview?.menu?.fontSize ||
@@ -122,9 +118,18 @@
             'left'
         }"
       >
+    
         <div
           class="logoSection"
-          [class.scrolled]="isScrolled"
+      [ngClass]="{ 'logo-scrolled': isScrolled }"
+            [ngStyle]="{
+         background: isScrolled 
+           ? 'transparent' 
+           : (state?.preview?.menu?.menuBackgroudColour 
+              || pageData?.header?.menu?.menuBackgroudColour 
+              || data?.selectedColor?.primary 
+              || '#f88d00')
+       }" 
           *ngIf="state$ | async as state"
         >
           <!-- <img
@@ -150,6 +155,7 @@
                 pageData?.header?.logo?.alignment ||
                 'center'
             }"
+            class="logoWrp"
           >
             <img
               [src]="getLogoUrl()"
@@ -157,11 +163,32 @@
                 width:
                   (state?.preview?.logo?.logoSize ||
                     pageData?.header?.logo?.logoSize ||
-                    70) + 'px'
+                    '') + 'px'
               }"
               alt="logo"
+             [ngClass]="{ 'logo-scrolled': isScrolled }"
+              width="120"
             />
           </div>
+        </div>
+      
+         <div class="rightHeaderWrap">
+          <div class="brandname" 
+       [ngStyle]="{
+         background: isScrolled 
+           ? 'transparent' 
+           : (state?.preview?.menu?.menuBackgroudColour 
+              || pageData?.header?.menu?.menuBackgroudColour 
+              || data?.selectedColor?.primary 
+              || '#f88d00')
+       }" 
+       [class.hide-brand]="isScrolled">
+
+          
+         <h3>Hostclap</h3>   
+       
+
+         <p>Lorem ipsum dolor, sit amet consectetur adipisicing  perspiciatis quas totam?</p>
         </div>
         <ul>
           <!-- <li *ngFor="let page of data?.pageData">
@@ -189,6 +216,7 @@
             >
           </li>
         </ul>
+        </div>
       </nav>
 
       <!-- Hero -->
@@ -554,7 +582,10 @@
                     <a
                       href="#"
                       class="learn-more"
-                      [ngStyle]="{ 'font-family': data?.font }"
+                     [ngStyle]="{
+                        'font-family': data?.font,
+                        background: data?.selectedColor?.primary
+                      }"
                     >
                       Learn more
                     </a>

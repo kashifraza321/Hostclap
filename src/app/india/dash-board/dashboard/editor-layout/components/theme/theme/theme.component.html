@@ -344,6 +344,73 @@
       </div>
     </div>
 
+    <!-- new color -->
+    
+ <div class="color-options">
+    <div
+      *ngFor="let color of colorOptions"
+      [ngStyle]="{
+        background: 'linear-gradient(to right, ' + color.primary + ' 50%, ' + color.secondary + ' 50%)'
+      }"
+      class="color-circle"
+      (click)="applyPresetColors(color)"
+    ></div>
+  </div>
+
+  <!-- Custom Color Picker Toggle -->
+  <div class="toggle-container">
+    <label for="color-toggle">Custom Color</label>
+    <input
+      type="checkbox"
+      id="color-toggle"
+      (change)="toggleCustomColor($event)"
+      formControlName="useCustomColors"
+    />
+  </div>
+
+  <!-- Custom Color Picker (Displayed if Custom Color is toggled) -->
+  <div *ngIf="showCustomColors" class="color-picker-container">
+    <input
+      type="color"
+      [value]="themeForm.controls['primary'].value"
+        (input)="onColorInput($event, 'primary')"
+      formControlName="primary"
+      id="primary-color-picker"
+      class="color-picker-input"
+    />
+  </div>
+
+  <!-- Labels and Color Displays -->
+ <div class="color-picker-controls">
+    <div class="colorWrp" (click)="onColorInput($event, 'primary')">
+      <label for="primary">Primary</label>
+      <input type="text" formControlName="primary" readonly />
+    </div>
+    <div class="colorWrp" (click)="onColorInput($event, 'secondary')">
+      <label for="secondary">Secondary</label>
+      <input type="text" formControlName="secondary" readonly />
+    </div>
+    <div class="colorWrp" (click)="onColorInput($event, 'accent')">
+      <label for="accent">Accent</label>
+      <input type="text" formControlName="accent" readonly />
+    </div>
+  </div>
+
+    <!-- new color -->
+    <label for="color">Pick a color:</label>
+   <!-- <input
+    type="color"
+    formControlName="primary"
+    [cpColor]="themeForm.get('primary')?.value"
+    [cpToggle]="true"
+  /> -->
+<input 
+  type="color" 
+
+  (input)="onColorInput($event, 'primary')" 
+/>
+
+
     <!-- Save / Cancel Buttons -->
     <div class="btnWRap">
       <button class="cancelBtn" type="button" (click)="goBack()">Cancel</button>

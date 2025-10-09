@@ -6,25 +6,30 @@ import { Data } from 'src/app/models/data.model';
 import { Router } from '@angular/router';
 import { AlertService } from 'src/app/services/Toaster/alert.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ColorPickerModule } from 'ngx-color-picker';
+
+
+
 
 @Component({
   selector: 'app-theme',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, ColorPickerModule ],
   templateUrl: './theme.component.html',
   styleUrl: './theme.component.css',
 })
 export class ThemeComponent {
   themeForm: FormGroup;
+    showCustomColors = false;
 
   colorOptions = [
     { primary: '#e92984e6', secondary: '#e6e6e6', accent: '#f9eee9' },
     { primary: '#29B6F6', secondary: '#ff827c', accent: '#ededed' },
-    { primary: '#294FDA', secondary: '#F6F8FC', accent: '#ededed' },
+    { primary: '#3336A3', secondary: '#F2F4F7', accent: '#ffffff' },
     { primary: '#ffbe33', secondary: '#212529', accent: '#f8f9fa' },
     { primary: '#baddf3', secondary: '#f3baba', accent: '#333333' },
-    { primary: '#C36D5F', secondary: '#944232', accent: '#ededed' },
-    { primary: '#915ED1', secondary: '#F96290', accent: '#ededed' },
+    { primary: '#ffa826', secondary: '#5f2b65', accent: '#ffffff' },
+    { primary: '#c81a35', secondary: '#faeee9', accent: '#ffffff' },
   ];
 
   fonts = [
@@ -83,6 +88,9 @@ export class ThemeComponent {
   selectTemplate(template: string) {
     this.themeForm.patchValue({ template });
   }
+    toggleCustomColor(event: any) {
+    this.showCustomColors = event.target.checked;
+  }
 
   applyPresetColors(color: any) {
     this.themeForm.patchValue({
@@ -103,6 +111,13 @@ export class ThemeComponent {
       accent: color.accent,
     });
   }
+  onColorInput(event: any, color: 'primary' | 'secondary' | 'accent') {
+    const colorValue = (event.target as HTMLInputElement).value;
+    this.themeForm.patchValue({
+      [color]: colorValue, // Dynamically update the selected color
+    });
+  }
+
 
   updateParentData() {
     const { template, font, primary, secondary, accent } = this.themeForm.value;

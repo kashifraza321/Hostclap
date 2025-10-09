@@ -18,6 +18,7 @@ import { ReviewSliderComponent } from './review-slider/review-slider.component';
 import { AboutUsSliderComponent } from './about-us-slider/about-us-slider.component';
 import { ThemeService } from '../../theme.service';
 import { TestimonialSliderComponent } from './testimonial-slider/testimonial-slider.component';
+import { take } from 'rxjs';
 // import { SlickCarouselModule } from 'ngx-slick-carousel';
 // import { SwiperModule } from 'swiper/angular';
 interface TeamMember {
@@ -62,7 +63,7 @@ export class ModernTemplateComponent {
   public state$ = this.pagesService.state$;
   aboveContactSections: any[] = [];
   belowContactSections: any[] = [];
-  isScrolled = false;
+
   itemsToShow = 3;
   selectedGroupIndex: number = 0;
   abovePriceContactSections: any[] = [];
@@ -110,11 +111,12 @@ export class ModernTemplateComponent {
   testimonialsPerView = 3;
  currentDay: string;
   isTestimonialAnimating = false;
-  @ViewChild('scrollContainer', { static: true }) scrollContainer!: ElementRef;
-  @HostListener('window:scroll', [])
-  onWindowScroll() {
-    this.isScrolled = window.scrollY > 50;
-  }
+    scrollListenerAttached = false;
+ @ViewChild('scrollContainer', { static: false }) scrollContainer!: ElementRef;
+
+isScrolled = false;
+  
+
 
   constructor(
     private pagesService: PagesService,
@@ -127,6 +129,7 @@ export class ModernTemplateComponent {
     const today = new Date().getDay(); // Get the current day (0-6)
     this.currentDay = daysOfWeek[today];
   }
+ 
 
   ngOnInit() {
     this.userId = this.route.snapshot.paramMap.get('id') || '';
@@ -186,19 +189,30 @@ export class ModernTemplateComponent {
     }
   }
 
-  ngAfterViewInit() {
-    setTimeout(() => {
-      if (this.scrollContainer) {
-        this.scrollContainer.nativeElement.addEventListener('scroll', () => {
-          const scrollTop = this.scrollContainer.nativeElement.scrollTop;
-          this.isScrolled = scrollTop > 50;
-          // console.log('Scroll:', scrollTop, 'isScrolled:', this.isScrolled);
-        });
-      } else {
-        console.error('scrollContainer still not found after timeout!');
-      }
-    }, 0);
+ngAfterViewInit() {
+ 
+}
+
+  ngAfterViewChecked() {
+    if (this.scrollContainer && !this.scrollListenerAttached) {
+      this.scrollContainer.nativeElement.addEventListener('scroll', this.onScroll.bind(this));
+      this.scrollListenerAttached = true;
+      console.log("✅ Scroll listener attached after view checked");
+    }
   }
+   onScroll(event?: Event) {
+    console.log("🌀 Scroll event fired", event);
+    // Example: toggle isScrolled based on scrollTop
+    const scrollTop = this.scrollContainer.nativeElement.scrollTop;
+    this.isScrolled = scrollTop > 50;
+    this.cdr.detectChanges(); // ensure Angular picks up the change
+  }
+
+
+
+
+
+
   updateData(update: Partial<Data>) {
     this.data = { ...this.data, ...update };
     console.log('Updated Data:', this.data);

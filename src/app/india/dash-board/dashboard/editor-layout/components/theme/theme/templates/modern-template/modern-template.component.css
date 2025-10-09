@@ -10,6 +10,8 @@
   height: 100vh;
   overflow-y: auto;
   background: #fff;
+    height: 100vh;
+  overflow-y: auto;
 }
 
 /* URL BAR */
@@ -75,17 +77,7 @@ classic-header-info {
   transition: background-color 0.4s ease, backdrop-filter 0.4s ease;
   background: transparent;
 }
-.classic-nav.scrolled {
-  background: rgba(0, 0, 0, 0.6); /* Transparent overlay with color */
-  backdrop-filter: blur(10px); /* Glassy blur */
-}
 
-.classic-nav ul {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-}
 
 .classic-nav a {
   color: #ecf0f1;
@@ -93,10 +85,7 @@ classic-header-info {
   font-size: 18px;
   font-weight: 500;
 }
-.classic-nav.scrolled {
-  background: rgba(0, 0, 0, 0.5) !important; /* Transparent overlay */
-  backdrop-filter: blur(8px) !important;
-}
+
 
 /* ANNOUNCEMENT BAR */
 .top-bar {
@@ -156,7 +145,7 @@ classic-header-info {
 .classic-header-info {
   display: flex;
   justify-content: space-between;
-  padding: 10px 20px;
+  padding: 0px;
   background: #1a1a1a;
   color: #ddd;
   font-size: 14px;
@@ -167,11 +156,137 @@ classic-header-info {
 
 .classic-nav {
   background: #1f1f1f;
-  padding: 12px 20px;
+    padding: 0;
+    display: flex
+;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0;
+}
+.brandname{
+      padding: 10px 0 40px;
+      width: 100%;
+}
+.brandname img{
+     max-width: 160px;
+     width: 100%;
+}
+.brandname h3{
+  font-size: 56px;
+    text-align: left;
+}
+
+/* logo translate */
+.logoSection {
+  transition: all 0.1s ease;
   display: flex;
-  justify-content: space-around;
+
+}
+
+.logo-img {
+  transition: all 0.5s ease;
+  width: 120px;
+}
+
+.logo-img.logo-scrolled {
+  width: 70px;
+}
+
+/* Brandname Hide on Scroll */
+.brandname {
+  transition: opacity 0.5s ease, max-height 0.5s ease;
+  /* max-height: 100px;
+  opacity: 1;
+  overflow: hidden; */
+}
+.brandname.hide-brand {
+  opacity: 0;
+  max-height: 0;
+  pointer-events: none;
+}
+
+.rightHeaderWrap {
+  display: flex;
   align-items: center;
-  gap: 106px;
+  width: 100%;
+  justify-content: flex-start;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* on scroll thing */
+
+.classicWrapper.scrolled .url-bar,
+.classicWrapper.scrolled .top-bar,
+.classicWrapper.scrolled .classic-header-info {
+  display: none;
+}
+
+/* Navbar adjustments when scrolled */
+.classic-nav.scrolled {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+ background: rgba(0, 0, 0, 0.6); /* Transparent overlay with color */
+  backdrop-filter: blur(10px); /* Glassy blur */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+
+.logo-scrolled img {
+  width: 120px; 
+  transition: width 0.3s ease;
+  
+}
+.logo-scrolled img {
+  width: 70px !important ;
+  transition: all 0.2s ease;
+}
+.brandname {
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+
+.hide-brand {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.hide-brand {
+  display: none !important;
+}
+
+/* logo translate */
+.logoSection {
+    width: 20%;
+    height: 277px;
+    padding: 22px;
+  
+}
+.logoWrp{
+  width: 100%;
+}
+.logoSection img {
+  display: inline-block;
+}
+/* .logoSection img {
+    transform: translate(137px, -49px);
+} */
+/* .logoSection.logo-scrolled img  {
+transform: translate(184px, -8px);
+} */
+.logoSection.logo-scrolled {
+  transform: translateY(9px);
+    height: initial; 
+  padding: 10px; 
+   transition: all 0.2s ease;
+}
+.brandname p{
+     font-size: 28px;
+    padding: 10px 0;
 }
 .classic-nav ::-webkit-scrollbar {
   width: 0px;
@@ -184,7 +299,7 @@ classic-header-info {
   margin: 0;
   padding: 0;
   justify-content: flex-start;
-  margin: 0;
+  margin: 23px;
   padding: 0;
   align-items: center;
   overflow: auto;
@@ -662,9 +777,7 @@ h2.section-title {
   transition: background 0.3s ease;
 }
 
-.btn:hover {
-  background: #e65c2e;
-}
+
 
 /* Learn more bar */
 .learn-more {
@@ -673,7 +786,7 @@ h2.section-title {
   right: 0;
   bottom: -60px; /* hidden initially */
   background: #fff;
-  color: #000;
+  color: #fff;
   padding: 14px 18px;
   font-size: 15px;
   font-weight: 600;
@@ -724,11 +837,6 @@ h2.section-title {
   font-size: 14px;
   transition: 0.3s;
   margin-left: 10px;
-}
-
-.btn:hover {
-  background: #ff7f50;
-  color: #fff;
 }
 
 /* Load More */
@@ -1751,6 +1859,12 @@ textarea {
 .requtBtn {
   color: #fff !important;
 }
+
+
+
+
+/* on scroll thing */
+
 @media (max-width: 900px) {
   .slide {
     width: 50% !important;

@@ -236,9 +236,9 @@ select {
 }
 
 .color-picker-container input {
-  border-radius: 50%;
-  height: 30px;
-  width: 30px;
+
+  min-height: 100px;
+  width: 70%;
   box-shadow: 0px 1px 14px 0px rgba(0, 0, 0, 0.16);
   border: 1px solid #fff;
 }
@@ -249,8 +249,64 @@ select {
   align-items: center;
 }
 
+
 .fontLabel {
   font-size: 19px;
   font-weight: 500;
   margin-bottom: 13px;
 }
+
+
+/* new css/
+ */
+.color-options {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.color-circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  margin: 0 5px;
+}
+
+.toggle-container {
+  margin-bottom: 20px;
+}
+
+.color-picker-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.color-picker-input {
+  width: 50px;
+  height: 50px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+}
+
+.color-picker-controls {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.colorWrp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.colorWrp input {
+  width: 100px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+
+
