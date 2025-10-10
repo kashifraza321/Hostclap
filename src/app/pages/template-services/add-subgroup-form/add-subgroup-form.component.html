@@ -172,7 +172,7 @@
           class="media-item"
           *ngFor="let img of uploadedImages; let i = index"
         >
-          <img [src]="img" alt="media" />
+          <img class="mediaIMg" [src]="img" alt="media" />
           <div class="actions">
             <button type="button" (click)="removeImage(i)">
               <img

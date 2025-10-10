@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { AlertService } from 'src/app/services/Toaster/alert.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ColorPickerModule } from 'ngx-color-picker';
+import { ColorChromeModule } from 'ngx-color/chrome';
 
 
 
@@ -14,7 +15,7 @@ import { ColorPickerModule } from 'ngx-color-picker';
 @Component({
   selector: 'app-theme',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ColorPickerModule ],
+  imports: [CommonModule, ReactiveFormsModule, ColorPickerModule,ColorChromeModule ],
   templateUrl: './theme.component.html',
   styleUrl: './theme.component.css',
 })
@@ -31,6 +32,13 @@ export class ThemeComponent {
     { primary: '#ffa826', secondary: '#5f2b65', accent: '#ffffff' },
     { primary: '#c81a35', secondary: '#faeee9', accent: '#ffffff' },
   ];
+   selectedType: 'primary' | 'secondary' | 'accent' = 'primary';
+  
+  colors = {
+    primary: '#9C27B0',
+    secondary: '#E91E63',
+    accent: '#f8f2f1'
+  };
 
   fonts = [
     'Roboto',
@@ -54,6 +62,7 @@ export class ThemeComponent {
     'Mukta',
     'Hind',
   ];
+
 
   templates = ['Classic', 'Origins', 'Modern'];
 
@@ -80,24 +89,65 @@ export class ThemeComponent {
     });
   }
 
+
   ngOnInit(): void {
     // Optionally load existing theme
     // this.GetWebsiteTheme();
   }
 
+  get selectedColor() {
+    return this.colors[this.selectedType];
+  }
+
+  onColorChange(color: string) {
+    // Update local color object
+    this.colors[this.selectedType] = color;
+
+    // Sync with form
+    this.themeForm.patchValue({
+      [this.selectedType]: color
+    }, { emitEvent: false });
+  }
+
+  selectType(type: 'primary' | 'secondary' | 'accent') {
+    this.selectedType = type;
+  }
+
+  
+
   selectTemplate(template: string) {
     this.themeForm.patchValue({ template });
   }
-    toggleCustomColor(event: any) {
+   toggleCustomColor(event: any) {
     this.showCustomColors = event.target.checked;
+
+    if (this.showCustomColors) {
+      // Sync colors object with form values when opening picker
+      this.colors = {
+        primary: this.themeForm.value.primary,
+        secondary: this.themeForm.value.secondary,
+        accent: this.themeForm.value.accent,
+      };
+    }
   }
 
-  applyPresetColors(color: any) {
+   applyPresetColors(color: any) {
+    // Update form
     this.themeForm.patchValue({
       primary: color.primary,
       secondary: color.secondary,
       accent: color.accent,
     });
+
+    // Sync picker colors
+    this.colors = {
+      primary: color.primary,
+      secondary: color.secondary,
+      accent: color.accent,
+    };
+
+    // Reset picker to show Primary first
+    this.selectedType = 'primary';
   }
   selectFont(event: Event) {
     const target = event.target as HTMLSelectElement;

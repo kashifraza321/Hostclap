@@ -60,6 +60,9 @@ export class TestimonialSliderComponent   {
    this.GetWebsiteTheme() 
     
     this.getSectionDetailDataForTestimonials(this.pageId);
+      this.pagesService.state$.subscribe((state) => {
+      this.preview = state.preview;
+    });
   }
    ngOnChanges(changes: SimpleChanges) {
       if (changes['data'] && changes['data'].currentValue) {

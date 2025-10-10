@@ -16,8 +16,8 @@
       />
       back
     </button>
-    <div class="title">{{ showSubGroup ? "SUBGROUPS" : "SERVICE" }}</div>
   </div>
+  <div class="title">{{ showSubGroup ? "SUBGROUPS" : "SERVICE" }}</div>
   <form [formGroup]="sectionForm" (ngSubmit)="saveSection()">
     <div class="section-card">
       <label class="label" for="section-title">Section Title</label>

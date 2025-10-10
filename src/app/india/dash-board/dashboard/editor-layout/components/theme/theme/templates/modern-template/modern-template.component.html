@@ -295,14 +295,22 @@
                 <span
                   class="star full"
                   [ngStyle]="{
-                    background: data?.selectedColor?.primary
+                    color: data?.selectedColor?.primary
                   }"
                   >&#9733;</span
                 >
-                <span class="star full">&#9733;</span>
-                <span class="star full">&#9733;</span>
-                <span class="star full">&#9733;</span>
-                <span class="star half">&#9733;</span>
+                <span   [ngStyle]="{
+                    color: data?.selectedColor?.primary
+                  }" class="star full">&#9733;</span>
+                <span   [ngStyle]="{
+                    color: data?.selectedColor?.primary
+                  }" class="star full">&#9733;</span>
+                <span  [ngStyle]="{
+                    color: data?.selectedColor?.primary
+                  }"  class="star full">&#9733;</span>
+                <span   [ngStyle]="{
+                    color: data?.selectedColor?.primary
+                  }" class="star half">&#9733;</span>
               </div>
               <div class="reviewFlex">
                 <div class="review-text">174 reviews</div>

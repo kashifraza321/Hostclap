@@ -18,6 +18,9 @@ export class ReviewSliderComponent {
   currentIndex = 0;
   @Input() data!: Data;
   pageData: any;
+   @Input() pageId!: string;
+     preview: any = {};
+   
   isLoading = false;
   userId: string = '';
   autoplayInterval: any;

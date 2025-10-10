@@ -360,7 +360,7 @@ input:checked + .slider::before {
   background: #eaeaea;
 }
 .sectionList {
-  max-height: 400px;
+  max-height: 800px;
   overflow: auto;
   min-height: 600px;
 }

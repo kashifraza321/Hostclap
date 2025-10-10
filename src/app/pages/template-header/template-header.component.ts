@@ -80,7 +80,7 @@ export class TemplateHeaderComponent {
     { id: 'Title', title: 'Title', icon: 'icons8-t-50.png' },
     { id: 'Menu', title: 'Menu', icon: 'icons8-menu-50.png' },
     { id: 'phone', title: 'phone', icon: 'icons8-image-30.png' },
-    { id: 'address', title: 'address', icon: 'icons8-image-30.png' },
+    { id: 'address', title: 'address', icon: 'icons8-menu-50.png' },
   ];
   modules = {
     toolbar: [

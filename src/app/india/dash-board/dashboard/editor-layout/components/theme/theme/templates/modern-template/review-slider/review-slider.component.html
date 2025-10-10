@@ -8,7 +8,7 @@
       <span class="star full">&#9733;</span>
       <span class="star half">&#9733;</span>
     </div>
-    <div class="review-text">174 reviews</div>
+    <div class="review">174 reviews</div>
     <div class="powered-by">
       powered by
       <img
@@ -39,8 +39,10 @@
           <a href="#">Read more</a>
         </p>
         <p class="review-date">{{ review.date }}</p>
-        <div class="stars">
-          <span *ngFor="let s of [].constructor(review.rating)">⭐</span>
+        <div class="stars" >
+          <span  [ngStyle]="{
+                    color: data?.selectedColor?.primary
+                  }" *ngFor="let s of [].constructor(review.rating)">⭐</span>
         </div>
       </div>
     </div>

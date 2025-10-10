@@ -369,7 +369,7 @@
   </div>
 
   <!-- Custom Color Picker (Displayed if Custom Color is toggled) -->
-  <div *ngIf="showCustomColors" class="color-picker-container">
+  <!-- <div *ngIf="showCustomColors" class="color-picker-container">
     <input
       type="color"
       [value]="themeForm.controls['primary'].value"
@@ -378,37 +378,46 @@
       id="primary-color-picker"
       class="color-picker-input"
     />
+  </div> -->
+
+  
+<div *ngIf="showCustomColors" class="color-picker-container">
+  <h3> Set Custom Colors</h3>
+
+  <color-chrome 
+    [color]="selectedColor"
+    (onChangeComplete)="onColorChange($event.color.hex)">
+  </color-chrome>
+
+  <div class="color-slots">
+    <div 
+      class="slot" 
+      [class.active]="selectedType === 'primary'"
+      (click)="selectType('primary')">
+      
+      <div class="color-preview"  formControlName="primary" [style.background]="colors.primary"></div>
+      <span>Primary</span>
+    </div>
+
+    <div 
+      class="slot"
+      [class.active]="selectedType === 'secondary'"
+      (click)="selectType('secondary')">
+      <div class="color-preview"  formControlName="secondary" [style.background]="colors.secondary"></div>
+      <span>Secondary</span>
+    </div>
+
+    <div 
+      class="slot"
+      [class.active]="selectedType === 'accent'"
+      (click)="selectType('accent')">
+      <div class="color-preview"  formControlName="accent" [style.background]="colors.accent"></div>
+      <span>Accent</span>
+    </div>
   </div>
+</div>
 
-  <!-- Labels and Color Displays -->
- <div class="color-picker-controls">
-    <div class="colorWrp" (click)="onColorInput($event, 'primary')">
-      <label for="primary">Primary</label>
-      <input type="text" formControlName="primary" readonly />
-    </div>
-    <div class="colorWrp" (click)="onColorInput($event, 'secondary')">
-      <label for="secondary">Secondary</label>
-      <input type="text" formControlName="secondary" readonly />
-    </div>
-    <div class="colorWrp" (click)="onColorInput($event, 'accent')">
-      <label for="accent">Accent</label>
-      <input type="text" formControlName="accent" readonly />
-    </div>
-  </div>
 
-    <!-- new color -->
-    <label for="color">Pick a color:</label>
-   <!-- <input
-    type="color"
-    formControlName="primary"
-    [cpColor]="themeForm.get('primary')?.value"
-    [cpToggle]="true"
-  /> -->
-<input 
-  type="color" 
-
-  (input)="onColorInput($event, 'primary')" 
-/>
 
 
     <!-- Save / Cancel Buttons -->

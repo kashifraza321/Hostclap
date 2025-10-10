@@ -201,7 +201,7 @@ ngAfterViewInit() {
     }
   }
    onScroll(event?: Event) {
-    console.log("🌀 Scroll event fired", event);
+   
     // Example: toggle isScrolled based on scrollTop
     const scrollTop = this.scrollContainer.nativeElement.scrollTop;
     this.isScrolled = scrollTop > 50;

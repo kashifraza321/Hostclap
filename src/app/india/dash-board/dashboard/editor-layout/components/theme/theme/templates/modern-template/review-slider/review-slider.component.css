@@ -123,7 +123,12 @@
 }
 
 .review-text {
-  font-size: 20px;
+  font-size: 24px;
+  color: #333;
+  font-weight: 600;
+}
+.review-text {
+  font-size: 19px;
   color: #333;
   font-weight: 600;
 }
@@ -131,7 +136,7 @@
 .powered-by {
   display: flex;
   align-items: center;
-  font-size: px20;
+  font-size: 22px;
   color: #666;
   gap: 5px;
   white-space: nowrap;
