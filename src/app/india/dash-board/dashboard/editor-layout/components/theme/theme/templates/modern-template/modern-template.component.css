@@ -65,17 +65,22 @@ classic-header-info {
   background: #34495e;
   padding: 10px;
   position: sticky;
-  justify-content: space-between;
-  align-items: center;
+ 
   top: 0;
   left: 0;
   width: 100%;
-  display: flex;
+overflow: auto;
   gap: 20px;
   z-index: 3;
   padding: 30px 40px;
   transition: background-color 0.4s ease, backdrop-filter 0.4s ease;
   background: transparent;
+}
+.classic-nav .mainContainer{
+  display: flex;
+   justify-content: space-between;
+  align-items: center;
+  padding: 0 !important;
 }
 
 
@@ -93,11 +98,15 @@ classic-header-info {
   padding: 6px 12px;
   font-size: 15px;
   background: #9c27b0;
-  color: #fff;
+
+}
+.top-bar .mainContainer{
+
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 30px;
+  
 }
 .top-bar p {
   font-weight: 700;
@@ -157,10 +166,9 @@ classic-header-info {
 .classic-nav {
   background: #1f1f1f;
     padding: 0;
-    display: flex
+   
 ;
-    justify-content: flex-start;
-    align-items: center;
+   
     gap: 0;
 }
 .brandname{
@@ -180,6 +188,7 @@ classic-header-info {
 .logoSection {
   transition: all 0.1s ease;
   display: flex;
+  flex-shrink: 0;
 
 }
 
@@ -291,6 +300,10 @@ transform: translate(184px, -8px);
 .classic-nav ::-webkit-scrollbar {
   width: 0px;
   height: 0px;
+}
+.classic-nav ::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
 }
 .classic-nav ul {
   list-style: none;

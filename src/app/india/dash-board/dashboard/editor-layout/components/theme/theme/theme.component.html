@@ -338,13 +338,7 @@
                   <input type="color" formControlName="accent" />
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- new color -->
+                <!-- new color -->
     
  <div class="color-options">
     <div
@@ -368,17 +362,7 @@
     />
   </div>
 
-  <!-- Custom Color Picker (Displayed if Custom Color is toggled) -->
-  <!-- <div *ngIf="showCustomColors" class="color-picker-container">
-    <input
-      type="color"
-      [value]="themeForm.controls['primary'].value"
-        (input)="onColorInput($event, 'primary')"
-      formControlName="primary"
-      id="primary-color-picker"
-      class="color-picker-input"
-    />
-  </div> -->
+ 
 
   
 <div *ngIf="showCustomColors" class="color-picker-container">
@@ -398,6 +382,7 @@
       <div class="color-preview"  formControlName="primary" [style.background]="colors.primary"></div>
       <span>Primary</span>
     </div>
+   
 
     <div 
       class="slot"
@@ -415,7 +400,14 @@
       <span>Accent</span>
     </div>
   </div>
-</div>
+  </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  
 
 
 

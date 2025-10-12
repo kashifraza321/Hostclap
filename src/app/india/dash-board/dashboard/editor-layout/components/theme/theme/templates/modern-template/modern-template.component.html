@@ -30,6 +30,7 @@
               '#fff'
           }"
         >
+        <div class="mainContainer">
           <span
             *ngIf="
               state?.preview?.announcement?.show ??
@@ -49,27 +50,14 @@
                   "Send a message"
               }}
             </button>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- Top Bar -->
 
-      <!-- new bar -->
-      <!-- <div
-        class="classic-top-bar"
-        [ngStyle]="{
-          background: data?.selectedColor?.secondary || '#9C27B0'
-        }"
-      >
-        <span class="topBarText" [ngStyle]="{ 'font-family': data?.font }"
-          >Need AC Help?</span
-        >
-        <button class="classic-btn" [ngStyle]="{ 'font-family': data?.font }">
-          Contact Us
-        </button>
-      </div> -->
-      <!-- announcement -->
+      
 
       <!-- announcement -->
 
@@ -77,28 +65,31 @@
       <header
         class="classic-header-info"
         [ngStyle]="{
-          'font-family': data?.font,
+          'font-family': data.font,
           background: data?.selectedColor?.primary
         }"
       >
+      <div class="mainContainer">
+
+    
         <div
           [ngStyle]="{
-            'font-family': data?.font,
+            'font-family': data.font,
            
           }"
         >
           <i class="bi bi-geo-alt-fill"></i>
-          <span class="addresTXt" [ngStyle]="{ 'font-family': data?.font }">
+          <span class="addresTXt" [ngStyle]="{ 'font-family': data.font }">
             {{ pageData?.contactUs?.address }} {{ pageData?.contactUs?.city }}
             {{ pageData?.contactUs?.state }}</span
           >
         </div>
-        <div [ngStyle]="{ 'font-family': data?.font }">
+        <div [ngStyle]="{ 'font-family': data.font }">
           <i class="bi bi-telephone-fill"></i>
           <!-- <pre>{{ pageData | json }}</pre> -->
           {{ pageData?.header?.phones?.mobile }}
         </div>
-        
+          </div>
       </header>
 
       <!-- Navigation -->
@@ -106,8 +97,13 @@
         [class.scrolled]="isScrolled"
         class="classic-nav"
         [ngStyle]="{
-       
-
+             background: isScrolled 
+           ? 'transparent' 
+           : (state?.preview?.menu?.menuBackgroudColour 
+              || pageData?.header?.menu?.menuBackgroudColour 
+              || data?.selectedColor?.primary 
+              || '#f88d00'),
+           
           'font-size':
             state?.preview?.menu?.fontSize ||
             pageData?.header?.menu?.fontSize ||
@@ -118,7 +114,7 @@
             'left'
         }"
       >
-    
+    <div class="mainContainer">
         <div
           class="logoSection"
       [ngClass]="{ 'logo-scrolled': isScrolled }"
@@ -217,6 +213,7 @@
           </li>
         </ul>
         </div>
+        </div>
       </nav>
 
       <!-- Hero -->
@@ -237,7 +234,7 @@
           <div class="hero-text" *ngIf="state$ | async as state">
             <h1
               [ngStyle]="{
-                'font-family': data?.font,
+                'font-family': data.font,
                 color:
                   state?.preview?.titles?.titleColour ||
                   pageData?.header?.titles?.titleColour,
@@ -256,7 +253,7 @@
             </h1>
             <p
               [ngStyle]="{
-                'font-family': data?.font,
+                'font-family': data.font,
                 color:
                   state?.preview?.titles?.subtitleColour ||
                   pageData?.header?.titles?.subtitleColour,
@@ -277,7 +274,7 @@
               <span>088773 06675</span>
               <button
                 [ngStyle]="{
-                  'font-family': data?.font,
+                  'font-family': data.font,
                   background: data?.selectedColor?.primary
                 }"
               >
@@ -287,7 +284,7 @@
             <div
               class="review-box"
               [ngStyle]="{
-                'font-family': data?.font,
+                'font-family': data.font,
                
               }"
             >
@@ -332,7 +329,7 @@
       <section
         class="offerSection"
         [ngStyle]="{
-          'font-family': data?.font,
+          'font-family': data.font,
          
         }"
       >
@@ -356,7 +353,7 @@
                 height="100"
               />
             </div>
-            <div class="offer-text" [ngStyle]="{ 'font-family': data?.font }">
+            <div class="offer-text" [ngStyle]="{ 'font-family': data.font }">
               <h3>
                 {{
                   state?.preview?.offer?.title ||
@@ -379,14 +376,14 @@
         </div>
       </section>
       <!-- about us section  -->
-      <app-about-us-slider [pageId]="pageId"></app-about-us-slider>
+      <app-about-us-slider [data]="data" [pageId]="pageId"></app-about-us-slider>
       <!-- about us section  -->
       <!-- gallery section -->
       <section *ngIf="" class="gallery-section">
         <div class="mainContainer">
           <div
             *ngIf="pageData?.gallery?.images?.length"
-            [ngStyle]="{ 'font-family': data?.font }"
+            [ngStyle]="{ 'font-family': data.font }"
           >
             <h2 class="gradientHeading" *ngIf="pageData?.gallery?.titleVisible">
               {{ pageData.gallery.title }}
@@ -433,7 +430,7 @@
         <div
           class="carousel-container"
           [ngStyle]="{
-            'font-family': data?.font,
+            'font-family': data.font,
             background: data?.selectedColor?.accent
           }"
           *ngIf="!isLoading"
@@ -447,7 +444,7 @@
             <div
               class="card"
               [ngStyle]="{
-                'font-family': data?.font,
+                'font-family': data.font,
                 background: data?.selectedColor?.accent
               }"
               *ngFor="let img of teamImages; let i = index"
@@ -512,7 +509,7 @@
 
       <div class="serviceSection">
         <div class="mainContainer">
-          <div class="" [ngStyle]="{ 'font-family': data?.font }">
+          <div class="" [ngStyle]="{ 'font-family': data.font }">
             <h2 class="gradientHeading">
               {{
                 state?.preview?.offer?.title ||
@@ -537,7 +534,7 @@
             <div class="group" *ngIf="i === selectedGroupIndex">
               <h2
                 class="section-title"
-                [ngStyle]="{ 'font-family': data?.font }"
+                [ngStyle]="{ 'font-family': data.font }"
               >
                 {{ group.groupName }}
               </h2>
@@ -559,21 +556,21 @@
                   <div class="serviceTItleWrap">
                     <h3
                       class="service-title"
-                      [ngStyle]="{ 'font-family': data?.font }"
+                      [ngStyle]="{ 'font-family': data.font }"
                     >
                       {{ sub.subgroupName }}
                     </h3>
 
                     <h4
                       class="service-desc"
-                      [ngStyle]="{ 'font-family': data?.font }"
+                      [ngStyle]="{ 'font-family': data.font }"
                     >
                       {{ sub.description }}
                     </h4>
                     <button
                       class="btn requtBtn"
                       [ngStyle]="{
-                        'font-family': data?.font,
+                        'font-family': data.font,
                         background: data?.selectedColor?.primary
                       }"
                     >
@@ -583,7 +580,7 @@
                     <a
                       href="#"
                       class="learn-more"
-                      [ngStyle]="{ 'font-family': data?.font }"
+                      [ngStyle]="{ 'font-family': data.font }"
                     >
                       Learn more
                     </a>
@@ -591,7 +588,7 @@
                       href="#"
                       class="learn-more"
                      [ngStyle]="{
-                        'font-family': data?.font,
+                        'font-family': data.font,
                         background: data?.selectedColor?.primary
                       }"
                     >
@@ -643,18 +640,18 @@
       <!-- Services -->
 
       <!-- review setion -->
-      <app-review-slider></app-review-slider>
+      <app-review-slider [data]="data" [pageId]="pageId"></app-review-slider>
       <!-- review setion -->
       <section
         id="page-2"
         class="dynamicPages"
-        [ngStyle]="{ 'font-family': data?.font }"
+        [ngStyle]="{ 'font-family': data.font }"
         style="position: relative"
       >
         <div
           class="dymanic-page-header"
           [ngStyle]="{
-            'font-family': data?.font,
+            'font-family': data.font,
            
           }"
         >
@@ -668,7 +665,7 @@
             <div
               class="price-card"
               [ngStyle]="{
-                'font-family': data?.font,
+                'font-family': data.font,
                 background: data?.selectedColor?.accent
               }"
             >
@@ -747,7 +744,7 @@
         <div class="mainContainer">
           <div
             class="dymanic-page-header"
-            [ngStyle]="{ 'font-family': data?.font }"
+            [ngStyle]="{ 'font-family': data.font }"
           >
             <h2 class="gradientHeading">Testimonials</h2>
           </div>
@@ -792,7 +789,7 @@
         <div class="mainContainer">
           <div
             class="dymanic-page-header"
-            [ngStyle]="{ 'font-family': data?.font }"
+            [ngStyle]="{ 'font-family': data.font }"
           >
             <h2 class="testimonial-heading">Testimonials</h2>
           </div>
@@ -875,7 +872,7 @@
           </div>
         </div>
       </div>
-      <app-testimonial-slider [pageId]="pageId"></app-testimonial-slider>
+      <app-testimonial-slider [data]="data" [pageId]="pageId"></app-testimonial-slider>
 
 
       <!-- testimonial section -->
@@ -885,7 +882,7 @@
       <section
         id="page-1"
         class="dynamicPages"
-        [ngStyle]="{ 'font-family': data?.font }"
+        [ngStyle]="{ 'font-family': data.font }"
         *ngIf="state$ | async as state"
       >
         <div class="dymanic-page-header">
@@ -907,7 +904,7 @@
               <div
                 class="location-tooltip"
                 [ngStyle]="{
-                  'font-family': data?.font,
+                  'font-family': data.font,
                   background: data?.selectedColor?.primary
                 }"
               >
@@ -956,7 +953,7 @@
       <div
         class="contact-section"
         [ngStyle]="{
-          'font-family': data?.font,
+          'font-family': data.font,
           background: data?.selectedColor?.accent
         }"
       >
@@ -966,7 +963,7 @@
         <div
           class="contact-form"
           [ngStyle]="{
-            'font-family': data?.font,
+            'font-family': data.font,
             background: data?.selectedColor?.secondary
           }"
         >
@@ -986,7 +983,7 @@
 
             <div class="form-check">
               <input type="checkbox" id="terms" />
-              <label for="terms" [ngStyle]="{ 'font-family': data?.font }">
+              <label for="terms" [ngStyle]="{ 'font-family': data.font }">
                 I agree with the <a href="#">Terms & Conditions</a> and the
                 <a href="#">Privacy & Cookies Policy</a>.
               </label>
@@ -1004,7 +1001,7 @@
         </div>
       </div>
 
-      <section class="dynamicPages" [ngStyle]="{ 'font-family': data?.font }">
+      <section class="dynamicPages" [ngStyle]="{ 'font-family': data.font }">
         <div class="dymanic-page-header">
           <h2 class="gradientHeading">{{ pagesList[3]?.pageName }}</h2>
         </div>
@@ -1014,7 +1011,7 @@
       <div
         class="contact-info"
         [ngStyle]="{
-          'font-family': data?.font,
+          'font-family': data.font,
           background: data?.selectedColor?.secondary
         }"
         *ngIf="state$ | async as state"
@@ -1098,68 +1095,68 @@
       <section
         id="page-1"
         class="dynamicPages"
-        [ngStyle]="{ 'font-family': data?.font }"
+        [ngStyle]="{ 'font-family': data.font }"
       >
       <div class="opening">
   <h2 class="gradientHeading">Opening Hours</h2>
   <table  cellspacing="10" cellpadding="10">
     <tr>
       <td [ngClass]="{'highlight': isToday('Sunday')}"  [ngStyle]="isToday('Sunday') ? {
-        'font-family': data?.font,
+        'font-family': data.font,
         'background': data?.selectedColor?.secondary
       } : null">Sunday</td>
       <td [ngClass]="{'highlight': isToday('Monday')}"  [ngStyle]="isToday('Monday') ? {
-        'font-family': data?.font,
+        'font-family': data.font,
         'background': data?.selectedColor?.secondary
       } : null">Monday</td>
       <td [ngClass]="{'highlight': isToday('Tuesday')}"  [ngStyle]="isToday('Tuesday') ? {
-        'font-family': data?.font,
+        'font-family': data.font,
         'background': data?.selectedColor?.secondary
       } : null">Tuesday</td>
       <td [ngClass]="{'highlight': isToday('Wednesday')}"  [ngStyle]="isToday('Wednesday') ? {
-        'font-family': data?.font,
+        'font-family': data.font,
         'background': data?.selectedColor?.secondary
       } : null">Wednesday</td>
       <td [ngClass]="{'highlight': isToday('Thursday')}"  [ngStyle]="isToday('Thursday') ? {
-        'font-family': data?.font,
+        'font-family': data.font,
         'background': data?.selectedColor?.secondary
       } : null">Thursday</td>
       <td [ngClass]="{'highlight': isToday('Friday')}"  [ngStyle]="isToday('Friday') ? {
-        'font-family': data?.font,
+        'font-family': data.font,
         'background': data?.selectedColor?.secondary
       } : null">Friday</td>
       <td [ngClass]="{'highlight': isToday('Saturday')}"  [ngStyle]="isToday('Saturday') ? {
-        'font-family': data?.font,
+        'font-family': data.font,
         'background': data?.selectedColor?.secondary
       } : null">Saturday</td>
     </tr>
     <tr>
       <td [ngClass]="{'highlight': isToday('Sunday')}"  [ngStyle]="isToday('Sunday') ? {
-        'font-family': data?.font,
+        'font-family': data.font,
         'background': data?.selectedColor?.secondary
       } : null">8:00 AM - 11:59 PM</td>
       <td  [ngClass]="{'highlight': isToday('Monday')}"  [ngStyle]="isToday('Monday') ? {
-        'font-family': data?.font,
+        'font-family': data.font,
         'background': data?.selectedColor?.secondary
       } : null">8:00 AM - 11:59 PM</td>
       <td  [ngClass]="{'highlight': isToday('Tuesday')}"  [ngStyle]="isToday('Tuesday') ? {
-        'font-family': data?.font,
+        'font-family': data.font,
         'background': data?.selectedColor?.secondary
       } : null">8:00 AM - 11:59 PM</td>
       <td [ngClass]="{'highlight': isToday('Wednesday')}"  [ngStyle]="isToday('Wednesday') ? {
-        'font-family': data?.font,
+        'font-family': data.font,
         'background': data?.selectedColor?.secondary
       } : null">8:00 AM - 11:59 PM</td>
       <td [ngClass]="{'highlight': isToday('Thursday')}"  [ngStyle]="isToday('Thursday') ? {
-        'font-family': data?.font,
+        'font-family': data.font,
         'background': data?.selectedColor?.secondary
       } : null">8:00 AM - 11:59 PM</td>
       <td [ngClass]="{'highlight': isToday('Friday')}"  [ngStyle]="isToday('Friday') ? {
-        'font-family': data?.font,
+        'font-family': data.font,
         'background': data?.selectedColor?.secondary
       } : null">8:00 AM - 11:59 PM</td>
       <td [ngClass]="{'highlight': isToday('Saturday')}"  [ngStyle]="isToday('Saturday') ? {
-        'font-family': data?.font,
+        'font-family': data.font,
         'background': data?.selectedColor?.secondary
       } : null">8:00 AM - 11:59 PM</td>
     </tr>
@@ -1176,7 +1173,7 @@
           <a href=""> Merchant Policies</a>
           <a href=""> Legal Notice</a>
         </div>
-        <p [ngStyle]="{ 'font-family': data?.font }">
+        <p [ngStyle]="{ 'font-family': data.font }">
           Powered by
           <img
             src="../../../../../../../../../../assets/images/logo.png"
