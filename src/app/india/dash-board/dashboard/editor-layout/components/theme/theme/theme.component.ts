@@ -99,7 +99,7 @@ export class ThemeComponent {
     return this.colors[this.selectedType];
   }
 
-  onColorChange(color: string) {
+onColorChange(color: string) {
     // Update local color object
     this.colors[this.selectedType] = color;
 
@@ -107,7 +107,11 @@ export class ThemeComponent {
     this.themeForm.patchValue({
       [this.selectedType]: color
     }, { emitEvent: false });
-  }
+
+    // Update parent data so the right side reflects
+    this.updateParentData();
+}
+
 
   selectType(type: 'primary' | 'secondary' | 'accent') {
     this.selectedType = type;

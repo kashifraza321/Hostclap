@@ -30,8 +30,8 @@
 
 .carousel {
   position: relative;
-  max-width: 600px;
-  width: 100%;
+
+  width: 60%;
   height: 733px;
   perspective: 1000px;
 }
@@ -59,9 +59,9 @@
 
 .slide.active {
   opacity: 1;
-  transform: scale(1.2);
+  transform: scale(1.1);
   z-index: 3;
-      left: -45px;
+      left: 17px;
 }
 
 .slide.prev {
@@ -72,13 +72,13 @@
 
 .slide.next {
   opacity: 0.6;
-  transform: scale(1.1) translateX(32px);
+  transform: scale(1) translateX(115px);
   z-index: 2;
 }
 
 .slide-content {
   flex: 1;
-  max-width: 50%;
+  max-width: 40%;
 }
 
 .slide-content h3 {
@@ -131,6 +131,11 @@
   color: #322d2f;
 }
 
+@media (max-width: 1326px) {
+  .slider-wrapper {
+    flex-direction: column;
+  }
+}
 @media (max-width: 768px) {
   .slider-wrapper {
     flex-direction: column;

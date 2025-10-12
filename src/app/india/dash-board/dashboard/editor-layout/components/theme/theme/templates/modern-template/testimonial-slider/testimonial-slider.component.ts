@@ -22,6 +22,7 @@ export class TestimonialSliderComponent   {
    @Input() pageId!: string;
      preview: any = {};
      @Input() data!: Data;
+    
   testimonials: any[] = [];
   testimonialGroups: any[] = [];
     imgurl = environment.imageBaseUrl;
@@ -63,6 +64,7 @@ export class TestimonialSliderComponent   {
       this.pagesService.state$.subscribe((state) => {
       this.preview = state.preview;
     });
+   
   }
    ngOnChanges(changes: SimpleChanges) {
       if (changes['data'] && changes['data'].currentValue) {
@@ -70,7 +72,7 @@ export class TestimonialSliderComponent   {
   
         console.log('Data updated in ModernTemplate:', this.data);
   
-        // agar template / color update hai to usko preview me bhi reflect karao
+       
         if (this.data.selectedColor) {
           this.preview = {
             ...this.preview,

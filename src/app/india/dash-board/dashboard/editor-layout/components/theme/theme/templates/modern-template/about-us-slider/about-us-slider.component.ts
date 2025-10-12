@@ -5,6 +5,7 @@ import { PagesService } from 'src/app/pages/pages.service';
 import { ThemeService } from '../../../theme.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
+import { Data } from 'src/app/models/data.model';
 
 @Component({
   selector: 'app-about-us-slider',
@@ -19,11 +20,13 @@ export class AboutUsSliderComponent {
   aboutUsSlides: any[] = [];
   slides: any[] = [];
   group:any;
+   preview: any = {};
+       @Input() data!: Data;
   userId:string=''
   imageUrl: string = environment.imageBaseUrl;
 sanitizedQuote: any;
 
-  data: any;
+  // data: any;
   pageData: any;
   isLoading: boolean = false;
 

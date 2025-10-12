@@ -21,6 +21,7 @@ import { CommonModule } from '@angular/common';
 })
 export class OpeningHoursComponent {
   pageId: string = '';
+  sectionId: string = '';
   openingHoursForm!: FormGroup;
   daysOfWeek: string[] = [
     'Sunday',
@@ -39,8 +40,12 @@ export class OpeningHoursComponent {
     private pagesService: PagesService
   ) {}
   ngOnInit() {
-    this.pageId = this.route.snapshot.paramMap.get('pageId') || '';
+     this.pageId = this.route.snapshot.paramMap.get('pageId') || '';
+     this.sectionId = this.route.snapshot.queryParamMap.get('sectionId') || '';
+  console.log(' Section ID in OpeningHoursComponent:', this.sectionId);
+
     console.log(this.pageId, 'page id in opening ');
+    console.log(this.sectionId, 'section id in opening ');
 
     const formControls: Record<string, FormControl> = {
       sectionTitle: new FormControl('', Validators.required),
@@ -48,63 +53,90 @@ export class OpeningHoursComponent {
       is24HourFormat: new FormControl(false),
 
       ...this.daysOfWeek.reduce((acc, day) => {
-        acc[`${day}Checked`] = new FormControl(false); // checkbox for each day
-        acc[`${day}Start`] = new FormControl(
-          { value: '', disabled: true },
-          Validators.required
-        ); // start time for each day, initially disabled
-        acc[`${day}End`] = new FormControl(
-          { value: '', disabled: true },
-          Validators.required
-        ); // end time for each day, initially disabled
+        acc[`${day}Checked`] = new FormControl(false);
+        acc[`${day}Start`] = new FormControl({ value: '', disabled: true });
+        acc[`${day}End`] = new FormControl({ value: '', disabled: true });
         return acc;
       }, {} as Record<string, FormControl>),
     };
 
     this.openingHoursForm = this.fb.group(formControls);
 
-    // Subscribe to changes in the checkbox controls to enable/disable the start and end times
+    // Enable/disable start and end time based on checkbox
     this.daysOfWeek.forEach((day) => {
       this.openingHoursForm
         .get(`${day}Checked`)
         ?.valueChanges.subscribe((checked) => {
           if (checked) {
-            // Enable start and end time if checkbox is checked
             this.openingHoursForm.get(`${day}Start`)?.enable();
             this.openingHoursForm.get(`${day}End`)?.enable();
           } else {
-            // Disable start and end time if checkbox is unchecked
             this.openingHoursForm.get(`${day}Start`)?.disable();
             this.openingHoursForm.get(`${day}End`)?.disable();
           }
         });
     });
+    this.getSectionDetailData()
   }
-  saveOpeningHours(): void {
-    console.log(this.openingHoursForm.valid); // Log the form status to check if it's valid
+    getSectionDetailData() {
+    this.pagesService.GET_SECTION_DETAIL(this.pageId, 'opening_hours').subscribe({
+      next: (res) => {
+        console.log('Section detail:', res);
+        if (res?.data?.section) {
+          this.sectionId = res.data.section._id;
+          // this.sectionType = res.data.section.sectionType;
+
+          // formValue.patchValue({
+          //   sectionTitle: res.data.section.sectionTitle || '',
+          //   sectionSubtitle: res.data.section.subtitle || '',
+          // });
+          // this.serviceGroups = res.data.section.groups || [];
+        }
+      },
+      error: (err) => {
+        console.error('Error loading section detail', err);
+      },
+    });
+  }
+ saveOpeningHours(): void {
     if (this.openingHoursForm.invalid) {
-      this.alertService.error(
-        'Please fill in the opening hours for all selected days and section details.'
-      );
+      this.alertService.error('Please fill all required fields.');
       return;
     }
 
-    const payload = this.openingHoursForm.value;
-    console.log('Opening hours payload:', payload);
+    const formValue = this.openingHoursForm.value;
 
-    // Call the API to save the opening hours data
-    this.pagesService.editPages(this.pageId, payload).subscribe({
-      next: (res) => {
-        console.log('Opening hours updated successfully:', res);
+    const openingHours = this.daysOfWeek.map((day) => {
+      const isOpen = formValue[`${day}Checked`];
+      return isOpen
+        ? {
+            day,
+            isOpen: true,
+            openTime: formValue[`${day}Start`] || '',
+            closeTime: formValue[`${day}End`] || '',
+          }
+        : { day, isOpen: false };
+    });
+
+    const payload = {
+      sectionId: this.sectionId, 
+      sectionTitle: formValue.sectionTitle,
+      subtitle: formValue.sectionSubtitle,
+      openingHours,
+    };
+
+    console.log(' Final Opening Hours Payload:', payload);
+
+    this.pagesService.UpdateOpeningHours(payload).subscribe({
+      next: () => {
         this.alertService.success('Opening hours updated successfully!');
-        this.getPageData(); // Refresh page data
       },
-      error: (err) => {
-        console.error('Failed to update opening hours:', err);
+      error: () => {
         this.alertService.error('Failed to update opening hours.');
       },
     });
   }
+
 
   cancel(): void {
     // Reset the form or navigate away

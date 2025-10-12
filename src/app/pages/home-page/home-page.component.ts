@@ -222,35 +222,33 @@ export class HomePageComponent {
   }
 
   // for opening houres
-  // navigateToTestimonial(pageId: string) {
-  //   console.log(pageId, 'pageidddddddddddd');
+navigateToOpeningHours(pageId: string) {
+  const data = {
+    sectionType: 'opening_hours',
+    sectionTitle: this.sectionForm.value.sectionTitle,
+    sectionSubtitle: this.sectionForm.value.sectionSubtitle,
+    pageId: pageId,
+  };
 
-  //   if (this.sectionForm.invalid) {
-  //     this.alertService.error('Please fill all required fields');
-  //     return;
-  //   }
+  // Hit API to create or update section
+  this.pagesService.createSection(data).subscribe({
+    next: (res: any) => {
+      // ✅ Extract sectionId from API response
+      const sectionId = res?.data?._id;
+      console.log('🆔 Section ID from API:', sectionId);
 
-  //   const data = {
-  //     sectionType: 'testimonials',
-  //     sectionTitle: this.sectionForm.value.sectionTitle,
-  //     sectionSubtitle: this.sectionForm.value.sectionSubtitle,
-  //     pageId: pageId,
-  //   };
+      // Navigate to OpeningHoursComponent with sectionId
+      this.router.navigate(['/in/insight/editor/opening-hours', pageId], {
+        queryParams: { sectionId },
+      });
+    },
+    error: (err) => {
+      console.error(' Failed to create section:', err);
+      this.alertService.error('Failed to create service section');
+    },
+  });
+}
 
-  //   this.pagesService.createSection(data).subscribe({
-  //     next: (res) => {
-  //       this.sectionId = res.data._id;
-  //       this.alertService.success('Service section created successfully');
-
-  //       this.router.navigate(['/in/insight/editor/Testimonials', pageId]);
-  //     },
-  //     error: () => {
-  //       this.alertService.error('Failed to create service section');
-
-  //       // this.router.navigate(['/in/insight/editor/services', pageId]);
-  //     },
-  //   });
-  // }
 
   addSection(): void {
     console.log('Add Section Clicked');
@@ -279,9 +277,7 @@ export class HomePageComponent {
     this.router.navigate(['/in/insight/editor/gallery', pageId]);
   }
 
-  navigateToOPeningHours(pageId: string) {
-    this.router.navigate(['/in/insight/editor/opening-hours', pageId]);
-  }
+
 
   navigateToContact(pageId: string) {
     this.router.navigate(['/in/insight/editor/contact-us', pageId]);

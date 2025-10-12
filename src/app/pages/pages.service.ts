@@ -136,6 +136,13 @@ export class PagesService {
       true
     );
   }
+  UpdateOpeningHours(data: any) {
+    return this.httpService.patchCall(
+      `${API_CONSTANTS.UPDATE_OPENINGSERVICE}`,
+      data,
+      true
+    );
+  }
   UpdateSubgroups(data: any) {
     return this.httpService.patchCall(
       `${API_CONSTANTS.UPDATE_SUBGROUPS}`,
