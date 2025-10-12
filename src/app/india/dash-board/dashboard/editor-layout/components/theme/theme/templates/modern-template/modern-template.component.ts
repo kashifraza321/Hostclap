@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PagesService } from 'src/app/pages/pages.service';
+import { ColorUtilsService } from 'src/app/services/color-utils.service';
 import { Data } from 'src/app/models/data.model';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer, SafeStyle, SafeUrl } from '@angular/platform-browser';
@@ -123,7 +124,8 @@ isScrolled = false;
     private route: ActivatedRoute,
     private sanitizer: DomSanitizer,
     private cdr: ChangeDetectorRef,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    public colorUtils: ColorUtilsService
   ) {
      const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const today = new Date().getDay(); // Get the current day (0-6)
@@ -132,14 +134,14 @@ isScrolled = false;
  
 
   ngOnInit() {
-    this.userId = this.route.snapshot.paramMap.get('id') || '';
-    console.log('User ID:', this.userId);
-    console.log('ngOnInit - data received:', this.data);
-
-    console.log('User ID:', this.userId);
-    console.log('Page ID:', this.pageId);
-    this.updateCarousel(0);
-    this.GetWebsiteTheme();
+  this.userId = this.route.snapshot.paramMap.get('id') || '';
+  console.log('User ID:', this.userId);
+  console.log('ngOnInit - data received:', this.data);
+ 
+  console.log('User ID:', this.userId);
+  console.log('Page ID:', this.pageId);
+  this.updateCarousel(0);
+  this.GetWebsiteTheme();
     // this.pagesService.state$.subscribe((state) => {
     //   this.pages = state.pages;
     //   this.preview = state.preview;
@@ -173,16 +175,26 @@ isScrolled = false;
     return day === this.currentDay; 
   }
   ngOnChanges(changes: SimpleChanges) {
+    
+ 
     if (changes['data'] && changes['data'].currentValue) {
       this.data = { ...this.data, ...changes['data'].currentValue };
 
       console.log('Data updated in ModernTemplate:', this.data);
 
+
+      // If primary color changes, check if it's dark and set theme attribute on body
+      const newPrimary = this.data?.selectedColor?.secondary;
+      if (newPrimary) {
+        const isDark = this.colorUtils.isColorDark(newPrimary);
+        console.log(`isColorDark('${newPrimary}'):`, isDark);
+        document.body.setAttribute('theme', isDark ? 'dark' : 'light');
+      }
+
       // agar template / color update hai to usko preview me bhi reflect karao
       if (this.data.selectedColor) {
         this.preview = {
           ...this.preview,
-
           selectedColor: this.data.selectedColor,
         };
       }
