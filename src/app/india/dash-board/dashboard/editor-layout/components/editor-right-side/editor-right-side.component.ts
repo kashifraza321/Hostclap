@@ -6,6 +6,7 @@ import { ClassicTemplateComponent } from '../theme/theme/templates/classic-templ
 import { Data } from 'src/app/models/data.model';
 import { ThemeService } from '../theme/theme/theme.service';
 import { ModernTemplateComponent } from '../theme/theme/templates/modern-template/modern-template.component';
+import { SubgroupDetailComponent } from '../theme/theme/templates/subgroup-detail/subgroup-detail.component';
 
 @Component({
   selector: 'app-editor-right-side',
@@ -15,6 +16,7 @@ import { ModernTemplateComponent } from '../theme/theme/templates/modern-templat
     DefaultTemplateComponent,
     ClassicTemplateComponent,
     ModernTemplateComponent,
+    SubgroupDetailComponent
   ],
   templateUrl: './editor-right-side.component.html',
   styleUrl: './editor-right-side.component.css',
@@ -23,6 +25,10 @@ export class EditorRightSideComponent {
   constructor(private themeService: ThemeService) {}
   // @Input() template: string = 'default';
   @Input() data!: Data;
+  pageId:string=''
+    slug = '';
+
+ showSubGroup = false; 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['data']) {
       console.log('EditorRightSideComponent received data:', this.data);
@@ -53,6 +59,17 @@ export class EditorRightSideComponent {
   //     },
   //   });
   // }
+  onOpenSubGroup() {
+    
+    this.showSubGroup = true; 
+  }
+  handleOpenSubGroup(event: { slug: string; pageId: string }) {
+     console.log('Received from child:', event); 
+    this.slug = event.slug;
+    this.pageId = event.pageId;
+    this.showSubGroup = true;
+  }
+
   GetWebsiteTheme() {
     this.themeService.getTheme().subscribe({
       next: (response) => {

@@ -173,6 +173,11 @@ export class PagesService {
       `${API_CONSTANTS.GET_SUBGROUP_DETAIL}/${subgroupId}`
     );
   }
+  GetSubgroupBySlug(slug: string) {
+    return this.httpService.getCall(
+      `${API_CONSTANTS.GET_SUBGROUPBYSLUG}/${slug}`
+    );
+  }
   updateGallery(data: any) {
     return this.httpService.postCall(`${API_CONSTANTS.UPDATE_GALLERY}`, data);
   }

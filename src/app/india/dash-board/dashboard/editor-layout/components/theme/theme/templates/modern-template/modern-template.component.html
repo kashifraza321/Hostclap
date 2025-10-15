@@ -1,9 +1,19 @@
-<ng-container *ngIf="isLoading; else content">
+
+<ng-container *ngIf="isLoading; else loaded">
+
   <app-loader></app-loader>
 </ng-container>
-<ng-template #content>
+<ng-template #loaded>
+  <!-- Always include the named outlet -->
+  <router-outlet name="subgroup"></router-outlet>
+
+  <!-- Show full modern content only if subgroup route is NOT active -->
+  <ng-container *ngIf="!showSubGroupRoute">
+
+  
   <div class="classicWrapper" id="scrollContainer" #scrollContainer>
     <ng-container *ngIf="state$ | async as state">
+    
       <div class="url-bar">
       
         <div class="url-content">
@@ -424,6 +434,7 @@
         </div>
       </section>
       <section>
+      
         <h2 class="sectionHeading">
           {{ pageData?.gallery?.title }}
         </h2>
@@ -560,6 +571,8 @@
                     >
                       {{ sub.subgroupName }}
                     </h3>
+                   
+                    
 
                     <h4
                       class="service-desc"
@@ -567,6 +580,7 @@
                     >
                       {{ sub.description }}
                     </h4>
+                    
                     <button
                       class="btn requtBtn"
                       [ngStyle]="{
@@ -578,21 +592,28 @@
                     </button>
 
                     <a
-                      href="#"
+               
                       class="learn-more"
                       [ngStyle]="{ 'font-family': data.font }"
+                  
                     >
                       Learn more
                     </a>
+                    
                     <a
-                      href="#"
+                     
                       class="learn-more"
                      [ngStyle]="{
                         'font-family': data.font,
                         background: data?.selectedColor?.primary
                       }"
+                 (click)="navigateToDetail(sub.slug)"
+                   
                     >
                       Learn more
+                       
+                      
+                     
                     </a>
                   </div>
                 </div>
@@ -1100,66 +1121,34 @@
       <div class="opening">
   <h2 class="gradientHeading">Opening Hours</h2>
   <table  cellspacing="10" cellpadding="10">
-    <tr>
-      <td [ngClass]="{'highlight': isToday('Sunday')}"  [ngStyle]="isToday('Sunday') ? {
-        'font-family': data.font,
-        'background': data?.selectedColor?.secondary
-      } : null">Sunday</td>
-      <td [ngClass]="{'highlight': isToday('Monday')}"  [ngStyle]="isToday('Monday') ? {
-        'font-family': data.font,
-        'background': data?.selectedColor?.secondary
-      } : null">Monday</td>
-      <td [ngClass]="{'highlight': isToday('Tuesday')}"  [ngStyle]="isToday('Tuesday') ? {
-        'font-family': data.font,
-        'background': data?.selectedColor?.secondary
-      } : null">Tuesday</td>
-      <td [ngClass]="{'highlight': isToday('Wednesday')}"  [ngStyle]="isToday('Wednesday') ? {
-        'font-family': data.font,
-        'background': data?.selectedColor?.secondary
-      } : null">Wednesday</td>
-      <td [ngClass]="{'highlight': isToday('Thursday')}"  [ngStyle]="isToday('Thursday') ? {
-        'font-family': data.font,
-        'background': data?.selectedColor?.secondary
-      } : null">Thursday</td>
-      <td [ngClass]="{'highlight': isToday('Friday')}"  [ngStyle]="isToday('Friday') ? {
-        'font-family': data.font,
-        'background': data?.selectedColor?.secondary
-      } : null">Friday</td>
-      <td [ngClass]="{'highlight': isToday('Saturday')}"  [ngStyle]="isToday('Saturday') ? {
-        'font-family': data.font,
-        'background': data?.selectedColor?.secondary
-      } : null">Saturday</td>
-    </tr>
-    <tr>
-      <td [ngClass]="{'highlight': isToday('Sunday')}"  [ngStyle]="isToday('Sunday') ? {
-        'font-family': data.font,
-        'background': data?.selectedColor?.secondary
-      } : null">8:00 AM - 11:59 PM</td>
-      <td  [ngClass]="{'highlight': isToday('Monday')}"  [ngStyle]="isToday('Monday') ? {
-        'font-family': data.font,
-        'background': data?.selectedColor?.secondary
-      } : null">8:00 AM - 11:59 PM</td>
-      <td  [ngClass]="{'highlight': isToday('Tuesday')}"  [ngStyle]="isToday('Tuesday') ? {
-        'font-family': data.font,
-        'background': data?.selectedColor?.secondary
-      } : null">8:00 AM - 11:59 PM</td>
-      <td [ngClass]="{'highlight': isToday('Wednesday')}"  [ngStyle]="isToday('Wednesday') ? {
-        'font-family': data.font,
-        'background': data?.selectedColor?.secondary
-      } : null">8:00 AM - 11:59 PM</td>
-      <td [ngClass]="{'highlight': isToday('Thursday')}"  [ngStyle]="isToday('Thursday') ? {
-        'font-family': data.font,
-        'background': data?.selectedColor?.secondary
-      } : null">8:00 AM - 11:59 PM</td>
-      <td [ngClass]="{'highlight': isToday('Friday')}"  [ngStyle]="isToday('Friday') ? {
-        'font-family': data.font,
-        'background': data?.selectedColor?.secondary
-      } : null">8:00 AM - 11:59 PM</td>
-      <td [ngClass]="{'highlight': isToday('Saturday')}"  [ngStyle]="isToday('Saturday') ? {
-        'font-family': data.font,
-        'background': data?.selectedColor?.secondary
-      } : null">8:00 AM - 11:59 PM</td>
-    </tr>
+   
+    
+<tr>
+  <td
+    *ngFor="let day of ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']"
+    [ngClass]="{'highlight': isToday(day)}"
+    [ngStyle]="isToday(day) ? {
+      'font-family': data.font,
+      'background': data?.selectedColor?.secondary
+    } : null"
+  >
+    {{ day }}
+  </td>
+</tr>
+<tr>
+  <td
+    *ngFor="let day of ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']"
+    [ngClass]="{'highlight': isToday(day)}"
+    [ngStyle]="isToday(day) ? {
+      'font-family': data.font,
+      'background': data?.selectedColor?.secondary
+    } : null"
+  >
+    {{ getOpeningHours(day) }}
+  </td>
+</tr>
+
+
   </table>
 </div>
 
@@ -1185,4 +1174,6 @@
       </footer>
     </ng-container>
   </div>
-</ng-template>
+ 
+</ng-container>
+  </ng-template>

@@ -28,6 +28,7 @@ import { ProductComponent } from 'src/app/pages/product/product.component';
 import { AddProductComponent } from 'src/app/pages/product/add-product/add-product.component';
 import { AboutUsComponent } from 'src/app/pages/about-us/about-us.component';
 import { NewContentComponent } from 'src/app/pages/about-us/new-content/new-content.component';
+import { SubgroupDetailComponent } from './components/theme/theme/templates/subgroup-detail/subgroup-detail.component';
 
 const routes: Routes = [
   {
@@ -38,7 +39,9 @@ const routes: Routes = [
         path: '',
         component: EditorSidebarComponent, // show sidebar by default
       },
+      { path: 'sidebar', component: EditorSidebarComponent },
       { path: 'theme', component: ThemeComponent },
+      
       { path: 'pages', component: PagesComponent },
       { path: 'home/:pageId', component: HomePageComponent },
       {
@@ -85,6 +88,12 @@ const routes: Routes = [
         path: 'Testimonials/:pageId',
         component: TestimonialsComponent,
       },
+      {
+        path: 'service-detail/:slug',
+        component: SubgroupDetailComponent,
+         outlet: 'subgroup'
+      },
+  
       {
         path: 'testimonialform/:pageId/:groupId',
         component: TestimonialFormComponent,
@@ -145,7 +154,13 @@ const routes: Routes = [
       { path: 'settings', component: SettingsComponent },
       // { path: '', redirectTo: 'theme', pathMatch: 'full' }, // optional default
     ],
+    
   },
+  //  {
+  //   path: 'service-detail/:slug',
+  //   component: SubgroupDetailComponent,
+  //   outlet: 'subgroup'
+  // }
 ];
 
 @NgModule({

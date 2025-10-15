@@ -2,12 +2,14 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
+  EventEmitter,
   HostListener,
   Input,
+  Output,
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterModule } from '@angular/router';
 import { PagesService } from 'src/app/pages/pages.service';
 import { ColorUtilsService } from 'src/app/services/color-utils.service';
 import { Data } from 'src/app/models/data.model';
@@ -19,7 +21,7 @@ import { ReviewSliderComponent } from './review-slider/review-slider.component';
 import { AboutUsSliderComponent } from './about-us-slider/about-us-slider.component';
 import { ThemeService } from '../../theme.service';
 import { TestimonialSliderComponent } from './testimonial-slider/testimonial-slider.component';
-import { take } from 'rxjs';
+import { filter, take } from 'rxjs';
 // import { SlickCarouselModule } from 'ngx-slick-carousel';
 // import { SwiperModule } from 'swiper/angular';
 interface TeamMember {
@@ -35,7 +37,8 @@ interface TeamMember {
     LoaderComponent,
     ReviewSliderComponent,
     AboutUsSliderComponent,
-    TestimonialSliderComponent
+    TestimonialSliderComponent,
+    RouterModule 
   ],
   templateUrl: './modern-template.component.html',
   styleUrl: './modern-template.component.css',
@@ -64,6 +67,8 @@ export class ModernTemplateComponent {
   public state$ = this.pagesService.state$;
   aboveContactSections: any[] = [];
   belowContactSections: any[] = [];
+slug:string=''
+  showSubGroupRoute = false;
 
   itemsToShow = 3;
   selectedGroupIndex: number = 0;
@@ -114,6 +119,10 @@ export class ModernTemplateComponent {
   isTestimonialAnimating = false;
     scrollListenerAttached = false;
  @ViewChild('scrollContainer', { static: false }) scrollContainer!: ElementRef;
+   @Output() openSubGroup = new EventEmitter<{ slug: string; pageId: string }>();
+   openingHoursData: any[] = [];
+
+
 
 isScrolled = false;
   
@@ -124,12 +133,15 @@ isScrolled = false;
     private route: ActivatedRoute,
     private sanitizer: DomSanitizer,
     private cdr: ChangeDetectorRef,
+     private router: Router,
     private themeService: ThemeService,
     public colorUtils: ColorUtilsService
   ) {
      const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+     
     const today = new Date().getDay(); // Get the current day (0-6)
     this.currentDay = daysOfWeek[today];
+    
   }
  
 
@@ -164,7 +176,14 @@ isScrolled = false;
     //   console.log('Preview updated:', this.preview);
     // });
 
-    
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      // Check if 'subgroup' outlet exists in the current route
+      const currentTree = this.router.parseUrl(this.router.url);
+      this.showSubGroupRoute = currentTree.root.children['subgroup'] !== undefined;
+    });
+  
     this.getPages();
     this.updateTestimonialsPerView();
     // window.addEventListener('resize', () => this.updateTestimonialsPerView());
@@ -183,7 +202,7 @@ isScrolled = false;
       console.log('Data updated in ModernTemplate:', this.data);
 
 
-      // If primary color changes, check if it's dark and set theme attribute on body
+      
       const newPrimary = this.data?.selectedColor?.secondary;
       if (newPrimary) {
         const isDark = this.colorUtils.isColorDark(newPrimary);
@@ -191,7 +210,7 @@ isScrolled = false;
         document.body.setAttribute('theme', isDark ? 'dark' : 'light');
       }
 
-      // agar template / color update hai to usko preview me bhi reflect karao
+     
       if (this.data.selectedColor) {
         this.preview = {
           ...this.preview,
@@ -204,12 +223,15 @@ isScrolled = false;
 ngAfterViewInit() {
  
 }
+  navigateToContact(pageId: string,slug:string) {
+    this.router.navigate(['/in/insight/editor/service-detail', pageId]);
+  }
 
   ngAfterViewChecked() {
     if (this.scrollContainer && !this.scrollListenerAttached) {
       this.scrollContainer.nativeElement.addEventListener('scroll', this.onScroll.bind(this));
       this.scrollListenerAttached = true;
-      console.log("✅ Scroll listener attached after view checked");
+    
     }
   }
    onScroll(event?: Event) {
@@ -219,10 +241,33 @@ ngAfterViewInit() {
     this.isScrolled = scrollTop > 50;
     this.cdr.detectChanges(); // ensure Angular picks up the change
   }
+  onOpenSubGroupClick(slug: string, pageId: string) {
+    this.openSubGroup.emit({ slug, pageId });
+  }
+
+  // navigateToDetail(slug:string ) {
+  // this.router.navigate([{ outlets: { subgroup: ['service-detail', slug] } }]);
+
+  //   // this.router.navigate(['/in/insight/editor/service-detail', slug]);
+  // }
+  navigateToDetail(slug: string) {
+ console.log({
+  outlets: {
+    subgroup: ['in/insight/editor/service-detail', slug]
+  }
+});
+this.router.navigate([
+  '/in/insight/editor',
+  {
+    outlets: {
+      subgroup: ['service-detail', slug]
+    }
+  }
+]);
 
 
 
-
+}
 
 
   updateData(update: Partial<Data>) {
@@ -310,6 +355,7 @@ ngAfterViewInit() {
           this.getSectionDetailData(this.pageId);
           this.getSectionDetailDataForPriceList(this.pageId);
           this.getSectionDetailDataForTestimonials(this.pageId);
+          this.getSectionDetailDataForOpening(this.pageId);
           console.log(this.pageData.phones.mobile, 'mobileeeee');
           console.log(this.getSectionDetailData, 'gettttttttttt');
         }
@@ -538,4 +584,32 @@ getCoverUrl(): SafeStyle {
     }
   }
   // slider
+  // opening hours
+      getSectionDetailDataForOpening(pageId:string) {
+    this.pagesService.GET_SECTION_DETAIL(pageId, 'opening_hours').subscribe({
+      next: (res) => {
+        console.log('Section detail:', res);
+        if (res?.data?.section) {
+               this.openingHoursData = res.data.section.openingHours || [];
+
+        }
+      },
+      error: (err) => {
+        console.error('Error loading section detail', err);
+      },
+    });
+  }
+getOpeningHours(day: string): string {
+  const dayInfo = this.openingHoursData.find(d => d.day === day);
+  if (!dayInfo || !dayInfo.isOpen) return 'Closed';
+
+  const options: Intl.DateTimeFormatOptions = { hour: 'numeric', minute: 'numeric', hour12: true };
+
+  const openTime = new Date(`1970-01-01T${dayInfo.openTime || '00:00'}:00`).toLocaleTimeString([], options);
+  const closeTime = new Date(`1970-01-01T${dayInfo.closeTime || '00:00'}:00`).toLocaleTimeString([], options);
+
+  return `${openTime} - ${closeTime}`;
+}
+
+
 }

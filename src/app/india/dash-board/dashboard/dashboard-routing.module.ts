@@ -27,6 +27,7 @@ const routes: Routes = [
         (m) => m.EditorLayoutModule
       ),
   },
+  
 ];
 
 @NgModule({

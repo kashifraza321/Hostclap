@@ -43,5 +43,6 @@ export const API_CONSTANTS = {
   GET_SUBGROUP_DETAIL: '/app/page/get-subgroup',
   DELETE_SERVICESBLOCK: '/app/page/delete-service-blocks',
   UPDATE_OPENINGSERVICE: '/app/page/update-opening-hours',
+  GET_SUBGROUPBYSLUG:'/app/page/get-subgroup-by-slug',
 };
 // admin/website/delete-page/686635ff8eefd3f716bf88d2

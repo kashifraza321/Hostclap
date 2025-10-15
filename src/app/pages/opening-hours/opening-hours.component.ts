@@ -84,13 +84,28 @@ export class OpeningHoursComponent {
         console.log('Section detail:', res);
         if (res?.data?.section) {
           this.sectionId = res.data.section._id;
-          // this.sectionType = res.data.section.sectionType;
+         
+          const section = res?.data?.section;
+      if (!section) return;
 
-          // formValue.patchValue({
-          //   sectionTitle: res.data.section.sectionTitle || '',
-          //   sectionSubtitle: res.data.section.subtitle || '',
-          // });
-          // this.serviceGroups = res.data.section.groups || [];
+          this.openingHoursForm.patchValue({
+        sectionTitle: section.sectionTitle || '',
+        sectionSubtitle: section.subtitle || '',
+        is24HourFormat: false // or get from your data if available
+      });
+        if (section.openingHours && section.openingHours.length) {
+        section.openingHours.forEach((dayInfo: any)  => {
+          const day = dayInfo.day;
+          if (this.daysOfWeek.includes(day)) {
+            this.openingHoursForm.patchValue({
+              [day + 'Checked']: dayInfo.isOpen,
+              [day + 'Start']: dayInfo.openTime || '',
+              [day + 'End']: dayInfo.closeTime || ''
+            });
+          }
+        });
+      }
+
         }
       },
       error: (err) => {

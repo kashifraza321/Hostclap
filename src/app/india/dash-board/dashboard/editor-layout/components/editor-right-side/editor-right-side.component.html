@@ -6,5 +6,9 @@
   *ngIf="data?.template === 'Classic'"
   [data]="data"
 ></app-classic-template>
-<app-modern-template *ngIf="data?.template === 'Modern'" [data]="data">
+<div>
+<app-modern-template *ngIf="data?.template === 'Modern' && !showSubGroup" [data]="data"    (openSubGroup)="handleOpenSubGroup($event)">
 </app-modern-template>
+<!-- <app-subgroup-detail *ngIf="showSubGroup"  [slug]="slug"
+  [pageId]="pageId"></app-subgroup-detail> -->
+</div>
