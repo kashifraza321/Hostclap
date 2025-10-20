@@ -1,6 +1,13 @@
 <app-editor-header></app-editor-header>
+<!-- Hamburger for mobile -->
+<button class="hamburger" (click)="toggleSidebar()" *ngIf="isMobileView">
+  ☰
+</button>
 <div class="editor-layout">
-  <div class="editor-sidebar">
+  <div class="editor-sidebar" [class.open]="isSidebarOpen || !isMobileView">
+     <button class="close-btn" (click)="toggleSidebar()" *ngIf="isMobileView">
+      ✖
+    </button>
     <router-outlet></router-outlet>
   </div>
 
@@ -9,3 +16,4 @@
     <app-editor-right-side  [data]="data"  style="width: 100%;"   ></app-editor-right-side>
   </div>
 </div>
+

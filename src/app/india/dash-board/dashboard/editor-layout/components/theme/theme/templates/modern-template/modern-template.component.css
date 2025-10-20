@@ -16,12 +16,16 @@
 
 /* URL BAR */
 .url-bar {
-  background: #1e1e1e;
+  background: #fff;
   padding: 8px 15px;
   display: flex;
   align-items: center;
   border-bottom: 1px solid #333;
   border-radius: 8px 8px 0 0;
+}
+.headingFlex{
+  display: flex;
+  justify-content: space-between;
 }
 
 .dots {
@@ -297,14 +301,8 @@ transform: translate(184px, -8px);
      font-size: 28px;
     padding: 10px 0;
 }
-.classic-nav ::-webkit-scrollbar {
-  width: 0px;
-  height: 0px;
-}
-.classic-nav ::-webkit-scrollbar-thumb {
-  background-color: #ccc;
-  border-radius: 4px;
-}
+
+
 .classic-nav ul {
   list-style: none;
   display: flex;
@@ -315,9 +313,17 @@ transform: translate(184px, -8px);
   margin: 23px;
   padding: 0;
   align-items: center;
-  overflow: auto;
+  overflow-x: auto;
   white-space: nowrap;
+  -ms-overflow-style: none; 
+  scrollbar-width: none;
 }
+
+
+.classic-nav::-webkit-scrollbar {
+  display: none;            
+}
+
 .classic-nav ul li a {
   text-decoration: none;
   color: #f5f5f5;
@@ -901,7 +907,7 @@ h1 {
 
 table {
   width: 100%;
- 
+ white-space: nowrap;
    border-collapse: separate; 
   border-spacing: 8px; 
 }
@@ -1102,7 +1108,7 @@ td.highlight {
 .info-item p {
   margin: 7px 0 0;
   font-size: 19px;
-  color: #fff;
+  color: #000;
 }
 .dynamicPages {
   margin: 10rem 0 0;
@@ -1211,6 +1217,12 @@ textarea {
 .g-recaptcha {
   margin: 20px 0;
 }
+.footerwrp{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
 
 .classic-footer {
   background: #2c3e50;
@@ -1243,7 +1255,7 @@ textarea {
 .price-section.dark {
   display: flex;
   justify-content: center;
-  padding: 30px;
+
   /* background: #0f172a;  */
   margin-top: 23px;
 }
@@ -1872,7 +1884,106 @@ textarea {
 .requtBtn {
   color: #fff !important;
 }
+.tableContainer{
+  overflow-x: auto;
+  width: 100%;
+   -ms-overflow-style: none;    
+  scrollbar-width: none;
+}
+.tableContainer::-webkit-scrollbar {
+  display: none;             
+}
+/* responsive header mobile view */
+/* ✅ Desktop nav hidden on mobile */
+@media (max-width: 500px) {
+  nav.classic-nav,
+  .rightHeaderWrap,
+  .brandname {
+    display: none !important;
+  }
+}
 
+/* 📱 Mobile Header (Logo + Hamburger) */
+.mobile-header {
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  background: #ffffff;
+  border-bottom: 1px solid #eee;
+}
+
+.mobile-header .mobile-logo img {
+  width: 100px;
+  height: auto;
+}
+
+.mobile-header .hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.mobile-header .hamburger span {
+  height: 3px;
+  width: 24px;
+  background-color: #000;
+  border-radius: 2px;
+}
+
+/* 📱 Mobile Menu */
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  list-style: none;
+  background: white;
+  padding: 10px 16px;
+  margin: 0;
+}
+
+.mobile-menu.open {
+  display: flex;
+}
+
+.mobile-menu li {
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.mobile-menu li a {
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+}
+
+/* ✅ Show mobile nav only at max 500px */
+@media (max-width: 500px) {
+  .mobile-header {
+    display: flex;
+  }
+}
+
+
+
+/* responsive header mobile view */
+
+@media (max-width: 1100px) {
+  .mesgBtn{
+    left: 11%;
+    display: flex;
+    align-items: center;
+    max-width: 244px;
+    width: 100%;
+  }
+  .review-box {
+    bottom: -8px;
+    right: 16%;
+    max-width: 175px;
+    width: 100%;
+
+}
+}
 
 
 
@@ -1892,7 +2003,7 @@ textarea {
 /* Responsive */
 @media screen and (max-width: 900px) {
   .testimonial-slider .slide {
-    flex: 0 0 50%; /* 2 slides on tablet */
+    flex: 0 0 50%; 
   }
 }
 
@@ -1949,4 +2060,180 @@ textarea {
   .testimonial-slider .slide {
     flex: 0 0 100%; /* 1 slide on mobile */
   }
+}
+@media screen and (max-width: 500px) {
+.linksss{
+  max-width: 200px;
+    width: 100%;
+}
+.linksss a {
+  font-size: 16px;
+    color: #000;
+    padding-right: 1px;
+}
+.classic-footer{
+  flex-direction: column;
+  gap: 0;
+}
+
+.form-row   input, .form-row  select {
+    flex: 1;
+
+    width: 50%;
+}
+.contact-form {
+    max-width: 402px;
+    width: 100%;
+}
+.gradientHeading {
+    font-size: 24px;
+
+}
+.info-item  h4 {
+    font-size: 14px;
+    font-weight: 500;
+}
+.contact-info {
+
+    min-height: 221px;
+}
+.info-item p {
+    margin: 7px 0 0;
+    font-size: 12px;
+    color: #fff;
+}
+.amenities-section{
+     padding: 30px 0;
+
+}
+.amenities-section p {
+    font-size: 11px;
+}
+.amenity {
+   
+    flex-shrink: 0;
+    width: 50%;
+  
+}
+.location-tooltip {
+    position: absolute;
+ 
+    transform: translate(-51%, -24%);
+    
+    padding: 6px;
+  
+
+    min-height: 64px;
+    text-align: left;
+    max-width: 85px;
+    width: 100%;
+}
+.card.right-2 {
+    transform: translateX(120px) scale(0.8) translateZ(-300px);
+}
+.card.right-1 {
+    transform: translateX(77px) scale(0.9) translateZ(-100px);
+}
+.slide.next {
+    opacity: 0.6;
+    transform: scale(1) translateX(48px);
+    z-index: 2;
+}
+.carousel-container {
+    
+    height: 281px;
+    position: relative;
+   
+}
+.sectionHeading{
+
+    font-size: 27px;
+
+}
+.classic-hero {
+    position: relative;
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+}
+.classic-hero  .overlay {
+    background: rgba(0, 0, 0, 0.55);
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+    margin: 0 auto;
+    height: 400px;
+}
+.hero-text  h1 {
+    font-size: 38px;
+    color: #fff;
+    margin-bottom: 15px;
+}
+.hero-text {
+    background: #ffffff94;
+    border-radius: 24px;
+    padding: 30px;
+    width: 100%;
+    max-width: 285px;
+    width: 100%;
+    min-height: 153px;
+}
+.offer-banner {
+    gap: 19px;
+   padding: 20px 19px;
+    max-width: 800px;
+    flex-direction: column;
+}
+.offer-text h3 {
+    font-size: 25px;
+
+}
+.offer-text  p {
+    font-size: 2rem;
+}
+.directions{
+      font-size: 10px;
+}
+.location-tooltip  p {
+    font-size: 10px;
+
+}
+h2.section-title {
+    font-size: 21px;
+   margin-bottom: 5px;
+    text-align: center;
+    margin: 58px 0 79px 0;
+    padding: 14px;
+    color: 000;
+}
+h2.section-title {
+    font-size: 21px;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 5px;
+    text-align: center;
+    margin: 0 0 49px 0;
+    background: #101511;
+    padding: 14px;
+    color: 000;
+}
+.mainHeading {
+    font-size: 32px;
+    text-align: center;
+    text-decoration: underline;
+    color: #000;
+}
+.mesgBtn{
+  display: none;
+}
+.review-box {
+    display: none;
+    bottom: -8px;
+    right: 16%;
+    max-width: 174px;
+    width: 100%;
+}
 }

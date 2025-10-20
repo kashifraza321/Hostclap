@@ -1,6 +1,6 @@
-<section class="testimonial-slider-section">
-  <h2 class="slider-heading">Happy <u>Bride's</u> Stories</h2>
-  <p class="slider-subheading">Stories of satisfaction</p>
+<section class="testimonial-slider-section" *ngIf="state$ | async as state">
+  <h2 class="slider-heading">  {{ state?.preview?.testimonials?.sectionTitle || pageData?.testimonials?.sectionTitle || "Testimonials"}}</h2>
+  <p class="slider-subheading"> {{ state?.preview?.testimonials?.subtitle || pageData?.testimonials?.subtitle  || "Testimonials subtitle"  }}</p>
 
   <ngx-slick-carousel
     class="testimonial-slider"

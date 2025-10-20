@@ -79,6 +79,22 @@ export class PagesComponent {
   // ==============================
   selectedPageIndex: number | null = null;
 
+  onPageNameChange(index: number, event: any) {
+  const newName = event.target.value;
+  this.pagesList[index].pageName = newName;
+
+  // 🔁 instantly broadcast to navbar
+  this.pagesService.updatePages(this.pagesList);
+}
+
+toggleVisibility(index: number, event: any) {
+  const checked = event.target.checked;
+  this.pagesList[index].visible = checked;
+
+  // 🔁 instantly broadcast to navbar
+  this.pagesService.updatePages(this.pagesList);
+}
+
   togglePage(index: number): void {
     const selectedPage = this.pagesList[index];
     console.log('Clicked index:', index, 'Selected Page:', selectedPage);
@@ -107,6 +123,8 @@ export class PagesComponent {
       }
     }
   }
+
+
   deletePage(pageId: string, event: MouseEvent): void {
     event.stopPropagation();
 

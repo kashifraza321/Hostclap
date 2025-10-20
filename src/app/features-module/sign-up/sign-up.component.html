@@ -89,12 +89,32 @@
     <input type="text" formControlName="state" placeholder="State" />
 
     <input type="text" formControlName="pincode" placeholder="Pincode" />
+    <div
+  *ngIf="accountForm.get('pincode')?.touched && accountForm.get('pincode')?.invalid"
+  class="error"
+>
+  <div *ngIf="accountForm.get('pincode')?.errors?.['required']">
+    Pincode is required.
+  </div>
+  <div *ngIf="accountForm.get('pincode')?.errors?.['pattern']">
+    Pincode must be 6 digits.
+  </div>
+</div>
 
     <input
       type="text"
       formControlName="doyouneed"
       placeholder="What do you need?"
     />
+<div
+  *ngIf="
+    accountForm.get('doyouneed')?.touched &&
+    accountForm.get('doyouneed')?.invalid
+  "
+  class="error"
+>
+  What do you need? field is required.
+</div>
 
     <p class="info-text">
       You are creating a HostClap account for a business in the

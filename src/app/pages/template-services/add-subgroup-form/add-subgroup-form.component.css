@@ -9,7 +9,7 @@
 
 form{
   overflow: auto;
-    max-height: 500px;
+    
 }
 .header {
   /* display: flex; */
@@ -61,8 +61,18 @@ form{
   width: 100%;
   padding: 8px;
   font-size: 14px;
-  border: 1px solid #ccc;
+  border: none;
+  border-bottom: 1px solid #ccc;
   border-radius: 6px;
+}
+.urlInput input{
+   width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  border-radius: 6px;
+
 }
 textarea {
     resize: none;
@@ -115,6 +125,7 @@ textarea {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  height: 100vh;
 }
 
 .form-section {

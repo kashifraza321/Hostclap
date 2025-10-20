@@ -20,15 +20,17 @@
   </div>
   <div
     class="slides"
-    [style.transform]="'translateX(-' + currentIndex * (100 / 3) + '%)'"
+   [style.transform]="'translateX(-' + currentIndex * slideWidthPercentage + '%)'"
   >
-    <div class="slide" *ngFor="let review of reviews">
+    <div class="slide" *ngFor="let review of reviews let i = index">
       <div
         class="review-card"
-        [ngStyle]="{
-          'font-family': data?.font,
-          background: data?.selectedColor?.accent
-        }"
+   [ngStyle]="{
+                  'background-color':
+                    i % 2 === 0
+                      ? data?.selectedColor?.accent
+                      : data?.selectedColor?.secondary
+                }"
       >
         <div class="review-user">
           <div class="avatar">{{ review.initial }}</div>

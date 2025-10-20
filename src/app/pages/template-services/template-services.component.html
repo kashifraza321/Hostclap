@@ -26,12 +26,16 @@
           id="section-title"
           type="text"
           class="input-field"
+          formControlName="sectionTitle"
           [value]="
             showSubGroup
               ? selectedGroup?.groupName
               : sectionForm.value.sectionTitle
           "
+       
+          
         />
+         <!-- (change)="applyServiceChanges(sectionForm.get('sectionTitle')?.value)" -->
         <input type="checkbox" class="checkbox" checked />
       </div>
       <div *ngIf="!showSubGroup">
@@ -40,10 +44,11 @@
           id="section-subtitle"
           type="text"
           class="input-field"
-          formControlName="sectionSubtitle"
+          formControlName="subtitle"
           [value]="
             showSubGroup ? selectedGroup?.groupName : sectionForm.value.subtitle
           "
+           
         />
       </div>
     </div>

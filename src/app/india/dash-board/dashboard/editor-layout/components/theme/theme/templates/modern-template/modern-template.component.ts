@@ -67,7 +67,7 @@ export class ModernTemplateComponent {
   public state$ = this.pagesService.state$;
   aboveContactSections: any[] = [];
   belowContactSections: any[] = [];
-slug:string=''
+  slug:string=''
   showSubGroupRoute = false;
 
   itemsToShow = 3;
@@ -121,7 +121,7 @@ slug:string=''
  @ViewChild('scrollContainer', { static: false }) scrollContainer!: ElementRef;
    @Output() openSubGroup = new EventEmitter<{ slug: string; pageId: string }>();
    openingHoursData: any[] = [];
-
+isMobileMenuOpen = false;
 
 
 isScrolled = false;
@@ -154,27 +154,18 @@ isScrolled = false;
   console.log('Page ID:', this.pageId);
   this.updateCarousel(0);
   this.GetWebsiteTheme();
-    // this.pagesService.state$.subscribe((state) => {
-    //   this.pages = state.pages;
-    //   this.preview = state.preview;
-    // });
-    // this.pagesService.state$.subscribe((state) => {
-    //   this.previewData = state.preview;
-    // });
-    // this.pagesService.state$.subscribe((state) => {
-    //   console.log('preview data', state.preview.titles);
-    // });
+ 
     /////////////////////////////////////////////////
     this.pagesService.state$.subscribe((state) => {
+        console.log('Realtime state in ModernTemplate:', state);
       this.preview = state.preview;
+      this.pagesList = state.pages;
+     this.serviceData = state.preview.services 
+      ? Object.values(state.preview.services) 
+      : [];
+      
     });
-    // this.pagesService.state$.subscribe((state) => {
-    //   this.preview = {
-    //     ...state.preview,
-    //     contactus: state.contactUs,
-    //   };
-    //   console.log('Preview updated:', this.preview);
-    // });
+
 
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
@@ -250,6 +241,7 @@ ngAfterViewInit() {
 
   //   // this.router.navigate(['/in/insight/editor/service-detail', slug]);
   // }
+  
   navigateToDetail(slug: string) {
  console.log({
   outlets: {
@@ -265,8 +257,9 @@ this.router.navigate([
   }
 ]);
 
-
-
+}
+toggleMobileMenu() {
+  this.isMobileMenuOpen = !this.isMobileMenuOpen;
 }
 
 
@@ -505,6 +498,12 @@ getCoverUrl(): SafeStyle {
     });
   }
 
+
+  onRequestService(sub: any) {
+  if (sub.bookingOption === 'ThirdParty' && sub.bookingUrl) {
+    window.open(sub.bookingUrl, '_blank');
+    return;
+  }}
   getImageUrl(path: string | undefined): SafeUrl {
     if (!path) {
       return 'assets/images/bg2.webp';

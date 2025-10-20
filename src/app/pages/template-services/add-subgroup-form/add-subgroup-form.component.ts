@@ -56,6 +56,9 @@ export class AddSubgroupFormComponent {
       unit: [null, Validators.required],
       promotionPrice: [''],
       bookable: [false],
+     bookingOption: [''],
+        bookingUrl: [''], 
+          bookingButtonLabel: [''], 
       media: this.fb.array([]),
       totalBookingTime: this.fb.group({
         hours: [''],
@@ -100,6 +103,9 @@ export class AddSubgroupFormComponent {
             unit: subgroup.unit ?? null,
             promotionPrice: subgroup.promotionPrice || '',
             bookable: subgroup.bookable ?? false,
+             bookingOption: subgroup.bookingOption || '',
+            bookingUrl: subgroup.bookingUrl || '',
+           bookingButtonLabel: subgroup.bookingButtonLabel || '',
             totalBookingTime: {
               hours: subgroup.totalBookingTime?.[0]?.hours || '',
               minutes: subgroup.totalBookingTime?.[0]?.minutes || '',
@@ -265,24 +271,53 @@ export class AddSubgroupFormComponent {
       'promotionPrice',
       this.subgroupForm.value.promotionPrice || ''
     );
-    formData.append('bookable', this.subgroupForm.value.bookable.toString());
+    const isBookable = this.subgroupForm.value.bookable;
+formData.append('bookable', isBookable.toString());
+
+if (isBookable) {
+  formData.append('bookingButtonLabel', this.subgroupForm.value.bookingButtonLabel || '');
+  formData.append('bookingOption', this.subgroupForm.value.bookingOption || '');
+  
+  formData.append('bookingUrl', this.subgroupForm.value.bookingUrl || 'https://');
+}
+
     formData.append('description', this.subgroupForm.value.description || '');
-    formData.append(
-      'totalBookingTime',
-      JSON.stringify([this.subgroupForm.value.totalBookingTime])
-    );
+  const totalBookingTime = this.subgroupForm.value.totalBookingTime;
+formData.append(
+  'totalBookingTime',
+  JSON.stringify([{
+    hours: totalBookingTime.hours,
+    minutes: totalBookingTime.minutes || 0 
+  }])
+);
 
     // Append media files
     this.selectedFiles.forEach((file) => {
       formData.append('media', file);
     });
+ for (let [key, value] of (formData as any).entries()) {
+  console.log(key, value);
+}
+
 
     if (this.subgroupId) {
       // UPDATE
-      this.pagesService.UpdateSubgroups(this.subgroupId).subscribe({
+        formData.append('subgroupId', this.subgroupId);
+  
+
+      this.pagesService.UpdateSubgroups(formData).subscribe({
         next: (res) => {
           this.alertService.success('Service subgroup updated successfully!');
+            // Realtime update preview
+    const updatedSubgroup = res.data;
+    const currentPreview = this.pagesService.getPreviewValue();
+    
+    this.pagesService.updatePreviewSection('services', {
+      ...currentPreview.services,
+      [updatedSubgroup._id]: updatedSubgroup
+    });
         },
+
         error: () => {
           this.alertService.error('Failed to update service subgroup.');
         },
@@ -292,6 +327,13 @@ export class AddSubgroupFormComponent {
       this.pagesService.CREATE_Sub_GROUP(formData).subscribe({
         next: (res) => {
           this.alertService.success('Service subgroup created successfully!');
+           const newSubgroup = res.data; // assume backend returns the new subgroup
+    const currentPreview = this.pagesService.getPreviewValue();
+    
+    this.pagesService.updatePreviewSection('services', {
+      ...currentPreview.services,
+      [newSubgroup._id]: newSubgroup
+    });
         },
         error: () => {
           this.alertService.error('Failed to create service subgroup.');

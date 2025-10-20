@@ -20,10 +20,13 @@ export class ReviewSliderComponent {
   pageData: any;
    @Input() pageId!: string;
      preview: any = {};
-   
+    public state$ = this.pagesService.state$;
   isLoading = false;
+
   userId: string = '';
   autoplayInterval: any;
+  slideWidthPercentage = 100;
+
 
 
   reviews = [
@@ -88,13 +91,20 @@ export class ReviewSliderComponent {
     this.userId = this.route.snapshot.paramMap.get('id') || '';
     console.log('User ID:', this.userId);
     console.log('ngOnInit - data received:', this.data);
+     this.setSlideWidth(); // 🆕 Set initial slide width
+  window.addEventListener('resize', this.setSlideWidth.bind(this));
 this.autoplayInterval = setInterval(() => {
   this.next();
 }, 3000); // autoplay every 3 seconds
 
     console.log('User ID:', this.userId);
     this.GetWebsiteTheme();
-
+  this.pagesService.state$.subscribe((state) => {
+        console.log('Realtime state in ModernTemplate:', state);
+      this.preview = state.preview;
+     
+   
+    });
     // this.pagesService.state$.subscribe((state) => {
     //   this.pages = state.pages;
     //   this.preview = state.preview;
@@ -115,22 +125,38 @@ this.autoplayInterval = setInterval(() => {
   if (this.autoplayInterval) {
     clearInterval(this.autoplayInterval);
   }
+   window.removeEventListener('resize', this.setSlideWidth.bind(this)); 
 }
 
 
-  next() {
-    if (this.currentIndex < this.reviews.length - 3) {
-      this.currentIndex++;
-    } else{
-      this.currentIndex = 0;
-    }
-  }
+next() {
+  const visibleSlides = 100 / this.slideWidthPercentage;
+  const maxIndex = Math.ceil(this.reviews.length - visibleSlides);
 
-  prev() {
-    if (this.currentIndex > 0) {
-      this.currentIndex--;
-    }
+  if (this.currentIndex < maxIndex) {
+    this.currentIndex++;
+  } else {
+    this.currentIndex = 0;
   }
+}
+
+
+prev() {
+  if (this.currentIndex > 0) {
+    this.currentIndex--;
+  }
+}
+  setSlideWidth() {
+  const width = window.innerWidth;
+
+  if (width >= 1024) {
+    this.slideWidthPercentage = 33.33; // 3 per row
+  } else if (width >= 600) {
+    this.slideWidthPercentage = 50; // 2 per row
+  } else {
+    this.slideWidthPercentage = 100; // 1 per row
+  }
+}
   GetWebsiteTheme() {
     this.themeService.getTheme().subscribe({
       next: (response) => {

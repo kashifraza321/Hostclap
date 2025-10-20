@@ -20,6 +20,10 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 }
+.card-body{
+      display: grid;
+    place-items: center;
+}
 
 /* color */
 .color-scheme-card {
@@ -28,11 +32,28 @@
   border-radius: 8px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 }
+.toggle-container{
+      display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.toggle-container label{
+  font-size: 15px;
+}
+.toggle-container input{
+    width: 18px;
+    height: 18px;
+}
+
 
 .color-scheme-title {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
+  font-size: 1.8rem;
+  font-weight: 400;
+  margin-bottom: 28px;
+}
+.themeNameWrap{
+  min-height: 30px;
 }
 
 .color-options {
@@ -82,9 +103,20 @@
 }
 
 .card-title {
-  color: #fff;
+  color: #fff !important;
   font-size: 14px;
-  padding-top: 40px;
+ 
+}
+.card-text{
+   color: #fff !important;
+}
+.themeNameWrap{
+  max-width: 79px;
+    width: 100%;
+     background: rgba(0, 0, 0, 0.4);
+         padding-top: 4px;
+    padding-bottom: 4px;
+    color: #fff !important;
 }
 /* color */
 /* template */
@@ -103,6 +135,7 @@ select {
   padding: 10px;
   font-size: 18px;
   font-weight: 400;
+  margin-bottom: 30px;
 }
 
 .btnWRap {
@@ -251,7 +284,7 @@ select {
 
 
 .fontLabel {
-  font-size: 19px;
+  font-size: 17px;
   font-weight: 500;
   margin-bottom: 13px;
 }
@@ -288,7 +321,7 @@ select {
 
 .color-slots {
   display: flex;
-  width: 80%;
+  width: 100%;
   justify-content: space-around;
   margin-top: 29px;
 }
@@ -306,8 +339,8 @@ select {
 }
 
 .color-preview {
-width: 67px;
-    height: 66px;
+width: 49px;
+    height: 49px;
   border-radius: 50%;
   border: 2px solid #ccc;
   margin-bottom: 5px;

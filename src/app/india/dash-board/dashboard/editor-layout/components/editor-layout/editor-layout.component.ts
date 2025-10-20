@@ -26,11 +26,20 @@ export class EditorLayoutComponent {
   template: string = 'default';
   showSidebar = true;
   currentComponent: any = null;
+  isMobileView = false;
+isSidebarOpen = false;
   data: Data = {
     template: 'default',
     font: '',
     selectedColor: null,
   };
+  constructor(){
+
+  }
+  ngOnInit() {
+  this.checkScreenSize();
+  window.addEventListener('resize', this.checkScreenSize.bind(this));
+}
   // updateData(newData: Partial<Data>) {
   //   this.data = { ...this.data, ...newData };
   //   console.log('EditorLayoutComponent updated data:', this.data);
@@ -47,4 +56,14 @@ export class EditorLayoutComponent {
 
     console.log('EditorLayoutComponent updated data:', this.data);
   }
+  checkScreenSize() {
+  this.isMobileView = window.innerWidth <= 500;
+  if (!this.isMobileView) {
+    this.isSidebarOpen = false; // Sidebar always open on desktop
+  }
+}
+
+toggleSidebar() {
+  this.isSidebarOpen = !this.isSidebarOpen;
+}
 }

@@ -34,6 +34,7 @@
           <div class="themeWrap">
             <div class="card">
               <div class="card-body text-center">
+                <div class="themeNameWrap">
                 <h5 class="card-title">Classic</h5>
                 <p class="card-text">Classic Template preview</p>
                 <button
@@ -42,10 +43,12 @@
                 >
                   Select
                 </button>
+                </div>
               </div>
             </div>
             <div class="card">
               <div class="card-body text-center">
+                <div class="themeNameWrap">
                 <h5 class="card-title">Origins</h5>
 
                 <button
@@ -54,10 +57,12 @@
                 >
                   Select
                 </button>
+                </div>
               </div>
             </div>
             <div class="card">
               <div class="card-body text-center">
+                <div class="themeNameWrap">
                 <h5 class="card-title">Modern</h5>
 
                 <button
@@ -66,6 +71,7 @@
                 >
                   Select
                 </button>
+                </div>
               </div>
             </div>
           </div>
@@ -218,6 +224,7 @@
                 (click)="selectTemplate(temp)"
               >
                 <div class="card-body text-center">
+                 <div class="themeNameWrap">
                   <h5 class="card-title">{{ temp }}</h5>
                   <p class="card-text">{{ temp }} Template preview</p>
                   <button
@@ -227,6 +234,7 @@
                   >
                     Select
                   </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -291,54 +299,7 @@
                 Choose color scheme <i class="bi bi-info-circle"></i>
               </h6>
 
-              <!-- Custom Color Option -->
-              <div class="form-check my-2">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  name="colorScheme"
-                  id="customColor"
-                  checked
-                />
-                <label class="form-check-label" for="customColor">
-                  Custom Colors
-                </label>
-              </div>
-
-              <!-- Custom Color Pickers -->
-
-              <!-- Color Option Buttons -->
-              <div class="color-options">
-                <div
-                  *ngFor="let color of colorOptions"
-                  [ngStyle]="{
-                    background:
-                      'linear-gradient(to right, ' +
-                      color.primary +
-                      ' 50%, ' +
-                      color.secondary +
-                      ' 50%)'
-                  }"
-                  class="color-circle"
-                  (click)="applyPresetColors(color)"
-                ></div>
-              </div>
-              <div class="color-picker-container">
-                <div class="colorWrp">
-                  <label>Primary</label>
-                  <input type="color" formControlName="primary" />
-                </div>
-
-                <div class="colorWrp">
-                  <label>Secondary</label>
-                  <input type="color" formControlName="secondary" />
-                </div>
-                <div class="colorWrp">
-                  <label>Accent</label>
-                  <input type="color" formControlName="accent" />
-                </div>
-              </div>
-                <!-- new color -->
+              <!-- new color -->
     
  <div class="color-options">
     <div

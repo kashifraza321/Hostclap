@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AlertService } from 'src/app/services/Toaster/alert.service';
 import { PagesService } from '../pages.service';
 import { CommonModule } from '@angular/common';
+import { merge, tap } from 'rxjs';
 
 declare var bootstrap: any;
 @Component({
@@ -29,19 +30,6 @@ export class TemplateServicesComponent {
   showSubGroup = false;
   selectedGroup: any = null;
   isSubgroupPage = false;
-
-  ngOnInit(): void {
-    this.pageId = this.route.snapshot.paramMap.get('pageId') || '';
-    console.log(this.pageId, ' pageId found');
-    this.sectionForm = this.fb.group({
-      sectionTitle: ['', Validators.required],
-      sectionSubtitle: ['', Validators.required],
-    });
-    this.groupForm = this.fb.group({
-      groupName: ['', Validators.required],
-    });
-    this.getSectionDetailData();
-  }
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -49,6 +37,24 @@ export class TemplateServicesComponent {
     private pagesService: PagesService,
     private alertService: AlertService
   ) {}
+  ngOnInit(): void {
+    this.pageId = this.route.snapshot.paramMap.get('pageId') || '';
+    console.log(this.pageId, ' pageId found');
+    this.sectionForm = this.fb.group({
+      sectionTitle: ['', Validators.required],
+      subtitle: ['', Validators.required],
+    });
+    this.groupForm = this.fb.group({
+      groupName: ['', Validators.required],
+    });
+    this.getSectionDetailData();
+     merge(
+    this.sectionForm.valueChanges.pipe(
+      tap((val) => this.applyServiceChanges(val))
+    )
+  ).subscribe();
+  }
+
   backToHomepage() {
     this.router.navigate(['/in/insight/editor/home', this.pageId]);
   }
@@ -64,6 +70,15 @@ export class TemplateServicesComponent {
 
     this.showSubGroup = true;
   }
+  applyServiceChanges(val: any) {
+  const data = {
+    sectionTitle: val.sectionTitle || '',
+   
+    // groups: this.serviceGroups || [],
+  };
+  this.pagesService.updatePreviewSection('service', data);
+}
+
 
   backToGroupList() {
     this.showSubGroup = false;
@@ -80,7 +95,7 @@ export class TemplateServicesComponent {
 
           this.sectionForm.patchValue({
             sectionTitle: res.data.section.sectionTitle || '',
-            sectionSubtitle: res.data.section.subtitle || '',
+            subtitle: res.data.section.subtitle || '',
           });
           this.serviceGroups = res.data.section.groups || [];
         }
@@ -99,7 +114,7 @@ export class TemplateServicesComponent {
     const data = {
       sectionType: 'service',
       sectionTitle: this.sectionForm.value.sectionTitle,
-      subtitle: this.sectionForm.value.sectionSubtitle,
+      subtitle: this.sectionForm.value.subtitle,
       pageId: this.pageId,
     };
 
@@ -135,8 +150,15 @@ export class TemplateServicesComponent {
     this.pagesService.createGroup(payload).subscribe({
       next: (res) => {
         this.alertService.success('Group added successfully');
+          const newGroup = res.data;
         this.serviceGroups.push(res.data);
         this.serviceSUbGroups.push(res.data);
+      this.serviceGroups.push(newGroup);
+      this.serviceSUbGroups.push(newGroup);
+
+      // 2️⃣ Right preview me update (realtime)
+      const currentServices = this.pagesService.getCurrentServices();
+      this.pagesService.updateServices([...currentServices, newGroup]);
         this.groupForm.reset();
         this.closeModal();
       },

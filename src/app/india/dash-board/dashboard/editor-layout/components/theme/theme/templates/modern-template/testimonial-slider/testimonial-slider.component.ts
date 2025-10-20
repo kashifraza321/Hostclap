@@ -22,11 +22,11 @@ export class TestimonialSliderComponent   {
    @Input() pageId!: string;
      preview: any = {};
      @Input() data!: Data;
-    
+    pageData: any;
   testimonials: any[] = [];
   testimonialGroups: any[] = [];
     imgurl = environment.imageBaseUrl;
-
+public state$ = this.pagesService.state$;
   testimonialConfig = {
     slidesToShow: 3,
     slidesToScroll: 1,

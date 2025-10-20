@@ -84,7 +84,7 @@
       <div class="form-group">
         <label>Request Service</label>
         <input
-          formControlName="requestService"
+          formControlName="bookingButtonLabel"
           type="text"
           placeholder="Set Booking button label"
         />
@@ -94,17 +94,26 @@
       <div class="radio-group">
         <label>
           <input
-            formControlName="bookingType"
+             formControlName="bookingOption"
             type="radio"
-            name="booking"
-            checked
+           name="bookingOption"
+            [value]="'hostclap'"
+        
           />
           Bookable on Hostclap page
         </label>
         <label>
-          <input formControlName="bookingType" type="radio" name="booking" />
+          <input  formControlName="bookingOption" type="radio"   name="bookingOption"   [value]="'ThirdParty'"/>
           Bookable on 3rd party platform
         </label>
+         <div *ngIf="subgroupForm.get('bookingOption')?.value === 'thirdparty'">
+    <input
+      formControlName="bookingUrl"
+      type="text"
+      placeholder="Enter booking URL"
+      class="urlInput"
+    />
+  </div>
       </div>
     </div>
 

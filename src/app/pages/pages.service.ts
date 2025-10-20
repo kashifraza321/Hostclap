@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpcommanService } from '../services/httpshared.service';
 import { API_CONSTANTS } from '../Constants/api.constant';
 import { BehaviorSubject } from 'rxjs';
+import { TestimonialFormComponent } from './testimonials/testimonial-form/testimonial-form.component';
 
 @Injectable({
   providedIn: 'root',
@@ -49,9 +50,26 @@ export class PagesService {
       offer: {},
       services: {},
       contactUs: {},
+       amenities: {},
+       testimonials: {},
+       
     },
   });
   state$ = this.stateSubject.asObservable();
+getCurrentServices(): any[] {
+  return this.stateSubject.getValue().preview.services || [];
+}
+// PagesService.ts
+updateServices(newServices: any[]) {
+  const current = this.stateSubject.getValue();
+  this.stateSubject.next({
+    ...current,
+    preview: {
+      ...current.preview,
+      services: newServices
+    }
+  });
+}
 
   // Update master object deeply
   updatePreviewSection(section: string, value: any) {
@@ -65,10 +83,11 @@ export class PagesService {
     });
   }
 
+
   updatePages(pages: any[]) {
     const current = this.stateSubject.getValue();
     this.stateSubject.next({ ...current, pages });
-  }
+  } 
 
   // Add single page
   addPage(page: any) {

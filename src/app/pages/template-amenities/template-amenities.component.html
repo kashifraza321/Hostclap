@@ -20,11 +20,13 @@
           type="text"
           class="input-field"
           formControlName="title"
+           (change)="applyAmenitiesChanges()"
         />
         <input
           type="checkbox"
           class="checkbox"
           formControlName="titleVisible"
+
         />
       </div>
 
@@ -34,6 +36,7 @@
         type="text"
         class="input-field"
         formControlName="subtitle"
+        (change)="applyAmenitiesChanges()"
       />
     </div>
 
@@ -45,6 +48,7 @@
             type="checkbox"
             [checked]="amenitiesNames.value?.includes(amenity)"
             (change)="toggleAmenity($event, amenity)"
+             (change)="applyAmenitiesChanges()"
           />
           <label>{{ amenity }}</label>
         </div>

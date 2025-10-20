@@ -20,6 +20,7 @@
           type="text"
           class="input-field"
           formControlName="sectionTitle"
+            (change)="applyTestimonialChanges(TestiminialForm.get('sectionTitle')?.value)"
         />
         <input type="checkbox" class="checkbox" checked />
       </div>
@@ -29,7 +30,8 @@
           id="section-subtitle"
           type="text"
           class="input-field"
-          formControlName="sectionSubtitle"
+          formControlName="subtitle"
+          (change)="applyTestimonialChanges(TestiminialForm.get('subtitle')?.value)"
         />
       </div>
     </div>

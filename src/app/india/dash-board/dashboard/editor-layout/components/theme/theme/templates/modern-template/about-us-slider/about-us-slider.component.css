@@ -150,3 +150,11 @@
     max-width: 100%;
   }
 }
+@media (max-width:500px){
+.slider-heading {
+    font-size: 3.2rem;
+  
+
+}
+}
+

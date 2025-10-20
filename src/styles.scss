@@ -1,25 +1,39 @@
 /* Theme-based text color for dark/light mode */
-body[theme='dark'] h1,
-body[theme='dark'] h2,
+body[theme='dark'] .modern-template  h1,
+
 //body[theme='dark'] h3,
-body[theme='dark'] h4,
-body[theme='dark'] h5,
-body[theme='dark'] p,
-body[theme='dark'] span,
-body[theme='dark'] div {
+body[theme='dark'] .modern-template  h4,
+body[theme='dark'] .modern-template  h3,
+body[theme='dark'] .modern-template  h5,
+
+body[theme='dark'] .modern-template  span,
+body[theme='dark'] .modern-template  div,
+body[theme='dark'] .modern-template  a  {
   color: #fff !important;
 }
 
-body[theme='light'] h1,
-body[theme='light'] h2,
+body[theme='light'] .modern-template  h1,
+
 //body[theme='light'] h3,
-body[theme='light'] h4,
-body[theme='light'] h5,
-body[theme='light'] p,
-body[theme='light'] span,
-body[theme='light'] div {
+body[theme='light'] .modern-template  h4,
+body[theme='light'] .modern-template  h3,
+body[theme='light'] .modern-template h5,
+body[theme='light'] .modern-template  span,
+body[theme='light'] .modern-template  div ,
+body[theme='light'] .modern-template  a {
   color: #000 !important;
 }
+/* DARK THEME for Modern Template */
+// body[theme='dark'] .modern-template * {
+//   color: #fff !important;
+// }
+
+/* LIGHT THEME for Modern Template */
+// body[theme='light'] .modern-template * {
+//   color: #000 !important;
+// }
+
+
 @import "bootstrap/dist/css/bootstrap.css";
 @import "bootstrap-icons/font/bootstrap-icons.css";
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap");

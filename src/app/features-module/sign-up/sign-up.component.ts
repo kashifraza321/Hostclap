@@ -44,42 +44,89 @@ export class SignUpComponent {
       address: [''],
       city: [''],
       state: [''],
-      pincode: [''],
-      doyouneed: [''],
+        pincode: ['', [Validators.required, Validators.pattern(/^[0-9]{6}$/)]],
+      doyouneed: ['', Validators.required],
     });
   }
   togglePassword() {
     this.showPassword = !this.showPassword;
   }
 
-  onSubmit() {
-    if (this.accountForm.valid) {
-      const formData = this.accountForm.value;
-      this._login.signup(formData).subscribe({
-        next: (response: any) => {
-          console.log(response);
-          if (response.status === 200) {
-            alert('Sign-up successful!');
-            this._router.navigate(['/in/insight/customer']);
-          } else if (response.status === 409) {
-            alert('User already exists.!');
-          } else {
-            alert('Sign-up failed. Please try again.');
-          }
-        },
-        error: (err) => {
-          if (err.status === 409) {
-            alert('User already exists.!');
-          } else {
-            alert('Sign-up failed. Please try again.');
+  // onSubmit() {
+  //   if (this.accountForm.valid) {
+  //     const formData = this.accountForm.value;
+  //     this._login.signup(formData).subscribe({
+  //       next: (response: any) => {
+  //         console.log(response);
+          
+  //         if (response.status === 200) {
+  //           alert('Sign-up successful!');
+  //           this._router.navigate(['/in/insight/customer']);
+  //         } else if (response.status === 409) {
+  //           alert('User already exists.!');
+  //         } else {
+  //           alert('Sign-up failed. Please try again.');
+  //         }
+  //       },
+  //       error: (err) => {
+  //         if (err.status === 409) {
+  //           alert('User already exists.!');
+  //         } else {
+  //           alert('Sign-up failed. Please try again.');
 
-            alert('An error occurred. Please try again later.');
-            console.error('Sign-up error:', err);
+  //           alert('An error occurred. Please try again later.');
+  //           console.error('Sign-up error:', err);
+  //         }
+  //       },
+  //     });
+  //   } else {
+  //     this.accountForm.markAllAsTouched();
+  //   }
+  // }
+  onSubmit() {
+  if (this.accountForm.valid) {
+    const formData = this.accountForm.value;
+    this._login.signup(formData).subscribe({
+      next: (response: any) => {
+        console.log('Signup response:', response);
+
+        if (response.status === 200) {
+          alert('Sign-up successful!');
+
+          // ✅ Mark user as logged in (same as login())
+          this._login.setLoginStatus(true);
+          localStorage.setItem('isLoggedIn', 'true');
+
+          // ✅ Save token & userId if returned
+          if (response.data?.token) {
+            localStorage.setItem('token', response.data.token);
           }
-        },
-      });
-    } else {
-      this.accountForm.markAllAsTouched();
-    }
+          if (response.data?._id) {
+            localStorage.setItem('userId', response.data._id);
+          }
+
+          // ✅ Navigate to dashboard
+          this._router.navigate(['/in/insight/customer']);
+        } 
+        else if (response.status === 409) {
+          alert('User already exists!');
+        } 
+        else {
+          alert('Sign-up failed. Please try again.');
+        }
+      },
+      error: (err) => {
+        if (err.status === 409) {
+          alert('User already exists!');
+        } else {
+          alert('An error occurred. Please try again later.');
+          console.error('Sign-up error:', err);
+        }
+      },
+    });
+  } else {
+    this.accountForm.markAllAsTouched();
   }
+}
+
 }

@@ -9,6 +9,7 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertService } from 'src/app/services/Toaster/alert.service';
 import { PagesService } from '../pages.service';
+import { merge, tap } from 'rxjs';
 
 @Component({
   selector: 'app-testimonials',
@@ -36,9 +37,14 @@ export class TestimonialsComponent {
     console.log(this.pageId, ' pageId found');
     this.TestiminialForm = this.fb.group({
       sectionTitle: [''],
-      sectionSubtitle: [''],
+      subtitle: [''],
     });
     this.getSectionDetailData();
+       merge(
+      this.TestiminialForm.valueChanges.pipe(
+        tap((val) => this.applyTestimonialChanges(val))
+      )
+    ).subscribe();
   }
   getSectionDetailData() {
     this.pagesService
@@ -51,7 +57,7 @@ export class TestimonialsComponent {
 
             this.TestiminialForm.patchValue({
               sectionTitle: res.data.section.sectionTitle || '',
-              sectionSubtitle: res.data.section.subtitle || '',
+              subtitle: res.data.section.subtitle || '',
             });
             this.testimonialGroups = res.data.section.groups || [];
           }
@@ -60,6 +66,14 @@ export class TestimonialsComponent {
           console.error('Error loading section detail', err);
         },
       });
+  }
+    applyTestimonialChanges(val: any) {
+    const data = {
+      sectionTitle: val.sectionTitle || '',
+     subtitle: val.subtitle || '',
+      groups: this.testimonialGroups || [],
+    };
+    this.pagesService.updatePreviewSection('testimonials', data);
   }
   // openForm(pageId: string, groupId?: string) {
   //   if (groupId) {
@@ -92,5 +106,35 @@ export class TestimonialsComponent {
     ]);
   }
 
-  saveSection() {}
+saveSection() {
+  if (this.TestiminialForm.invalid) {
+    this.alertService.error('Please fill all required fields');
+    return;
+  }
+
+  const data = {
+    sectionType: 'testimonials',        // specify the section type
+    sectionTitle: this.TestiminialForm.value.sectionTitle,
+    subtitle: this.TestiminialForm.value.subtitle, 
+    pageId: this.pageId,
+    sectionId: this.sectionId,          // include sectionId for update
+  };
+
+  this.pagesService.createSection(data).subscribe({
+    next: (res: any) => {
+      if (res?.status === 200) {
+        this.alertService.success('Section updated successfully!');
+        this.getSectionDetailData();     // refresh form with updated data
+      } else {
+        this.alertService.error(res?.message || 'Failed to update section');
+      }
+    },
+    error: (err) => {
+      console.error('Error updating section', err);
+      this.alertService.error('Failed to update section');
+    },
+  });
+}
+
+
 }

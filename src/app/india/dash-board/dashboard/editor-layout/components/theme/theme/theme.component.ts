@@ -24,13 +24,14 @@ export class ThemeComponent {
     showCustomColors = false;
 
   colorOptions = [
-    { primary: '#e92984e6', secondary: '#e6e6e6', accent: '#f9eee9' },
+    { primary: '#e92984e6', secondary: '#faeee9', accent: '#f9eee9' },
     { primary: '#29B6F6', secondary: '#ff827c', accent: '#ededed' },
     { primary: '#3336A3', secondary: '#F2F4F7', accent: '#ffffff' },
     { primary: '#ffbe33', secondary: '#212529', accent: '#f8f9fa' },
     { primary: '#baddf3', secondary: '#f3baba', accent: '#333333' },
     { primary: '#ffa826', secondary: '#5f2b65', accent: '#ffffff' },
     { primary: '#c81a35', secondary: '#faeee9', accent: '#ffffff' },
+    { primary: '#f6c077', secondary: '#6a9e70', accent: '#ededed' },
   ];
    selectedType: 'primary' | 'secondary' | 'accent' = 'primary';
   

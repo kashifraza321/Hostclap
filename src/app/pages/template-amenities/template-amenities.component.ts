@@ -11,6 +11,7 @@ import {
 } from '@angular/forms';
 import { AlertService } from 'src/app/services/Toaster/alert.service';
 import { CommonModule } from '@angular/common';
+import { merge, tap } from 'rxjs';
 
 @Component({
   selector: 'app-template-amenities',
@@ -48,12 +49,15 @@ export class TemplateAmenitiesComponent {
       title: ['Amenities'],
       titleVisible: [true],
       subtitle: [''],
-      amenitiesNames: this.fb.array([]),
+ amenitiesNames: this.fb.control([])
     });
 
     this.pageId = this.route.snapshot.paramMap.get('pageId') || '';
     console.log(this.pageId, 'pageidddddddddd');
     this.getPageData();
+     merge(
+    this.amenitiesForm.valueChanges.pipe(tap(() => this.applyAmenitiesChanges()))
+  ).subscribe();
   }
 
   backToHomepage() {
@@ -78,6 +82,20 @@ export class TemplateAmenitiesComponent {
       );
     }
   }
+  applyAmenitiesChanges() {
+  const val = this.amenitiesForm.value;
+
+  const data = {
+    title: val.title || 'Amenities',
+    titleVisible: val.titleVisible ?? true,
+    subtitle: val.subtitle || '',
+    amenitiesNames: val.amenitiesNames || [],
+  };
+
+  // ✅ Instantly update the preview state
+  this.pagesService.updatePreviewSection('amenities', data);
+}
+
 
   getPageData(): void {
     this.pagesService.getPageDetail(this.pageId).subscribe({
@@ -119,6 +137,7 @@ export class TemplateAmenitiesComponent {
       next: (res) => {
         console.log('Amenities updated successfully:', res);
         this.alertService.success('Amenities updated successfully!');
+          this.pagesService.updatePreviewSection('amenities', this.amenitiesForm.value);
         this.getPageData();
       },
       error: (err) => {

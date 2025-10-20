@@ -237,7 +237,7 @@ export class TemplateHeaderComponent {
           }
         : false,
       show: showAnnouncement,
-    };
+  };
 
     this.pagesService.updatePreviewSection('announcement', data);
   }

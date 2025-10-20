@@ -97,7 +97,7 @@
           [formGroup]="inlineForm"
         >
           <label>Page Name</label>
-          <input type="text" formControlName="pageName" />
+          <input type="text" formControlName="pageName"  (input)="onPageNameChange(i, $event)"  />
 
           <label>URL</label>
           <input type="text" formControlName="url" />
@@ -113,7 +113,7 @@
             </button>
           </div>
           <label class="toggle-switch">
-            <input type="checkbox" (change)="toggleSection($event)" />
+            <input type="checkbox"   (change)="toggleVisibility(i, $event)"  />
             <span class="slider"></span>
           </label>
 
