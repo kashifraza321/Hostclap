@@ -101,9 +101,9 @@
 
           <label>URL</label>
           <input type="text" formControlName="url" />
-          <div class="flxWrp">
+          <div class="flxWrp ">
             <button
-              class="btn btn-success btn-sm"
+              class=" btn-success greenBtn"
               (click)="saveInlinePage(page)"
             >
               Save
@@ -167,7 +167,7 @@
       </li>
     </ul>
     <div class="btnWrp">
-      <button class="cancelBtn">cancel</button>
+      <button class="cancelBtn"  (click)="cancel()">cancel</button>
       <button class="btn btn-success greenBtn">Save</button>
     </div>
   </ng-container>

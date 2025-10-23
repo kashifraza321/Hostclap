@@ -48,11 +48,11 @@ export class TemplateServicesComponent {
       groupName: ['', Validators.required],
     });
     this.getSectionDetailData();
-     merge(
-    this.sectionForm.valueChanges.pipe(
-      tap((val) => this.applyServiceChanges(val))
-    )
-  ).subscribe();
+  //    merge(
+  //   this.sectionForm.valueChanges.pipe(
+  //     tap((val) => this.applyServiceChanges(val))
+  //   )
+  // ).subscribe();
   }
 
   backToHomepage() {
@@ -70,14 +70,7 @@ export class TemplateServicesComponent {
 
     this.showSubGroup = true;
   }
-  applyServiceChanges(val: any) {
-  const data = {
-    sectionTitle: val.sectionTitle || '',
-   
-    // groups: this.serviceGroups || [],
-  };
-  this.pagesService.updatePreviewSection('service', data);
-}
+
 
 
   backToGroupList() {
@@ -132,6 +125,38 @@ export class TemplateServicesComponent {
     });
   }
 
+//  applyServiceChanges(val: any) {
+//    const currentService = this.pagesService.getCurrentService();
+  
+//   const data = {
+//     sectionTitle: val.sectionTitle || '',
+//     groups: this.serviceGroups || [],
+//     subgroups: this.serviceSUbGroups || [],
+//   };
+
+//   this.pagesService.updatePreviewSection('service', data);
+// }
+// applyServiceChanges(val: any) {
+//   const currentService = this.pagesService.getCurrentService() || {
+//     sectionTitle: '',
+//     subtitle: '',
+//     groups: [],
+//     subgroups: [],
+//   };
+
+//   const data = {
+//     ...currentService,
+//     sectionTitle: val.sectionTitle || '',
+//     subtitle: val.subtitle || '',
+//   };
+
+//   console.log('Before update:', currentService);
+//   this.pagesService.updatePreviewSection('service', data);
+//   console.log('Sending to updatePreviewSection:', data);
+// }
+
+
+
   addGroup() {
     if (this.groupForm.invalid) {
       this.alertService.error('Group name is required');
@@ -156,9 +181,9 @@ export class TemplateServicesComponent {
       this.serviceGroups.push(newGroup);
       this.serviceSUbGroups.push(newGroup);
 
-      // 2️⃣ Right preview me update (realtime)
-      const currentServices = this.pagesService.getCurrentServices();
-      this.pagesService.updateServices([...currentServices, newGroup]);
+      // // 2️⃣ Right preview me update (realtime)
+      // const currentServices = this.pagesService.getCurrentServices();
+      // this.pagesService.updateServices([...currentServices, newGroup]);
         this.groupForm.reset();
         this.closeModal();
       },

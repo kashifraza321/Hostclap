@@ -41,7 +41,7 @@
           }"
         >
         <div class="mainContainer">
-          <span
+          <span class="accountmentText"
             *ngIf="
               state?.preview?.announcement?.show ??
               pageData?.header?.announcement?.show
@@ -396,6 +396,7 @@
           </div>
         </div>
       </section>
+     
       <!-- about us section  -->
       <app-about-us-slider [data]="data" [pageId]="pageId"></app-about-us-slider>
       <!-- about us section  -->
@@ -444,7 +445,7 @@
           </div>
         </div>
       </section>
-      <section>
+      <section class="gallerySection">
         <h2 class="sectionHeading">
           {{ pageData?.gallery?.title }}
         </h2>
@@ -543,9 +544,9 @@
           <div class="" [ngStyle]="{ 'font-family': data.font }">
             <h2 class="gradientHeading">
               {{
-                state?.preview?.offer?.sectionTitle ||
+                state?.preview?.service?.sectionTitle ||
                   serviceData?.section?.sectionTitle ||
-                  "offer"
+                  "service"
               }}
             </h2>
           </div>
@@ -746,7 +747,7 @@
                     [innerHTML]="subgroup.description"
                   ></p>
                   <div class="subgroup-actions">
-                    <a href="#" class="learnBtn">Learn more</a>
+                    <!-- <a href="#" class="learnBtn">Learn more</a> -->
                     <button class="add-to-cart"   [ngStyle]="{
                     background: data?.selectedColor?.primary
                   }">Add to Cart</button>
@@ -890,7 +891,7 @@
       <!-- slider  -->
       <!-- location -->
       <section
-        id="page-1"
+        id="page-3"
         class="dynamicPages"
         [ngStyle]="{ 'font-family': data.font }"
         *ngIf="state$ | async as state"

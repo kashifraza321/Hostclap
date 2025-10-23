@@ -12,6 +12,7 @@
   background: #fff;
     height: 100vh;
   overflow-y: auto;
+   
 }
 
 /* URL BAR */
@@ -26,6 +27,16 @@
 .headingFlex{
   display: flex;
   justify-content: space-between;
+}
+.addresTXt{
+      font-weight: 400;
+    line-height: 2;
+    letter-spacing: 2px;
+}
+.accountmentText{
+     font-weight: 600;
+    line-height: 2;
+    letter-spacing: 2px;
 }
 
 .dots {
@@ -170,14 +181,12 @@ overflow: auto;
 .classic-nav {
   background: #1f1f1f;
     padding: 0;
-   
-;
-   
-    gap: 0;
+   gap: 0;
 }
 .brandname{
       padding: 10px 0 40px;
       width: 100%;
+        letter-spacing: 2px;
 }
 .brandname img{
      max-width: 160px;
@@ -401,10 +410,11 @@ font-size: 28px;
   padding: 20px 40px;
   border-radius: 20px;
   overflow: hidden;
-  max-width: 800px;
+  max-width: 875px;
   width: 100%;
   min-height: 237px;
   margin: 0 auto;
+  
 }
 
 .offer-banner::before,
@@ -526,6 +536,7 @@ margin-bottom: 43px;
 
 .serviceSection {
   margin-top: 11rem;
+    letter-spacing: 2px;
 }
 /* SERVICES */
 /* gallery section */
@@ -898,6 +909,7 @@ h2.section-title {
   width: 80%;
   margin: 0 auto;
   text-align: center;
+    letter-spacing: 2px;
 }
 
 h1 {
@@ -1022,6 +1034,7 @@ td.highlight {
   width: 100%;
   padding: 63px 0;
   min-height: 336px;
+    letter-spacing: 2px;
 }
 
 .addTocart {
@@ -1136,6 +1149,7 @@ td.highlight {
   max-width: 750px;
   margin: auto;
   transform: translateY(86px);
+    letter-spacing: 2px;
 }
 
 .contact-form h3 {
@@ -1222,8 +1236,14 @@ textarea {
   justify-content: center;
   align-items: center;
   gap: 40px;
+  letter-spacing: 2px;
+    font-weight: 500;
 }
 
+.gallerySection{
+  border: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 20px 0;
+}
 .classic-footer {
   background: #2c3e50;
   color: #ecf0f1;
@@ -1295,6 +1315,7 @@ textarea {
   max-width: 200px;
   width: 100%;
   border: none;
+    letter-spacing: 2px;
 }
 .subgroup-card:hover {
   transform: translateY(-3px);
@@ -1316,7 +1337,7 @@ textarea {
 
 .subgroup-description {
   font-size: 14px;
-  color: #cbd5e1;
+  color: #000;
   margin: 10px 0;
 }
 
@@ -1403,7 +1424,7 @@ textarea {
  
   width: 100%;
   margin: 50px auto;
-
+  letter-spacing: 2px;
   width: 100%;
 }
 
@@ -1433,7 +1454,7 @@ textarea {
   transition: 0.3s all;
 }
 .amenity:hover {
-  background: rgb(195, 162, 167);
+  background:#faeee9;
 }
 
 .amenity .icon {
@@ -1947,7 +1968,7 @@ textarea {
 }
 
 .mobile-menu li {
-  padding: 10px 0;
+  padding: 10px 11px;
   border-bottom: 1px solid #eee;
 }
 
@@ -2117,7 +2138,7 @@ textarea {
 }
 .location-tooltip {
     position: absolute;
- 
+   letter-spacing: 2px;
     transform: translate(-51%, -24%);
     
     padding: 6px;
@@ -2236,4 +2257,54 @@ h2.section-title {
     max-width: 174px;
     width: 100%;
 }
+.top-bar{
+  flex-direction: column;
+   
+    align-items: flex-end;
+}
+
+
+}
+@media (max-width: 480px) {
+.amenities{
+  justify-content: center;
+}
+.amenity {
+   
+    width: 100%;
+}
+.top-bar {
+
+    font-size: 13px;
+}
+.top-bar{
+ 
+    padding: 6px 0px;
+ 
+   
+}
+.accountmentText {
+  font-size: 11px;
+    max-width: 130px;
+    width: 100%;
+}
+.addresTXt {
+ 
+    font-size: 12px;
+}
+.map-image[_ngcontent-ng-c1413764434] {
+
+    height: 209px;
+
+}
+.location-tooltip {
+
+    max-width: 115px;
+    width: 100%;
+}
+.footerwrp {
+
+    flex-direction: column;
+}
+
 }

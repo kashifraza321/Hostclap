@@ -48,7 +48,7 @@ export class PagesService {
       phone: {},
       address: {},
       offer: {},
-      services: {},
+      service: {},
       contactUs: {},
        amenities: {},
        testimonials: {},
@@ -59,34 +59,47 @@ export class PagesService {
 getCurrentServices(): any[] {
   return this.stateSubject.getValue().preview.services || [];
 }
+  
 // PagesService.ts
-updateServices(newServices: any[]) {
-  const current = this.stateSubject.getValue();
-  this.stateSubject.next({
-    ...current,
-    preview: {
-      ...current.preview,
-      services: newServices
-    }
-  });
+// updateServices(newServices: any[]) {
+//   const current = this.stateSubject.getValue();
+//   this.stateSubject.next({
+//     ...current,
+    
+//     preview: {
+//       ...current.preview,
+//       service: newServices
+//     }
+//   });
+// }
+  getCurrentService(): any {
+  return this.stateSubject.getValue().preview.service || {};
 }
-
   // Update master object deeply
   updatePreviewSection(section: string, value: any) {
+    // if (!value || Object.keys(value).length === 0) return;
+    console.log('updatePreviewSection called with:', section, value);
     const current = this.stateSubject.getValue();
+    console.log('Current state before update:', current);
     this.stateSubject.next({
       ...current,
+    //  pages: Array.isArray(current.pages) ? current.pages : [],
       preview: {
         ...current.preview,
         [section]: { ...current.preview[section], ...value },
       },
+      
     });
+     console.log('State updated with preview section:', section);
+  console.log('New state:', this.stateSubject.getValue());
   }
-
+getCurrentState() {
+  return this.stateSubject.getValue();
+}
 
   updatePages(pages: any[]) {
     const current = this.stateSubject.getValue();
-    this.stateSubject.next({ ...current, pages });
+    this.stateSubject.next({ ...current, pages:pages, });
   } 
 
   // Add single page

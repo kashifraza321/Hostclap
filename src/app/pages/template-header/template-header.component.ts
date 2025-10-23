@@ -37,6 +37,7 @@ export class TemplateHeaderComponent {
   toggleMenuFontColor: boolean = false;
   logoPreview: SafeResourceUrl | null = null;
   uploadedImages: string[] = [];
+  pagesList= [];
   pageData: any;
   imgurl = environment.imageBaseUrl;
   pageId: string = '';
@@ -114,7 +115,7 @@ export class TemplateHeaderComponent {
     console.log(this.route.snapshot.paramMap, 'afreen');
     this.pageId = this.route.snapshot.paramMap.get('pageId') || '';
     console.log('Page ID tazz:', this.pageId);
-
+  
     this.announcementForm = this.fb.group({
       message: [''],
       show: [true],
@@ -205,6 +206,7 @@ export class TemplateHeaderComponent {
       ),
       this.menuForm.valueChanges.pipe(
         tap((val) =>
+            // console.log('🔥 MENU FORM CHANGED', val)
           // this.pagesService.updatePreviewSection('menu', val)
           this.applyMenuChanges()
         )
@@ -214,7 +216,31 @@ export class TemplateHeaderComponent {
     ).subscribe();
 
     this.getPageDetail(this.pageId);
+    this.getPages()
+
+    console.log('pagesList on init:', this.pagesList);
   }
+   getPages() {
+    
+    this.pagesService.getPages().subscribe({
+      next: (res) => {
+        console.log('Fetched pages:', res);
+
+        this.pagesList = res.data || [];
+        this.pageId = res.data[0]?._id;
+ this.pagesList = this.pageData.pages || [];
+            console.log('pagesList after in getpages api:', this.pagesList);
+      
+      },
+      error: (err) => {
+        console.error('Error loading pages:', err);
+      },
+      complete: () => {
+        
+      },
+    });
+  }
+  
   // realtime data show logic
   applyFontStyles() {
     const val = this.announcementForm.value;
@@ -264,7 +290,9 @@ export class TemplateHeaderComponent {
       fontSize: this.menuForm.get('fontSize')?.value + 'px',
       alignment: this.menuForm.get('alignment')?.value || 'middle',
     };
+    console.log('BEFORE menu update:', this.pagesService.getCurrentState());
     this.pagesService.updatePreviewSection('menu', data);
+    console.log('AFTER menu update:', this.pagesService.getCurrentState());
   }
 
   applyCoverChanges() {
@@ -454,6 +482,9 @@ export class TemplateHeaderComponent {
 
           this.logoPreview = safeImageUrl;
 
+            this.pagesList = this.pageData.pages || [];
+            console.log('pagesList after assignment:', this.pagesList);
+
           // --- Cover ---
           const cover = res.data.header.cover; // assuming your API has cover under header.cover
           if (cover?.image) {
@@ -517,7 +548,10 @@ export class TemplateHeaderComponent {
             fontSize: menu.fontSize || 16,
             alignment: menu.alignment || 'left',
             menuFontColour: menu.menuFontColour || '#000000',
-          });
+          },
+          { emitEvent: false }
+        );
+          
 
           console.log('📝 MenuForm after patch:', this.menuForm.value);
         }

@@ -30,7 +30,7 @@
       <a
         class="learn-more-btn"
         [href]="slides[currentSlide]?.link"
-        [ngStyle]="{ background: data?.selectedColor?.secondary }"
+       [style.color]="data?.selectedColor?.primary + ' !important'"
       >
         {{ slides[currentSlide]?.linkText }}
       </a>

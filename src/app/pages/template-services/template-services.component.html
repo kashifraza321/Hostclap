@@ -32,10 +32,11 @@
               ? selectedGroup?.groupName
               : sectionForm.value.sectionTitle
           "
+         
        
           
         />
-         <!-- (change)="applyServiceChanges(sectionForm.get('sectionTitle')?.value)" -->
+      <!--    (input)="applyServiceChanges(sectionForm.value)" -->
         <input type="checkbox" class="checkbox" checked />
       </div>
       <div *ngIf="!showSubGroup">
@@ -48,7 +49,7 @@
           [value]="
             showSubGroup ? selectedGroup?.groupName : sectionForm.value.subtitle
           "
-           
+          
         />
       </div>
     </div>
@@ -85,14 +86,14 @@
           <div
             class="group-item"
             *ngFor="let group of serviceGroups; let i = index"
-            (click)="openSubGroup(group._id)"
+           
             [ngClass]="{
               'orange-border': i % 2 === 0,
               'blue-border': i % 2 !== 0
             }"
           >
            
-                <span class="GroupTitle"> {{ group.groupName }} </span>  
+                <span class="GroupTitle"  (click)="openSubGroup(group._id)"> {{ group.groupName }} </span>  
             <button  class="deleteBtn" (click)="deleteGroup(group._id, 'group')"> <img  src="../../../assets/images/delete.png" alt="delete" width="20"></button>
           </div>
         </div>
@@ -104,16 +105,16 @@
           <div
             class="subgroup-item group-item"
             *ngFor="let sub of selectedGroup?.subgroups; let i = index"
-            (click)="
-              navigateToSubgroupForm(pageId, selectedGroup?._id, sub._id)
-            "
+       
             [ngClass]="{
               'orange-border': i % 2 === 0,
               'blue-border': i % 2 !== 0
             }"
           >
            
-              <span class="GroupTitle">  {{ sub.subgroupName }}</span>
+              <span class="GroupTitle"      (click)="
+              navigateToSubgroupForm(pageId, selectedGroup?._id, sub._id)
+            ">  {{ sub.subgroupName }}</span>
             <button  class="deleteBtn" (click)="deleteGroup(sub._id, 'subgroup')"><img  src="../../../assets/images/delete.png" alt="delete" width="20"></button>
           </div>
         </div>

@@ -427,7 +427,7 @@
           <label class="form-label">Alignment</label>
           <select
             formControlName="alignment"
-            (click)="applyMenuChanges()"
+            (change)="applyMenuChanges()"
             class="form-select"
           >
             <option value="left">Left</option>
@@ -457,7 +457,7 @@
             <input
               type="color"
               formControlName="menuFontColour"
-              (click)="applyMenuChanges()"
+              (change)="applyMenuChanges()"
             />
           </div>
         </div>

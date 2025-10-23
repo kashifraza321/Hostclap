@@ -22,6 +22,7 @@ import { AboutUsSliderComponent } from './about-us-slider/about-us-slider.compon
 import { ThemeService } from '../../theme.service';
 import { TestimonialSliderComponent } from './testimonial-slider/testimonial-slider.component';
 import { filter, take } from 'rxjs';
+import { GallerySlderComponent } from './gallery-slder/gallery-slder.component';
 // import { SlickCarouselModule } from 'ngx-slick-carousel';
 // import { SwiperModule } from 'swiper/angular';
 interface TeamMember {
@@ -38,7 +39,8 @@ interface TeamMember {
     ReviewSliderComponent,
     AboutUsSliderComponent,
     TestimonialSliderComponent,
-    RouterModule 
+    RouterModule ,
+    GallerySlderComponent
   ],
   templateUrl: './modern-template.component.html',
   styleUrl: './modern-template.component.css',
@@ -112,6 +114,42 @@ export class ModernTemplateComponent {
       initial: 'A',
     },
   ];
+dummySubgroup = [
+  {
+    subgroupName: 'Sample Plan',
+    price: '999',
+    description: 'This is a sample description for the plan.',
+  }
+];
+
+dummyGroup = {
+  groupName: 'Sample Group',
+  subgroups: this.dummySubgroup,
+};
+dummyServiceSubgroups = [
+  {
+    subgroupName: 'Sample Service',
+    description: 'This is a placeholder service description.',
+    media: ['assets/images/herosection.png'], // you can set a placeholder image path here if needed
+    bookingButtonLabel: 'Request Service',
+    slug: 'sample-service',
+  },
+];
+
+dummyServiceGroup = {
+  groupName: 'Sample Group',
+  subgroups: this.dummyServiceSubgroups,
+};
+
+dummyServiceSection = {
+  section: {
+    sectionTitle: 'Sample Service Section',
+    groups: [this.dummyServiceGroup],
+  },
+};
+
+
+
 
   currentTestimonialIndex = 0;
   testimonialsPerView = 3;
@@ -158,6 +196,7 @@ isScrolled = false;
     /////////////////////////////////////////////////
     this.pagesService.state$.subscribe((state) => {
         console.log('Realtime state in ModernTemplate:', state);
+        console.log('📘 ModernTemplate pages updated:', state.pages);
       this.preview = state.preview;
       this.pagesList = state.pages;
      this.serviceData = state.preview.services 
@@ -482,21 +521,45 @@ getCoverUrl(): SafeStyle {
       address
     )}`;
   }
-  getSectionDetailData(pageId: string) {
-    this.pagesService.GET_SECTION_DETAIL(pageId, 'service').subscribe({
-      next: (res) => {
+  // getSectionDetailData(pageId: string) {
+  //   this.pagesService.GET_SECTION_DETAIL(pageId, 'service').subscribe({
+  //     next: (res) => {
+  //       this.serviceData = res.data;
+  //       console.log('Section detail:', res);
+  //       this.aboveContactSections = res.data?.section?.groups || [];
+  //       this.allSubGroups =
+  //         res.data?.section?.groups?.flatMap((group: any) => group.subGroups) ||
+  //         [];
+  //     },
+  //     error: (err) => {
+  //       console.error('Error loading section detail', err);
+  //     },
+  //   });
+  // }
+getSectionDetailData(pageId: string) {
+  this.pagesService.GET_SECTION_DETAIL(pageId, 'service').subscribe({
+    next: (res) => {
+      const groups = res.data?.section?.groups;
+      if (groups && groups.length > 0) {
         this.serviceData = res.data;
-        console.log('Section detail:', res);
-        this.aboveContactSections = res.data?.section?.groups || [];
-        this.allSubGroups =
-          res.data?.section?.groups?.flatMap((group: any) => group.subGroups) ||
-          [];
-      },
-      error: (err) => {
-        console.error('Error loading section detail', err);
-      },
-    });
-  }
+        this.aboveContactSections = groups;
+        this.allSubGroups = groups.flatMap((group: any) => group.subgroups || []);
+      } else {
+        // API returned no groups – fallback to dummy data
+        this.serviceData = this.dummyServiceSection;
+        this.aboveContactSections = this.dummyServiceSection.section.groups;
+        this.allSubGroups = this.dummyServiceSection.section.groups[0].subgroups;
+      }
+    },
+    error: (err) => {
+      console.error('Error loading section detail', err);
+      // On error – use dummy data
+      this.serviceData = this.dummyServiceSection;
+      this.aboveContactSections = this.dummyServiceSection.section.groups;
+      this.allSubGroups = this.dummyServiceSection.section.groups[0].subgroups;
+    },
+  });
+}
 
 
   onRequestService(sub: any) {
@@ -528,17 +591,26 @@ getCoverUrl(): SafeStyle {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }
-  getSectionDetailDataForPriceList(pageId: string) {
-    this.pagesService.GET_SECTION_DETAIL(pageId, 'price_list').subscribe({
-      next: (res) => {
-        this.abovePriceContactSections = res.data?.section?.groups || [];
-        this.setSelectedGroup(0, 'price_list');
-      },
-      error: (err) => {
-        console.error('Error loading section detail', err);
-      },
-    });
-  }
+getSectionDetailDataForPriceList(pageId: string) {
+  this.pagesService.GET_SECTION_DETAIL(pageId, 'price_list').subscribe({
+    next: (res) => {
+      const groups = res.data?.section?.groups;
+      if (groups && groups.length > 0) {
+        this.abovePriceContactSections = groups;
+      } else {
+        this.abovePriceContactSections = [this.dummyGroup];
+      }
+      this.setSelectedGroup(0, 'price_list');
+    },
+    error: (err) => {
+      console.error('Error loading section detail', err);
+      // On error, use dummy
+      this.abovePriceContactSections = [this.dummyGroup];
+      this.setSelectedGroup(0, 'price_list');
+    },
+  });
+}
+
 
   setSelectedGroup(index: number, type: 'service' | 'price_list') {
     if (type === 'price_list') {

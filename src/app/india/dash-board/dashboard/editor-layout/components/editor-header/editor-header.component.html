@@ -4,9 +4,12 @@
     <span></span>
     <a href="#"> </a>
   </div>
+  <button  class="backto" *ngIf="isPreview" (click)="onBackClick()">
+  <img src="../../../../../../../assets/images/icons8-chevron-right-24.png" alt=""> Back to Editor
+</button>
 
   <!-- Center: Device Toggle + Links -->
-  <div class="center-options">
+  <div class="center-options" *ngIf="!isPreview">
     <div class="device-toggle">
       <button title="Desktop View">
         <img
@@ -30,16 +33,13 @@
     </div>
   </div>
 
+
   <!-- Right: Help + Preview -->
-  <div class="right-controls">
+  <div class="right-controls" *ngIf="!isPreview">
     <div class="help-icon">?</div>
 
-    <a
-      class="preview-btn"
-      href="http://hostclap.com/#/in/myWebsite"
-      target="_blank"
-    >
-      Preview</a
-    >
+   <a class="preview-btn" 
+  (click)="onPreviewClick()">Preview</a>
+  
   </div>
 </div>

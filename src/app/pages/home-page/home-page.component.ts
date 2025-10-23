@@ -22,7 +22,7 @@ import { AlertService } from 'src/app/services/Toaster/alert.service';
 })
 export class HomePageComponent {
   homeForm!: FormGroup;
-
+originalPageData: any;
   sectionForm!: FormGroup;
   userId: string = '';
   showHeader = false;
@@ -31,6 +31,7 @@ export class HomePageComponent {
   pageData: any;
   pages: any[] = [];
   sectionId: string = '';
+  isCanceling = false;
   // sections: { name: string; key: string }[] = [];
   sections = [
     { name: 'Header', key: 'header' },
@@ -57,6 +58,13 @@ export class HomePageComponent {
       pageName: ['Home'],
       isActive: [true],
     });
+     this.homeForm.valueChanges.subscribe(() => {
+    if (this.isCanceling) {
+      // skip api calls during cancel
+      return;
+    }
+   
+  });
     console.log('Sections list cnsdcndscnd:', this.sections);
     console.log('pageID hain kyaaaaa', this.pageId);
     console.log(' Sections Initialized:', this.sections);
@@ -79,7 +87,7 @@ export class HomePageComponent {
       return;
     }
 
-    // Suppose you have the page ID stored somewhere, e.g. this.pageId
+   
     const pageId = this.pageId;
 
     const data = {
@@ -100,7 +108,8 @@ export class HomePageComponent {
     });
   }
 
-  // home edit
+ 
+
   openServices(pageId: string) {
     console.log(pageId, 'pageidddddddddddd');
 
@@ -353,7 +362,11 @@ navigateToOpeningHours(pageId: string) {
         if (res?.status === 200) {
           console.log('Full API Response:', res);
           this.pageData = res.data;
-
+           this.originalPageData = this.pageData;
+ this.homeForm.patchValue({
+          pageName: this.pageData.pageName || 'Home',
+          isActive: this.pageData.isActive ?? true,
+        });
           console.log('Page Data:', this.pageData);
         }
       },
@@ -362,4 +375,23 @@ navigateToOpeningHours(pageId: string) {
       },
     });
   }
+cancel() {
+  if (this.originalPageData) {
+    this.isCanceling = true;
+
+    this.homeForm.patchValue({
+      pageName: this.originalPageData.pageName || 'Home',
+      isActive: this.originalPageData.isActive ?? true,
+    });
+
+    setTimeout(() => {
+      this.isCanceling = false;
+    }, 0);
+
+    console.log('Form reset locally to original data');
+  }
+}
+
+
+
 }

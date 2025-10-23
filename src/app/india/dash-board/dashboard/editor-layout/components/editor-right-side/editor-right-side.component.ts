@@ -1,6 +1,6 @@
 import { DEFAULT_RESIZE_TIME } from '@angular/cdk/scrolling';
 import { CommonModule } from '@angular/common';
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { DefaultTemplateComponent } from '../theme/theme/templates/default-template/default-template.component';
 import { ClassicTemplateComponent } from '../theme/theme/templates/classic-template/classic-template.component';
 import { Data } from 'src/app/models/data.model';
@@ -27,7 +27,7 @@ export class EditorRightSideComponent {
   @Input() data!: Data;
   pageId:string=''
     slug = '';
-
+@Output() previewClicked = new EventEmitter<void>();
  showSubGroup = false; 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['data']) {

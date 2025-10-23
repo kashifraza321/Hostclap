@@ -388,3 +388,11 @@
 .blue-border {
   border-left-color: #44c8f5;
 }
+.GroupTitle{
+  width: 70%;
+}
+
+.deleteBtn{
+border: none;
+background: none;
+}

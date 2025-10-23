@@ -488,16 +488,43 @@ input:checked + .slider::before {
   border-radius: 10px;
   border: none;
 }
-.cancelBtn {
-  background: #ccc;
-}
-.greenBtn {
-  min-height: 40px;
-}
+
 .btnWrp {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: 30px;
   margin-top: 20px;
+}
+
+.cancelBtn {
+  background-color: #e0e0e0;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.cancelBtn:hover {
+  background-color: #d5d5d5;
+}
+
+.greenBtn {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+    min-height: 40px;
+  transition: background-color 0.2s;
+}
+
+.greenBtn:disabled {
+  background-color: #9ccc9c;
+  cursor: not-allowed;
 }

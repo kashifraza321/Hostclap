@@ -32,7 +32,11 @@ isSidebarOpen = false;
     template: 'default',
     font: '',
     selectedColor: null,
+
   };
+    isPreview: boolean = false;
+
+
   constructor(){
 
   }
@@ -46,8 +50,8 @@ isSidebarOpen = false;
   // }
   updateData(newData: Partial<Data>) {
     this.data = {
-      ...this.data, // purane values safe rakho
-      ...newData, // naye values overwrite karo
+      ...this.data, 
+      ...newData, 
     };
 
     if (!this.data.template) {
@@ -65,5 +69,14 @@ isSidebarOpen = false;
 
 toggleSidebar() {
   this.isSidebarOpen = !this.isSidebarOpen;
+}
+enterPreview() {
+  this.isPreview = true;
+  console.log('Entered Preview Mode');
+}
+
+exitPreview() {
+  this.isPreview = false;
+  console.log('Exited Preview Mode');
 }
 }

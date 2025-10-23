@@ -40,11 +40,11 @@ export class TestimonialsComponent {
       subtitle: [''],
     });
     this.getSectionDetailData();
-       merge(
-      this.TestiminialForm.valueChanges.pipe(
-        tap((val) => this.applyTestimonialChanges(val))
-      )
-    ).subscribe();
+    //    merge(
+    //   this.TestiminialForm.valueChanges.pipe(
+    //     tap((val) => this.applyTestimonialChanges(val))
+    //   )
+    // ).subscribe();
   }
   getSectionDetailData() {
     this.pagesService
@@ -67,25 +67,34 @@ export class TestimonialsComponent {
         },
       });
   }
-    applyTestimonialChanges(val: any) {
-    const data = {
-      sectionTitle: val.sectionTitle || '',
-     subtitle: val.subtitle || '',
-      groups: this.testimonialGroups || [],
-    };
-    this.pagesService.updatePreviewSection('testimonials', data);
-  }
-  // openForm(pageId: string, groupId?: string) {
-  //   if (groupId) {
-  //     this.router.navigate([
-  //       '/in/insight/editor/testimonialform',
-  //       pageId,
-  //       this.selectedGroup?._id,
-  //     ]);
-  //   } else {
-  //     // this.router.navigate(['/in/insight/editor/testimonialform', pageId]);
-  //   }
+  //   applyTestimonialChanges(val: any) {
+  //   const data = {
+  //     sectionTitle: this.TestiminialForm.value.sectionTitle || '',
+  //    subtitle: this.TestiminialForm.value.subtitle || '',
+  //     groups: this.testimonialGroups || [],
+  //   };
+  //   this.pagesService.updatePreviewSection('testimonials', data);
   // }
+ 
+   deleteGroup(subgroupId: string, sectionType: string) {
+  console.log(sectionType, 'pricelist sectiontype');
+  this.pagesService.deleteServiesBlock(sectionType, subgroupId).subscribe({
+    next: (res) => {
+      console.log('Group deleted:', res);
+      this.alertService.success('Group deleted successfully');
+
+      // ✅ Remove from UI list
+      this.testimonialGroups = this.testimonialGroups.filter(
+        (group) => group._id !== subgroupId
+      );
+    },
+    error: (err) => {
+      console.error('Error deleting group:', err);
+      this.alertService.error('Failed to delete group');
+    },
+  });
+}
+
 
   backToHomepage() {
     this.router.navigate(['/in/insight/editor/home', this.pageId]);
@@ -113,11 +122,11 @@ saveSection() {
   }
 
   const data = {
-    sectionType: 'testimonials',        // specify the section type
+    sectionType: 'testimonials',       
     sectionTitle: this.TestiminialForm.value.sectionTitle,
     subtitle: this.TestiminialForm.value.subtitle, 
     pageId: this.pageId,
-    sectionId: this.sectionId,          // include sectionId for update
+    sectionId: this.sectionId,         
   };
 
   this.pagesService.createSection(data).subscribe({

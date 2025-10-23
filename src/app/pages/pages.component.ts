@@ -248,6 +248,10 @@ toggleVisibility(index: number, event: any) {
     }
   }
 
+  cancel() {
+console.log('Cancel button clicked — discarding changes.');
+  this.pageForm.reset();
+  }
   goBack() {
     this.router.navigateByUrl('/in/insight/editor');
   }

@@ -33,7 +33,7 @@ public state$ = this.pagesService.state$;
     dots: true,
     arrows: true,
     infinite: true,
-    autoplay: false,
+    autoplay: true,
     autoplaySpeed: 3000,
     responsive: [
       {
@@ -50,6 +50,30 @@ public state$ = this.pagesService.state$;
       }
     ]
   };
+  dummyTestimonials = [
+  {
+    name: 'John Doe',
+    review: 'This company exceeded my expectations. Excellent service!',
+    date: '01/01/2023',
+    rating: 5,
+    image: 'assets/images/dummy-user-1.jpg'
+  },
+  {
+    name: 'Jane Smith',
+    review: 'Great experience from start to finish. Highly recommend.',
+    date: '15/02/2023',
+    rating: 4,
+    image: 'assets/images/dummy-user-2.jpg'
+  },
+  {
+    name: 'Michael Johnson',
+    review: 'Professional, reliable, and friendly team!',
+    date: '10/03/2023',
+    rating: 5,
+    image: 'assets/images/dummy-user-3.jpg'
+  }
+];
+
   constructor(  private pagesService: PagesService,
       private route: ActivatedRoute,
       private sanitizer: DomSanitizer,
@@ -121,13 +145,24 @@ public state$ = this.pagesService.state$;
           };
         });
 
-        // Assign to slider
-        this.testimonials = this.testimonialGroups;
+        
+        // this.testimonials = this.testimonialGroups;
 
-        // Detect changes
+      
+        // ✅ Fallback to dummy if no testimonials found
+      if (this.testimonialGroups.length === 0) {
+        this.testimonials = this.dummyTestimonials;
+      } else {
+        this.testimonials = this.testimonialGroups;
+      }
         this.cdr.detectChanges();
       },
-      error: (err) => console.error('Error loading section detail', err)
+      error: (err) => {
+      console.error('Error loading section detail', err);
+      // ✅ In case of API failure, also fallback
+      this.testimonials = this.dummyTestimonials;
+      this.cdr.detectChanges();
+    }
     });
   }
 }

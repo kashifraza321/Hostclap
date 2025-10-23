@@ -29,6 +29,18 @@ sanitizedQuote: any;
   // data: any;
   pageData: any;
   isLoading: boolean = false;
+dummySlide = {
+  title: 'Welcome to Our Company',
+  description: 'We are passionate about delivering quality and value.',
+  imageUrl: 'assets/images/herosection.png', 
+  linkText: 'Learn More',
+  link: '#',
+  alignment: 'center',
+  textColour: '#333333',
+  sanitizedDescription: this.sanitizer.bypassSecurityTrustHtml(
+    'We are passionate about delivering quality and value.'
+  ) as SafeHtml,
+};
 
 
   constructor(
@@ -113,8 +125,8 @@ sanitizedQuote: any;
               imageUrl: this.sanitizer.bypassSecurityTrustUrl(
         this.imageUrl + group.aboutus.imageUrl
       ),
-              linkText: 'Learn More', // API se agar available ho to yahan daalo
-              link: '#', // API se agar available ho to yahan daalo
+              linkText: 'Learn More', 
+              link: '#', 
               alignment: group.aboutus.alignment || 'left',
               textColour: group.aboutus.textColour || '#000000',
               sanitizedDescription: this.sanitizer.bypassSecurityTrustHtml(
@@ -122,12 +134,20 @@ sanitizedQuote: any;
               ) as SafeHtml,
             };
           });
+           // 👇 Check if slides is empty, then use dummy slide
+      if (this.slides.length === 0) {
+        this.slides = [this.dummySlide];
+      }
+
+      this.currentSlide = 0;
+      console.log('Slides:', this.slides);
 
         this.currentSlide = 0;
         console.log('Slides:', this.slides);
       },
       error: (err) => {
         console.error('Error loading section detail', err);
+         this.slides = [this.dummySlide];
       },
     });
   }

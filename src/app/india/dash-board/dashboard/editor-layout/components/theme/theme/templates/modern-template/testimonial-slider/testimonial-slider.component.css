@@ -1,8 +1,9 @@
 .testimonial-slider-section {
   text-align: center;
-  padding: 60px 0;
+  padding: 8rem 0;
   background: #fff;
   overflow: hidden;
+    letter-spacing: 2px;
 }
 
 .slider-heading {
@@ -57,7 +58,7 @@
   height: 80px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid #ff4081;
+  /* border: 3px solid #ff4081; */
 }
 
 .testimonial-card h3 {

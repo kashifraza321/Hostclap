@@ -1,0 +1,56 @@
+/* Limit total width and center the slider */
+.container {
+  width: 100%;
+  max-width: 1200px;      /* 👈 limit slider area */
+  margin: 0 auto;         /* center horizontally */
+  position: relative;
+  text-align: center;
+}
+
+/* Header styling stays fixed within container width */
+.header {
+  position: relative;     /* no longer fixed to entire viewport */
+  width: 100%;
+  opacity: 0.9;
+  color: white;
+  background-color: black;
+  display: none;
+  padding: 10px 0;
+}
+
+/* Slider area */
+#ts-slider {
+  width: 100%;            /* fit inside 1200px container */
+  overflow: hidden;
+  position: relative;
+}
+
+/* Slide wrapper */
+#ts-slider .slides {
+  display: flex;
+  transition: margin-left 1s ease;
+  width: max-content;
+}
+
+/* Each slide takes full container width */
+#ts-slider .slide {
+  list-style-type: none;
+  flex: 0 0 100%;
+}
+
+/* Images scale to container width */
+#ts-slider .slide img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+/* Colors (same as before) */
+.red { background-color: red; }
+.orange { background-color: orange; }
+.yellow { background-color: yellow; }
+.green { background-color: green; }
+.blue { background-color: blue; }
+.indigo { background-color: indigo; }

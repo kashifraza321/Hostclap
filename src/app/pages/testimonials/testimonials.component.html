@@ -20,7 +20,7 @@
           type="text"
           class="input-field"
           formControlName="sectionTitle"
-            (change)="applyTestimonialChanges(TestiminialForm.get('sectionTitle')?.value)"
+          
         />
         <input type="checkbox" class="checkbox" checked />
       </div>
@@ -31,8 +31,8 @@
           type="text"
           class="input-field"
           formControlName="subtitle"
-          (change)="applyTestimonialChanges(TestiminialForm.get('subtitle')?.value)"
-        />
+          />
+          <!-- (change)="applyTestimonialChanges(TestiminialForm.get('subtitle')?.value)" -->
       </div>
     </div>
 
@@ -55,20 +55,16 @@
           <div
             class="group-item"
             *ngFor="let group of testimonialGroups; let i = index"
-            (click)="navigateToForm(group._id)"
+            
             [ngClass]="{
               'orange-border': i % 2 === 0,
               'blue-border': i % 2 !== 0
             }"
           >
+          <span class="GroupTitle" (click)="navigateToForm(group._id)">
             {{ group.testimonial?.reviewerName
-            }}<span class="arrow"
-              ><img
-                src="../../../assets/images/icons8-chevron-right-24.png"
-                alt=""
-                width="15"
-                height="15"
-            /></span>
+            }} 
+            </span><button  class="deleteBtn" (click)="deleteGroup(group._id, 'group')"> <img  src="../../../assets/images/delete.png" alt="delete" width="20"></button>
           </div>
         </div>
       </div>
