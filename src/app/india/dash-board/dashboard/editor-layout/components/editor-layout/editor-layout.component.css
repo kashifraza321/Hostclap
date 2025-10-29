@@ -39,7 +39,13 @@
   cursor: pointer;
 }
 
-
+.close-btn{
+  position: absolute;
+    left: 14px;
+    top: 12px;
+    font-size: 17px;
+    border: none;
+}
 
 /* new user  */
 
@@ -75,6 +81,8 @@
     background: white;
     z-index: 1000;
     transform: translateX(-100%);
+        padding-top: 25px;
+           
   }
 
   .editor-sidebar.open {

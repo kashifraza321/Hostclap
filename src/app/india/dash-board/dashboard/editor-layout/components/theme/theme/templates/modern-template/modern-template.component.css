@@ -2257,12 +2257,6 @@ h2.section-title {
     max-width: 174px;
     width: 100%;
 }
-.top-bar{
-  flex-direction: column;
-   
-    align-items: flex-end;
-}
-
 
 }
 @media (max-width: 480px) {
@@ -2292,7 +2286,7 @@ h2.section-title {
  
     font-size: 12px;
 }
-.map-image[_ngcontent-ng-c1413764434] {
+.map-image {
 
     height: 209px;
 
@@ -2305,6 +2299,11 @@ h2.section-title {
 .footerwrp {
 
     flex-direction: column;
+}
+.top-bar{
+  flex-direction: column;
+   gap: 12px;
+    align-items: flex-end;
 }
 
 }
