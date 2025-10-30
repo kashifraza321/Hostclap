@@ -1257,7 +1257,7 @@ textarea {
   margin-top: 8rem;
 }
 .classic-footer p {
-  color: #ecf0f1;
+  color: #606263;;
   padding: 15px 0;
   text-align: center;
   font-size: 19px;
@@ -1265,6 +1265,8 @@ textarea {
   gap: 15px;
   border-left: 1px solid #ccc;
   padding-left: 20px;
+  max-width: 222px;
+  width: 100%;
 }
 .product-name.highlight {
   color: #f25c05;

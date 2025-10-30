@@ -13,6 +13,10 @@
   margin: 20px 0;
   font-size: 18px;
 }
+.checkBox{
+  width: 20px;
+  height: 18px;
+}
 
 .announcement-box {
   background: #f9f9f9;
@@ -813,7 +817,7 @@ small.text-muted {
 label {
   font-size: 18px;
   font-weight: 600;
-  margin: 14px 2px;
+  margin: 19px 2px 2px;
 }
 .cover-section {
   padding: 16px;

@@ -242,31 +242,26 @@ export class TemplateHeaderComponent {
   }
   
   // realtime data show logic
-  applyFontStyles() {
-    const val = this.announcementForm.value;
-    const showAnnouncement = val.show;
+applyFontStyles() {
+  const val = this.announcementForm.value;
 
-    const data = {
-      message: this.announcementForm.get('message')?.value || '',
-      fontSize: this.announcementForm.get('fontSize')?.value || 14,
-      fontColor: this.announcementForm.get('fontColor')?.value || '#000000',
-      actionButton: this.announcementForm.get('actionButton.enabled')?.value
-        ? {
-            buttonText:
-              this.announcementForm.get('actionButton.buttonName')?.value ||
-              'Send a message',
-            linkType:
-              this.announcementForm.get('actionButton.linkType')?.value ||
-              'sendMessage',
-            link: this.announcementForm.get('actionButton.link')?.value || '',
-            fontSize: this.announcementForm.get('fontSize')?.value || 14,
-          }
-        : false,
-      show: showAnnouncement,
+  const data = {
+    message: this.announcementForm.get('message')?.value || '',
+    fontSize: this.announcementForm.get('fontSize')?.value || 14,
+    fontColor: this.announcementForm.get('fontColor')?.value || '#000000',
+    actionButton: {
+      buttonName:
+        this.announcementForm.get('actionButton.buttonName')?.value || '',
+      linkType:
+        this.announcementForm.get('actionButton.linkType')?.value || 'external',
+      link: this.announcementForm.get('actionButton.link')?.value || ''
+    },
+    show: this.announcementForm.get('show')?.value ?? true,
   };
 
-    this.pagesService.updatePreviewSection('announcement', data);
-  }
+  this.pagesService.updatePreviewSection('announcement', data);
+}
+
   applyTitleChanges() {
     const data = {
       buisnessName: this.titlesForm.get('buisnessName')?.value || '',
