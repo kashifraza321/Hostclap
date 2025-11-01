@@ -1,8 +1,9 @@
 <div class="product-edit-wrapper">
   <form [formGroup]="priceItemForm" (ngSubmit)="onSubmit()">
-    <!-- Header -->
-    <div class="header d-flex align-items-center mb-3">
-      <button class="back-btn" (click)="back(pageId)">
+
+    <!-- Category -->
+    <div class="mb-3">
+        <button class="back-btn" (click)="back(pageId)">
         <img
           src="../../../assets/images/icons8-chevron-right-24.png"
           alt="chevron"
@@ -10,18 +11,7 @@
         />
         Back
       </button>
-      <h4 class="ms-2 mb-0">{{ priceItemForm.get("subgroupName")?.value }}</h4>
-    </div>
-
-    <!-- Tabs (sirf ek tab for now) -->
-    <!-- <ul class="nav nav-tabs mb-3">
-    <li class="nav-item">
-      <a class="nav-link active" href="#">Details</a>
-    </li>
-  </ul> -->
-
-    <!-- Category -->
-    <div class="mb-3">
+      <h4 class="ms-2 subGroupName">{{ priceItemForm.get("subgroupName")?.value }}</h4>
       <div class="inputWrp">
         <label class="form-label">Item Name</label>
         <input
@@ -62,10 +52,7 @@
           formControlName="description"
         ></quill-editor>
       </div>
-    </div>
-
-    <!-- Footer Buttons -->
-    <div class="footer-buttons d-flex gap-2">
+        <div class="footer-buttons d-flex gap-2">
       <button type="button" class="cancelBtn" (click)="onCancel()">
         Cancel
       </button>
@@ -73,5 +60,9 @@
         Save
       </button>
     </div>
+    </div>
+
+    <!-- Footer Buttons -->
+  
   </form>
 </div>

@@ -54,6 +54,12 @@
   box-shadow: none;
   border: none;
   border-bottom: 1px solid #ddd;
+  font-size: 15px;
+}
+.footer-buttons{
+      margin-top: 26px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .save-btn {
@@ -64,6 +70,7 @@
   padding: 8px 25px;
   border-radius: 5px;
   cursor: not-allowed;
+  border: none;
 }
 
 .save-btn:enabled {
@@ -78,6 +85,7 @@
   font-size: 18px;
   color: #fff;
   border-radius: 10px;
+  border: none;
 }
 .cancelBtn {
   color: #fff;
@@ -89,6 +97,11 @@
   padding: 9px;
   border: none;
   background: #ccc;
+}
+.subGroupName{
+  font-size: 17px;
+  display: block;
+  text-align: center;
 }
 
 .back-btn {

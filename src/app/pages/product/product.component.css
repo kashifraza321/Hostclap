@@ -1,6 +1,4 @@
 .top-bar {
-  display: flex;
-  align-items: center;
   margin-bottom: 25px;
   padding-bottom: 20px;
   border-bottom: 1px solid #e5e5e5;
@@ -32,6 +30,7 @@
   padding-bottom: 3px;
   color: #2b2e9b;
   width: 100px;
+  margin: 0 auto;
 }
 
 .section-card {
@@ -209,9 +208,7 @@
   transition: background-color 0.2s;
 }
 
-.cancel-btn:hover {
-  background-color: #f0f0f0;
-}
+
 
 .save-btn {
   background: #ddd;
@@ -223,11 +220,6 @@
   cursor: not-allowed;
 }
 
-.save-btn:enabled {
-  background: #2b2e9b;
-  color: white;
-  cursor: pointer;
-}
 .saveBtn {
   background: green;
   width: 100px;
@@ -246,4 +238,13 @@
   padding: 9px;
   border: none;
   background: #ccc;
+}
+
+.GroupTitle{
+  width: 70%;
+}
+
+.deleteBtn{
+border: none;
+background: none;
 }

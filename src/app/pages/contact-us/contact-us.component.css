@@ -18,6 +18,9 @@
   align-items: center;
   justify-content: center;
 }
+.busiN{
+  margin: 10px 0 20px;
+}
 
 .title {
   /* flex-grow: 1; */

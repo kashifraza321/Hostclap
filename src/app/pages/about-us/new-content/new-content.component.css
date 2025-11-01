@@ -21,7 +21,7 @@
 }
 .section {
   /* margin-bottom: 18px; */
-  margin-top: 35px;
+  margin-top: 42px;
 }
 
 .inputTitle {
@@ -34,14 +34,14 @@
 
 .section label {
   display: block;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 20px;
   margin-bottom: 18px;
 }
 
 .imageWrap h3 {
   display: block;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 20px;
   margin-bottom: 18px;
 }
@@ -167,9 +167,9 @@ input[type="file"] {
   }
 }
 .quill-label {
-  font-weight: 600;
+  font-weight: 500;
   font-size: 20px;
-  margin-bottom: 8px;
+  margin-bottom: 22px;
   display: block;
   color: #000;
 }

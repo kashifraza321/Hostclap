@@ -71,7 +71,7 @@ export class AddProductComponent {
       description: ['', Validators.required], // Quill editor's description field
       media: [null],
       showAddToCart: [true],
-      category: ['', Validators.required],
+      // category: [''],
       productVariants: [false], // Add this if applicable
       inventory: [true], // Stock toggle
       productTags: [''], // Tags field
@@ -120,7 +120,7 @@ export class AddProductComponent {
       '#media-upload'
     ) as HTMLInputElement;
     if (fileInput) {
-      fileInput.value = ''; // Resets the file input
+      fileInput.value = ''; 
     }
   }
   getSubGroupDetail(subgroupId: string) {
@@ -177,7 +177,7 @@ export class AddProductComponent {
 
       formData.append('pageId', this.pageId);
       formData.append('groupId', this.groupId);
-      formData.append('sectionType', 'price_list');
+      formData.append('sectionType', 'products');
       formData.append('subgroupName', formValue.subgroupName);
       formData.append('price', formValue.price);
       formData.append('unit', formValue.unit);

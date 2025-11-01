@@ -151,7 +151,7 @@
   margin-bottom: 10px;
 }
 .image-container {
-  width: 110px;
+    width: 42%;
   height: 130px;
   position: relative;
   border-radius: 5px;
@@ -178,6 +178,7 @@
 }
 .delete-btn {
   left: 6px;
+background: #868688;
 }
 .edit-btn {
   right: 6px;
@@ -234,11 +235,7 @@
   cursor: not-allowed;
 }
 
-.save-btn:enabled {
-  background: #2b2e9b;
-  color: white;
-  cursor: pointer;
-}
+
 .saveBtn {
   background: green;
   width: 100px;
@@ -262,4 +259,5 @@
 .imgWrp {
   display: flex;
   gap: 11px;
+  flex-wrap: wrap;
 }

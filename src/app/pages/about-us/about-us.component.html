@@ -1,5 +1,7 @@
 <form [formGroup]="sectionForm">
-  <button class="back-btn" (click)="backToHomepage()">
+ 
+  <div class="about-us-section">
+     <button class="back-btn" (click)="backToHomepage()">
     <img
       src="../../../assets/images/icons8-chevron-right-24.png"
       alt="chevron"
@@ -7,7 +9,6 @@
     />
     Back
   </button>
-  <div class="about-us-section">
     <h2 class="section-title">About Us</h2>
 
     <!-- Section Title Input -->
@@ -35,11 +36,6 @@
     <!-- Section Subtitle Input -->
     <div class="service-groups-card">
       <div class="header-row">
-        <div class="header-title">
-          <span class="info-icon" title="Info">i</span>
-       
-        <button class="edit-btn">Edit</button>
-        </div>
          <button
         type="button"
         class="add-group-btn"

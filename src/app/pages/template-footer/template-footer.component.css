@@ -220,9 +220,7 @@
   transition: background-color 0.2s;
 }
 
-.cancel-btn:hover {
-  background-color: #f0f0f0;
-}
+
 
 .save-btn {
   background: #ddd;
@@ -234,11 +232,7 @@
   cursor: not-allowed;
 }
 
-.save-btn:enabled {
-  background: #2b2e9b;
-  color: white;
-  cursor: pointer;
-}
+
 .saveBtn {
   background: green;
   width: 100px;
@@ -246,6 +240,7 @@
   font-size: 18px;
   color: #fff;
   border-radius: 10px;
+  border: none;
 }
 .cancelBtn {
   color: #fff;

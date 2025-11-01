@@ -539,12 +539,12 @@
       </section>
       <!-- amenties section -->
 
-      <div class="serviceSection" *ngIf="state$ | async as state">
+      <div class="serviceSection" >
         <div class="mainContainer">
           <div class="" [ngStyle]="{ 'font-family': data.font }">
             <h2 class="gradientHeading">
               {{
-                state?.preview?.service?.sectionTitle ||
+                
                   serviceData?.section?.sectionTitle ||
                   "service"
               }}

@@ -96,7 +96,7 @@ export class ProductComponent {
     }
 
     const data = {
-      sectionType: 'service',
+      sectionType: 'products',
       sectionTitle: this.sectionForm.value.sectionTitle,
       subtitle: this.sectionForm.value.sectionSubtitle,
       pageId: this.pageId,
@@ -127,7 +127,7 @@ export class ProductComponent {
     const payload = {
       pageId: this.pageId,
       sectionId: this.sectionId,
-      sectionType: 'service',
+      sectionType: 'products',
       groupName: groupName,
     };
 
@@ -151,13 +151,24 @@ export class ProductComponent {
       modalInstance?.hide();
     }
   }
-  // navigateToaddproductForm(pageId: string) {
-  //   this.router.navigate([
-  //     '/in/insight/editor/add-products',
-  //     pageId,
-  //     this.selectedGroup?._id,
-  //   ]);
-  // }
+  deleteGroup(subgroupId: string, sectionType: string) {
+    console.log(sectionType, 'products sectiontype');
+    this.pagesService.deleteServiesBlock(sectionType, subgroupId).subscribe({
+      next: (res) => {
+        console.log('Group deleted:', res);
+        this.alertService.success('Group deleted successfully');
+
+        // Remove from UI list
+        this.serviceSUbGroups = this.serviceSUbGroups.filter(
+          (g) => g._id !== subgroupId
+        );
+      },
+      error: (err) => {
+        console.error('Error deleting group:', err);
+        this.alertService.error('Failed to delete group');
+      },
+    });
+  }
   navigateToaddproductForm(
     pageId: string,
     groupId: string,
@@ -180,4 +191,7 @@ export class ProductComponent {
       ]);
     }
   }
+ 
+
+
 }
