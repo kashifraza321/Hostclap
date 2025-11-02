@@ -93,7 +93,10 @@
 }
 .pageWrapper {
   padding: 10px 14px;
-  max-height: 600px;
+ 
+}
+.formContainer{
+ max-height: 600px;
   min-height: 600px;
   overflow: auto;
 }
@@ -216,6 +219,7 @@
   justify-content: space-between;
   padding-top: 15px;
   border-top: 1px solid #ddd;
+
 }
 
 .cancel-btn {
@@ -229,10 +233,6 @@
   transition: background-color 0.2s;
 }
 
-.cancel-btn:hover {
-  background-color: #f0f0f0;
-}
-
 .save-btn {
   background: #ddd;
   border: none;
@@ -240,7 +240,7 @@
   font-size: 14px;
   padding: 8px 25px;
   border-radius: 5px;
-  cursor: not-allowed;
+
 }
 
 /* .save-btn:enabled {
@@ -255,6 +255,7 @@
   font-size: 18px;
   color: #fff;
   border-radius: 10px;
+
 }
 .cancelBtn {
   color: #fff;

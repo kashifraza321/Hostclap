@@ -233,11 +233,6 @@
   cursor: not-allowed;
 }
 
-.save-btn:enabled {
-  background: #2b2e9b;
-  color: white;
-  cursor: pointer;
-}
 .saveBtn {
   background: green;
   width: 100px;

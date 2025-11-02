@@ -199,9 +199,9 @@ isScrolled = false;
         console.log('📘 ModernTemplate pages updated:', state.pages);
       this.preview = state.preview;
       this.pagesList = state.pages;
-     this.serviceData = state.preview.services 
-      ? Object.values(state.preview.services) 
-      : [];
+    //  this.serviceData = state.preview.services 
+    //   ? Object.values(state.preview.services) 
+    //   : [];
       
     });
 

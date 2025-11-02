@@ -13,6 +13,7 @@
   <!-- Form -->
   <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
     <!-- Product Name -->
+     <div class="scrollDiv">
     <div class="section">
       <label for="productName">Product Name</label>
       <input
@@ -128,6 +129,7 @@
           />
         </div>
       </div>
+    </div>
     </div>
     <div class="btnFlex">
       <button class="cancel-btn cancelBtn">Cancel</button>
