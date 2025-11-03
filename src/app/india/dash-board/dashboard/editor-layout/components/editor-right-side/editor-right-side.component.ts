@@ -28,7 +28,7 @@ export class EditorRightSideComponent {
   pageId:string=''
     slug = '';
     
-  isMobilePreview = false;
+  @Input() isMobilePreview = false;
 @Output() previewClicked = new EventEmitter<void>();
  showSubGroup = false; 
   ngOnChanges(changes: SimpleChanges) {
@@ -61,11 +61,12 @@ export class EditorRightSideComponent {
   //     },
   //   });
   // }
-
-
 toggleMobilePreview() {
   this.isMobilePreview = !this.isMobilePreview;
+  console.log('Right-side: isMobilePreview =', this.isMobilePreview);
 }
+
+
   onOpenSubGroup() {
     
     this.showSubGroup = true; 

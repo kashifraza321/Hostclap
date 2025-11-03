@@ -25,6 +25,7 @@ export class TestimonialSliderComponent   {
     pageData: any;
   testimonials: any[] = [];
   testimonialGroups: any[] = [];
+   @Input() isMobilePreview = false;
     imgurl = environment.imageBaseUrl;
 public state$ = this.pagesService.state$;
   testimonialConfig = {

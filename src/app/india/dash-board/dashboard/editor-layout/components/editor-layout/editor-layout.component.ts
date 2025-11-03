@@ -36,7 +36,7 @@ isSidebarOpen = false;
   };
     isPreview: boolean = false;
 
-
+isMobilePreview = false;
   constructor(){
 
   }
@@ -65,6 +65,9 @@ isSidebarOpen = false;
   if (!this.isMobileView) {
     this.isSidebarOpen = false; // Sidebar always open on desktop
   }
+}
+setMobilePreview(status: boolean) {
+  this.isMobilePreview = status;
 }
 
 toggleSidebar() {

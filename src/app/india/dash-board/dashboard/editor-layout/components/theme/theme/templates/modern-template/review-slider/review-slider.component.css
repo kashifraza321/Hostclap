@@ -175,6 +175,22 @@
 }
 
 
+/* ---- Mobile preview container ---- */
+.mobile-preview {
+  width: 500px;              /* Force container to behave like 500px screen */
+  margin: 0 auto;            /* Center it horizontally */
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Make sure all children respect this width */
+.mobile-preview * {
+  max-width: 100%;
+  box-sizing: border-box;
+}
 
 
 

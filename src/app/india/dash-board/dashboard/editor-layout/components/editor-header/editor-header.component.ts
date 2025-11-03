@@ -12,8 +12,15 @@ export class EditorHeaderComponent {
   @Input() isPreview: boolean = false;
   @Output() previewClicked = new EventEmitter<void>();
   @Output() backToEditor = new EventEmitter<void>();
+  @Output() mobilePreviewClicked = new EventEmitter<boolean>();
 constructor(){}
 
+  onMobileClick() {
+    this.mobilePreviewClicked.emit(true);
+  }
+   onDesktopClick() {
+    this.mobilePreviewClicked.emit(false); // back to desktop view
+  }
   onPreviewClick() {
     console.log('Preview clicked in header'); // optional log
     this.previewClicked.emit();

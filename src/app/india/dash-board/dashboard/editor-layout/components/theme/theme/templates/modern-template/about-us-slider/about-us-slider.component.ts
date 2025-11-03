@@ -25,6 +25,7 @@ export class AboutUsSliderComponent {
   userId:string=''
   imageUrl: string = environment.imageBaseUrl;
 sanitizedQuote: any;
+ @Input() isMobilePreview = false;
 
   // data: any;
   pageData: any;
@@ -134,7 +135,7 @@ dummySlide = {
               ) as SafeHtml,
             };
           });
-           // 👇 Check if slides is empty, then use dummy slide
+       
       if (this.slides.length === 0) {
         this.slides = [this.dummySlide];
       }

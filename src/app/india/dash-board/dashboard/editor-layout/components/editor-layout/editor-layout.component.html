@@ -1,6 +1,7 @@
 <app-editor-header  [isPreview]="isPreview"
   (previewClicked)="enterPreview()"
-  (backToEditor)="exitPreview()" ></app-editor-header>
+  (backToEditor)="exitPreview()"
+ (mobilePreviewClicked)="setMobilePreview($event)" ></app-editor-header>
 <!-- Hamburger for mobile -->
 <button class="hamburger" (click)="toggleSidebar()" *ngIf="isMobileView">
   ☰
@@ -15,7 +16,7 @@
 
   <!-- Right Side Always -->
   <div class="editor-main">
-    <app-editor-right-side (previewClicked)="enterPreview()"  [data]="data"  style="width: 100%;" ></app-editor-right-side>
+    <app-editor-right-side   [isMobilePreview]="isMobilePreview"  (previewClicked)="enterPreview()"  [data]="data"  style="width: 100%;" ></app-editor-right-side>
   </div>
 </div>
 

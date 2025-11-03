@@ -11,14 +11,14 @@
   <!-- Center: Device Toggle + Links -->
   <div class="center-options" *ngIf="!isPreview">
     <div class="device-toggle">
-      <button title="Desktop View">
+      <button title="Desktop View" (click)="onDesktopClick()">
         <img
           src="../../../../../assets/images/icons8-desktop-50.png"
           alt="desktop"
           width="28"
         />
       </button>
-      <button title="Mobile View">
+      <button title="Mobile View"(click)="onMobileClick()">
         <img
           src="../../../../../assets/images/icons8-cellphone-50.png"
           alt="desktop"

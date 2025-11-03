@@ -2309,3 +2309,257 @@ h2.section-title {
 }
 
 }
+/* ---- Mobile preview container ---- */
+.mobile-preview {
+  width: 500px;              /* Force container to behave like 500px screen */
+  margin: 0 auto;            /* Center it horizontally */
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Make sure all children respect this width */
+.mobile-preview * {
+  /* max-width: 100%; */
+  box-sizing: border-box;
+}
+
+.mobile-preview {
+  outline: 5px solid red !important;
+}
+.modern-template.mobile-preview {
+  width: 498px; /* typical mobile width */
+  height: 667px; /* typical mobile height */
+  overflow-y: auto; /* enable vertical scroll */
+  overflow-x: hidden;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  margin: 0 auto;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+
+
+/* 🔽 Apply all 500px responsive rules also when .mobile-preview class is active */
+.modern-template.mobile-preview {
+  width: 500px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* ---- duplicate of media styles for .mobile-preview ---- */
+.modern-template.mobile-preview .linksss {
+  max-width: 200px;
+  width: 100%;
+}
+.modern-template.mobile-preview .linksss a {
+  font-size: 16px;
+  color: #000;
+  padding-right: 1px;
+}
+.modern-template.mobile-preview .classic-footer {
+  flex-direction: column;
+  gap: 0;
+}
+.modern-template.mobile-preview .form-row input,
+.modern-template.mobile-preview .form-row select {
+  flex: 1;
+  width: 50%;
+}
+.modern-template.mobile-preview .contact-form {
+  max-width: 402px;
+  width: 100%;
+}
+.modern-template.mobile-preview .gradientHeading {
+  font-size: 24px;
+}
+.modern-template.mobile-preview .info-item h4 {
+  font-size: 14px;
+  font-weight: 500;
+}
+.modern-template.mobile-preview .contact-info {
+  min-height: 221px;
+}
+.modern-template.mobile-preview .info-item p {
+  margin: 7px 0 0;
+  font-size: 12px;
+  color: #fff;
+}
+.modern-template.mobile-preview .amenities-section {
+  padding: 30px 0;
+}
+.modern-template.mobile-preview .amenities-section p {
+  font-size: 11px;
+}
+.modern-template.mobile-preview .amenity {
+  flex-shrink: 0;
+  width: 50%;
+}
+.modern-template.mobile-preview .location-tooltip {
+  position: absolute;
+  letter-spacing: 2px;
+  transform: translate(-51%, -24%);
+  padding: 6px;
+  min-height: 64px;
+  text-align: left;
+  max-width: 85px;
+  width: 100%;
+}
+.modern-template.mobile-preview .card.right-2 {
+  transform: translateX(120px) scale(0.8) translateZ(-300px);
+}
+.modern-template.mobile-preview .card.right-1 {
+  transform: translateX(77px) scale(0.9) translateZ(-100px);
+}
+.modern-template.mobile-preview .slide.next {
+  opacity: 0.6;
+  transform: scale(1) translateX(48px);
+  z-index: 2;
+}
+.modern-template.mobile-preview .carousel-container {
+  height: 281px;
+  position: relative;
+}
+.modern-template.mobile-preview .sectionHeading {
+  font-size: 27px;
+}
+.modern-template.mobile-preview .classic-hero {
+  position: relative;
+  height: 400px;
+  background-size: cover;
+  background-position: center;
+}
+.modern-template.mobile-preview .classic-hero .overlay {
+  background: rgba(0, 0, 0, 0.55);
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 20px;
+  margin: 0 auto;
+  height: 400px;
+}
+.modern-template.mobile-preview .hero-text h1 {
+  font-size: 38px;
+  color: #fff;
+  margin-bottom: 15px;
+}
+.modern-template.mobile-preview .hero-text {
+  background: #ffffff94;
+  border-radius: 24px;
+  padding: 30px;
+  width: 100%;
+  max-width: 285px;
+  min-height: 153px;
+}
+.modern-template.mobile-preview .offer-banner {
+  gap: 19px;
+  padding: 20px 19px;
+  max-width: 800px;
+  flex-direction: column;
+}
+.modern-template.mobile-preview .offer-text h3 {
+  font-size: 25px;
+}
+.modern-template.mobile-preview .offer-text p {
+  font-size: 2rem;
+}
+.modern-template.mobile-preview .directions {
+  font-size: 10px;
+}
+.modern-template.mobile-preview .location-tooltip p {
+  font-size: 10px;
+}
+.modern-template.mobile-preview h2.section-title {
+  font-size: 21px;
+  font-weight: 500;
+  color: #fff;
+  text-align: center;
+  margin: 0 0 49px 0;
+  background: #101511;
+  padding: 14px;
+}
+.modern-template.mobile-preview .mainHeading {
+  font-size: 32px;
+  text-align: center;
+  text-decoration: underline;
+  color: #000;
+}
+.modern-template.mobile-preview .mesgBtn {
+  display: none;
+}
+.modern-template.mobile-preview .review-box {
+  display: none;
+  bottom: -8px;
+  right: 16%;
+  max-width: 174px;
+  width: 100%;
+}
+
+
+/* 400 */
+/* 🔹 For mobile preview below 400px */
+
+  .modern-template.mobile-preview .amenities {
+    justify-content: center;
+  }
+
+  .modern-template.mobile-preview .amenity {
+    width: 100%;
+  }
+
+  .modern-template.mobile-preview .top-bar {
+    font-size: 12px;
+    padding: 5px 0;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-end;
+  }
+
+  .modern-template.mobile-preview .accountmentText {
+    font-size: 10px;
+    max-width: 110px;
+    width: 100%;
+  }
+
+  .modern-template.mobile-preview .addresTXt {
+    font-size: 11px;
+  }
+
+  .modern-template.mobile-preview .map-image {
+    height: 180px;
+  }
+
+  .modern-template.mobile-preview .location-tooltip {
+    max-width: 100px;
+    width: 100%;
+    font-size: 10px;
+  }
+
+  .modern-template.mobile-preview .footerwrp {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .modern-template.mobile-preview .amenities-section p {
+    font-size: 10px;
+  }
+
+  .modern-template.mobile-preview h2.section-title {
+    font-size: 18px;
+    margin: 10px 0 40px;
+    padding: 10px;
+  }
+
+  .modern-template.mobile-preview .gradientHeading {
+    font-size: 20px;
+  }
+
+  .modern-template.mobile-preview .mainHeading {
+    font-size: 26px;
+  }
+

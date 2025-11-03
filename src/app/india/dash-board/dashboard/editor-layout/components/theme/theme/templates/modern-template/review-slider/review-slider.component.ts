@@ -37,6 +37,7 @@ export class ReviewSliderComponent {
      preview: any = {};
     public state$ = this.pagesService.state$;
   isLoading = false;
+   @Input() isMobilePreview = false;
 
   userId: string = '';
   autoplayInterval: any;

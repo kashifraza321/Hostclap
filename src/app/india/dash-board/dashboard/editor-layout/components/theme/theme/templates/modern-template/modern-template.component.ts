@@ -148,9 +148,7 @@ dummyServiceSection = {
   },
 };
 
-
-
-
+ @Input() isMobilePreview = false;
   currentTestimonialIndex = 0;
   testimonialsPerView = 3;
  currentDay: string;

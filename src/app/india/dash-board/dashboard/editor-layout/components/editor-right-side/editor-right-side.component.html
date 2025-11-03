@@ -1,4 +1,4 @@
-<app-default-template
+<!-- <app-default-template
   *ngIf="data.template === 'Origins'"
   [data]="data"
 ></app-default-template>
@@ -9,6 +9,38 @@
 <div>
 <app-modern-template *ngIf="data?.template === 'Modern' && !showSubGroup" [data]="data"    (openSubGroup)="handleOpenSubGroup($event)">
 </app-modern-template>
-<!-- <app-subgroup-detail *ngIf="showSubGroup"  [slug]="slug"
-  [pageId]="pageId"></app-subgroup-detail> -->
+
+</div> -->
+
+
+<!-- ////////////////// -->
+ <div class="preview-wrapper" [class.mobile-view]="isMobilePreview">
+  <div class="mobile-frame" *ngIf="isMobilePreview">
+    <div class="mobile-screen">
+      <ng-container *ngIf="data?.template === 'Modern'">
+        <app-modern-template
+          [data]="data"
+          (openSubGroup)="handleOpenSubGroup($event)"
+          [isMobilePreview]="isMobilePreview" >
+        </app-modern-template>
+      </ng-container>
+
+      <ng-container *ngIf="data?.template === 'Classic'">
+        <app-classic-template [data]="data"></app-classic-template>
+      </ng-container>
+
+      <ng-container *ngIf="data?.template === 'Origins'">
+        <app-default-template [data]="data"></app-default-template>
+      </ng-container>
+    </div>
+  </div>
+
+  <!-- Normal desktop view -->
+  <div *ngIf="!isMobilePreview">
+    <app-modern-template
+      *ngIf="data?.template === 'Modern' && !showSubGroup"
+      [data]="data"
+      (openSubGroup)="handleOpenSubGroup($event)">
+    </app-modern-template>
+  </div>
 </div>
