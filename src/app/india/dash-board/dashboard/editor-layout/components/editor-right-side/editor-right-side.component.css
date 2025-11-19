@@ -50,7 +50,7 @@
   height: 740px;
   background: #fff;
   margin: 0 auto;
-  border: 16px solid #f9f9f9;
+  /* border: 16px solid #f9f9f9; */
   border-radius: 36px;
   box-shadow: 0 4px 25px rgba(0, 0, 0, 0.2);
   position: relative;
@@ -74,6 +74,19 @@
   height: 100%;
   overflow-y: auto;
   scroll-behavior: smooth;
+}
+.mobile-frame { 
+    width: 559px;
+    height: 1003px;
+  margin: auto;
+  padding: 84px 40px 60px;
+  background: url(../../../../../../../assets/images/mobilePreview.a33af659.png) no-repeat center center;
+  background-size: cover; 
+  border-radius: 36px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+  animation: zoomIn 0.3s ease;
 }
 .mobile-frame {
   animation: zoomIn 0.3s ease;

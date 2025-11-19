@@ -2326,16 +2326,13 @@ h2.section-title {
   box-sizing: border-box;
 }
 
-.mobile-preview {
-  outline: 5px solid red !important;
-}
 .modern-template.mobile-preview {
-  width: 498px; /* typical mobile width */
-  height: 667px; /* typical mobile height */
+  width: 498px; 
+  height: 767px; /* typical mobile height */
   overflow-y: auto; /* enable vertical scroll */
   overflow-x: hidden;
   border: 1px solid #ccc;
-  border-radius: 20px;
+  border-radius: 0px;
   margin: 0 auto;
   background: #fff;
   box-shadow: 0 0 10px rgba(0,0,0,0.2);
@@ -2345,7 +2342,7 @@ h2.section-title {
 
 /* 🔽 Apply all 500px responsive rules also when .mobile-preview class is active */
 .modern-template.mobile-preview {
-  width: 500px;
+ width: 450px;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -2357,7 +2354,7 @@ h2.section-title {
 }
 .modern-template.mobile-preview .linksss a {
   font-size: 16px;
-  color: #000;
+  color: #000; 
   padding-right: 1px;
 }
 .modern-template.mobile-preview .classic-footer {

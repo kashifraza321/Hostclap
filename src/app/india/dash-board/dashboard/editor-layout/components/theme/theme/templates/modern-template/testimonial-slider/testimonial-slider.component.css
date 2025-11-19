@@ -165,12 +165,7 @@
   background: white;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
 }
-.mobile-preview {
-  outline: 5px solid red !important;
-}
-.mobile-preview {
-  outline: 5px solid red !important;
-}
+
 
 /* Make sure all children respect this width */
 .mobile-preview * {
