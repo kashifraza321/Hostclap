@@ -340,6 +340,7 @@ input:checked + .slider::before {
 .section-list {
   flex-grow: 1;
   overflow-y: auto;
+  max-height: 600px;
 }
 
 .section-item {
@@ -359,11 +360,11 @@ input:checked + .slider::before {
 .section-item:hover {
   background: #eaeaea;
 }
-.sectionList {
+/* .sectionList {
   max-height: 800px;
   overflow: auto;
   min-height: 600px;
-}
+} */
 
 .section-item i {
   font-size: 18px;
@@ -527,4 +528,12 @@ input:checked + .slider::before {
 .greenBtn:disabled {
   background-color: #9ccc9c;
   cursor: not-allowed;
+}
+
+@media (max-width:480px){
+  .home-wrapper {
+
+  box-shadow: none;
+  
+}
 }

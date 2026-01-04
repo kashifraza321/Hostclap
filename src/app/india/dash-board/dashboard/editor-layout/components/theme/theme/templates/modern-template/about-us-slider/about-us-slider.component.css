@@ -165,8 +165,14 @@ p{
   }
 }
 .slider-wrapper {
-   
-    gap: 84px;
+   gap: 84px;
+}
+.slide.active {
+    left: 0;
+}
+.slider-nav{
+    margin-top: 70px;
+
 }
 
 }

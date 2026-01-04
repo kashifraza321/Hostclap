@@ -168,10 +168,16 @@
   }
 }
 
+
 @media (min-width: 1024px) {
   .slide {
     flex: 0 0 33.33%;
   }
+}
+@media (min-width: 480px) {
+  .mainHeading {
+    font-size: 40px
+}
 }
 
 
