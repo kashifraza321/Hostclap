@@ -6,7 +6,7 @@ import { MatDialogRef } from '@angular/material/dialog';
   standalone: true,
   imports: [],
   templateUrl: './booking-request-detal-modal.component.html',
-  styleUrl: './booking-request-detal-modal.component.css',
+  styleUrls: ['./booking-request-detal-modal.component.css'],
 })
 export class BookingRequestDetalModalComponent {
   formData = {

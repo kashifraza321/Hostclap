@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './upgrade.component.html',
-  styleUrl: './upgrade.component.css'
+  styleUrls: ['./upgrade.component.css']
 })
 export class UpgradeComponent {
 

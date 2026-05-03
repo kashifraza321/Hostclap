@@ -9,7 +9,7 @@ import { PagesService } from 'src/app/pages/pages.service';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './default-template.component.html',
-  styleUrl: './default-template.component.css',
+  styleUrls: ['./default-template.component.css'],
 })
 export class DefaultTemplateComponent {
   @Input() data!: Data;

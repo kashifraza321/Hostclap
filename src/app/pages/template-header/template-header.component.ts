@@ -23,7 +23,7 @@ declare var bootstrap: any;
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, QuillModule, FormsModule],
   templateUrl: './template-header.component.html',
-  styleUrl: './template-header.component.css',
+  styleUrls: ['./template-header.component.css'],
 })
 export class TemplateHeaderComponent {
   showMediaModal = false;

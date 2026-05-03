@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [InsightHeaderComponent],
   templateUrl: './my-hub.component.html',
-  styleUrl: './my-hub.component.css',
+  styleUrls: ['./my-hub.component.css'],
 })
 export class MyHubComponent {
   constructor(private dialog: MatDialog, private router: Router) {}

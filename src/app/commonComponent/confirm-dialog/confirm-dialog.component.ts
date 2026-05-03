@@ -15,7 +15,7 @@ import { FormsModule } from '@angular/forms';
     // }
   ],
   templateUrl: './confirm-dialog.component.html',
-  styleUrl: './confirm-dialog.component.scss'
+  styleUrls: ['./confirm-dialog.component.scss']
 })
 export class ConfirmDialogComponent implements OnInit {
   contentTemplate!: TemplateRef<any>;

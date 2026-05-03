@@ -17,7 +17,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   standalone: true,
   imports: [CommonModule, FormsModule, ReactiveFormsModule, QuillModule],
   templateUrl: './pricelist-sub-group-form.component.html',
-  styleUrl: './pricelist-sub-group-form.component.css',
+  styleUrls: ['./pricelist-sub-group-form.component.css'],
 })
 export class PricelistSubGroupFormComponent {
   priceItemForm!: FormGroup;

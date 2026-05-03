@@ -37,7 +37,7 @@ import { filter } from 'rxjs';
     },
   ],
   templateUrl: './container.component.html',
-  styleUrl: './container.component.scss',
+  styleUrls: ['./container.component.scss'],
 })
 export class ContainerComponent implements OnInit {
   isHalfShown: boolean = false;

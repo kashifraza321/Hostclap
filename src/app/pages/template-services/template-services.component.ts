@@ -18,7 +18,7 @@ declare var bootstrap: any;
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './template-services.component.html',
-  styleUrl: './template-services.component.css',
+  styleUrls: ['./template-services.component.css'],
 })
 export class TemplateServicesComponent {
   sectionForm!: FormGroup;

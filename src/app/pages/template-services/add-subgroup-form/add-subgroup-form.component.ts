@@ -19,7 +19,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
   standalone: true,
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './add-subgroup-form.component.html',
-  styleUrl: './add-subgroup-form.component.css',
+  styleUrls: ['./add-subgroup-form.component.css'],
 })
 export class AddSubgroupFormComponent {
   serviceForm!: FormGroup;

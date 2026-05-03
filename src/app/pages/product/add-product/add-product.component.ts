@@ -17,7 +17,7 @@ import { AlertService } from 'src/app/services/Toaster/alert.service';
   standalone: true,
   imports: [CommonModule, FormsModule, ReactiveFormsModule, QuillModule],
   templateUrl: './add-product.component.html',
-  styleUrl: './add-product.component.css',
+  styleUrls: ['./add-product.component.css'],
 })
 export class AddProductComponent {
   productForm!: FormGroup;

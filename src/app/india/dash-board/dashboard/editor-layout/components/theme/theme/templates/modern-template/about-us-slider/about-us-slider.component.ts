@@ -12,7 +12,7 @@ import { Data } from 'src/app/models/data.model';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './about-us-slider.component.html',
-  styleUrl: './about-us-slider.component.css',
+  styleUrls: ['./about-us-slider.component.css'],
 })
 export class AboutUsSliderComponent {
   currentSlide: number = 0;

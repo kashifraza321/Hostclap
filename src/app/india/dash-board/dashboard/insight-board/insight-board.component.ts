@@ -9,7 +9,7 @@ import { BookingRequestDetalModalComponent } from './components/booking-request-
   standalone: true,
   imports: [InsightHeaderComponent, RouterModule, MatDialogModule],
   templateUrl: './insight-board.component.html',
-  styleUrl: './insight-board.component.css',
+  styleUrls: ['./insight-board.component.css'],
 })
 export class InsightBoardComponent {
   constructor(private dialog: MatDialog) {}

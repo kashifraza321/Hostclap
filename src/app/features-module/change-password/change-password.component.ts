@@ -18,7 +18,7 @@ import { AlertService } from '../../services/Toaster/alert.service';
     MatButtonModule,
     MatCardModule],
   templateUrl: './change-password.component.html',
-  styleUrl: './change-password.component.scss'
+  styleUrls: ['./change-password.component.scss']
 })
 export class ChangePasswordComponent {
   changePasswordForm!: FormGroup;

@@ -6,7 +6,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   standalone: true,
   imports: [],
   templateUrl: './common-dialog.component.html',
-  styleUrl: './common-dialog.component.scss'
+  styleUrls: ['./common-dialog.component.scss']
 })
 export class CommonDialogComponent {
    constructor(

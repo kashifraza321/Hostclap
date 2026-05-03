@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   standalone: true,
   imports: [],
   templateUrl: './google-reviews.component.html',
-  styleUrl: './google-reviews.component.css',
+  styleUrls: ['./google-reviews.component.css'],
 })
 export class GoogleReviewsComponent {
   constructor(private router: Router, private route: ActivatedRoute) {}

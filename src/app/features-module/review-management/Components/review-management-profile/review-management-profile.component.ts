@@ -9,7 +9,7 @@ import { SearchComponent } from '../../../subscription-management/Components/sea
   standalone: true,
   imports: [SearchComponent,MaterialModule],
   templateUrl: './review-management-profile.component.html',
-  styleUrl: './review-management-profile.component.scss'
+  styleUrls: ['./review-management-profile.component.scss']
 })
 export class ReviewManagementProfileComponent {
   

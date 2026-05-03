@@ -18,7 +18,7 @@ import { merge, tap } from 'rxjs';
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule, FormsModule, RouterModule],
   templateUrl: './template-amenities.component.html',
-  styleUrl: './template-amenities.component.css',
+  styleUrls: ['./template-amenities.component.css'],
 })
 export class TemplateAmenitiesComponent {
   constructor(

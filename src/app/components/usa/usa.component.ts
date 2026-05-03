@@ -7,7 +7,7 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
   standalone: true,
   imports: [],
   templateUrl: './usa.component.html',
-  styleUrl: './usa.component.css',
+  styleUrls: ['./usa.component.css'],
 })
 export class UsaComponent {
   @ViewChild('imageContent', { static: false }) imageContent!: ElementRef;

@@ -6,7 +6,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './editor-header.component.html',
-  styleUrl: './editor-header.component.css'
+  styleUrls: ['./editor-header.component.css']
 })
 export class EditorHeaderComponent {
   @Input() isPreview: boolean = false;

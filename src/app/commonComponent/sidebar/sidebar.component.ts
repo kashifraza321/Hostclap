@@ -11,7 +11,7 @@ import { AuthService } from '../../services/auth.service';
   selector: 'app-sidebar',
   standalone: true,
   templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.scss',
+  styleUrls: ['./sidebar.component.scss'],
   imports: [NgbAccordionModule, CommonModule, RouterModule],
   providers: [{
     provide: ActivatedRoute,

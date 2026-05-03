@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './gallery-slder.component.html',
-  styleUrl: './gallery-slder.component.css'
+  styleUrls: ['./gallery-slder.component.css']
 })
 export class GallerySlderComponent {
 

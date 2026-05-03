@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   standalone: true,
   imports: [],
   templateUrl: './settings.component.html',
-  styleUrl: './settings.component.css',
+  styleUrls: ['./settings.component.css'],
 })
 export class SettingsComponent {
   constructor(private route: ActivatedRoute, private router: Router) {}

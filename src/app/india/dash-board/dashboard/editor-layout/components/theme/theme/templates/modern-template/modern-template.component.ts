@@ -43,7 +43,7 @@ interface TeamMember {
     GallerySlderComponent
   ],
   templateUrl: './modern-template.component.html',
-  styleUrl: './modern-template.component.css',
+  styleUrls: ['./modern-template.component.css'],
 })
 export class ModernTemplateComponent {
   @Input() data!: Data;

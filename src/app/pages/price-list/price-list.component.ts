@@ -18,7 +18,7 @@ declare var bootstrap: any;
   imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './price-list.component.html',
 
-  styleUrl: './price-list.component.css',
+  styleUrls: ['./price-list.component.css'],
 })
 export class PriceListComponent {
   sectionForm!: FormGroup;

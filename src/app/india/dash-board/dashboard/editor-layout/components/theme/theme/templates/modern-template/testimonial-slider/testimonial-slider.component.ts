@@ -15,7 +15,7 @@ declare var $: any;
   standalone: true,
   imports: [CommonModule,SlickCarouselModule],
   templateUrl: './testimonial-slider.component.html',
-  styleUrl: './testimonial-slider.component.css'
+  styleUrls: ['./testimonial-slider.component.css']
   
 })
 export class TestimonialSliderComponent   {

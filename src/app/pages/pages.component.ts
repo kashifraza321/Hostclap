@@ -26,7 +26,7 @@ declare var bootstrap: any;
     RouterModule,
   ],
   templateUrl: './pages.component.html',
-  styleUrl: './pages.component.css',
+  styleUrls: ['./pages.component.css'],
 })
 export class PagesComponent {
   userId: string = '';

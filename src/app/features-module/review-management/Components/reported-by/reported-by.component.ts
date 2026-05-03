@@ -19,7 +19,7 @@ import { AlertService } from '../../../../services/Toaster/alert.service';
   standalone: true,
   imports: [ReactiveFormsModule, MaterialModule, DatePipe, CommonModule, SearchComponent],
   templateUrl: './reported-by.component.html',
-  styleUrl: './reported-by.component.scss'
+  styleUrls: ['./reported-by.component.scss']
 })
 export class ReportedByComponent {
   datasource: any;

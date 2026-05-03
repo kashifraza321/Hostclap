@@ -18,7 +18,7 @@ import { environment } from 'src/environments/environment';
   standalone: true,
   imports: [CommonModule, LoaderComponent],
   templateUrl: './classic-template.component.html',
-  styleUrl: './classic-template.component.css',
+  styleUrls: ['./classic-template.component.css'],
 })
 export class ClassicTemplateComponent {
   @Input() data!: Data;

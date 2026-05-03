@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './ca.component.html',
-  styleUrl: './ca.component.css',
+  styleUrls: ['./ca.component.css'],
 })
 export class CaComponent {
   private carousel: any;

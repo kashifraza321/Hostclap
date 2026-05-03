@@ -16,7 +16,7 @@ import { validate } from 'uuid';
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule, CommonModule],
   templateUrl: './sign-up.component.html',
-  styleUrl: './sign-up.component.css',
+  styleUrls: ['./sign-up.component.css'],
 })
 export class SignUpComponent {
   accountForm!: FormGroup;

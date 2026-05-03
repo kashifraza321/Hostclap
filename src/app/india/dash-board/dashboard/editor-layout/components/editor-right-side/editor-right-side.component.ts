@@ -19,7 +19,7 @@ import { SubgroupDetailComponent } from '../theme/theme/templates/subgroup-detai
     SubgroupDetailComponent
   ],
   templateUrl: './editor-right-side.component.html',
-  styleUrl: './editor-right-side.component.css',
+  styleUrls: ['./editor-right-side.component.css'],
 })
 export class EditorRightSideComponent {
   constructor(private themeService: ThemeService) {}

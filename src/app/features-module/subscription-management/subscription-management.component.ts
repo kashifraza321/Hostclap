@@ -25,7 +25,7 @@ import { ViewSubscriptionComponent } from './Components/view-subscription/view-s
     DatePipe, CreateSubscriptionComponent,
     ConfirmDialogComponent, ViewSubscriptionComponent],
   templateUrl: './subscription-management.component.html',
-  styleUrl: './subscription-management.component.scss'
+  styleUrls: ['./subscription-management.component.scss']
 })
 export class SubscriptionManagementComponent implements OnInit {
   datasource: any;

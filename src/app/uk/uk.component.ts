@@ -7,7 +7,7 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
   standalone: true,
   imports: [],
   templateUrl: './uk.component.html',
-  styleUrl: './uk.component.css',
+  styleUrls: ['./uk.component.css'],
 })
 export class UkComponent {
   @ViewChild('imageContent', { static: false }) imageContent!: ElementRef;

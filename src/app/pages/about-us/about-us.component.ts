@@ -16,7 +16,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './about-us.component.html',
-  styleUrl: './about-us.component.css',
+  styleUrls: ['./about-us.component.css'],
 })
 export class AboutUsComponent {
   sectionForm!: FormGroup;

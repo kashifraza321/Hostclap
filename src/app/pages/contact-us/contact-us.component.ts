@@ -16,7 +16,7 @@ import { merge, tap } from 'rxjs';
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule, FormsModule, RouterModule],
   templateUrl: './contact-us.component.html',
-  styleUrl: './contact-us.component.css',
+  styleUrls: ['./contact-us.component.css'],
 })
 export class ContactUsComponent {
   contactForm!: FormGroup;

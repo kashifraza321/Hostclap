@@ -8,7 +8,7 @@ import { MaterialModule } from '../../../../../Module/material.module';
   standalone: true,
   imports: [CommonModule, MaterialModule],
   templateUrl: './view-subscription.component.html',
-  styleUrl: './view-subscription.component.scss'
+  styleUrls: ['./view-subscription.component.scss']
 })
 export class ViewSubscriptionComponent implements OnInit {
 

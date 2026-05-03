@@ -6,7 +6,7 @@ import { Router, RouterModule } from '@angular/router';
   standalone: true,
   imports: [RouterModule],
   templateUrl: './editor-sidebar.component.html',
-  styleUrl: './editor-sidebar.component.css',
+  styleUrls: ['./editor-sidebar.component.css'],
 })
 export class EditorSidebarComponent {
   userId: string = '';

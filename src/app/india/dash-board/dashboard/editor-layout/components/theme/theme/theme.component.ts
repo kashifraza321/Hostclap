@@ -17,7 +17,7 @@ import { ColorChromeModule } from 'ngx-color/chrome';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, ColorPickerModule,ColorChromeModule ],
   templateUrl: './theme.component.html',
-  styleUrl: './theme.component.css',
+  styleUrls: ['./theme.component.css'],
 })
 export class ThemeComponent {
   themeForm: FormGroup;

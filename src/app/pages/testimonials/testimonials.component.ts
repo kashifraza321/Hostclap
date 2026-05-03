@@ -16,7 +16,7 @@ import { merge, tap } from 'rxjs';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './testimonials.component.html',
-  styleUrl: './testimonials.component.css',
+  styleUrls: ['./testimonials.component.css'],
 })
 export class TestimonialsComponent {
   testimonialGroups: any[] = [];

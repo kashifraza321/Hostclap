@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule, FormsModule, RouterModule],
   templateUrl: './template-footer.component.html',
-  styleUrl: './template-footer.component.css',
+  styleUrls: ['./template-footer.component.css'],
 })
 export class TemplateFooterComponent {
   footerForm!: FormGroup;

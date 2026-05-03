@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './request-service-modal.component.html',
-  styleUrl: './request-service-modal.component.css'
+  styleUrls: ['./request-service-modal.component.css']
 })
 export class RequestServiceModalComponent {
 

@@ -18,7 +18,7 @@ import { CommonDialogComponent } from '../../../../commonComponent/common-dialog
   standalone: true,
   imports: [MaterialModule, ReactiveFormsModule, DatePipe],
   templateUrl: './view-user.component.html',
-  styleUrl: './view-user.component.scss'
+  styleUrls: ['./view-user.component.scss']
 })
 export class ViewUserComponent implements OnInit {
   displayedColums: string[] = ["teamName", "role", "memberName", "memberEmail"]

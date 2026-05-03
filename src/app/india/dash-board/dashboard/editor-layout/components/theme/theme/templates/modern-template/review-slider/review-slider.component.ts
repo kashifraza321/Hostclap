@@ -14,7 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   standalone: true,
   imports: [CommonModule,CarouselModule],
   templateUrl: './review-slider.component.html',
-  styleUrl: './review-slider.component.css',
+  styleUrls: ['./review-slider.component.css'],
 })
 export class ReviewSliderComponent {
   private sliderWidth: number = window.innerWidth;

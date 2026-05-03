@@ -17,7 +17,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule, FormsModule, RouterModule],
   templateUrl: './opening-hours.component.html',
-  styleUrl: './opening-hours.component.css',
+  styleUrls: ['./opening-hours.component.css'],
 })
 export class OpeningHoursComponent {
   pageId: string = '';

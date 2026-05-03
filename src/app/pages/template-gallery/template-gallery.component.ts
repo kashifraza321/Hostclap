@@ -18,7 +18,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
   standalone: true,
   imports: [ReactiveFormsModule, FormsModule, CommonModule],
   templateUrl: './template-gallery.component.html',
-  styleUrl: './template-gallery.component.css',
+  styleUrls: ['./template-gallery.component.css'],
 })
 export class TemplateGalleryComponent {
   galleryForm!: FormGroup;

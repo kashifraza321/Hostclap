@@ -23,7 +23,7 @@ import { ChangeDetectorRef } from '@angular/core';
   standalone: true,
   imports: [ReactiveFormsModule, MaterialModule, DatePipe, CommonModule, SearchComponent, FormsModule,MatFormFieldModule, MatSelectModule],
   templateUrl: './subadmin-management-list.component.html',
-  styleUrl: './subadmin-management-list.component.scss'
+  styleUrls: ['./subadmin-management-list.component.scss']
 })
 
 export class SubadminManagementListComponent implements OnInit {

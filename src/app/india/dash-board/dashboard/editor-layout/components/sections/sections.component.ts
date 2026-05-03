@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   standalone: true,
   imports: [],
   templateUrl: './sections.component.html',
-  styleUrl: './sections.component.css',
+  styleUrls: ['./sections.component.css'],
 })
 export class SectionsComponent {
   constructor(private route: ActivatedRoute, private router: Router) {}

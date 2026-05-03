@@ -26,7 +26,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
     FormsModule,
   ],
   templateUrl: './new-content.component.html',
-  styleUrl: './new-content.component.css',
+  styleUrls: ['./new-content.component.css'],
 })
 export class NewContentComponent {
   contentBlockForm!: FormGroup;

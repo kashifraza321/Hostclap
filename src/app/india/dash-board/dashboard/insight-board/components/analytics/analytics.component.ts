@@ -10,7 +10,7 @@ import { InsightHeaderComponent } from '../insight-header/insight-header.compone
   standalone: true,
   imports: [CommonModule, InsightHeaderComponent],
   templateUrl: './analytics.component.html',
-  styleUrl: './analytics.component.css',
+  styleUrls: ['./analytics.component.css'],
 })
 export class AnalyticsComponent {
   @ViewChild('chartContainer', { static: true }) chartContainer!: ElementRef;

@@ -23,7 +23,7 @@ import { merge, tap } from 'rxjs';
     RouterModule,
   ],
   templateUrl: './promotion.component.html',
-  styleUrl: './promotion.component.css',
+  styleUrls: ['./promotion.component.css'],
 })
 export class PromotionComponent {
   promotionForm!: FormGroup;

@@ -10,7 +10,7 @@ import { ChartConfiguration, ChartOptions, ChartType } from 'chart.js';
   standalone: true,
   imports: [MatToolbarModule, MatTableModule, BaseChartDirective],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss',
+  styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
   text = 'small business online in less than 7 days';

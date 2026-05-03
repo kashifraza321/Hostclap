@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './refund-policy.component.html',
-  styleUrl: './refund-policy.component.css'
+  styleUrls: ['./refund-policy.component.css']
 })
 export class RefundPolicyComponent {
 

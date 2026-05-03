@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule, FormsModule, RouterModule],
   templateUrl: './location.component.html',
-  styleUrl: './location.component.css',
+  styleUrls: ['./location.component.css'],
 })
 export class LocationComponent {
   locationForm!: FormGroup;

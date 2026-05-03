@@ -17,7 +17,7 @@ import { AlertService } from 'src/app/services/Toaster/alert.service';
   standalone: true,
   imports: [CommonModule, FormsModule, ReactiveFormsModule, QuillModule],
   templateUrl: './merchant-policy.component.html',
-  styleUrl: './merchant-policy.component.css',
+  styleUrls: ['./merchant-policy.component.css'],
 })
 export class MerchantPolicyComponent {
   pageForm!: FormGroup;

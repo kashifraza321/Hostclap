@@ -18,7 +18,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './testimonial-form.component.html',
-  styleUrl: './testimonial-form.component.css',
+  styleUrls: ['./testimonial-form.component.css'],
 })
 export class TestimonialFormComponent {
   testimonialForm!: FormGroup;

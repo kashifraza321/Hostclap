@@ -20,7 +20,7 @@ import { HomePageComponent } from 'src/app/pages/home-page/home-page.component';
     RouterOutlet,
   ],
   templateUrl: './editor-layout.component.html',
-  styleUrl: './editor-layout.component.css',
+  styleUrls: ['./editor-layout.component.css'],
 })
 export class EditorLayoutComponent {
   template: string = 'default';

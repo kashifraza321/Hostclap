@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
   standalone: true,
   imports: [RouterModule, CommonModule],
   templateUrl: './insight-header.component.html',
-  styleUrl: './insight-header.component.css',
+  styleUrls: ['./insight-header.component.css'],
 })
 export class InsightHeaderComponent {
   constructor(private _router: Router, private _login: LoginService, private authService: AuthService) {}

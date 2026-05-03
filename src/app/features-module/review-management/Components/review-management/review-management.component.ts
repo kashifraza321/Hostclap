@@ -17,7 +17,7 @@ import { AlertService } from '../../../../services/Toaster/alert.service';
   standalone: true,
   imports: [ReactiveFormsModule, MaterialModule, DatePipe, CommonModule, SearchComponent],
   templateUrl: './review-management.component.html',
-  styleUrl: './review-management.component.scss'
+  styleUrls: ['./review-management.component.scss']
 })
 
 export class ReviewManagementComponent implements OnInit {

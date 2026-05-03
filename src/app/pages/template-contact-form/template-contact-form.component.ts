@@ -23,7 +23,7 @@ import { QuillModule } from 'ngx-quill';
     RouterModule,
   ],
   templateUrl: './template-contact-form.component.html',
-  styleUrl: './template-contact-form.component.css',
+  styleUrls: ['./template-contact-form.component.css'],
 })
 export class TemplateContactFormComponent {
   contactUsForm!: FormGroup;

@@ -12,7 +12,7 @@ import { ConfirmDialogComponent } from '../../../../commonComponent/confirm-dial
   standalone: true,
   imports: [MaterialModule, ReactiveFormsModule, CommonModule],
   templateUrl: './create-subscription.component.html',
-  styleUrl: './create-subscription.component.scss'
+  styleUrls: ['./create-subscription.component.scss']
 })
 export class CreateSubscriptionComponent implements OnInit {
   CreatePlanform!: FormGroup;

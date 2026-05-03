@@ -17,7 +17,7 @@ import { SearchComponent } from '../../../subscription-management/Components/sea
   standalone: true,
   imports: [ReactiveFormsModule, MaterialModule, DatePipe, CommonModule, SearchComponent, MaterialModule],
   templateUrl: './user-list.component.html',
-  styleUrl: './user-list.component.scss'
+  styleUrls: ['./user-list.component.scss']
 })
 
 

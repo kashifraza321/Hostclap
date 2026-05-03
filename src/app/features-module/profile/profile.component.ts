@@ -25,7 +25,7 @@ import { ContainerComponent } from '../../commonComponent/container/container.co
     ContainerComponent
   ],
   templateUrl: './profile.component.html',
-  styleUrl: './profile.component.scss'
+  styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
   profileForm: FormGroup;

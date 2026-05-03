@@ -18,7 +18,7 @@ import { AlertService } from 'src/app/services/Toaster/alert.service';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, TemplateHeaderComponent],
   templateUrl: './home-page.component.html',
-  styleUrl: './home-page.component.css',
+  styleUrls: ['./home-page.component.css'],
 })
 export class HomePageComponent {
   homeForm!: FormGroup;

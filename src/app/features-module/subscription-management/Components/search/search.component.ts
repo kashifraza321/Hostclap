@@ -6,7 +6,7 @@ import { Subscription, debounceTime, fromEvent } from 'rxjs';
   standalone: true,
   imports: [],
   templateUrl: './search.component.html',
-  styleUrl: './search.component.scss'
+  styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit, OnDestroy {
   @ViewChild('search') searchElement: any;

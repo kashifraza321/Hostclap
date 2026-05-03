@@ -13,7 +13,7 @@ import { ThemeService } from '../../theme.service';
   standalone: true,
   imports: [  LoaderComponent,CommonModule],
   templateUrl: './subgroup-detail.component.html',
-  styleUrl: './subgroup-detail.component.css'
+  styleUrls: ['./subgroup-detail.component.css']
 })
 export class SubgroupDetailComponent {
    isLoading = false;

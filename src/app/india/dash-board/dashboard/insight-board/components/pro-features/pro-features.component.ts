@@ -6,6 +6,6 @@ import { InsightHeaderComponent } from '../insight-header/insight-header.compone
   standalone: true,
   imports: [InsightHeaderComponent],
   templateUrl: './pro-features.component.html',
-  styleUrl: './pro-features.component.css',
+  styleUrls: ['./pro-features.component.css'],
 })
 export class ProFeaturesComponent {}
