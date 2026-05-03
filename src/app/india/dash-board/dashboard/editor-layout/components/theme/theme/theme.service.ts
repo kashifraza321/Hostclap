@@ -11,6 +11,6 @@ export class ThemeService {
     return this.httpService.postCall(`${API_CONSTANTS.GET_THEME}`, themeData);
   }
   getTheme() {
-    return this.httpService.getCall(`${API_CONSTANTS.GET_WEBSITE}`);
+    return this.httpService.getCall(`${API_CONSTANTS.GET_WEBSITE}`, true);
   }
 }
