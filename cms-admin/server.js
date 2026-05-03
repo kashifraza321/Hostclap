@@ -20,8 +20,12 @@ const corsOptions = {
 app.use(cors(corsOptions));
 // Middleware to parse JSON
 app.use(express.json());
-// Serve static files from the 'public' directory
-app.use(express.static(path.join(__dirname, 'public')));
+// Serve static files from the 'public' directory with no-cache headers
+app.use(express.static(path.join(__dirname, 'public'), {
+  setHeaders: (res) => {
+    res.set('Cache-Control', 'no-cache');
+  }
+}));
 
 // Middleware
 app.use(bodyParser.json());
