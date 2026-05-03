@@ -22,6 +22,13 @@ export class AuthService {
     this.setupActivityListeners();
   }
 
+  private startInactivityTimer(): void {
+    this.inactivityTimer?.unsubscribe();
+    this.inactivityTimer = timer(this.inactivityDuration).subscribe(() => {
+      this.logout();
+    });
+  }
+
   private setupActivityListeners(): void {
     const events = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'];
     events.forEach(event => {
