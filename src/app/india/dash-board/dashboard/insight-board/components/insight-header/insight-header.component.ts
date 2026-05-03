@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-insight-header',
@@ -12,7 +13,7 @@ import { LoginService } from 'src/app/services/login.service';
   styleUrl: './insight-header.component.css',
 })
 export class InsightHeaderComponent {
-  constructor(private _router: Router, private _login: LoginService) {}
+  constructor(private _router: Router, private _login: LoginService, private authService: AuthService) {}
 
   isScrolled = false;
   menuOpen = false;
@@ -30,12 +31,7 @@ export class InsightHeaderComponent {
     this.clearToken();
   }
   clearToken(): void {
-    const tokenKey = 'token';
-    localStorage.removeItem(tokenKey);
-    this._login.setLoginStatus(false);
-    localStorage.setItem('isLoggedIn', 'false');
-    console.log('Token cleared from local storage.');
-    this._router.navigate(['/']);
+    this.authService.logout();
   }
   // Check if a token exists
   isAuthenticated(): boolean {

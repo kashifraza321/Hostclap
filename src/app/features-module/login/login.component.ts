@@ -11,6 +11,7 @@ import { LoginService } from '../../services/login.service';
 import { AlertService } from '../../services/Toaster/alert.service';
 import { gapi } from 'gapi-script';
 import { LoaderComponent } from 'src/app/commonComponent/loader/loader.component';
+import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -31,7 +32,8 @@ export class LoginComponent {
     private _route: Router,
     private formBuilder: FormBuilder,
     private alertService: AlertService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
@@ -95,6 +97,8 @@ export class LoginComponent {
           localStorage.setItem('userId', result.data._id);
           console.log('User IDvsmvkkkkkkkkk:', result.data._id);
           this.alertService.success('Login successfully');
+
+          this.authService.startTimer();
 
           this._route.navigate(['/in/insight/customer']);
         } else {
