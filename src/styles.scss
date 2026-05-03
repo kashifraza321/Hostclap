@@ -67,8 +67,8 @@ body {
   font-style: normal;
   overflow-x: hidden;
   word-wrap: break-word;
-  line-height: 1;
-  font-size: 62.5%;
+  line-height: 1.6;
+  font-size: 100%;
   /* text-transform: capitalize; */
   /* cursor: default; */
 }
@@ -142,6 +142,13 @@ li {
 }
 html {
   scroll-behavior: smooth;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  height: 100%;
+  font-family: "Montserrat", sans-serif;
 }
 
 .textCenter {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTableModule } from '@angular/material/table';
 import { LoginService } from '../../services/login.service';
@@ -12,7 +12,7 @@ import { ChartConfiguration, ChartOptions, ChartType } from 'chart.js';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, AfterViewInit {
   text = 'small business online in less than 7 days';
   displayText = '';
   i = 0;

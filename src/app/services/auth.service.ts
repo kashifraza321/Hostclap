@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { timer, Subscription } from "rxjs";
 // import * as jwt from 'jsonwebtoken'
+import { LoginService } from "./login.service";
 
 @Injectable({
   providedIn: "root"
@@ -10,7 +11,7 @@ export class AuthService {
   private inactivityTimer: Subscription | null = null;
   private readonly inactivityDuration = 30 * 60 * 1000; // 30 minutes in milliseconds
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private loginService: LoginService) {
     if (this.isLoggedIn()) {
       this.startInactivityTimer();
       this.setupActivityListeners();
@@ -44,6 +45,7 @@ export class AuthService {
     localStorage.clear();
     sessionStorage.clear();
     this.inactivityTimer?.unsubscribe();
+    this.loginService.setLoginStatus(false);
     this.router.navigate(['/login']);
   }
 
