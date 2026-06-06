@@ -138,7 +138,7 @@ export class ClassicTemplateComponent {
         console.error('Error loading pages:', err);
       },
       complete: () => {
-        this.isLoading = false; // loader stop
+        this.isLoading = false; 
       },
     });
   }

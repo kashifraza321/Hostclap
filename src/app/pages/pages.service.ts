@@ -79,6 +79,7 @@ getCurrentServices(): any[] {
   updatePreviewSection(section: string, value: any) {
     // if (!value || Object.keys(value).length === 0) return;
     console.log('updatePreviewSection called with:', section, value);
+      console.trace();
     const current = this.stateSubject.getValue();
     console.log('Current state before update:', current);
     this.stateSubject.next({

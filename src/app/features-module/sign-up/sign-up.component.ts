@@ -9,6 +9,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
+import { AlertService } from 'src/app/services/Toaster/alert.service';
 import { validate } from 'uuid';
 
 @Component({
@@ -24,7 +25,8 @@ export class SignUpComponent {
   constructor(
     private fb: FormBuilder,
     private _login: LoginService,
-    private _router: Router
+    private _router: Router,
+     private alertService: AlertService,
   ) {}
   ngOnInit() {
     this.signupForm();
@@ -93,11 +95,11 @@ export class SignUpComponent {
         if (response.status === 200) {
           alert('Sign-up successful!');
 
-          // ✅ Mark user as logged in (same as login())
+          //  Mark user as logged in (same as login())
           this._login.setLoginStatus(true);
           localStorage.setItem('isLoggedIn', 'true');
 
-          // ✅ Save token & userId if returned
+          //  Save token & userId if returned
           if (response.data?.token) {
             localStorage.setItem('token', response.data.token);
           }
@@ -105,21 +107,27 @@ export class SignUpComponent {
             localStorage.setItem('userId', response.data._id);
           }
 
-          // ✅ Navigate to dashboard
+          // Navigate to dashboard
           this._router.navigate(['/in/insight/customer']);
         } 
         else if (response.status === 409) {
           alert('User already exists!');
+           this.alertService.error(
+            'User already exists!'
+          );
         } 
         else {
           alert('Sign-up failed. Please try again.');
+           this.alertService.error(
+            'Sign-up failed. Please try again.'
+          );
         }
       },
       error: (err) => {
         if (err.status === 409) {
-          alert('User already exists!');
+          this.alertService.error('User already exists!');
         } else {
-          alert('An error occurred. Please try again later.');
+          this.alertService.error('An error occurred. Please try again later.');
           console.error('Sign-up error:', err);
         }
       },

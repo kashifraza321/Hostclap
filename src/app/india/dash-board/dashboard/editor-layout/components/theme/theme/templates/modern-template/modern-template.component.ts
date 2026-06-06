@@ -130,7 +130,7 @@ dummyServiceSubgroups = [
   {
     subgroupName: 'Sample Service',
     description: 'This is a placeholder service description.',
-    media: ['assets/images/herosection.png'], // you can set a placeholder image path here if needed
+    media: ['assets/images/herosection.png'], 
     bookingButtonLabel: 'Request Service',
     slug: 'sample-service',
   },
@@ -194,9 +194,11 @@ isScrolled = false;
     /////////////////////////////////////////////////
     this.pagesService.state$.subscribe((state) => {
         console.log('Realtime state in ModernTemplate:', state);
-        console.log('📘 ModernTemplate pages updated:', state.pages);
+        console.log(' ModernTemplate pages updated:', state.pages);
       this.preview = state.preview;
-      this.pagesList = state.pages;
+      if (Array.isArray(state.pages) && state.pages.length > 0) {
+        this.pagesList = state.pages;
+      }
     //  this.serviceData = state.preview.services 
     //   ? Object.values(state.preview.services) 
     //   : [];

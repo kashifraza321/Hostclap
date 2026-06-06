@@ -37,7 +37,7 @@ export class TemplateHeaderComponent {
   toggleMenuFontColor: boolean = false;
   logoPreview: SafeResourceUrl | null = null;
   uploadedImages: string[] = [];
-  pagesList= [];
+  pagesList: any[] = [];
   pageData: any;
   imgurl = environment.imageBaseUrl;
   pageId: string = '';
@@ -221,22 +221,26 @@ export class TemplateHeaderComponent {
     console.log('pagesList on init:', this.pagesList);
   }
    getPages() {
-    
     this.pagesService.getPages().subscribe({
       next: (res) => {
         console.log('Fetched pages:', res);
 
+        // Use the API response directly. Do not overwrite with this.pageData (may be undefined)
         this.pagesList = res.data || [];
-        this.pageId = res.data[0]?._id;
- this.pagesList = this.pageData.pages || [];
-            console.log('pagesList after in getpages api:', this.pagesList);
-      
+        this.pagesService.updatePages(this.pagesList);
+
+        // If pageId is not already set, pick the first page returned by the API
+        if (!this.pageId && Array.isArray(this.pagesList) && this.pagesList.length) {
+          this.pageId = this.pagesList[0]._id;
+        }
+
+        console.log('pagesList after in getpages api:', this.pagesList);
       },
       error: (err) => {
         console.error('Error loading pages:', err);
       },
       complete: () => {
-        
+        // no-op
       },
     });
   }
@@ -274,21 +278,18 @@ applyFontStyles() {
     };
     this.pagesService.updatePreviewSection('titles', data);
   }
-  applyMenuChanges() {
-    const data = {
-      stickyMenu: this.menuForm.get('stickyMenu')?.value ?? true,
-      logoInLine: this.menuForm.get('logoInLine')?.value ?? true,
-      menuPosition: this.menuForm.get('menuPosition')?.value || 'top',
-      menuBackgroudColour:
-        this.menuForm.get('menuBackgroudColour')?.value || '',
-      menuFontColour: this.menuForm.get('menuFontColour')?.value || '#000000',
-      fontSize: this.menuForm.get('fontSize')?.value + 'px',
-      alignment: this.menuForm.get('alignment')?.value || 'middle',
-    };
-    console.log('BEFORE menu update:', this.pagesService.getCurrentState());
-    this.pagesService.updatePreviewSection('menu', data);
-    console.log('AFTER menu update:', this.pagesService.getCurrentState());
-  }
+applyMenuChanges() {
+  // ✅ Sirf tab update karo jab form dirty ho ya user ne interact kiya ho
+  if (this.menuForm.pristine) return; // ← ye add karo
+
+  const data = {
+    stickyMenu: this.menuForm.get('stickyMenu')?.value ?? true,
+    menuFontColour: this.menuForm.get('menuFontColour')?.value || '#000000',
+    fontSize: this.menuForm.get('fontSize')?.value + 'px',
+    alignment: this.menuForm.get('alignment')?.value || 'middle',
+  };
+  this.pagesService.updatePreviewSection('menu', data);
+}
 
   applyCoverChanges() {
     const data = {
@@ -477,8 +478,12 @@ applyFontStyles() {
 
           this.logoPreview = safeImageUrl;
 
-            this.pagesList = this.pageData.pages || [];
+          // Preserve pagesList from the pages API response if available.
+          // Do not overwrite it with pageData.pages unless it exists and is an array.
+          if (Array.isArray(this.pageData.pages)) {
+            this.pagesList = this.pageData.pages;
             console.log('pagesList after assignment:', this.pagesList);
+          }
 
           // --- Cover ---
           const cover = res.data.header.cover; // assuming your API has cover under header.cover
