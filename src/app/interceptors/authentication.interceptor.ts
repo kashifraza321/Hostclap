@@ -70,7 +70,7 @@ export class AuthenticationInterceptor implements HttpInterceptor {
           localStorage.removeItem("token");
           const message = error.error.details || 'Session expired, please login again';
           this.alertService.warning(message);
-          console.log(message);
+          console.log(error);
           window.alert(message); 
           // this.router.navigate(["/login"]);
         }
