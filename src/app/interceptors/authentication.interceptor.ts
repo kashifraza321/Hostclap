@@ -68,8 +68,11 @@ export class AuthenticationInterceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401 || error.status === 410) {
           localStorage.removeItem("token");
-          this.alertService.info("Session expired, please login again");
-          this.router.navigate(["/login"]);
+          const message = error.error.details || 'Session expired, please login again';
+          this.alertService.warning(message);
+          console.log(message);
+          window.alert(message); 
+          // this.router.navigate(["/login"]);
         }
         return throwError(error);
       })
