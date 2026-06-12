@@ -45,6 +45,8 @@ export class TestimonialsComponent {
     //     tap((val) => this.applyTestimonialChanges(val))
     //   )
     // ).subscribe();
+     this.pagesService.triggerScroll('testimonial');
+
   }
   getSectionDetailData() {
     this.pagesService
@@ -83,7 +85,7 @@ export class TestimonialsComponent {
       console.log('Group deleted:', res);
       this.alertService.success('Group deleted successfully');
 
-      // ✅ Remove from UI list
+      //  Remove from UI list
       this.testimonialGroups = this.testimonialGroups.filter(
         (group) => group._id !== subgroupId
       );

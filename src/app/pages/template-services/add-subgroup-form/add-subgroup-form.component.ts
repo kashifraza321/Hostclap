@@ -327,7 +327,8 @@ formData.append(
       this.pagesService.CREATE_Sub_GROUP(formData).subscribe({
         next: (res) => {
           this.alertService.success('Service subgroup created successfully!');
-            window.location.reload();
+            // window.location.reload();
+           this.getSectionDetailData();1
            const newSubgroup = res.data; // assume backend returns the new subgroup
     const currentPreview = this.pagesService.getPreviewValue();
     

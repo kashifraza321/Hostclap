@@ -1,4 +1,4 @@
-<div class="pageWrapper">
+<div class="pageWrapper" >
   <div class="top-bar">
     <button class="back-btn" (click)="backToHomepage()">
       <img
@@ -37,7 +37,7 @@
             alt="Logo"
           />
           <div class="overlay">
-            <button class="edit-btn" (click)="uploadLogo()">
+            <button class="edit-btn" type="button" (click)="uploadLogo()">
               <img src="../../../assets/images/icons8-pencil-24.png" alt="" />
               <input
                 type="file"
@@ -46,7 +46,7 @@
                 accept="image/*"
               />
             </button>
-            <button class="delete-btn">
+            <button class="delete-btn" type="button">
               <img
                 src="../../../assets/images/delete.png"
                 alt="delete"

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpcommanService } from '../services/httpshared.service';
 import { API_CONSTANTS } from '../Constants/api.constant';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { TestimonialFormComponent } from './testimonials/testimonial-form/testimonial-form.component';
 
 @Injectable({
@@ -56,6 +56,13 @@ export class PagesService {
     },
   });
   state$ = this.stateSubject.asObservable();
+   private scrollSubject = new Subject<string>();
+
+  scroll$ = this.scrollSubject.asObservable();
+
+  triggerScroll(sectionId: string) {
+    this.scrollSubject.next(sectionId);
+  }
 getCurrentServices(): any[] {
   return this.stateSubject.getValue().preview.services || [];
 }

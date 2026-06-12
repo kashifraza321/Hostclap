@@ -126,6 +126,7 @@ textarea {
   flex-direction: column;
   gap: 20px;
   height: 100vh;
+  min-height:700px
 }
 
 .form-section {

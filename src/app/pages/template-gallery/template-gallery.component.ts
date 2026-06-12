@@ -45,6 +45,7 @@ export class TemplateGalleryComponent {
       images: this.fb.array([]),
     });
     this.getPageDetail(this.pageId);
+    this.pagesService.triggerScroll('gallery');
   }
   onFileSelected(event: any): void {
     if (event.target.files && event.target.files.length > 0) {

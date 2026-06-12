@@ -37,6 +37,8 @@ export class TemplateFooterComponent {
     });
 
     this.pageId = this.route.snapshot.paramMap.get('pageId') || '';
+     this.pagesService.triggerScroll('footer');
+
   }
 
   onFileSelected(event: Event) {

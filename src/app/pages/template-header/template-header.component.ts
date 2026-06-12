@@ -212,7 +212,9 @@ export class TemplateHeaderComponent {
         )
       ),
       this.coverForm.valueChanges.pipe(tap(() => this.applyCoverChanges())),
-      this.logoForm.valueChanges.pipe(tap(() => this.applyLogoChanges()))
+      this.logoForm.valueChanges.pipe(tap(() => this.applyLogoChanges())),
+      this.contactForm.valueChanges.pipe(tap(() => this.applyphoneChanges())),
+      this.addressForm.valueChanges.pipe(tap(() => this.applyaddressChanges()))
     ).subscribe();
 
     this.getPageDetail(this.pageId);
@@ -278,9 +280,25 @@ applyFontStyles() {
     };
     this.pagesService.updatePreviewSection('titles', data);
   }
+  applyphoneChanges() {
+
+  const phoneData = this.contactForm.get('phones')?.value;
+
+  console.log('phoneData', phoneData);
+
+  this.pagesService.updatePreviewSection(
+    'phone',
+    phoneData
+  );
+}
+applyaddressChanges() {
+  const addressData = this.addressForm.value;
+  console.log('addressData', addressData);
+  this.pagesService.updatePreviewSection('address', addressData);
+}
 applyMenuChanges() {
-  // ✅ Sirf tab update karo jab form dirty ho ya user ne interact kiya ho
-  if (this.menuForm.pristine) return; // ← ye add karo
+ 
+  if (this.menuForm.pristine) return;
 
   const data = {
     stickyMenu: this.menuForm.get('stickyMenu')?.value ?? true,
@@ -309,6 +327,7 @@ applyMenuChanges() {
 
     this.pagesService.updatePreviewSection('logo', data);
   }
+ 
   announcementMessage: string = 'AC is not working?';
   // realtime data show logic
   onOpacityChange(event: Event) {
@@ -327,9 +346,16 @@ applyMenuChanges() {
 
   toggleSection(sectionId: string) {
     if (this.activeSection && this.activeSection !== sectionId) {
-      this.saveSection(this.activeSection);
+      // this.saveSection(this.activeSection);
     }
     this.activeSection = this.activeSection === sectionId ? null : sectionId;
+    
+  if (this.activeSection) {
+    this.pagesService.triggerScroll(
+      sectionId.toLowerCase()
+    );
+  }
+
   }
 
   // logo modal  code ========
@@ -553,7 +579,7 @@ applyMenuChanges() {
         );
           
 
-          console.log('📝 MenuForm after patch:', this.menuForm.value);
+          console.log(' MenuForm after patch:', this.menuForm.value);
         }
         const phones = res.data.header?.phones;
         if (phones) {
@@ -563,7 +589,9 @@ applyMenuChanges() {
               office: phones.office || '',
               whatsapp: phones.whatsapp || '',
             },
-          });
+          },
+           { emitEvent: false }
+        );
         }
         const data = res?.data?.header?.addressLine;
 

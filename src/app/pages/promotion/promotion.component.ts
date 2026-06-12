@@ -70,6 +70,8 @@ export class PromotionComponent {
         )
       )
     ).subscribe();
+     this.pagesService.triggerScroll('promotion');
+
     this.getPageData();
   }
 

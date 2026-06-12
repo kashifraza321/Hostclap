@@ -197,11 +197,11 @@
               class="form-range"
               (change)="applyLogoChanges()"
             /> -->
-            <div class="slider-labels">
+            <!-- <div class="slider-labels">
               <span>Small</span>
               <span>Medium</span>
               <span>Large</span>
-            </div>
+            </div> -->
           </div>
           <div class="alignment-box">
             <label>Alignment</label>
@@ -317,7 +317,7 @@
             <label class="form-check-label">Parallax Scroll</label>
           </div> -->
 
-          <button
+          <!-- <button
             type="button"
             class="btn btn-light border w-100 d-flex justify-content-between align-items-center"
             (click)="toggleBgPicker = !toggleBgPicker"
@@ -339,7 +339,8 @@
             formControlName="backgroundColour"
             name="backgroundColor"
             class="form-control form-control-color mt-2"
-          />
+             (change)="applyCoverChanges()"
+          /> -->
 
           <button
             type="submit"
@@ -459,7 +460,7 @@
             <input
               type="color"
               formControlName="menuFontColour"
-              (change)="applyMenuChanges()"
+               (input)="applyMenuChanges()"
             />
           </div>
         </div>
@@ -473,6 +474,7 @@
         [formGroup]="titlesForm"
         (ngSubmit)="saveSection('titles')"
         class="titles-form card p-3"
+        
       >
         <!-- Business Name -->
         <div class="mb-4">
@@ -491,7 +493,7 @@
         </div>
 
         <!-- Page Title -->
-        <div class="mb-4">
+        <!-- <div class="mb-4">
           <label class="form-label fw-bold">Page Title</label>
           <input
             type="text"
@@ -504,7 +506,7 @@
           <div class="form-text">
             Set a custom title for your website. Max 80 characters.
           </div>
-        </div>
+        </div> -->
         <!-- font-size -->
 
         <!-- font-size -->
@@ -578,7 +580,7 @@
             <input
               type="color"
               formControlName="titleColour"
-              (input)="applyTitleChanges()"
+                 (input)="applyTitleChanges()"
               class="form-control form-control-color"
             />
           </div>
@@ -649,7 +651,7 @@
         </div>
 
         <!-- Save Button -->
-        <div class="text-center">
+        <div class="text-left">
           <button class="btn saveBtn" type="submit">Save</button>
         </div>
       </form>
@@ -672,6 +674,7 @@
                 type="text"
                 class="form-control phoneInput"
                 formControlName="mobile"
+                  (input)="applyphoneChanges()"
                 placeholder="+918102065847"
               />
             </div>
@@ -731,6 +734,7 @@
               class="form-control"
               formControlName="line1"
               placeholder="123 Main Street"
+              (input)="applyaddressChanges()"
             />
           </div>
 
@@ -742,6 +746,7 @@
               class="form-control"
               formControlName="line2"
               placeholder="Near Central Park, New York"
+              (input)="applyaddressChanges()"
             />
           </div>
         </div>

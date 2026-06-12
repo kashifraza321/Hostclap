@@ -56,6 +56,8 @@ export class ContactUsComponent {
     this.state$.subscribe((state) => {
       console.log('State Changed:', state);
     });
+     this.pagesService.triggerScroll('contactus');
+
   }
 
   backToHomepage() {

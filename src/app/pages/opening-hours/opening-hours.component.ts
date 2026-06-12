@@ -76,7 +76,10 @@ export class OpeningHoursComponent {
           }
         });
     });
+     this.pagesService.triggerScroll('openinghours');
+
     this.getSectionDetailData()
+
   }
     getSectionDetailData() {
     this.pagesService.GET_SECTION_DETAIL(this.pageId, 'opening_hours').subscribe({

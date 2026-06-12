@@ -72,7 +72,7 @@
       <!-- announcement -->
 
       <!-- Header Info -->
-      <header
+      <header 
         class="classic-header-info"
         [ngStyle]="{
           'font-family': data.font,
@@ -87,17 +87,18 @@
             'font-family': data.font,
            
           }"
+          id="address"
         >
           <i class="bi bi-geo-alt-fill"></i>
           <span class="addresTXt" [ngStyle]="{ 'font-family': data.font }">
-            {{ pageData?.contactUs?.address }} {{ pageData?.contactUs?.city }}
-            {{ pageData?.contactUs?.state }}</span
+           
+                {{  state?.preview?.address?.line1 || pageData?.header?.addressLine?.line1 }} </span
           >
         </div>
-        <div [ngStyle]="{ 'font-family': data.font }">
+        <div *ngIf="state$ | async as state" id="phone" [ngStyle]="{ 'font-family': data.font }">
           <i class="bi bi-telephone-fill"></i>
           <!-- <pre>{{ pageData | json }}</pre> -->
-          {{ pageData?.header?.phones?.mobile }}
+          {{  state?.preview?.phone?.mobile || pageData?.header?.phones?.mobile }}
         </div>
         </div>
           </div>
@@ -130,7 +131,7 @@
         }"
       >
     <div class="mainContainer">
-        <div
+        <div id="logo"
           class="logoSection"
       [ngClass]="{ 'logo-scrolled': isScrolled }"
              [ngStyle]="{
@@ -187,6 +188,7 @@
             <a
               href="javascript:void(0)"
               (click)="scrollToSection('page-' + i)"
+                
               [ngStyle]="{
                 color:
                   state?.preview?.menu?.menuFontColour ||
@@ -201,8 +203,8 @@
                   pageData?.header?.menu?.alignment ||
                   'center'
               }"
-              >{{ page.pageName }}</a
-            >
+              >{{ page.pageName }} 
+          </a >
           </li>
           </ng-container>
         </ul>
@@ -212,7 +214,7 @@
         </div>
         </div>
       </nav>
-          <!-- 📱 Simple Mobile Header -->
+          <!--  Simple Mobile Header -->
 <nav class="mobile-header">
   <div class="mobile-logo">
     <img [src]="getLogoUrl()" alt="logo" />
@@ -224,7 +226,7 @@
   </div>
 </nav>
 
-<!-- 📱 Mobile Menu -->
+<!--  Mobile Menu -->
 <ul class="mobile-menu" [class.open]="isMobileMenuOpen">
   <li *ngFor="let page of pagesList; let i = index">
     <a href="javascript:void(0)" (click)="scrollToSection('page-' + i); toggleMobileMenu()">
@@ -249,7 +251,8 @@
       >
         <!-- {{ getCoverUrl(state) | json }} -->
         <div class="overlay">
-          <div class="hero-text" *ngIf="state$ | async as state">
+          <div class="hero-text" *ngIf="state$ | async as state" id="title">
+ 
             <h1
               [ngStyle]="{
                 'font-family': data.font,
@@ -353,6 +356,7 @@
           'font-family': data.font,
          
         }"
+        id="promotion"
       >
         <div class="mainContainer">
           <div
@@ -445,7 +449,7 @@
           </div>
         </div>
       </section>
-      <section class="gallerySection">
+      <section class="gallerySection" id="gallery">
         <h2 class="sectionHeading">
           {{ pageData?.gallery?.title }}
         </h2>
@@ -505,7 +509,7 @@
       </section>
       <!-- gallery section -->
       <!-- amenties section -->
-      <section class="amenities-section" *ngIf="state$ | async as state">
+      <section class="amenities-section" id="amenities" *ngIf="state$ | async as state">
         <div class="mainContainer">
           <h2 class="gradientHeading"> {{
         state?.preview?.amenities?.title ||
@@ -539,7 +543,7 @@
       </section>
       <!-- amenties section -->
 
-      <div class="serviceSection" >
+      <div class="serviceSection" id="service" >
         <div class="mainContainer">
           <div class="" [ngStyle]="{ 'font-family': data.font }">
             <h2 class="gradientHeading">
@@ -883,7 +887,7 @@
         </div>
       </div>
       </section>
-      <app-testimonial-slider  [isMobilePreview]="isMobilePreview" [data]="data" [pageId]="pageId"></app-testimonial-slider>
+      <app-testimonial-slider id="testimonial"  [isMobilePreview]="isMobilePreview" [data]="data" [pageId]="pageId"></app-testimonial-slider>
 
 
       <!-- testimonial section -->
@@ -1023,6 +1027,7 @@
 
       <!-- contact us  -->
       <div
+      id="contactus"
         class="contact-info"
         [ngStyle]="{
           'font-family': data.font,
@@ -1104,7 +1109,7 @@
         class="dynamicPages"
         [ngStyle]="{ 'font-family': data.font }"
       >
-      <div class="opening">
+      <div class="opening" id="openinghours">
   <h2 class="gradientHeading">Opening Hours</h2>
   <div class="tableContainer">
   <table  cellspacing="10" cellpadding="10">
@@ -1143,7 +1148,7 @@
       </section>
       <!-- Footer -->
       <footer
-        class="classic-footer"
+        class="classic-footer" id="footer"
         [ngStyle]="{ background: data?.selectedColor?.accent || '#ccc' }"
       >
       <div class="mainContainer">

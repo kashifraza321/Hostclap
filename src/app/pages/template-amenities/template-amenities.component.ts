@@ -58,6 +58,8 @@ export class TemplateAmenitiesComponent {
      merge(
     this.amenitiesForm.valueChanges.pipe(tap(() => this.applyAmenitiesChanges()))
   ).subscribe();
+   this.pagesService.triggerScroll('amenities');
+
   }
 
   backToHomepage() {
@@ -94,6 +96,7 @@ export class TemplateAmenitiesComponent {
 
   // ✅ Instantly update the preview state
   this.pagesService.updatePreviewSection('amenities', data);
+
 }
 
 

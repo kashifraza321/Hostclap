@@ -48,11 +48,13 @@ export class TemplateServicesComponent {
       groupName: ['', Validators.required],
     });
     this.getSectionDetailData();
+     this.pagesService.triggerScroll('service');
+
   //    merge(
   //   this.sectionForm.valueChanges.pipe(
   //     tap((val) => this.applyServiceChanges(val))
   //   )
-  // ).subscribe();
+  // ).subscribe(); 
   }
 
   backToHomepage() {
@@ -175,11 +177,11 @@ export class TemplateServicesComponent {
     this.pagesService.createGroup(payload).subscribe({
       next: (res) => {
         this.alertService.success('Group added successfully');
-          const newGroup = res.data;
+          const newGroup = res.data; 
         this.serviceGroups.push(res.data);
         this.serviceSUbGroups.push(res.data);
-      this.serviceGroups.push(newGroup);
-      this.serviceSUbGroups.push(newGroup);
+      // this.serviceGroups.push(newGroup);
+      // this.serviceSUbGroups.push(newGroup);
 
       // // 2️⃣ Right preview me update (realtime)
       // const currentServices = this.pagesService.getCurrentServices();
@@ -205,6 +207,7 @@ export class TemplateServicesComponent {
       next: (res) => {
         console.log('Group deleted:', res);
         this.alertService.success('Group deleted successfully');
+          this.getSectionDetailData();
 
         // Remove from UI list
         this.serviceSUbGroups = this.serviceSUbGroups.filter(
