@@ -64,7 +64,7 @@
           <span class="GroupTitle" (click)="navigateToForm(group._id)">
             {{ group.testimonial?.reviewerName
             }} 
-            </span><button  class="deleteBtn" (click)="deleteGroup(group._id, 'group')"> <img  src="../../../assets/images/delete.png" alt="delete" width="20"></button>
+            </span><button  type="button" class="deleteBtn" (click)="deleteGroup(group._id, 'group')"> <img  src="../../../assets/images/delete.png" alt="delete" width="20"></button>
           </div>
         </div>
       </div>
@@ -76,7 +76,7 @@
     </div>
 
     <div class="footer-buttons">
-      <button class="cancel-btn cancelBtn">Cancel</button>
+      <button (click)="backToHomepage()" class="cancel-btn cancelBtn">Cancel</button>
       <button class="saveBtn" [disabled]="TestiminialForm.invalid">Save</button>
     </div>
   </form>

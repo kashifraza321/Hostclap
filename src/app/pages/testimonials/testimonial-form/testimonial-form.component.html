@@ -85,7 +85,7 @@
           <ng-container *ngIf="imagePreview; else uploadPlaceholder">
             <div class="image-preview">
               <img [src]="imagePreview" alt="Preview" />
-              <button class="delete-btn" (click)="onDeleteImage($event)">
+              <button type="button" class="delete-btn" (click)="onDeleteImage($event)">
                 ✖
               </button>
             </div>
@@ -114,7 +114,7 @@
     </div>
 
     <div class="buttons">
-      <button type="button" class="btn cancelBtn">Cancel</button>
+      <!-- <button type="button" (click)="backTo()" class="btn cancelBtn">Cancel</button> -->
       <button
         type="submit"
         class="btn saveBtn"

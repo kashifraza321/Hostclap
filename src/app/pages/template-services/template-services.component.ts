@@ -183,7 +183,7 @@ export class TemplateServicesComponent {
       // this.serviceGroups.push(newGroup);
       // this.serviceSUbGroups.push(newGroup);
 
-      // // 2️⃣ Right preview me update (realtime)
+      // //  Right preview me update (realtime)
       // const currentServices = this.pagesService.getCurrentServices();
       // this.pagesService.updateServices([...currentServices, newGroup]);
         this.groupForm.reset();
@@ -201,25 +201,58 @@ export class TemplateServicesComponent {
       modalInstance?.hide();
     }
   }
-   deleteGroup(subgroupId: string, sectionType: string) {
-    console.log(sectionType, 'pricelist sectiontype');
-    this.pagesService.deleteServiesBlock(sectionType, subgroupId).subscribe({
-      next: (res) => {
-        console.log('Group deleted:', res);
-        this.alertService.success('Group deleted successfully');
-          this.getSectionDetailData();
+  //  deleteGroup(subgroupId: string, sectionType: string) {
+  //   console.log(sectionType, 'pricelist sectiontype');
+  //   this.pagesService.deleteServiesBlock(sectionType, subgroupId).subscribe({
+  //     next: (res) => {
+  //       console.log('Group deleted:', res);
+  //       this.alertService.success('Group deleted successfully');
+  //         this.getSectionDetailData();
 
-        // Remove from UI list
-        this.serviceSUbGroups = this.serviceSUbGroups.filter(
-          (g) => g._id !== subgroupId
-        );
-      },
-      error: (err) => {
-        console.error('Error deleting group:', err);
-        this.alertService.error('Failed to delete group');
-      },
-    });
-  }
+  //       // Remove from UI list
+  //       this.serviceSUbGroups = this.serviceSUbGroups.filter(
+  //         (g) => g._id !== subgroupId
+  //       );
+  //     },
+  //     error: (err) => {
+  //       console.error('Error deleting group:', err);
+  //       this.alertService.error('Failed to delete group');
+  //     },
+  //   });
+  // }
+  deleteGroup(subgroupId: string, sectionType: string) {
+  this.pagesService.deleteServiesBlock(sectionType, subgroupId).subscribe({
+    next: (res) => {
+      this.alertService.success('Group deleted successfully');
+
+      // GET API hit
+      this.pagesService
+        .GET_SECTION_DETAIL(this.pageId, 'service')
+        .subscribe({
+          next: (response) => {
+            this.serviceGroups = response?.data?.section?.groups || [];
+
+            // agar subgroup screen open hai to uska loop bhi refresh karo
+            if (this.selectedGroup?._id) {
+              const updatedGroup = this.serviceGroups.find(
+                (g) => g._id === this.selectedGroup._id
+              );
+
+              this.serviceSUbGroups = updatedGroup?.subgroups || [];
+
+              // selectedGroup bhi update kar do
+              this.selectedGroup = updatedGroup;
+            }
+          },
+        });
+    },
+
+    error: (err) => {
+      console.error(err);
+      this.alertService.error('Failed to delete group');
+    },
+  });
+}
   // navigateToSubgroupForm(pageId: string) {
   //   this.router.navigate([
   //     '/in/insight/editor/form',

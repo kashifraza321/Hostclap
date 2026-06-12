@@ -94,7 +94,7 @@
           >
            
                 <span class="GroupTitle"  (click)="openSubGroup(group._id)"> {{ group.groupName }} </span>  
-            <button  class="deleteBtn" (click)="deleteGroup(group._id, 'group')"> <img  src="../../../assets/images/delete.png" alt="delete" width="20"></button>
+            <button type="button"  class="deleteBtn" (click)="deleteGroup(group._id, 'group')"> <img  src="../../../assets/images/delete.png" alt="delete" width="20"></button>
           </div>
         </div>
       </div>
@@ -115,7 +115,7 @@
               <span class="GroupTitle"      (click)="
               navigateToSubgroupForm(pageId, selectedGroup?._id, sub._id)
             ">  {{ sub.subgroupName }}</span>
-            <button  class="deleteBtn" (click)="deleteGroup(sub._id, 'subgroup')"><img  src="../../../assets/images/delete.png" alt="delete" width="20"></button>
+            <button type="button"  class="deleteBtn" (click)="deleteGroup(sub._id, 'subgroup')"><img  src="../../../assets/images/delete.png" alt="delete" width="20"></button>
           </div>
         </div>
       </div>
@@ -127,7 +127,7 @@
     </div>
 
     <div class="footer-buttons">
-      <button class="cancel-btn cancelBtn">Cancel</button>
+      <button class="cancel-btn cancelBtn" (click)="backToHomepage()">Cancel</button>
       <button class=" saveBtn" [disabled]="sectionForm.invalid">
         Save
       </button>

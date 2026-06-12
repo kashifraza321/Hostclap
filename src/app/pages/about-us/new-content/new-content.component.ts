@@ -88,32 +88,48 @@ export class NewContentComponent {
 getSectionDetailData() {
   this.pagesService.GET_SECTION_DETAIL(this.pageId, 'aboutus').subscribe({
     next: (res) => {
-      const section = res.data?.section;
-      if (!section) return;
+      console.log('FULL RESPONSE =>', res);
 
-      this.sectionId = section._id;
-      this.sectionType = section.sectionType;
+      const section = res?.data?.section;
 
-      const matchedGroup = section.groups.find(
+      if (!section) {
+        console.error('Section not found');
+        return;
+      }
+
+      // IMPORTANT
+      this.sectionId = section._id || '';
+      this.sectionType = section.sectionType || 'aboutus';
+
+      console.log('sectionId =>', this.sectionId);
+      console.log('sectionType =>', this.sectionType);
+
+      const matchedGroup = section.groups?.find(
         (group: any) => group._id === this.groupId
       );
 
-      if (matchedGroup) {
-        const aboutus = matchedGroup.aboutus;
-        this.contentBlockForm.patchValue({
-          title: section.sectionTitle || '',
-          alignment: aboutus?.alignment || 'left',
-          fontSize: this.fontSize,
-          textColour: aboutus?.textColour || '#000000',
-          quote: aboutus?.quote || '',
-        });
+      if (!matchedGroup) {
+        console.warn('Group not found');
+        return;
+      }
 
-         const fullImageUrl = `${this.imageUrl}${aboutus.imageUrl}`;
-        if (aboutus?.imageUrl) {
-          this.mediaPreview = `${this.imageUrl}${aboutus.imageUrl}`;
-           this.mediaPreview = this.sanitizer.bypassSecurityTrustUrl(fullImageUrl);
-          this.mediaPreviewType = 'image';
-        }
+      const aboutus = matchedGroup.aboutus;
+
+      this.contentBlockForm.patchValue({
+        title: section.sectionTitle || '',
+        alignment: aboutus?.alignment || 'left',
+        fontSize: aboutus?.fontSize || 16,
+        textColour: aboutus?.textColour || '#000000',
+        quote: aboutus?.quote || '',
+      });
+
+      if (aboutus?.imageUrl) {
+        const fullImageUrl = `${this.imageUrl}${aboutus.imageUrl}`;
+
+        this.mediaPreview =
+          this.sanitizer.bypassSecurityTrustUrl(fullImageUrl);
+
+        this.mediaPreviewType = 'image';
       }
     },
     error: (err) => {
@@ -121,7 +137,6 @@ getSectionDetailData() {
     },
   });
 }
-
 
   // Font size slider change
   updateFontSize(event: Event): void {
@@ -207,36 +222,89 @@ getSectionDetailData() {
     console.log('Action button clicked!');
   }
 
+  // onSubmit(): void {
+  //   if (this.contentBlockForm.valid) {
+  //     const formData = new FormData();
+  //     const formValue = this.contentBlockForm.value;
+  //     formData.append('pageId', this.pageId);
+  //     formData.append('sectionId', this.sectionId);
+  //     formData.append('sectionType', this.sectionType);
+
+  //     formData.append('title', formValue.title);
+  //     formData.append('alignment', formValue.alignment);
+  //     formData.append('fontSize', formValue.fontSize.toString());
+  //     formData.append('textColour', formValue.textColour);
+  //     formData.append('quote', formValue.quote);
+
+  //     if (formValue.image) {
+  //       formData.append('image', formValue.image, formValue.image.name);
+  //     }
+
+  //     this.pagesService.UpdateAboutus(formData).subscribe({
+  //       next: (res) => {
+  //         console.log(' Success:', res);
+  //         this.alertService.success('Testimonial updated successfully');
+  //       },
+  //       error: (err) => {
+  //         console.error(' Error:', err);
+  //         this.alertService.error('Failed to update testimonial');
+  //       },
+  //     });
+
+  //     // Example: this.http.post('/api/content', formData).subscribe();
+  //   }
+  // }
   onSubmit(): void {
-    if (this.contentBlockForm.valid) {
-      const formData = new FormData();
-      const formValue = this.contentBlockForm.value;
-      formData.append('pageId', this.pageId);
-      formData.append('sectionId', this.sectionId);
-      formData.append('sectionType', this.sectionType);
-
-      formData.append('title', formValue.title);
-      formData.append('alignment', formValue.alignment);
-      formData.append('fontSize', formValue.fontSize.toString());
-      formData.append('textColour', formValue.textColour);
-      formData.append('quote', formValue.quote);
-
-      if (formValue.image) {
-        formData.append('image', formValue.image, formValue.image.name);
-      }
-
-      this.pagesService.UpdateAboutus(formData).subscribe({
-        next: (res) => {
-          console.log(' Success:', res);
-          this.alertService.success('Testimonial updated successfully');
-        },
-        error: (err) => {
-          console.error(' Error:', err);
-          this.alertService.error('Failed to update testimonial');
-        },
-      });
-
-      // Example: this.http.post('/api/content', formData).subscribe();
-    }
+  if (this.contentBlockForm.invalid) {
+    this.contentBlockForm.markAllAsTouched();
+    return;
   }
+
+  console.log('sectionId =>', this.sectionId);
+  console.log('sectionType =>', this.sectionType);
+
+  if (!this.sectionId || !this.sectionType) {
+    this.alertService.error(
+      'Section ID or Section Type is missing'
+    );
+    return;
+  }
+
+  const formValue = this.contentBlockForm.value;
+  const formData = new FormData();
+
+  formData.append('pageId', this.pageId);
+  formData.append('sectionId', this.sectionId);
+  formData.append('sectionType', this.sectionType);
+
+  formData.append('title', formValue.title || '');
+  formData.append('alignment', formValue.alignment || 'left');
+  formData.append('fontSize', String(formValue.fontSize || 16));
+  formData.append('textColour', formValue.textColour || '#000000');
+  formData.append('quote', formValue.quote || '');
+
+  if (formValue.image instanceof File) {
+    formData.append(
+      'image',
+      formValue.image,
+      formValue.image.name
+    );
+  }
+
+  // DEBUG
+  // for (const pair of formData.entries()) {
+  //   console.log(pair[0], pair[1]);
+  // }
+
+  this.pagesService.UpdateAboutus(formData).subscribe({
+    next: (res) => {
+      console.log(res);
+      this.alertService.success('About Us updated successfully');
+    },
+    error: (err) => {
+      console.error(err);
+      this.alertService.error('Failed to update About Us');
+    },
+  });
+}
 }
