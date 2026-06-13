@@ -63,27 +63,46 @@ export class AboutUsComponent {
     });
 
     this.getSectionDetailData();
+     this.pagesService.triggerScroll('aboutus');
   }
   backToHomepage() {
     this.router.navigate(['/in/insight/editor/home', this.pageId]);
   }
+  // getSectionDetailData() {
+  //   this.pagesService.GET_SECTION_DETAIL(this.pageId, 'aboutus').subscribe({
+  //     next: (res) => {
+  //         console.log('API RESPONSE RECEIVED');
+  //       if (res?.data?.section) {
+  //         this.sectionId = res.data.section._id;
+  //         this.sectionForm.patchValue({
+  //           sectionTitle: res.data.section.sectionTitle || '',
+  //           sectionSubtitle: res.data.section.subtitle || '',
+  //         });
+  //           this.serviceGroups = res.data.section.groups || [];
+  //       }
+  //     },
+  //     error: (err) => {
+  //       console.error('Error loading section detail', err);
+  //     },
+  //   });
+  // }
   getSectionDetailData() {
-    this.pagesService.GET_SECTION_DETAIL(this.pageId, 'aboutus').subscribe({
-      next: (res) => {
-        if (res?.data?.section) {
-          this.sectionId = res.data.section._id;
-          this.sectionForm.patchValue({
-            sectionTitle: res.data.section.sectionTitle || '',
-            sectionSubtitle: res.data.section.subtitle || '',
-          });
-            this.serviceGroups = res.data.section.groups || [];
-        }
-      },
-      error: (err) => {
-        console.error('Error loading section detail', err);
-      },
-    });
-  }
+  this.pagesService.GET_SECTION_DETAIL(this.pageId, 'aboutus').subscribe({
+    next: (res) => {
+
+      this.serviceGroups = res.data.section.groups || [];
+
+      console.log('serviceGroups length', this.serviceGroups.length);
+
+      console.table(
+        this.serviceGroups.map((g: any) => ({
+          id: g._id,
+          alignment: g.aboutus?.alignment
+        }))
+      );
+    }
+  });
+}
   saveSection() {
     if (this.sectionForm.invalid) {
       this.alertService.error('Please fill all required fields');

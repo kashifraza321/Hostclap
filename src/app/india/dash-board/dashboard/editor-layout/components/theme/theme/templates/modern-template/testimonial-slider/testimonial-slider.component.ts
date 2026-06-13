@@ -150,7 +150,7 @@ public state$ = this.pagesService.state$;
         // this.testimonials = this.testimonialGroups;
 
       
-        // ✅ Fallback to dummy if no testimonials found
+        //  Fallback to dummy if no testimonials found
       if (this.testimonialGroups.length === 0) {
         this.testimonials = this.dummyTestimonials;
       } else {

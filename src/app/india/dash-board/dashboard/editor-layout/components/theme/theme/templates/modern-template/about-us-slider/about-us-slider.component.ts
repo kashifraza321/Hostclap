@@ -62,6 +62,7 @@ dummySlide = {
      this.getSectionDetailData();
      this.getSectionDetailData();
     // this.getPageDetail('687177a9aa11a48cb4de77db');
+    
   }
 
   selectSlide(index: number): void {

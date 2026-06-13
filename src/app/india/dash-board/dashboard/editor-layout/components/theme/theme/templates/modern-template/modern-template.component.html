@@ -402,7 +402,7 @@
       </section>
      
       <!-- about us section  -->
-      <app-about-us-slider   [isMobilePreview]="isMobilePreview" [data]="data" [pageId]="pageId"></app-about-us-slider>
+      <app-about-us-slider   id="aboutus"  [isMobilePreview]="isMobilePreview" [data]="data" [pageId]="pageId"></app-about-us-slider>
       <!-- about us section  -->
       <!-- gallery section -->
       <section *ngIf="" class="gallery-section">
@@ -979,6 +979,7 @@
 
         <!-- Right Form -->
         <div
+       
           class="contact-form"
           [ngStyle]="{
             'font-family': data.font,

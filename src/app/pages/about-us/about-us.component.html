@@ -1,7 +1,7 @@
 <form [formGroup]="sectionForm">
  
   <div class="about-us-section">
-     <button class="back-btn" (click)="backToHomepage()">
+     <button type="button" class="back-btn" (click)="backToHomepage()">
     <img
       src="../../../assets/images/icons8-chevron-right-24.png"
       alt="chevron"
@@ -56,7 +56,6 @@
         >
          <span   (click)="navigateTonewContent(pageId, group._id)" class="GroupTitle">{{ group.aboutus?.alignment || 'No Alignment' }} - {{ group._id | slice:0:8 }}</span> 
          
-
           <button
            (click)="deleteGroup(group._id, 'group')"
             type="button"
@@ -136,8 +135,9 @@
     <!-- Save Button -->
 
     <div class="footer-buttons">
-      <button class="cancelBtn">Cancel</button>
+      <button type="button" class="cancelBtn">Cancel</button>
       <button
+      type="button"
         class="saveBtn"
         (click)="saveSection()"
         [disabled]="sectionForm.invalid"

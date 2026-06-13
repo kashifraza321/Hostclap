@@ -55,9 +55,9 @@ export class TemplateContactFormComponent {
   ) {}
   ngOnInit(): void {
     this.contactUsForm = this.fb.group({
-      title: ['Send Us a Message', Validators.required],
+      contactFormTitle: ['Send Us a Message', Validators.required],
       titleVisible: [true],
-      subtitle: ['Our team will respond within 24 hours'],
+      contactFormsubtitle: ['Our team will respond within 24 hours'],
       warningText: ['Please provide a valid email address'],
     });
     this.pageId = this.route.snapshot.paramMap.get('pageId') || '';
@@ -73,19 +73,19 @@ export class TemplateContactFormComponent {
     }
 
     const payload = {
-      offer: this.contactUsForm.value,
+      contactformData: this.contactUsForm.value,
     };
 
     console.log(payload, 'payload before API');
 
     this.pagesService.editPages(this.pageId, payload).subscribe({
       next: (res) => {
-        console.log('Promotion updated successfully:', res);
-        this.alertService.success('Promotion updated successfully!');
+        console.log('Contact form updated successfully:', res);
+        this.alertService.success('Contact form updated successfully!');
       },
       error: (err) => {
-        console.error('Failed to update promotion:', err);
-        this.alertService.error('Failed to update promotion.');
+        console.error('Failed to update contact form:', err);
+        this.alertService.error('Failed to update contact form.');
       },
     });
   }

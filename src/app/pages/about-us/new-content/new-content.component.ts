@@ -67,9 +67,10 @@ export class NewContentComponent {
   ) {}
   ngOnInit(): void {
     this.pageId = this.route.snapshot.paramMap.get('pageId') || '';
-     this.groupId = this.route.snapshot.paramMap.get('groupId') || '';
-     console.log(this.groupId, ' groupId found');
-     console.log(this.pageId, ' pageId found');
+    this.groupId = this.route.snapshot.paramMap.get('groupId') || '';
+    console.log(this.groupId, ' groupId found');
+    console.log(this.pageId, ' pageId found');
+    
     this.contentBlockForm = this.fb.group({
       title: ['', Validators.required],
       alignment: ['left'],
@@ -78,62 +79,83 @@ export class NewContentComponent {
       quote: ['', Validators.required],
       image: [null],
     });
-     console.log(this.groupId, "group id in newww")
- if (this.groupId) {
-  console.log(this.groupId, "group id in newww")
-      this.getSectionDetailData();
-    }
+    
+    // ALWAYS fetch section data (needed for sectionId and sectionType)
+    this.getSectionDetailData();
   }
 
 getSectionDetailData() {
   this.pagesService.GET_SECTION_DETAIL(this.pageId, 'aboutus').subscribe({
     next: (res) => {
       console.log('FULL RESPONSE =>', res);
+      console.log('Response data =>', res?.data);
 
-      const section = res?.data?.section;
+      // Try both possible response structures
+      const section = res?.data?.section || res?.data;
 
       if (!section) {
-        console.error('Section not found');
+        console.error('Section not found in response');
+        this.alertService.error('Failed to load section data');
         return;
       }
 
-      // IMPORTANT
-      this.sectionId = section._id || '';
-      this.sectionType = section.sectionType || 'aboutus';
+      console.log('Section object =>', section);
+
+      // Extract sectionId - try multiple field names
+      this.sectionId = section._id || section.id || '';
+      
+      if (!this.sectionId) {
+        console.error('Section ID not found in response');
+        this.alertService.error('Section ID is missing');
+        return;
+      }
+
+      // Set sectionType explicitly (we already know it's 'aboutus')
+      this.sectionType = 'aboutus';
 
       console.log('sectionId =>', this.sectionId);
       console.log('sectionType =>', this.sectionType);
 
-      const matchedGroup = section.groups?.find(
-        (group: any) => group._id === this.groupId
-      );
+      // Only try to populate group data if groupId exists (editing mode)
+      if (this.groupId) {
+        const matchedGroup = section.groups?.find(
+          (group: any) => group._id === this.groupId
+        );
 
-      if (!matchedGroup) {
-        console.warn('Group not found');
-        return;
-      }
+        if (!matchedGroup) {
+          console.warn('Group not found for groupId:', this.groupId);
+          console.warn('Available groups:', section.groups);
+          this.alertService.error('Group not found');
+          return;
+        }
 
-      const aboutus = matchedGroup.aboutus;
+        const aboutus = matchedGroup.aboutus;
 
-      this.contentBlockForm.patchValue({
-        title: section.sectionTitle || '',
-        alignment: aboutus?.alignment || 'left',
-        fontSize: aboutus?.fontSize || 16,
-        textColour: aboutus?.textColour || '#000000',
-        quote: aboutus?.quote || '',
-      });
+        this.contentBlockForm.patchValue({
+          title: section.sectionTitle || '',
+          alignment: aboutus?.alignment || 'left',
+          fontSize: aboutus?.fontSize || 16,
+          textColour: aboutus?.textColour || '#000000',
+          quote: aboutus?.quote || '',
+        });
 
-      if (aboutus?.imageUrl) {
-        const fullImageUrl = `${this.imageUrl}${aboutus.imageUrl}`;
-
-        this.mediaPreview =
-          this.sanitizer.bypassSecurityTrustUrl(fullImageUrl);
-
-        this.mediaPreviewType = 'image';
+        if (aboutus?.imageUrl) {
+          const fullImageUrl = `${this.imageUrl}${aboutus.imageUrl}`;
+          this.mediaPreview =
+            this.sanitizer.bypassSecurityTrustUrl(fullImageUrl);
+          this.mediaPreviewType = 'image';
+        }
+      } else {
+        // Creating new content block - just set sectionTitle
+        this.contentBlockForm.patchValue({
+          title: section.sectionTitle || '',
+        });
+        console.log('Creating new content block (no groupId)');
       }
     },
     error: (err) => {
       console.error('Error loading section detail', err);
+      this.alertService.error('Failed to load section details: ' + err?.message);
     },
   });
 }
@@ -222,89 +244,37 @@ getSectionDetailData() {
     console.log('Action button clicked!');
   }
 
-  // onSubmit(): void {
-  //   if (this.contentBlockForm.valid) {
-  //     const formData = new FormData();
-  //     const formValue = this.contentBlockForm.value;
-  //     formData.append('pageId', this.pageId);
-  //     formData.append('sectionId', this.sectionId);
-  //     formData.append('sectionType', this.sectionType);
-
-  //     formData.append('title', formValue.title);
-  //     formData.append('alignment', formValue.alignment);
-  //     formData.append('fontSize', formValue.fontSize.toString());
-  //     formData.append('textColour', formValue.textColour);
-  //     formData.append('quote', formValue.quote);
-
-  //     if (formValue.image) {
-  //       formData.append('image', formValue.image, formValue.image.name);
-  //     }
-
-  //     this.pagesService.UpdateAboutus(formData).subscribe({
-  //       next: (res) => {
-  //         console.log(' Success:', res);
-  //         this.alertService.success('Testimonial updated successfully');
-  //       },
-  //       error: (err) => {
-  //         console.error(' Error:', err);
-  //         this.alertService.error('Failed to update testimonial');
-  //       },
-  //     });
-
-  //     // Example: this.http.post('/api/content', formData).subscribe();
-  //   }
-  // }
   onSubmit(): void {
-  if (this.contentBlockForm.invalid) {
-    this.contentBlockForm.markAllAsTouched();
-    return;
+    if (this.contentBlockForm.valid) {
+      const formData = new FormData();
+      const formValue = this.contentBlockForm.value;
+      formData.append('pageId', this.pageId);
+      formData.append('sectionId', this.sectionId);
+      formData.append('sectionType', this.sectionType);
+
+      formData.append('title', formValue.title);
+      formData.append('alignment', formValue.alignment);
+      formData.append('fontSize', formValue.fontSize.toString());
+      formData.append('textColour', formValue.textColour);
+      formData.append('quote', formValue.quote);
+
+      if (formValue.image) {
+        formData.append('image', formValue.image, formValue.image.name);
+      }
+
+      this.pagesService.UpdateAboutus(formData).subscribe({
+        next: (res) => {
+          console.log(' Success:', res);
+          this.alertService.success('Testimonial updated successfully');
+        },
+        error: (err) => {
+          console.error(' Error:', err);
+          this.alertService.error('Failed to update testimonial');
+        },
+      });
+
+      // Example: this.http.post('/api/content', formData).subscribe();
+    }
   }
 
-  console.log('sectionId =>', this.sectionId);
-  console.log('sectionType =>', this.sectionType);
-
-  if (!this.sectionId || !this.sectionType) {
-    this.alertService.error(
-      'Section ID or Section Type is missing'
-    );
-    return;
-  }
-
-  const formValue = this.contentBlockForm.value;
-  const formData = new FormData();
-
-  formData.append('pageId', this.pageId);
-  formData.append('sectionId', this.sectionId);
-  formData.append('sectionType', this.sectionType);
-
-  formData.append('title', formValue.title || '');
-  formData.append('alignment', formValue.alignment || 'left');
-  formData.append('fontSize', String(formValue.fontSize || 16));
-  formData.append('textColour', formValue.textColour || '#000000');
-  formData.append('quote', formValue.quote || '');
-
-  if (formValue.image instanceof File) {
-    formData.append(
-      'image',
-      formValue.image,
-      formValue.image.name
-    );
-  }
-
-  // DEBUG
-  // for (const pair of formData.entries()) {
-  //   console.log(pair[0], pair[1]);
-  // }
-
-  this.pagesService.UpdateAboutus(formData).subscribe({
-    next: (res) => {
-      console.log(res);
-      this.alertService.success('About Us updated successfully');
-    },
-    error: (err) => {
-      console.error(err);
-      this.alertService.error('Failed to update About Us');
-    },
-  });
-}
 }

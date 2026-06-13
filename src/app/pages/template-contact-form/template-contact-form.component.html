@@ -25,8 +25,8 @@
           id="section-title"
           type="text"
           class="input-field"
-          value="offer"
-          formControlName="title"
+          value="send us a message "
+          formControlName="contactFormTitle"
         />
         <p>Max 25 characters</p>
       </div>
@@ -37,7 +37,7 @@
         [modules]="modules"
         theme="snow"
         class="custom-quill"
-        formControlName="subtitle"
+        formControlName="contactFormsubtitle"
       >
         ></quill-editor
       >
@@ -59,7 +59,7 @@
     </div>
 
     <div class="footer-buttons">
-      <button class="cancel-btn cancelBtn">Cancel</button>
+      <button type="button" class="cancel-btn cancelBtn">Cancel</button>
       <button class=" saveBtn">Save</button>
     </div>
   </form>
