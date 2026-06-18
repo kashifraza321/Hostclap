@@ -25,22 +25,27 @@
         </app-modern-template>
       </ng-container>
 
-      <ng-container *ngIf="data?.template === 'Classic'">
-        <app-classic-template [data]="data"></app-classic-template>
-      </ng-container>
+   
 
-      <ng-container *ngIf="data?.template === 'Origins'">
-        <app-default-template [data]="data"></app-default-template>
-      </ng-container>
+     
     </div>
   </div>
 
   <!-- Normal desktop view -->
+   
   <div *ngIf="!isMobilePreview">
+   
     <app-modern-template
       *ngIf="data?.template === 'Modern' && !showSubGroup"
       [data]="data"
       (openSubGroup)="handleOpenSubGroup($event)">
     </app-modern-template>
+    <ng-container *ngIf="data?.template === 'Classic' ">
+        <app-classic-template [data]="data"></app-classic-template>
+      </ng-container>
+       <ng-container *ngIf="data?.template === 'Origins'">
+        <app-default-template [data]="data"></app-default-template>
+      </ng-container>
   </div>
 </div>
+

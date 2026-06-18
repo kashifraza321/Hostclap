@@ -130,7 +130,7 @@
             'left'
         }"
       >
-    <div class="mainContainer">
+    <div class="mainContainer"  >
         <div id="logo"
           class="logoSection"
       [ngClass]="{ 'logo-scrolled': isScrolled }"
@@ -239,6 +239,7 @@
       <!-- Hero -->
 
       <section
+      id="cover"
         class="classic-hero hero"
         *ngIf="state$ | async as state"
         [style.background-image]="getCoverUrl()"

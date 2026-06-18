@@ -225,7 +225,7 @@
       <form *ngIf="item.id === 'cover'">
         <div class="cover-editor card p-3">
           <div class="cover-image-box">
-            <label>Cover Image</label>
+            <label  (click)="openCoverLibrary()" >Cover Image</label>
 
             <div
               class="image-preview"
@@ -798,7 +798,7 @@
         </button>
       </li>
       <li class="nav-item" role="presentation">
-        <button
+        <!-- <button
           class="nav-link"
           id="profile-tab"
           data-bs-toggle="tab"
@@ -809,7 +809,7 @@
           aria-selected="false"
         >
           URL Upload
-        </button>
+        </button> -->
       </li>
     </ul>
     <div class="tab-content" id="myTabContent">
@@ -830,8 +830,8 @@
             <div
               *ngFor="let image of uploadedImages"
               class="media-thumbnail"
-              [class.selected]="selectedImage === image"
-              (click)="selectImage(image)"
+              [class.selected]="selectedLogoImage === image"
+               (click)="selectedLogoImage = image"
             >
               <img [src]="image" alt="Media" />
             </div>
@@ -939,7 +939,7 @@
               </div>
               <div class="media-items">
                 <div
-                  *ngFor="let image of uploadedImages"
+                  *ngFor="let image of coverImages"
                   class="media-thumbnail"
                   [class.selected]="selectedImage === image"
                   (click)="selectImage(image)"
@@ -964,13 +964,55 @@
           <button
             class="greenbtn"
             (click)="chooseCoverImage()"
-            [disabled]="!selectedImage"
+             [disabled]="!selectedLogoImage"
           >
             Choose
           </button>
         </div>
         <!-- END Cover Editor -->
       </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="media-modal-backdrop" *ngIf="showCoverModal">
+  <div class="media-modal">
+    <div class="modal-header">
+      <h2>Cover Library</h2>
+      <button class="cross" (click)="closeCoverLibrary()">✕</button>
+    </div>
+
+    <div class="upload-gallery">
+      <div class="upload-box">
+        <label>
+          <input type="file" (change)="uploadFile($event)" hidden />
+          <div class="upload-placeholder">+</div>
+        </label>
+      </div>
+
+      <div class="media-items">
+        <div
+          *ngFor="let image of uploadedImages"
+          class="media-thumbnail"
+           [class.selected]="selectedCoverImage === image"
+        (click)="selectedCoverImage = image"
+        >
+          <img [src]="image" alt="Media" />
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button (click)="closeCoverLibrary()">Cancel</button>
+
+      <button
+        class="greenbtn"
+        (click)="chooseCoverImage()"
+       [disabled]="!selectedCoverImage"
+      >
+        Choose
+      </button>
     </div>
   </div>
 </div>

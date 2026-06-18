@@ -49,13 +49,15 @@ isMobilePreview = false;
   //   console.log('EditorLayoutComponent updated data:', this.data);
   // }
   updateData(newData: Partial<Data>) {
+     console.log('Incoming =>', newData);
     this.data = {
       ...this.data, 
       ...newData, 
     };
+    console.log('After Merge =>', this.data);
 
     if (!this.data.template) {
-      this.data.template = 'Origins'; // ya jo default tum chaho
+      this.data.template = 'Origins'; 
     }
 
     console.log('EditorLayoutComponent updated data:', this.data);

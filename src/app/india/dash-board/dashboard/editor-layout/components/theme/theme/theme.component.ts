@@ -79,8 +79,8 @@ export class ThemeComponent {
     this.themeForm = this.fb.group({
       template: ['Origins'],
       font: ['Roboto'],
-      primary: ['#9C27B0'],
-      secondary: ['#E91E63'],
+      primary: [''],
+      secondary: [''],
       accent: [''],
     });
 
@@ -121,7 +121,17 @@ onColorChange(color: string) {
   
 
   selectTemplate(template: string) {
+     const cleanTemplate = template.trim();
+
+  this.themeForm.patchValue({
+    template: cleanTemplate,
+  },
+    { emitEvent: false }
+);
+
+  console.log('Selected Template =>', JSON.stringify(cleanTemplate));
     this.themeForm.patchValue({ template });
+      console.log('Before Update:', this.parent.data);
   }
    toggleCustomColor(event: any) {
     this.showCustomColors = event.target.checked;
@@ -176,15 +186,16 @@ onColorChange(color: string) {
 
   updateParentData() {
     const { template, font, primary, secondary, accent } = this.themeForm.value;
-
+      
+      console.log('Selected Template =>', template);
     this.parent.updateData({
       template,
       font,
       selectedColor: {
-        primary,
-        secondary,
-        accent,
-      },
+      primary: primary || this.parent.data.selectedColor?.primary,
+      secondary: secondary || this.parent.data.selectedColor?.secondary,
+      accent: accent || this.parent.data.selectedColor?.accent,
+    },
     });
   }
 

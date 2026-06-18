@@ -27,9 +27,14 @@ declare var bootstrap: any;
 })
 export class TemplateHeaderComponent {
   showMediaModal = false;
+  showCoverModal =false
   toggleColorPicker = false;
   toggleCustomize = false;
   toggleBgPicker = false;
+  coverImages: string[] = [];
+logoImages: string[] = [];
+selectedLogoImage: string | null = null;
+selectedCoverImage: string | null = null;
   toggleTitleColorPicker = false;
   toggleAddressBgColor = false;
   toggleAddressFontColor = false;
@@ -360,6 +365,7 @@ applyMenuChanges() {
 
   // logo modal  code ========
   openMediaLibrary(): void {
+    console.log('logoImages =>', this.logoImages);
     this.showMediaModal = true;
   }
 
@@ -367,21 +373,29 @@ applyMenuChanges() {
     this.showMediaModal = false;
     this.selectedImage = null;
   }
+  openCoverLibrary() {
+  this.showCoverModal = true;
+}
+
+closeCoverLibrary() {
+  this.showCoverModal = false;
+}
   selectImage(image: string): void {
     this.selectedImage = image;
   }
 
   chooseImage(): void {
-    if (!this.selectedImage) return;
+    if (!this.selectedLogoImage) return;
 
-    this.logoPreview = this.selectedImage;
-    this.logoForm.patchValue({ image: this.selectedImage });
+    this.logoPreview = this.selectedLogoImage;
+    this.logoForm.patchValue({ image: this.selectedLogoImage });
 
-    this.convertImageToFile(this.selectedImage).then((file) => {
+    this.convertImageToFile(this.selectedLogoImage).then((file) => {
       this.selectedLogoFile = file;
     });
 
     this.closeMediaLibrary();
+       this.showMediaModal = false;
   }
   async convertImageToFile(imageUrlOrBase64: string): Promise<File> {
     const res = await fetch(imageUrlOrBase64);
@@ -449,25 +463,15 @@ applyMenuChanges() {
     }
   }
   chooseCoverImage(): void {
-    if (!this.selectedImage) return;
+    if (!this.selectedCoverImage) return;
 
     // Patch the form with selected image
-    this.coverForm.patchValue({ image: this.selectedImage });
-    this.coverImageUrl = this.selectedImage;
+    this.coverForm.patchValue({ image: this.selectedCoverImage
+ });
+    this.coverImageUrl = this.selectedCoverImage;
     this.applyCoverChanges();
-
-    // Find modal element
-    const modalEl = document.getElementById('coverEditorModal');
-    if (modalEl) {
-      // Check if modal instance already exists
-      let modalInstance = bootstrap.Modal.getInstance(modalEl);
-      if (!modalInstance) {
-        modalInstance = new bootstrap.Modal(modalEl);
-      }
-      modalInstance.hide();
-    } else {
-      console.error('Modal element not found!');
-    }
+      this.showCoverModal = false;
+this.closeCoverLibrary();
 
     // Reset selected image
     this.selectedImage = null;

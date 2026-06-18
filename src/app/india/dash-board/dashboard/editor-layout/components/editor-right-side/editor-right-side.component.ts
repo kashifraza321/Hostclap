@@ -35,6 +35,7 @@ export class EditorRightSideComponent {
     if (changes['data']) {
       console.log('EditorRightSideComponent received data:', this.data);
     }
+      console.log('Preview Data =>', this.data);
   }
   ngOnInit() {
     this.GetWebsiteTheme();
