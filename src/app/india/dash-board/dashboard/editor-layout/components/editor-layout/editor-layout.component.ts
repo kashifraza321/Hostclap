@@ -29,7 +29,7 @@ export class EditorLayoutComponent {
   isMobileView = false;
 isSidebarOpen = false;
   data: Data = {
-    template: 'default',
+    template: '',
     font: '',
     selectedColor: null,
 

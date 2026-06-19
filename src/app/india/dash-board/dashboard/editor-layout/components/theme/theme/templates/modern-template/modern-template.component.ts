@@ -240,7 +240,9 @@ isScrolled = false;
     return day === this.currentDay; 
   }
   ngOnChanges(changes: SimpleChanges) {
-    
+      if (changes['data']) {
+    console.log('Font:', this.data?.font);
+  }
  
     if (changes['data'] && changes['data'].currentValue) {
       this.data = { ...this.data, ...changes['data'].currentValue };

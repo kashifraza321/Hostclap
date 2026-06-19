@@ -86,6 +86,7 @@ export class ThemeComponent {
 
     // Watch form changes to update parent data
     this.themeForm.valueChanges.subscribe((val) => {
+       console.log('Theme Form Changed:', val);
       this.updateParentData();
     });
   }
@@ -93,7 +94,7 @@ export class ThemeComponent {
 
   ngOnInit(): void {
     // Optionally load existing theme
-    // this.GetWebsiteTheme();
+    this.GetWebsiteTheme();
   }
 
   get selectedColor() {
@@ -101,16 +102,23 @@ export class ThemeComponent {
   }
 
 onColorChange(color: string) {
-    // Update local color object
-    this.colors[this.selectedType] = color;
 
-    // Sync with form
-    this.themeForm.patchValue({
-      [this.selectedType]: color
-    }, { emitEvent: false });
+  this.colors[this.selectedType] = color;
 
-    // Update parent data so the right side reflects
-    this.updateParentData();
+  this.themeForm.patchValue({
+    [this.selectedType]: color
+  }, {
+    emitEvent:false
+  });
+
+  this.parent.updateData({
+    selectedColor: {
+      primary: this.colors.primary,
+      secondary: this.colors.secondary,
+      accent: this.colors.accent
+    }
+  });
+
 }
 
 
@@ -120,19 +128,24 @@ onColorChange(color: string) {
 
   
 
-  selectTemplate(template: string) {
-     const cleanTemplate = template.trim();
+selectTemplate(template: string) {
 
-  this.themeForm.patchValue({
-    template: cleanTemplate,
-  },
-    { emitEvent: false }
-);
+  this.themeForm.patchValue(
+    {
+      template: template
+    },
+    {
+      emitEvent: false
+    }
+  );
 
-  console.log('Selected Template =>', JSON.stringify(cleanTemplate));
-    this.themeForm.patchValue({ template });
-      console.log('Before Update:', this.parent.data);
-  }
+  this.parent.updateData({
+    template: template
+  });
+
+}
+
+
    toggleCustomColor(event: any) {
     this.showCustomColors = event.target.checked;
 
@@ -146,29 +159,51 @@ onColorChange(color: string) {
     }
   }
 
-   applyPresetColors(color: any) {
-    // Update form
-    this.themeForm.patchValue({
+ applyPresetColors(color: any) {
+
+  this.themeForm.patchValue({
+    primary: color.primary,
+    secondary: color.secondary,
+    accent: color.accent
+  }, {
+    emitEvent:false
+  });
+
+  this.colors = {
+    primary: color.primary,
+    secondary: color.secondary,
+    accent: color.accent
+  };
+
+  this.parent.updateData({
+    selectedColor: {
       primary: color.primary,
       secondary: color.secondary,
-      accent: color.accent,
-    });
+      accent: color.accent
+    }
+  });
 
-    // Sync picker colors
-    this.colors = {
-      primary: color.primary,
-      secondary: color.secondary,
-      accent: color.accent,
-    };
+}
+selectFont(event: Event) {
 
-    // Reset picker to show Primary first
-    this.selectedType = 'primary';
-  }
-  selectFont(event: Event) {
-    const target = event.target as HTMLSelectElement;
-    const value = target.value;
-    this.themeForm.patchValue({ font: value });
-  }
+  const value = (event.target as HTMLSelectElement).value;
+
+  this.themeForm.patchValue(
+    {
+      font: value
+    },
+    {
+      emitEvent: false
+    }
+  );
+
+  this.parent.updateData({
+    font: value
+  });
+
+    console.log('Theme Form:', this.themeForm.value);
+
+}
   selectColor(color: any) {
     this.themeForm.patchValue({
       primary: color.primary,
@@ -183,28 +218,55 @@ onColorChange(color: string) {
     });
   }
 
+  GetWebsiteTheme() {
+  this.themeService.getTheme().subscribe({
+    next: (response) => {
 
-  updateParentData() {
-    const { template, font, primary, secondary, accent } = this.themeForm.value;
-      
-      console.log('Selected Template =>', template);
-    this.parent.updateData({
-      template,
-      font,
-      selectedColor: {
-      primary: primary || this.parent.data.selectedColor?.primary,
-      secondary: secondary || this.parent.data.selectedColor?.secondary,
-      accent: accent || this.parent.data.selectedColor?.accent,
-    },
-    });
-  }
+      if (!response.data) return;
+
+      const theme = response.data;
+
+      this.themeForm.patchValue({
+        template: theme.template,
+        font: theme.font,
+        primary: theme.selectedColor?.primary,
+        secondary: theme.selectedColor?.secondary,
+        accent: theme.selectedColor?.accent
+      }, { emitEvent: false });
+
+      this.colors = {
+        primary: theme.selectedColor?.primary,
+        secondary: theme.selectedColor?.secondary,
+        accent: theme.selectedColor?.accent
+      };
+
+      this.parent.updateData(theme);
+    }
+  });
+}
+
+updateParentData() {
+  const formValue = this.themeForm.getRawValue();
+
+  console.log('Sending to Parent:', formValue);
+
+  this.parent.updateData({
+    template: formValue.template,
+    font: formValue.font,
+    selectedColor: {
+      primary: formValue.primary,
+      secondary: formValue.secondary,
+      accent: formValue.accent
+    }
+  });
+}
 
   goBack() {
     this.router.navigateByUrl('/in/insight/editor');
   }
 
   saveTheme() {
-    this.updateParentData();
+    // this.updateParentData();
     const themeData: Data = this.parent.data;
 
     this.themeService.saveTheme(themeData).subscribe({
