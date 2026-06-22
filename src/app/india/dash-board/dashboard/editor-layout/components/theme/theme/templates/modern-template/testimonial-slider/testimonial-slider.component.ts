@@ -23,6 +23,10 @@ export class TestimonialSliderComponent   {
      preview: any = {};
      @Input() data!: Data;
     pageData: any;
+  // Section title/subtitle loaded from the API, used as the heading fallback
+  // before the editor pushes anything into the shared preview state.
+  sectionTitle = '';
+  sectionSubtitle = '';
   testimonials: any[] = [];
   testimonialGroups: any[] = [];
   // Concrete array the slick carousel iterates. Must be a stable field (NOT a
@@ -189,6 +193,11 @@ public state$ = this.pagesService.state$;
     this.pagesService.GET_SECTION_DETAIL(pageId, 'testimonials').subscribe({
       next: (res) => {
         const groups = res.data?.section?.groups || [];
+
+        // Capture the section heading from the API so it shows on first view,
+        // before the editor pushes anything into the shared state.
+        this.sectionTitle = res.data?.section?.sectionTitle || '';
+        this.sectionSubtitle = res.data?.section?.subtitle || '';
 
         this.testimonialGroups = groups.map((group: any) => {
           // Build full image URL safely
