@@ -163,7 +163,7 @@ this.autoplayInterval = setInterval(() => {
   console.log('BrideGalleryComponent loaded ✅');
     // console.log('Images array:', this.images);
     console.log('User ID:', this.userId);
-    this.GetWebsiteTheme();
+    // Theme/colors arrive via @Input() data (parent owns the theme) — no self-fetch.
   this.pagesService.state$.subscribe((state) => {
         console.log('Realtime state in ModernTemplate:', state);
       this.preview = state.preview;

@@ -90,16 +90,14 @@ export class AboutUsComponent {
   this.pagesService.GET_SECTION_DETAIL(this.pageId, 'aboutus').subscribe({
     next: (res) => {
 
-      this.serviceGroups = res.data.section.groups || [];
+      this.serviceGroups = res?.data?.section?.groups || [];
 
       console.log('serviceGroups length', this.serviceGroups.length);
 
-      console.table(
-        this.serviceGroups.map((g: any) => ({
-          id: g._id,
-          alignment: g.aboutus?.alignment
-        }))
-      );
+      // Push to the shared preview so the About-us slider reflects it live.
+      this.pagesService.updatePreviewSection('aboutus', {
+        groups: this.serviceGroups,
+      });
     }
   });
 }
@@ -142,6 +140,10 @@ export class AboutUsComponent {
         this.serviceGroups = this.serviceGroups.filter(
           (g) => g._id !== subgroupId
         );
+        // Keep the live preview in sync after deletion.
+        this.pagesService.updatePreviewSection('aboutus', {
+          groups: this.serviceGroups,
+        });
       },
       error: (err) => {
         console.error('Error deleting group:', err);

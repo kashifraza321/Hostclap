@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PagesService } from 'src/app/pages/pages.service';
 import { ThemeService } from '../../../theme.service';
@@ -54,15 +54,49 @@ dummySlide = {
     this.userId = this.route.snapshot.paramMap.get('Id') || '';
     console.log('User ID:', this.pageId);
 
-    // this.pagesService.state$.subscribe((state) => {
-    //   this.preview = state.preview;
-    // });
+    // Initial backend load.
+    this.getSectionDetailData();
 
-    this.GetWebsiteTheme();
-     this.getSectionDetailData();
-     this.getSectionDetailData();
-    // this.getPageDetail('687177a9aa11a48cb4de77db');
-    
+    // Live updates: rebuild slides when the About-us editor pushes groups.
+    this.pagesService.state$.subscribe((state) => {
+      this.preview = state.preview;
+      const groups = state?.preview?.aboutus?.groups;
+      if (groups?.length) {
+        this.buildSlides(groups);
+      }
+    });
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    // pageId is provided by the parent and may arrive after ngOnInit.
+    if (changes['pageId'] && changes['pageId'].currentValue) {
+      this.getSectionDetailData();
+    }
+  }
+
+  // Shared mapping used by both the backend load and live state updates.
+  private buildSlides(groups: any[]) {
+    this.slides = (groups || [])
+      .filter((group: any) => group.isActive && group.aboutus)
+      .map((group: any) => ({
+        title: group.aboutus.title || '',
+        description: group.aboutus.quote || '',
+        imageUrl: this.sanitizer.bypassSecurityTrustUrl(
+          this.imageUrl + group.aboutus.imageUrl
+        ),
+        linkText: 'Learn More',
+        link: '#',
+        alignment: group.aboutus.alignment || 'left',
+        textColour: group.aboutus.textColour || '#000000',
+        sanitizedDescription: this.sanitizer.bypassSecurityTrustHtml(
+          group.aboutus.quote
+        ) as SafeHtml,
+      }));
+
+    if (this.slides.length === 0) {
+      this.slides = [this.dummySlide];
+    }
+    this.currentSlide = 0;
   }
 
   selectSlide(index: number): void {
@@ -82,22 +116,6 @@ dummySlide = {
   getNextIndex(): number {
     return (this.currentSlide + 1) % this.slides.length;
   }
-  GetWebsiteTheme() {
-    this.themeService.getTheme().subscribe({
-      next: (response) => {
-        if (response.data) {
-          this.data = {
-            ...this.data,
-            ...response.data,
-          };
-          console.log('Merged theme data:', this.data);
-        }
-      },
-      error: (err) => {
-        console.error('Error fetching theme:', err);
-      },
-    });
-  }
   getPageDetail(pageId: string): void {
     this.pagesService.getPageDetail(pageId).subscribe({
       next: (res) => {
@@ -114,38 +132,13 @@ dummySlide = {
     });
   }
  getSectionDetailData() {
+    if (!this.pageId) {
+      return;
+    }
     this.pagesService.GET_SECTION_DETAIL(this.pageId, 'aboutus').subscribe({
       next: (res) => {
         const groups = res?.data?.section?.groups || [];
-
-        this.slides = groups
-          .filter((group: any) => group.isActive && group.aboutus)
-          .map((group: any) => {
-            return {
-              title: group.aboutus.title || '',
-              description: group.aboutus.quote || '',
-              imageUrl: this.sanitizer.bypassSecurityTrustUrl(
-        this.imageUrl + group.aboutus.imageUrl
-      ),
-              linkText: 'Learn More', 
-              link: '#', 
-              alignment: group.aboutus.alignment || 'left',
-              textColour: group.aboutus.textColour || '#000000',
-              sanitizedDescription: this.sanitizer.bypassSecurityTrustHtml(
-                group.aboutus.quote
-              ) as SafeHtml,
-            };
-          });
-       
-      if (this.slides.length === 0) {
-        this.slides = [this.dummySlide];
-      }
-
-      this.currentSlide = 0;
-      console.log('Slides:', this.slides);
-
-        this.currentSlide = 0;
-        console.log('Slides:', this.slides);
+        this.buildSlides(groups);
       },
       error: (err) => {
         console.error('Error loading section detail', err);

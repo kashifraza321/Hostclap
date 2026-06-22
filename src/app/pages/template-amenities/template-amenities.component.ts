@@ -11,7 +11,6 @@ import {
 } from '@angular/forms';
 import { AlertService } from 'src/app/services/Toaster/alert.service';
 import { CommonModule } from '@angular/common';
-import { merge, tap } from 'rxjs';
 
 @Component({
   selector: 'app-template-amenities',
@@ -31,6 +30,8 @@ export class TemplateAmenitiesComponent {
   amenitiesForm!: FormGroup;
   pageId: string = '';
   pageData: any;
+  // Guards the live-preview push until backend data has loaded.
+  private dataLoaded = false;
   suggestedAmenities: string[] = [
     '24/7 availability',
     'Parking available',
@@ -55,9 +56,12 @@ export class TemplateAmenitiesComponent {
     this.pageId = this.route.snapshot.paramMap.get('pageId') || '';
     console.log(this.pageId, 'pageidddddddddd');
     this.getPageData();
-     merge(
-    this.amenitiesForm.valueChanges.pipe(tap(() => this.applyAmenitiesChanges()))
-  ).subscribe();
+    this.amenitiesForm.valueChanges.subscribe(() => {
+      if (!this.dataLoaded) {
+        return;
+      }
+      this.applyAmenitiesChanges();
+    });
    this.pagesService.triggerScroll('amenities');
 
   }
@@ -115,13 +119,19 @@ export class TemplateAmenitiesComponent {
               titleVisible: amenities.titleVisible || false,
               subtitle: amenities.subtitle || '',
               amenitiesNames: amenities.amenitiesNames || [],
-            });
+            }, { emitEvent: false });
           }
 
           console.log(' Form after patch:', this.amenitiesForm.value);
         }
+        // Enable live edits and push the loaded data to the preview.
+        this.dataLoaded = true;
+        this.applyAmenitiesChanges();
       },
-      error: (err) => console.error('🔴 API Error:', err),
+      error: (err) => {
+        console.error('🔴 API Error:', err);
+        this.dataLoaded = true;
+      },
     });
   }
 

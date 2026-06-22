@@ -10,7 +10,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AlertService } from 'src/app/services/Toaster/alert.service';
 import { PagesService } from '../pages.service';
 import { CommonModule } from '@angular/common';
-import { merge, tap } from 'rxjs';
 
 declare var bootstrap: any;
 @Component({
@@ -30,6 +29,9 @@ export class TemplateServicesComponent {
   showSubGroup = false;
   selectedGroup: any = null;
   isSubgroupPage = false;
+  // True once backend data has loaded; guards the live-preview push so early
+  // edits don't overwrite backend services with empty data.
+  private dataLoaded = false;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -50,11 +52,14 @@ export class TemplateServicesComponent {
     this.getSectionDetailData();
      this.pagesService.triggerScroll('service');
 
-     merge(
-    this.sectionForm.valueChanges.pipe(
-      tap((val) => this.applyServiceChanges(val))
-    )
-  ).subscribe(); 
+    // Mirror edits to the preview only after backend data has loaded, so the
+    // first keystroke doesn't push empty groups and wipe the service cards.
+    this.sectionForm.valueChanges.subscribe((val) => {
+      if (!this.dataLoaded) {
+        return;
+      }
+      this.applyServiceChanges(val);
+    });
   }
 
   backToHomepage() {
@@ -95,13 +100,15 @@ export class TemplateServicesComponent {
           this.sectionForm.patchValue({
             sectionTitle: res.data.section.sectionTitle || '',
             subtitle: res.data.section.subtitle || '',
-          });
+          }, { emitEvent: false });
           this.serviceGroups = res.data.section.groups || [];
            this.applyServiceChanges(this.sectionForm.value);
         }
+        this.dataLoaded = true;
       },
       error: (err) => {
         console.error('Error loading section detail', err);
+        this.dataLoaded = true;
       },
     });
   }
@@ -192,7 +199,7 @@ applyServiceChanges(val: any) {
   this.pagesService.updatePreviewSection('service', {
     sectionTitle: this.sectionForm.value.sectionTitle,
     subtitle: this.sectionForm.value.subtitle,
-    // groups: [...this.serviceGroups]
+    groups: [...this.serviceGroups]
   });
 
       // //  Right preview me update (realtime)

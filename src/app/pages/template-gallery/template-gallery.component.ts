@@ -26,6 +26,8 @@ export class TemplateGalleryComponent {
   pageId: string = '';
   pageData: any;
   imgurl = environment.imageBaseUrl;
+  // Guards the live-preview push until backend data has loaded.
+  private dataLoaded = false;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -48,6 +50,9 @@ export class TemplateGalleryComponent {
     this.getPageDetail(this.pageId);
     this.pagesService.triggerScroll('gallery');
     this.galleryForm.valueChanges.subscribe(val => {
+  if (!this.dataLoaded) {
+    return;
+  }
   this.applyGalleryChanges(val);
 });
   }
@@ -98,8 +103,7 @@ export class TemplateGalleryComponent {
         this.galleryForm.patchValue({
           title: gallery.title,
           subtitle: gallery.subtitle,
-        });
-        this.applyGalleryChanges(this.galleryForm.value);
+        }, { emitEvent: false });
         this.selectedFiles = (gallery.images || []).map((imgPath: string) => {
           const fullUrl = this.imgurl.endsWith('/')
             ? this.imgurl + imgPath
@@ -119,9 +123,13 @@ export class TemplateGalleryComponent {
         });
 
         console.log('Selected files:', this.selectedFiles);
+        // Now that images are loaded, push to the preview and enable live edits.
+        this.dataLoaded = true;
+        this.applyGalleryChanges(this.galleryForm.value);
       },
       error: (err) => {
         console.error('Failed to fetch page detail:', err);
+        this.dataLoaded = true;
       },
     });
   }

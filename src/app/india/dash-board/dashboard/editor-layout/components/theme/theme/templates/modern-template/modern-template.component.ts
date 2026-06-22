@@ -78,7 +78,7 @@ export class ModernTemplateComponent {
   abovePriceContactSections: any[] = [];
   subgroupsToShowForPrice: any[] = [];
   selectedPriceGroupIndex = 0;
-  teamImages: string[] = [];
+  teamImages: any[] = [];
   currentindex = 0;
   itemsPerView = 3;
   teamMembers: { img: string; name: string; role: string }[] = [];
@@ -213,6 +213,13 @@ isScrolled = false;
         groups: [...(state.preview.service.groups || [])]
       }
     };
+  }
+
+  // Live gallery images from the editor (media = [{ file, preview }]).
+  const galleryMedia = state.preview?.gallery?.media;
+  if (Array.isArray(galleryMedia) && galleryMedia.length) {
+    this.teamImages = galleryMedia.map((m: any) => m?.preview);
+    this.updateCarousel(0);
   }
 
   console.log('serviceData', this.serviceData);
@@ -628,12 +635,23 @@ getSectionDetailData(pageId: string) {
     this.visibleSubgroupsCount += 100;
   }
   // Gallery section
-  getGalleryImageUrl(path: string | undefined): SafeUrl {
+  getGalleryImageUrl(path: any): SafeUrl {
     if (!path) {
       return 'assets/images/gallery-placeholder.png';
     }
-    const fullUrl = path.startsWith('http') ? path : `${this.imgurl}${path}`;
-    return this.sanitizer.bypassSecurityTrustUrl(fullUrl);
+    // Live previews from the gallery editor are already SafeUrl objects
+    // (sanitized) or blob:/data: URLs — pass those through untouched.
+    if (typeof path !== 'string') {
+      return path;
+    }
+    if (
+      path.startsWith('http') ||
+      path.startsWith('blob:') ||
+      path.startsWith('data:')
+    ) {
+      return this.sanitizer.bypassSecurityTrustUrl(path);
+    }
+    return this.sanitizer.bypassSecurityTrustUrl(`${this.imgurl?.trim()}${path}`);
   }
   scrollToSection(sectionId: string) {
     const element = document.getElementById(sectionId);
