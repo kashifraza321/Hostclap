@@ -108,6 +108,23 @@ public state$ = this.pagesService.state$;
       }
     }
 
+    get displayTestimonials() {
+  if (this.preview?.testimonials?.groups?.length) {
+    return this.preview.testimonials.groups.map((g: any) => ({
+      name: g.testimonial?.reviewerName,
+      review: g.testimonial?.quote,
+      date: g.testimonial?.date
+        ? new Date(g.testimonial.date).toLocaleDateString()
+        : '',
+      rating: Number(g.testimonial?.rating) || 0,
+      image: g.testimonial?.imageUrl
+        ? this.imgurl + g.testimonial.imageUrl
+        : null
+    }));
+  }
+
+  return this.testimonials;
+}
    GetWebsiteTheme() {
     this.themeService.getTheme().subscribe({
       next: (response) => {

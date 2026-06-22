@@ -40,11 +40,17 @@ export class TestimonialsComponent {
       subtitle: [''],
     });
     this.getSectionDetailData();
-    //    merge(
-    //   this.TestiminialForm.valueChanges.pipe(
-    //     tap((val) => this.applyTestimonialChanges(val))
-    //   )
-    // ).subscribe();
+ merge(
+  this.TestiminialForm.valueChanges.pipe(
+    tap(() => {
+      this.pagesService.updatePreviewSection('testimonials', {
+        sectionTitle: this.TestiminialForm.value.sectionTitle,
+        subtitle: this.TestiminialForm.value.subtitle,
+        groups: this.testimonialGroups
+      });
+    })
+  )
+).subscribe();
      this.pagesService.triggerScroll('testimonial');
 
   }
@@ -62,6 +68,11 @@ export class TestimonialsComponent {
               subtitle: res.data.section.subtitle || '',
             });
             this.testimonialGroups = res.data.section.groups || [];
+            this.pagesService.updatePreviewSection('testimonials', {
+  sectionTitle: res.data.section.sectionTitle,
+  subtitle: res.data.section.subtitle,
+  groups: this.testimonialGroups
+});
           }
         },
         error: (err) => {
@@ -69,14 +80,15 @@ export class TestimonialsComponent {
         },
       });
   }
-  //   applyTestimonialChanges(val: any) {
-  //   const data = {
-  //     sectionTitle: this.TestiminialForm.value.sectionTitle || '',
-  //    subtitle: this.TestiminialForm.value.subtitle || '',
-  //     groups: this.testimonialGroups || [],
-  //   };
-  //   this.pagesService.updatePreviewSection('testimonials', data);
-  // }
+applyTestimonialChanges(val: any) {
+  const data = {
+    sectionTitle: val.sectionTitle,
+    subtitle: val.subtitle,
+    groups: this.testimonialGroups
+  };
+
+  this.pagesService.updatePreviewSection('testimonials', data);
+}
  
    deleteGroup(subgroupId: string, sectionType: string) {
   console.log(sectionType, 'pricelist sectiontype');
@@ -89,6 +101,11 @@ export class TestimonialsComponent {
       this.testimonialGroups = this.testimonialGroups.filter(
         (group) => group._id !== subgroupId
       );
+      this.pagesService.updatePreviewSection('testimonials', {
+  sectionTitle: this.TestiminialForm.value.sectionTitle,
+  subtitle: this.TestiminialForm.value.subtitle,
+  groups: this.testimonialGroups
+});
     },
     error: (err) => {
       console.error('Error deleting group:', err);

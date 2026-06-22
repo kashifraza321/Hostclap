@@ -452,8 +452,15 @@
       </section>
       <section class="gallerySection" id="gallery">
         <h2 class="sectionHeading">
-          {{ pageData?.gallery?.title }}
+           {{
+    state?.preview?.gallery?.title ||
+    galleryData?.section?.title
+  }}
         </h2>
+       <p class="galleryTXt"> {{
+    state?.preview?.gallery?.subtitle ||
+    galleryData?.section?.subtitle
+  }}</p> 
         <div
           class="carousel-container"
           [ngStyle]="{
@@ -549,15 +556,17 @@
           <div class="" [ngStyle]="{ 'font-family': data.font }">
             <h2 class="gradientHeading">
               {{
-                
+                 state?.preview?.service?.sectionTitle ||
                   serviceData?.section?.sectionTitle ||
                   "service"
               }}
+                
+    
             </h2>
           </div>
 
           <ng-container
-            *ngFor="let group of serviceData?.section?.groups; let i = index"
+            *ngFor="let group of serviceData?.section?.groups; let i=index"
           >
             <input
               type="radio"
@@ -659,13 +668,11 @@
               <div class="controls">
                 <!-- Next button -->
                 <label
-                  *ngIf="i < serviceData?.section?.groups.length - 1"
+                *ngIf="i < groups.length - 1"
                   [for]="'group' + (i + 1)"
                   class="btn"
                   (click)="selectedGroupIndex = i + 1"
-                  [class.disabled]="
-                    i === serviceData?.section?.groups.length - 1
-                  "
+                [class.disabled]="i === serviceData?.section?.groups.length - 1"
                 >
                   Next
                 </label>

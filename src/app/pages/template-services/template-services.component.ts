@@ -50,11 +50,11 @@ export class TemplateServicesComponent {
     this.getSectionDetailData();
      this.pagesService.triggerScroll('service');
 
-  //    merge(
-  //   this.sectionForm.valueChanges.pipe(
-  //     tap((val) => this.applyServiceChanges(val))
-  //   )
-  // ).subscribe(); 
+     merge(
+    this.sectionForm.valueChanges.pipe(
+      tap((val) => this.applyServiceChanges(val))
+    )
+  ).subscribe(); 
   }
 
   backToHomepage() {
@@ -69,6 +69,10 @@ export class TemplateServicesComponent {
     if (this.selectedGroup) {
       this.serviceSUbGroups = this.selectedGroup.subgroups || [];
     }
+     this.sectionForm.patchValue({
+    groupName: this.selectedGroup?.groupName
+  });
+
 
     this.showSubGroup = true;
   }
@@ -93,6 +97,7 @@ export class TemplateServicesComponent {
             subtitle: res.data.section.subtitle || '',
           });
           this.serviceGroups = res.data.section.groups || [];
+           this.applyServiceChanges(this.sectionForm.value);
         }
       },
       error: (err) => {
@@ -126,18 +131,18 @@ export class TemplateServicesComponent {
       },
     });
   }
+applyServiceChanges(val: any) {
 
-//  applyServiceChanges(val: any) {
-//    const currentService = this.pagesService.getCurrentService();
-  
-//   const data = {
-//     sectionTitle: val.sectionTitle || '',
-//     groups: this.serviceGroups || [],
-//     subgroups: this.serviceSUbGroups || [],
-//   };
+  if (this.showSubGroup) {
+    return; // Group edit ke time section title update mat karo
+  }
 
-//   this.pagesService.updatePreviewSection('service', data);
-// }
+  this.pagesService.updatePreviewSection('service', {
+    sectionTitle: val.sectionTitle,
+    subtitle: val.subtitle,
+    groups: [...this.serviceGroups]
+  });
+}
 // applyServiceChanges(val: any) {
 //   const currentService = this.pagesService.getCurrentService() || {
 //     sectionTitle: '',
@@ -180,8 +185,15 @@ export class TemplateServicesComponent {
           const newGroup = res.data; 
         this.serviceGroups.push(res.data);
         this.serviceSUbGroups.push(res.data);
-      // this.serviceGroups.push(newGroup);
-      // this.serviceSUbGroups.push(newGroup);
+        this.applyServiceChanges(this.sectionForm.value);
+     
+  // 🔥 Realtime Preview
+  
+  this.pagesService.updatePreviewSection('service', {
+    sectionTitle: this.sectionForm.value.sectionTitle,
+    subtitle: this.sectionForm.value.subtitle,
+    // groups: [...this.serviceGroups]
+  });
 
       // //  Right preview me update (realtime)
       // const currentServices = this.pagesService.getCurrentServices();
@@ -231,6 +243,7 @@ export class TemplateServicesComponent {
         .subscribe({
           next: (response) => {
             this.serviceGroups = response?.data?.section?.groups || [];
+            this.applyServiceChanges(this.sectionForm.value);
 
             // agar subgroup screen open hai to uska loop bhi refresh karo
             if (this.selectedGroup?._id) {

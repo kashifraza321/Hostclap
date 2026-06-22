@@ -232,7 +232,7 @@ background: #868688;
   font-size: 14px;
   padding: 8px 25px;
   border-radius: 5px;
-  cursor: not-allowed;
+  cursor: pointer;
 }
 
 
@@ -260,4 +260,6 @@ background: #868688;
   display: flex;
   gap: 11px;
   flex-wrap: wrap;
+      max-height: 300px;
+    overflow: auto;
 }

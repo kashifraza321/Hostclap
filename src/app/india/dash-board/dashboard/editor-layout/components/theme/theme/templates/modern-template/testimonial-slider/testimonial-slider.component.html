@@ -9,7 +9,7 @@
   >
     <div
       ngxSlickItem
-      *ngFor="let testimonial of testimonials let i = index"
+      *ngFor="let testimonial of displayTestimonials; let i = index"
       class="testimonial-card"
         [ngStyle]="{
                   'background-color':

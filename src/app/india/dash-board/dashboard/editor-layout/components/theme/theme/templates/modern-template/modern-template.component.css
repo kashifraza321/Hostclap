@@ -1138,6 +1138,11 @@ td.highlight {
   align-items: center;
   justify-content: center;
 }
+.galleryTXt{
+      font-size: 27px;
+    text-align: center;
+    margin-top: 16px;
+}
 /* contact form */
 .contact-section {
   /* margin: 5rem; */

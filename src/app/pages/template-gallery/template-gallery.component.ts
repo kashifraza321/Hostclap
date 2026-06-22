@@ -39,14 +39,26 @@ export class TemplateGalleryComponent {
     console.log(this.pageId, ' pageId found');
     this.galleryForm = this.fb.group({
       pageId: [this.pageId],
-      title: ['SERVICE'],
+      title: [''],
       titleVisible: [true],
-      subtitle: ['Get AC Service Now'],
+      subtitle: [''],
       images: this.fb.array([]),
+      
     });
     this.getPageDetail(this.pageId);
     this.pagesService.triggerScroll('gallery');
+    this.galleryForm.valueChanges.subscribe(val => {
+  this.applyGalleryChanges(val);
+});
   }
+  applyGalleryChanges(val: any) {
+  this.pagesService.updatePreviewSection('gallery', {
+    title: val.title,
+    subtitle: val.subtitle,
+    titleVisible: val.titleVisible,
+    media: [...this.selectedFiles]
+  });
+}
   onFileSelected(event: any): void {
     if (event.target.files && event.target.files.length > 0) {
       for (let file of event.target.files) {
@@ -59,6 +71,12 @@ export class TemplateGalleryComponent {
   removeImage(index: number): void {
     URL.revokeObjectURL(this.selectedFiles[index].preview);
     this.selectedFiles.splice(index, 1);
+     this.pagesService.updatePreviewSection('gallery', {
+    title: this.galleryForm.value.title,
+    subtitle: this.galleryForm.value.subtitle,
+    titleVisible: this.galleryForm.value.titleVisible,
+    media: [...this.selectedFiles]
+  });
   }
 
   removeAll(): void {
@@ -81,6 +99,7 @@ export class TemplateGalleryComponent {
           title: gallery.title,
           subtitle: gallery.subtitle,
         });
+        this.applyGalleryChanges(this.galleryForm.value);
         this.selectedFiles = (gallery.images || []).map((imgPath: string) => {
           const fullUrl = this.imgurl.endsWith('/')
             ? this.imgurl + imgPath

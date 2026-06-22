@@ -55,6 +55,7 @@ export class ModernTemplateComponent {
   preview: any = {};
   sectionId: string = '';
   pageData: any;
+  serviceGroups = [];
   imgurl = environment.imageBaseUrl;
   serviceData: any;
   serviceDataForPrice: any;
@@ -84,6 +85,7 @@ export class ModernTemplateComponent {
   testimonials: any[] = [];
   currentIndex = 0;
   isAnimating = false;
+  galleryData: any;
   reviews = [
     {
       text: 'Huge shoutout to Zoe and team, for making me feel so beautiful 💖 ...',
@@ -195,10 +197,25 @@ isScrolled = false;
     this.pagesService.state$.subscribe((state) => {
         console.log('Realtime state in ModernTemplate:', state);
         console.log(' ModernTemplate pages updated:', state.pages);
+          console.log(state.preview.service.groups);
       this.preview = state.preview;
       if (Array.isArray(state.pages) && state.pages.length > 0) {
         this.pagesList = state.pages;
       }
+        // Force new reference
+  if (state.preview?.service) {
+    this.serviceData = {
+      ...this.serviceData,
+      section: {
+        ...this.serviceData?.section,
+        ...state.preview.service,
+        groups: [...(state.preview.service.groups || [])]
+      }
+    };
+  }
+
+  console.log('serviceData', this.serviceData);
+      
     //  this.serviceData = state.preview.services 
     //   ? Object.values(state.preview.services) 
     //   : [];
@@ -243,6 +260,10 @@ isScrolled = false;
       if (changes['data']) {
     console.log('Font:', this.data?.font);
   }
+    //  this.serviceGroups = this.data.service?.groups || [];
+
+    console.log(this.serviceGroups);
+
  
     if (changes['data'] && changes['data'].currentValue) {
       this.data = { ...this.data, ...changes['data'].currentValue };
@@ -498,6 +519,7 @@ getCoverUrl(): SafeStyle {
     );
   }
 
+
   // Fallback default cover image
   return this.sanitizer.bypassSecurityTrustStyle(
     `url("assets/images/bg2.webp")`
@@ -525,7 +547,16 @@ getCoverUrl(): SafeStyle {
   // }
 
   // cover
-
+  get currentService() {
+  return this.state?.preview?.service || this.serviceData?.section;
+}
+get groups() {
+  return (
+    this.state?.preview?.service?.groups ||
+    this.serviceData?.section?.groups ||
+    []
+  );
+}
   getFullAddress(): string {
     const address = this.pageData?.contactUs?.address || '';
     const state = this.pageData?.contactUs?.state || '';
