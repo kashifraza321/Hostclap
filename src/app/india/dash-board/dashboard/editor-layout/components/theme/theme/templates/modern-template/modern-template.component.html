@@ -454,13 +454,14 @@
         <h2 class="sectionHeading">
            {{
     state?.preview?.gallery?.title ||
-    galleryData?.section?.title
+    pageData?.gallery?.title ||
+    "Gallery"
   }}
         </h2>
        <p class="galleryTXt"> {{
     state?.preview?.gallery?.subtitle ||
-    galleryData?.section?.subtitle
-  }}</p> 
+    pageData?.gallery?.subtitle
+  }}</p>
         <div
           class="carousel-container"
           [ngStyle]="{
