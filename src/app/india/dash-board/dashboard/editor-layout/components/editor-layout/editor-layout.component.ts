@@ -8,6 +8,7 @@ import { ThemeComponent } from '../theme/theme/theme.component';
 import { Data } from 'src/app/models/data.model';
 import { PagesComponent } from 'src/app/pages/pages.component';
 import { HomePageComponent } from 'src/app/pages/home-page/home-page.component';
+import { ThemeService } from '../theme/theme/theme.service';
 
 @Component({
   selector: 'app-editor-layout',
@@ -37,19 +38,39 @@ isSidebarOpen = false;
     isPreview: boolean = false;
 
 isMobilePreview = false;
-  constructor(){
+  // Set true once the user makes any edit, so a slow initial theme load
+  // cannot land late and overwrite a change the user already made.
+  private userEdited = false;
+  constructor(private themeService: ThemeService){
 
   }
   ngOnInit() {
   this.checkScreenSize();
   window.addEventListener('resize', this.checkScreenSize.bind(this));
+  this.loadInitialTheme();
 }
+  // Single source of truth: load the saved theme ONCE here and feed it to the
+  // preview via @Input. Children must not fetch the theme themselves.
+  private loadInitialTheme() {
+    this.themeService.getTheme().subscribe({
+      next: (response: any) => {
+        if (!response?.data) return;
+        if (this.userEdited) return; // don't clobber a change made meanwhile
+        this.data = { ...this.data, ...response.data };
+        if (!this.data.template) {
+          this.data.template = 'Origins';
+        }
+      },
+      error: (err) => console.error('Error loading theme:', err),
+    });
+  }
   // updateData(newData: Partial<Data>) {
   //   this.data = { ...this.data, ...newData };
   //   console.log('EditorLayoutComponent updated data:', this.data);
   // }
   updateData(newData: Partial<Data>) {
      console.log('Incoming =>', newData);
+    this.userEdited = true; // a real edit has happened; protect it from late loads
     this.data = {
       ...this.data, 
       ...newData, 

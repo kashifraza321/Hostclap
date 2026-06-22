@@ -3,6 +3,7 @@
   <p class="slider-subheading"> {{ state?.preview?.testimonials?.subtitle || pageData?.testimonials?.subtitle  || "Testimonials subtitle"  }}</p>
 
   <ngx-slick-carousel
+    *ngIf="sliderReady && displayTestimonials?.length"
     class="testimonial-slider"
     #slickModal="slick-carousel"
     [config]="testimonialConfig"

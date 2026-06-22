@@ -191,8 +191,9 @@ isScrolled = false;
   console.log('User ID:', this.userId);
   console.log('Page ID:', this.pageId);
   this.updateCarousel(0);
-  this.GetWebsiteTheme();
- 
+  // NOTE: theme `data` comes from @Input (parent owns it). Fetching it here
+  // raced with live edits and overwrote them, so the self-fetch is removed.
+
     /////////////////////////////////////////////////
     this.pagesService.state$.subscribe((state) => {
         console.log('Realtime state in ModernTemplate:', state);

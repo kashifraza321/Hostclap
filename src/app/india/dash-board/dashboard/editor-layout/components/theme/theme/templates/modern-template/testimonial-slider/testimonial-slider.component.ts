@@ -25,6 +25,15 @@ export class TestimonialSliderComponent   {
     pageData: any;
   testimonials: any[] = [];
   testimonialGroups: any[] = [];
+  // Concrete array the slick carousel iterates. Must be a stable field (NOT a
+  // getter) — a getter returns a new array each change-detection cycle, which
+  // breaks ngx-slick-carousel and renders no cards.
+  displayTestimonials: any[] = [];
+  // Controls (re)creation of the slick carousel. ngx-slick-carousel does not
+  // re-initialize when its *ngFor list grows, so we destroy + recreate it when
+  // the data actually changes to make slick pick up all slides.
+  sliderReady = false;
+  private lastSig = '';
    @Input() isMobilePreview = false;
     imgurl = environment.imageBaseUrl;
 public state$ = this.pagesService.state$;
@@ -83,48 +92,83 @@ public state$ = this.pagesService.state$;
 
   }
    ngOnInit() {
-   this.GetWebsiteTheme() 
-    
+    // Theme/colors arrive via @Input() data (parent owns the theme) — no self-fetch.
     this.getSectionDetailDataForTestimonials(this.pageId);
       this.pagesService.state$.subscribe((state) => {
       this.preview = state.preview;
+      this.buildDisplayTestimonials();
+      this.cdr.detectChanges();
     });
-   
+
   }
    ngOnChanges(changes: SimpleChanges) {
+      // pageId is provided by the parent and may arrive after ngOnInit; (re)load
+      // the backend testimonials once we actually have it.
+      if (changes['pageId'] && changes['pageId'].currentValue) {
+        this.getSectionDetailDataForTestimonials(this.pageId);
+      }
       if (changes['data'] && changes['data'].currentValue) {
         this.data = { ...this.data, ...changes['data'].currentValue };
-  
+
         console.log('Data updated in ModernTemplate:', this.data);
-  
-       
+
+
         if (this.data.selectedColor) {
           this.preview = {
             ...this.preview,
-  
+
             selectedColor: this.data.selectedColor,
           };
         }
       }
     }
 
-    get displayTestimonials() {
-  if (this.preview?.testimonials?.groups?.length) {
-    return this.preview.testimonials.groups.map((g: any) => ({
-      name: g.testimonial?.reviewerName,
-      review: g.testimonial?.quote,
-      date: g.testimonial?.date
-        ? new Date(g.testimonial.date).toLocaleDateString()
-        : '',
-      rating: Number(g.testimonial?.rating) || 0,
-      image: g.testimonial?.imageUrl
-        ? this.imgurl + g.testimonial.imageUrl
-        : null
-    }));
-  }
+    // Rebuild the concrete array only when data actually changes. Live edits
+    // from the testimonials form (preview.testimonials.groups) take priority;
+    // otherwise fall back to the backend-loaded list.
+    private buildDisplayTestimonials() {
+      const baseUrl = this.imgurl?.trim().endsWith('/')
+        ? this.imgurl.trim()
+        : (this.imgurl?.trim() || '') + '/';
+      const groups = this.preview?.testimonials?.groups;
+      let list: any[];
+      if (groups?.length) {
+        list = groups.map((g: any) => ({
+          name: g.testimonial?.reviewerName,
+          review: g.testimonial?.quote,
+          date: g.testimonial?.date
+            ? new Date(g.testimonial.date).toLocaleDateString()
+            : '',
+          rating: Number(g.testimonial?.rating) || 0,
+          image: g.testimonial?.imageUrl
+            ? baseUrl + g.testimonial.imageUrl
+            : null,
+        }));
+      } else {
+        list = this.testimonials || [];
+      }
 
-  return this.testimonials;
-}
+      // Only rebuild/recreate the carousel when the data actually changed,
+      // otherwise every unrelated state$ emit (e.g. a colour edit) would make
+      // the testimonials flicker.
+      const sig = JSON.stringify(
+        list.map((t) => [t.name, t.review, t.date, t.rating])
+      );
+      if (sig === this.lastSig) {
+        return;
+      }
+      this.lastSig = sig;
+      this.displayTestimonials = list;
+
+      // Destroy then recreate the slick carousel so it re-initializes with the
+      // full, current set of slides.
+      this.sliderReady = false;
+      this.cdr.detectChanges();
+      setTimeout(() => {
+        this.sliderReady = this.displayTestimonials.length > 0;
+        this.cdr.detectChanges();
+      });
+    }
    GetWebsiteTheme() {
     this.themeService.getTheme().subscribe({
       next: (response) => {
@@ -173,12 +217,14 @@ public state$ = this.pagesService.state$;
       } else {
         this.testimonials = this.testimonialGroups;
       }
+        this.buildDisplayTestimonials();
         this.cdr.detectChanges();
       },
       error: (err) => {
       console.error('Error loading section detail', err);
       // ✅ In case of API failure, also fallback
       this.testimonials = this.dummyTestimonials;
+      this.buildDisplayTestimonials();
       this.cdr.detectChanges();
     }
     });

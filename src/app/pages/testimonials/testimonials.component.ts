@@ -9,7 +9,6 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertService } from 'src/app/services/Toaster/alert.service';
 import { PagesService } from '../pages.service';
-import { merge, tap } from 'rxjs';
 
 @Component({
   selector: 'app-testimonials',
@@ -24,6 +23,10 @@ export class TestimonialsComponent {
   pageId: string = '';
   sectionId: string = '';
   selectedGroup: any = null;
+  // Becomes true once the section's backend data has loaded (or it's confirmed
+  // to be a brand-new section). Guards the live-preview push so early edits
+  // don't overwrite backend data with blanks.
+  private dataLoaded = false;
 
   constructor(
     private router: Router,
@@ -40,17 +43,19 @@ export class TestimonialsComponent {
       subtitle: [''],
     });
     this.getSectionDetailData();
- merge(
-  this.TestiminialForm.valueChanges.pipe(
-    tap(() => {
+    // Only mirror form edits into the shared preview AFTER backend data has
+    // loaded. Otherwise the first keystroke pushes empty title/subtitle and an
+    // empty `groups: []`, wiping the backend testimonials from the preview.
+    this.TestiminialForm.valueChanges.subscribe(() => {
+      if (!this.dataLoaded) {
+        return;
+      }
       this.pagesService.updatePreviewSection('testimonials', {
         sectionTitle: this.TestiminialForm.value.sectionTitle,
         subtitle: this.TestiminialForm.value.subtitle,
-        groups: this.testimonialGroups
+        groups: this.testimonialGroups,
       });
-    })
-  )
-).subscribe();
+    });
      this.pagesService.triggerScroll('testimonial');
 
   }
@@ -66,7 +71,7 @@ export class TestimonialsComponent {
             this.TestiminialForm.patchValue({
               sectionTitle: res.data.section.sectionTitle || '',
               subtitle: res.data.section.subtitle || '',
-            });
+            }, { emitEvent: false });
             this.testimonialGroups = res.data.section.groups || [];
             this.pagesService.updatePreviewSection('testimonials', {
   sectionTitle: res.data.section.sectionTitle,
@@ -74,9 +79,14 @@ export class TestimonialsComponent {
   groups: this.testimonialGroups
 });
           }
+          // Backend load finished (whether or not a section existed). From now
+          // on it's safe to mirror the user's edits into the preview.
+          this.dataLoaded = true;
         },
         error: (err) => {
           console.error('Error loading section detail', err);
+          // Allow editing a brand-new section even if the fetch failed.
+          this.dataLoaded = true;
         },
       });
   }

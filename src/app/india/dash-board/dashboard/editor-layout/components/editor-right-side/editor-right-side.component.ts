@@ -38,8 +38,10 @@ export class EditorRightSideComponent {
       console.log('Preview Data =>', this.data);
   }
   ngOnInit() {
-    this.GetWebsiteTheme();
-    console.log(this.data, 'theme datahhhhhhhhhhhhhhh');
+    // NOTE: Do NOT fetch the theme here. `data` is owned by the parent
+    // (EditorLayoutComponent) and arrives via @Input. Fetching here would
+    // overwrite live edits whenever this async response lands after an edit.
+    console.log(this.data, 'theme data (from @Input)');
   }
   // GetWebsiteTheme() {
   //   this.themeService.getTheme().subscribe({
