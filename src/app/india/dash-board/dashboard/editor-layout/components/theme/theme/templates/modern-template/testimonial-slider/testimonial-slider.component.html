@@ -16,7 +16,8 @@
                   'background-color':
                     i % 2 === 0
                       ? data?.selectedColor?.accent
-                      : data?.selectedColor?.secondary
+                      : data?.selectedColor?.secondary,
+                  '--card-text': textColorFor(i)
                 }"
     >
       <div class="testimonial-header">

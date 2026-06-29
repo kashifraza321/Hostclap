@@ -7,6 +7,7 @@ import { ThemeService } from '../../../theme.service';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { Data } from 'src/app/models/data.model';
+import { ColorUtilsService } from 'src/app/services/color-utils.service';
 
 
 declare var $: any;
@@ -92,8 +93,26 @@ public state$ = this.pagesService.state$;
       private route: ActivatedRoute,
       private sanitizer: DomSanitizer,
       private cdr: ChangeDetectorRef,
-      private themeService: ThemeService){
+      private themeService: ThemeService,
+      private colorUtils: ColorUtilsService){
 
+  }
+
+  /**
+   * Returns a readable text colour for a card based on its (dynamic) background.
+   * Even cards use the accent colour, odd cards the secondary colour.
+   */
+  textColorFor(index: number): string {
+    const colors = this.data?.selectedColor || ({} as any);
+    const bg = index % 2 === 0 ? colors.accent : colors.secondary;
+    if (!bg || typeof bg !== 'string' || !bg.startsWith('#')) {
+      return '#222222';
+    }
+    try {
+      return this.colorUtils.isColorDark(bg) ? '#ffffff' : '#222222';
+    } catch {
+      return '#222222';
+    }
   }
    ngOnInit() {
     // Theme/colors arrive via @Input() data (parent owns the theme) — no self-fetch.

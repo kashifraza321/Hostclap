@@ -33,6 +33,15 @@ body[theme='light'] .modern-template   {
 //   color: #000 !important;
 // }
 
+/* Testimonial card text must contrast with the card's OWN (user-chosen)
+   background, not the global light/dark theme. Each card sets --card-text to a
+   readable colour; this overrides the blanket theme rule above. */
+body .modern-template .testimonial-card h3,
+body .modern-template .testimonial-card .testimonial-text,
+body .modern-template .testimonial-card .testimonial-date {
+  color: var(--card-text, inherit) !important;
+}
+
 
 @import "bootstrap/dist/css/bootstrap.css";
 @import "bootstrap-icons/font/bootstrap-icons.css";
