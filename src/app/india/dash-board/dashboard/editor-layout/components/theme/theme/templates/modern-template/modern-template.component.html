@@ -28,7 +28,11 @@
         <div
           class="top-bar"
           [ngStyle]="{
-            background: data?.selectedColor?.primary || '#f88d00',
+            background:
+      state?.preview?.announcement?.fontColor ||
+      pageData?.header?.announcement?.fontColor ||
+      data?.selectedColor?.primary ||
+      '',
             'font-size.px':
               state?.preview?.announcement?.fontSize ||
               pageData?.header?.announcement?.fontSize ||
@@ -177,10 +181,39 @@
        [class.hide-brand]="isScrolled">
 
           
-         <h3>Hostclap</h3>   
+         <h3   [ngStyle]="{
+                'font-family': data.font,
+                color:
+                  state?.preview?.titles?.titleColour ||
+                  pageData?.header?.titles?.titleColour,
+
+                'text-align':
+                  state?.preview?.titles?.titleAlignment ||
+                  pageData?.header?.titles?.titleAlignment ||
+                  'center'
+              }"> {{
+                state?.preview?.titles?.buisnessName ||
+                  pageData?.header?.titles?.buisnessName ||
+                  "HostClap"
+              }}</h3>   
        
 
-         <p>Lorem ipsum dolor, sit amet consectetur adipisicing  perspiciatis quas totam?</p>
+         <p  [ngStyle]="{
+                'font-family': data.font,
+                color:
+                  state?.preview?.titles?.subtitleColour ||
+                  pageData?.header?.titles?.subtitleColour ||
+                  '#6b7280',
+
+                'text-align':
+                  state?.preview?.titles?.subtitleAlignment ||
+                  pageData?.header?.titles?.subtitleAlignment ||
+                  'left'
+              }">{{
+                state?.preview?.titles?.subtitle ||
+                  pageData?.header?.titles?.subtitle ||
+                  "Your subtitle"
+              }}</p>
         </div>
         <ul>
         <ng-container *ngFor="let page of pagesList; let i = index">
@@ -252,7 +285,7 @@
       >
         <!-- {{ getCoverUrl(state) | json }} -->
         <div class="overlay">
-          <div class="hero-text" *ngIf="state$ | async as state" id="title">
+          <!-- <div class="hero-text" *ngIf="state$ | async as state" id="title">
  
             <h1
               [ngStyle]="{
@@ -347,7 +380,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </section>
 

@@ -140,7 +140,7 @@ overflow: auto;
 
 /* CLASSIC TOP BAR */
 .classic-top-bar {
-  background: #1f1f1f;
+  /* background: #1f1f1f; */
   padding: 10px 20px;
   display: flex;
   justify-content: space-between;

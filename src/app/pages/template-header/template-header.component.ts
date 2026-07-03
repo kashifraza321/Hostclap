@@ -259,7 +259,7 @@ applyFontStyles() {
   const data = {
     message: this.announcementForm.get('message')?.value || '',
     fontSize: this.announcementForm.get('fontSize')?.value || 14,
-    fontColor: this.announcementForm.get('fontColor')?.value || '#000000',
+    fontColor: this.announcementForm.get('fontColor')?.value || '',
     actionButton: {
       buttonName:
         this.announcementForm.get('actionButton.buttonName')?.value || '',

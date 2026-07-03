@@ -258,9 +258,13 @@ isScrolled = false;
     this.getPages();
     this.updateTestimonialsPerView();
     // window.addEventListener('resize', () => this.updateTestimonialsPerView());
-
+console.log('preview fontColor:', this.state?.preview?.announcement?.fontColor);
+console.log('backend fontColor:', this.pageData?.header?.announcement?.fontColor);
+console.log('theme primary:', this.data?.selectedColor?.primary);
  
   }
+
+  
      isToday(day: string): boolean {
     return day === this.currentDay; 
   }
