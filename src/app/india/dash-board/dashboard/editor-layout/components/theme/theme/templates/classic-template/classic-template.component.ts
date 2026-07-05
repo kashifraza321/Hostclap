@@ -66,14 +66,10 @@ export class ClassicTemplateComponent {
     private pagesService: PagesService,
     private route: ActivatedRoute,
     private sanitizer: DomSanitizer
-  ) {  console.log('ClassicTemplate Loaded');}
+  ) {}
 
   ngOnInit() {
     this.userId = this.route.snapshot.paramMap.get('id') || '';
-    console.log('User ID:', this.userId);
-  console.log('ClassicTemplate Loaded');
-    console.log('User ID:', this.userId);
-    console.log('Page ID:', this.pageId);
     this.logoUrl = this.getLogoUrl();
     // this.pagesService.state$.subscribe((state) => {
     //   this.pages = state.pages;

@@ -44,3 +44,6 @@ Thumbs.db
 # Environment secrets
 .env
 cms-admin/.env
+
+# Build artifacts
+dist.zip

@@ -29,7 +29,6 @@ export class DefaultTemplateComponent {
 
   ngOnInit() {
     this.userId = localStorage.getItem('userId') || '';
-    console.log('User ID from localStorage:', this.userId);
     this.pagesService.state$.subscribe((state) => {
       this.pages = state.pages;
       this.preview = state.preview;

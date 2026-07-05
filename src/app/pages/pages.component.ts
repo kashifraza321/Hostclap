@@ -49,12 +49,8 @@ export class PagesComponent {
   ) {}
 
   ngOnInit() {
-    // this.userId = this.route.snapshot.paramMap.get('id') || '';
-    // console.log('User ID ho tm:', this.userId);
     this.userId = localStorage.getItem('userId') || '';
-    console.log('User ID from localStorage:', this.userId);
     this.getPages();
-    console.log('page._id being senttttttttttttt:', this.pageId);
 
     this.pageForm = this.fb.group({
       pageType: ['', Validators.required],

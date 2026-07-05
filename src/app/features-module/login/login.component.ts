@@ -51,7 +51,6 @@ export class LoginComponent {
     const authInstance = gapi.auth2.getAuthInstance();
     authInstance.signIn().then((user: gapi.auth2.GoogleUser) => {
       const profile = user.getBasicProfile();
-      console.log('User Logged In:', profile.getEmail());
       // You can send profile info to the backend for further verification
     });
   }
@@ -88,14 +87,12 @@ export class LoginComponent {
 
     this._login.login(login).subscribe(
       (result) => {
-        console.log('userrrrrrrr', result);
         if (result.status === 200) {
           this._login.setLoginStatus(true);
           localStorage.setItem('isLoggedIn', 'true');
 
           localStorage.setItem('token', result.data.token);
           localStorage.setItem('userId', result.data._id);
-          console.log('User IDvsmvkkkkkkkkk:', result.data._id);
           this.alertService.success('Login successfully');
 
           this.authService.startTimer();
