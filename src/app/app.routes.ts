@@ -23,7 +23,7 @@ import { EditorRightSideComponent } from './india/dash-board/dashboard/editor-la
 export const routes: Routes = [
   {
     path: 'login',
-    // canActivate: [ProtectGuard],
+    canActivate: [ProtectGuard],
     component: LoginComponent,
   },
 
@@ -33,7 +33,7 @@ export const routes: Routes = [
   {
     path: '',
     component: ContainerComponent,
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: 'in', pathMatch: 'full' },
       { path: 'in', component: DashboardComponent },
