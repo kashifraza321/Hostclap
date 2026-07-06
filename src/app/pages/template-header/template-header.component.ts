@@ -15,13 +15,14 @@ import { AlertService } from 'src/app/services/Toaster/alert.service';
 import { merge, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { ColorChromeModule } from 'ngx-color/chrome';
 
 declare var bootstrap: any;
 
 @Component({
   selector: 'app-template-header',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, QuillModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, QuillModule, FormsModule,ColorChromeModule],
   templateUrl: './template-header.component.html',
   styleUrl: './template-header.component.css',
 })
@@ -36,6 +37,7 @@ logoImages: string[] = [];
 selectedLogoImage: string | null = null;
 selectedCoverImage: string | null = null;
   toggleTitleColorPicker = false;
+  toggleSubtitleColorPicker = false;
   toggleAddressBgColor = false;
   toggleAddressFontColor = false;
   toggleMenuBgColor: boolean = false;
@@ -52,8 +54,12 @@ selectedCoverImage: string | null = null;
   selectedImage: string | null = null;
   selectedFile: File | null = null;
   selectedLogoFile: File | null = null;
+  selectedColor = '';
+  selectedTitleColor='';
+  selectedSubtitleColor=""
+  selectedMenuFontColor = '';
   data = {
-    logo: '', // 👈 default value, baad me API se overwrite hoga
+    logo: '', //  default value, baad me API se overwrite hoga
   };
   editorModules = {
     toolbar: '#custom-toolbar',
@@ -117,16 +123,17 @@ selectedCoverImage: string | null = null;
   ) {}
 
   ngOnInit(): void {
-    console.log(this.route.snapshot.paramMap, 'afreen');
+    console.log(this.route.snapshot.paramMap, );
     this.pageId = this.route.snapshot.paramMap.get('pageId') || '';
     console.log('Page ID tazz:', this.pageId);
   
     this.announcementForm = this.fb.group({
       message: [''],
-      show: [true],
+      show: [],
       showOn: ['all'],
-      fontSize: [16],
-      fontColor: ['#000000'],
+      fontSize: [],
+     fontColor: [''],   
+  bgColour: [''],
       actionButton: this.fb.group({
         // enabled: [],
         buttonName: [''],
@@ -211,7 +218,7 @@ selectedCoverImage: string | null = null;
       ),
       this.menuForm.valueChanges.pipe(
         tap((val) =>
-            // console.log('🔥 MENU FORM CHANGED', val)
+            // console.log(' MENU FORM CHANGED', val)
           // this.pagesService.updatePreviewSection('menu', val)
           this.applyMenuChanges()
         )
@@ -253,13 +260,27 @@ selectedCoverImage: string | null = null;
   }
   
   // realtime data show logic
+onMenuFontColorChange(color: string) {
+  console.log('Color:', color);
+
+  this.selectedMenuFontColor = color;
+
+  this.menuForm.patchValue({
+    menuFontColour: color
+  });
+
+  console.log('Form value:', this.menuForm.value);
+
+
+}
 applyFontStyles() {
   const val = this.announcementForm.value;
 
   const data = {
     message: this.announcementForm.get('message')?.value || '',
     fontSize: this.announcementForm.get('fontSize')?.value || 14,
-    fontColor: this.announcementForm.get('fontColor')?.value || '',
+       fontColor: this.announcementForm.get('fontColor')?.value || '',
+    bgColour: this.announcementForm.get('bgColour')?.value || '',
     actionButton: {
       buttonName:
         this.announcementForm.get('actionButton.buttonName')?.value || '',
@@ -273,6 +294,18 @@ applyFontStyles() {
   this.pagesService.updatePreviewSection('announcement', data);
 }
 
+
+
+onColorChange(color: string) {
+  this.selectedColor = color;
+
+  this.announcementForm.patchValue({
+    bgColour: color
+  });
+  console.log(this.menuForm.value);
+
+  this.applyFontStyles();
+}
   applyTitleChanges() {
     const data = {
       buisnessName: this.titlesForm.get('buisnessName')?.value || '',
@@ -362,6 +395,27 @@ applyMenuChanges() {
   }
 
   }
+
+
+  onTitleColorChange(color: string) {
+  this.selectedTitleColor = color;
+
+  this.titlesForm.patchValue({
+    titleColour: color
+  });
+
+  this.applyTitleChanges();
+}
+onSubtitleColorChange(color: string) {
+  this.selectedSubtitleColor = color;
+
+  this.titlesForm.patchValue({
+    subtitleColour: color
+  });
+
+  this.applyTitleChanges();
+}
+
 
   // logo modal  code ========
   openMediaLibrary(): void {
@@ -562,6 +616,7 @@ this.closeCoverLibrary();
             message: announcement.message || '',
             fontSize: announcement.fontSize || 16,
             fontColor: announcement.fontColor || '#000000',
+            bgColour: announcement.bgColour || '',
             actionButton: {
               // enabled: announcement.actionButton?.enabled ?? false,
               buttonName: announcement.actionButton?.buttonName || '',
@@ -693,8 +748,10 @@ this.closeCoverLibrary();
         payload = {
           announcement: {
             show: !!val.show,
-            message: cleanMsg || 'Announcement', // empty avoid karo
+            message: cleanMsg || 'Announcement', 
             fontSize: `${val.fontSize}`,
+            fontColor: val.fontColor || '#000000',
+            bgColour: val.bgColour || '',
             actionButton: {
               buttonName: val.actionButton?.buttonName || '',
               linkType: val.actionButton?.linkType || 'external', // safe default

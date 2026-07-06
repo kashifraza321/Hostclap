@@ -28,11 +28,11 @@
         <div
           class="top-bar"
           [ngStyle]="{
-            background:
-      state?.preview?.announcement?.fontColor ||
-      pageData?.header?.announcement?.fontColor ||
+       background:
+      state?.preview?.announcement?.bgColour ||
+      pageData?.header?.announcement?.bgColour ||
       data?.selectedColor?.primary ||
-      '',
+      '#ffbe33',
             'font-size.px':
               state?.preview?.announcement?.fontSize ||
               pageData?.header?.announcement?.fontSize ||
@@ -181,7 +181,7 @@
        [class.hide-brand]="isScrolled">
 
           
-         <h3   [ngStyle]="{
+         <h2 style="font-size: 40px;"  [ngStyle]="{
                 'font-family': data.font,
                 color:
                   state?.preview?.titles?.titleColour ||
@@ -195,7 +195,7 @@
                 state?.preview?.titles?.buisnessName ||
                   pageData?.header?.titles?.buisnessName ||
                   "HostClap"
-              }}</h3>   
+              }}</h2>   
        
 
          <p  [ngStyle]="{
@@ -221,7 +221,7 @@
             <a
               href="javascript:void(0)"
               (click)="scrollToSection('page-' + i)"
-                
+                [style.color]="state?.preview?.menu?.menuFontColour"
               [ngStyle]="{
                 color:
                   state?.preview?.menu?.menuFontColour ||

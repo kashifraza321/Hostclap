@@ -73,7 +73,7 @@
             (input)="applyFontStyles()"
           />
 
-          <button
+          <!-- <button
             type="button"
             class="btn btn-light border w-100"
             (click)="toggleColorPicker = !toggleColorPicker"
@@ -87,9 +87,27 @@
             *ngIf="toggleColorPicker"
             type="color"
             class="form-control mt-2"
-            formControlName="fontColor"
+            formControlName="bgColor"
             (input)="applyFontStyles()"
-          />
+          /> -->
+          <button
+  type="button"
+  class="btn btn-light border w-100"
+  (click)="toggleColorPicker = !toggleColorPicker"
+>
+<div class="rainbow-plus-icon">
+         <span>+</span>
+       </div>
+  Set Background Color
+</button>
+
+<div *ngIf="toggleColorPicker" class="mt-2">
+  <color-chrome
+    [color]="selectedColor"
+    (onChangeComplete)="onColorChange($event.color.hex)">
+  </color-chrome>
+  <input type="hidden" formControlName="bgColour">
+</div>
           <div formGroupName="actionButton">
             <!-- <div class="form-check form-switch my-2">
               <input
@@ -457,12 +475,20 @@
             ></i>
           </button>
           <div *ngIf="toggleMenuFontColor" class="mt-2">
-            <input
+            <!-- <input
               type="color"
               formControlName="menuFontColour"
                (input)="applyMenuChanges()"
-            />
+            /> -->
           </div>
+          <div *ngIf="toggleMenuFontColor" class="mt-2">
+  <color-chrome
+    [color]="selectedMenuFontColor"
+     (onChange)="onMenuFontColorChange($event.color.hex)">
+  </color-chrome>
+  <input type="hidden" formControlName="menuFontColour">
+  
+</div>
         </div>
         <button type="submit" class="btn saveBtn mt-3">Save</button>
       </form>
@@ -554,37 +580,31 @@
         </div>
 
         <!-- Title Color Picker Toggle -->
-        <div class="mb-4">
-          <label>  Set Title Color</label>
-          <button
-            type="button"
-            class="btn btn-light border w-100 d-flex justify-content-between align-items-center"
-            (click)="toggleTitleColorPicker = !toggleTitleColorPicker"
-          >
-            <span>
-              <div class="rainbow-plus-icon">
-                <span>+</span>
-              </div>
-           
-            </span>
-            <i
-              [class]="
-                toggleTitleColorPicker
-                  ? 'bi bi-chevron-up'
-                  : 'bi bi-chevron-down'
-              "
-            ></i>
-          </button>
+       <div class="mb-4">
+  <label>Set Title Color</label>
 
-          <div *ngIf="toggleTitleColorPicker" class="mt-2">
-            <input
-              type="color"
-              formControlName="titleColour"
-                 (input)="applyTitleChanges()"
-              class="form-control form-control-color"
-            />
-          </div>
-        </div>
+  <button
+    type="button"
+    class="btn btn-light border w-100 d-flex justify-content-start align-items-center g-2"
+    (click)="toggleTitleColorPicker = !toggleTitleColorPicker"
+  >
+  
+      <div class="rainbow-plus-icon">
+        <span>+</span>
+      </div>
+      Set Title Color
+   
+
+  
+  </button>
+
+  <div *ngIf="toggleTitleColorPicker" class="mt-2">
+    <color-chrome
+      [color]="selectedTitleColor"
+      (onChangeComplete)="onTitleColorChange($event.color.hex)">
+    </color-chrome>
+  </div>
+</div>
 
         <!-- Subtitle -->
         <div class="mb-4">
@@ -618,37 +638,30 @@
         </div>
 
         <!-- Title Color Picker Toggle -->
-        <div class="mb-4">
-            <label>  Set  subtitle Color</label>
-          <button
-            type="button"
-            class="btn btn-light border w-100 d-flex justify-content-between align-items-center"
-            (click)="toggleTitleColorPicker = !toggleTitleColorPicker"
-          >
-            <span>
-              <div class="rainbow-plus-icon">
-                <span>+</span>
-              </div>
-           
-            </span>
-            <i
-              [class]="
-                toggleTitleColorPicker
-                  ? 'bi bi-chevron-up'
-                  : 'bi bi-chevron-down'
-              "
-            ></i>
-          </button>
+       <div class="mb-4">
+  <label>Set Subtitle Color</label>
 
-          <div *ngIf="toggleTitleColorPicker" class="mt-2">
-            <input
-              type="color"
-              formControlName="subtitleColour"
-              (input)="applyTitleChanges()"
-              class="form-control form-control-color"
-            />
-          </div>
-        </div>
+  <button
+    type="button"
+    class="btn btn-light border w-100 d-flex justify-content-first align-items-center"
+    (click)="toggleSubtitleColorPicker = !toggleSubtitleColorPicker"
+  >
+   
+      <div class="rainbow-plus-icon">
+        <span>+</span>
+      </div>
+   Set Subtitle Color
+
+   
+  </button>
+
+  <div *ngIf="toggleSubtitleColorPicker" class="mt-2">
+    <color-chrome
+      [color]="selectedSubtitleColor"
+      (onChangeComplete)="onSubtitleColorChange($event.color.hex)">
+    </color-chrome>
+  </div>
+</div>
 
         <!-- Save Button -->
         <div class="text-left">
