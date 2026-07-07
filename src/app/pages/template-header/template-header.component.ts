@@ -186,7 +186,7 @@ selectedCoverImage: string | null = null;
       menuPosition: ['top'],
       menuBackgroudColour: [''],
       menuFontColour: ['#000000'],
-      fontSize: ['16'],
+      fontSize: [''],
       alignment: ['middle'],
     });
 
@@ -335,8 +335,10 @@ applyaddressChanges() {
   this.pagesService.updatePreviewSection('address', addressData);
 }
 applyMenuChanges() {
- 
-  if (this.menuForm.pristine) return;
+  //  console.log('pristine:', this.menuForm.pristine);
+  // console.log('dirty:', this.menuForm.dirty);
+
+  // if (this.menuForm.pristine) return;
 
   const data = {
     stickyMenu: this.menuForm.get('stickyMenu')?.value ?? true,
@@ -630,7 +632,7 @@ this.closeCoverLibrary();
             stickyMenu: menu.stickyMenu ?? false,
             logoInLine: menu.logoInLine ?? false,
             menuBackgroudColour: menu.menuBackgroudColour || '#ffffff',
-            fontSize: menu.fontSize || 16,
+            fontSize: menu.fontSize,
             alignment: menu.alignment || 'left',
             menuFontColour: menu.menuFontColour || '#000000',
           },

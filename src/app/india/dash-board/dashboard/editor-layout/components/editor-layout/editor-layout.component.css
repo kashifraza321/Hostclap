@@ -1,16 +1,15 @@
 .editor-layout {
   display: flex;
-  min-height: 100vh; /* Full height */
+  min-height: 100vh; 
 }
 
 .editor-sidebar {
 
-  background-color: #f5f5f5;
 
   box-sizing: border-box;
   flex-shrink: 0;
 
-    background-color: #f5f5f5;
+      background-color: #ffffff;
     box-sizing: border-box;
     flex-shrink: 0;
     max-width: 345px;
