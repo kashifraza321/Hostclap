@@ -68,10 +68,10 @@
           background: data?.selectedColor?.primary || '#9C27B0'
         }"
       >
-        <span class="topBarText" [ngStyle]="{ 'font-family': data?.font }"
+        <span class="topBarText" [ngStyle]="{ 'font-family': fontFamily }"
           >Need AC Help?</span
         >
-        <button class="classic-btn" [ngStyle]="{ 'font-family': data?.font }">
+        <button class="classic-btn" [ngStyle]="{ 'font-family': fontFamily }">
           Contact Us
         </button>
       </div>
@@ -81,7 +81,7 @@
 
       <!-- Header Info -->
       <header class="classic-header-info">
-        <div [ngStyle]="{ 'font-family': data?.font }">
+        <div [ngStyle]="{ 'font-family': fontFamily }">
           <i class="bi bi-geo-alt-fill"></i>
           <span class="addresTXt">Lalpur, Ranchi, Jharkhand</span>
         </div>
@@ -198,7 +198,7 @@
           <div class="hero-text" *ngIf="state$ | async as state">
             <h1
               [ngStyle]="{
-                'font-family': data?.font,
+                'font-family': fontFamily,
                 color:
                   state?.preview?.titles?.titleColour ||
                   pageData?.header?.titles?.titleColour,
@@ -217,7 +217,7 @@
             </h1>
             <p
               [ngStyle]="{
-                'font-family': data?.font,
+                'font-family': fontFamily,
                 color:
                   state?.preview?.titles?.subtitleColour ||
                   pageData?.header?.titles?.subtitleColour,
@@ -364,7 +364,7 @@
 
       <div class="serviceSection">
         <div class="mainContainer">
-          <div class="serviceHeading" [ngStyle]="{ 'font-family': data?.font }">
+          <div class="serviceHeading" [ngStyle]="{ 'font-family': fontFamily }">
             <h2>
               {{
                 state?.preview?.offer?.title ||
@@ -388,7 +388,7 @@
             <div class="group">
               <h2
                 class="section-title"
-                [ngStyle]="{ 'font-family': data?.font }"
+                [ngStyle]="{ 'font-family': fontFamily }"
               >
                 {{ group.groupName }}
               </h2>
@@ -410,14 +410,14 @@
 
                   <div
                     class="service-title"
-                    [ngStyle]="{ 'font-family': data?.font }"
+                    [ngStyle]="{ 'font-family': fontFamily }"
                   >
                     {{ sub.subgroupName }}
                   </div>
 
                   <div
                     class="service-desc"
-                    [ngStyle]="{ 'font-family': data?.font }"
+                    [ngStyle]="{ 'font-family': fontFamily }"
                   >
                     {{ sub.description }}
                   </div>
@@ -425,12 +425,12 @@
                   <a
                     href="#"
                     class="learn-more"
-                    [ngStyle]="{ 'font-family': data?.font }"
+                    [ngStyle]="{ 'font-family': fontFamily }"
                   >
                     Learn more
                   </a>
 
-                  <button class="btn" [ngStyle]="{ 'font-family': data?.font }">
+                  <button class="btn" [ngStyle]="{ 'font-family': fontFamily }">
                     Request Service
                   </button>
                 </div>
@@ -467,7 +467,7 @@
       <!-- Services -->
       <div *ngIf="" class="serviceSection">
         <div class="mainContainer">
-          <div class="serviceHeading" [ngStyle]="{ 'font-family': data?.font }">
+          <div class="serviceHeading" [ngStyle]="{ 'font-family': fontFamily }">
             {{
               state?.preview?.offer?.title ||
                 serviceData?.section?.sectionTitle ||
@@ -484,7 +484,7 @@
               [checked]="i === 0"
               hidden
             />
-            <h2 class="section-title" [ngStyle]="{ 'font-family': data?.font }">
+            <h2 class="section-title" [ngStyle]="{ 'font-family': fontFamily }">
               {{ group.groupName }}
               <!-- {{ group.groupName }} -->
             </h2>
@@ -504,14 +504,14 @@
 
                 <div
                   class="service-title"
-                  [ngStyle]="{ 'font-family': data?.font }"
+                  [ngStyle]="{ 'font-family': fontFamily }"
                 >
                   {{ sub.subgroupName }}
                 </div>
 
                 <div
                   class="service-desc"
-                  [ngStyle]="{ 'font-family': data?.font }"
+                  [ngStyle]="{ 'font-family': fontFamily }"
                 >
                   {{ sub.description }}
                 </div>
@@ -519,12 +519,12 @@
                 <a
                   href="#"
                   class="learn-more"
-                  [ngStyle]="{ 'font-family': data?.font }"
+                  [ngStyle]="{ 'font-family': fontFamily }"
                 >
                   Learn more
                 </a>
 
-                <button class="btn" [ngStyle]="{ 'font-family': data?.font }">
+                <button class="btn" [ngStyle]="{ 'font-family': fontFamily }">
                   Request Service
                 </button>
               </div>
@@ -560,10 +560,10 @@
             <div class="icon">
               <i class="fas fa-clock" [ngClass]="{ active: i === 6 }"></i>
             </div>
-            <div class="day-name" [ngStyle]="{ 'font-family': data?.font }">
+            <div class="day-name" [ngStyle]="{ 'font-family': fontFamily }">
               {{ day }}
             </div>
-            <div class="day-status" [ngStyle]="{ 'font-family': data?.font }">
+            <div class="day-status" [ngStyle]="{ 'font-family': fontFamily }">
               All day
             </div>
           </div>
@@ -790,7 +790,7 @@
         class="classic-footer"
         [ngStyle]="{ background: data?.selectedColor?.primary || '#ccc' }"
       >
-        <p [ngStyle]="{ 'font-family': data?.font }">
+        <p [ngStyle]="{ 'font-family': fontFamily }">
           📍 Ranchi, Jharkhand | 📞 {{ pageData?.header?.phones?.mobile }} | ✉️
           inforanchiservice.com
         </p>

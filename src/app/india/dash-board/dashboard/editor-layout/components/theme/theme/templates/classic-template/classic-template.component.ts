@@ -22,6 +22,14 @@ import { environment } from 'src/environments/environment';
 })
 export class ClassicTemplateComponent {
   @Input() data!: Data;
+
+  // Quote the family (handles multi-word names like "Open Sans") and always
+  // add a generic fallback so an unloaded/empty font degrades gracefully.
+  get fontFamily(): string {
+    const f = (this.data?.font || '').trim();
+    return f ? `"${f}", sans-serif` : 'Roboto, sans-serif';
+  }
+
   userId: string = '';
   pageId: string = '';
   pagesList: any[] = [];

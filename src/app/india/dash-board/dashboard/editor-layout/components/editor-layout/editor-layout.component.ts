@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { EditorHeaderComponent } from '../editor-header/editor-header.component';
 import { EditorSidebarComponent } from '../editor-sidebar/editor-sidebar.component';
 import { EditorRightSideComponent } from '../editor-right-side/editor-right-side.component';
@@ -23,7 +23,7 @@ import { ThemeService } from '../theme/theme/theme.service';
   templateUrl: './editor-layout.component.html',
   styleUrl: './editor-layout.component.css',
 })
-export class EditorLayoutComponent {
+export class EditorLayoutComponent implements OnInit, OnDestroy {
   template: string = 'default';
   showSidebar = true;
   currentComponent: any = null;
@@ -41,14 +41,20 @@ isMobilePreview = false;
   // Set true once the user makes any edit, so a slow initial theme load
   // cannot land late and overwrite a change the user already made.
   private userEdited = false;
+  // Store the bound handler so it can actually be removed in ngOnDestroy
+  // (a fresh .bind(this) each call produces a new reference that can't be removed).
+  private onResize = this.checkScreenSize.bind(this);
   constructor(private themeService: ThemeService){
 
   }
   ngOnInit() {
   this.checkScreenSize();
-  window.addEventListener('resize', this.checkScreenSize.bind(this));
+  window.addEventListener('resize', this.onResize);
   this.loadInitialTheme();
 }
+  ngOnDestroy() {
+    window.removeEventListener('resize', this.onResize);
+  }
   // Single source of truth: load the saved theme ONCE here and feed it to the
   // preview via @Input. Children must not fetch the theme themselves.
   private loadInitialTheme() {
@@ -69,19 +75,30 @@ isMobilePreview = false;
   //   console.log('EditorLayoutComponent updated data:', this.data);
   // }
   updateData(newData: Partial<Data>) {
-     console.log('Incoming =>', newData);
     this.userEdited = true; // a real edit has happened; protect it from late loads
     this.data = {
-      ...this.data, 
-      ...newData, 
+      ...this.data,
+      ...newData,
     };
-    console.log('After Merge =>', this.data);
 
     if (!this.data.template) {
-      this.data.template = 'Origins'; 
+      this.data.template = 'Origins';
     }
+  }
 
-    console.log('EditorLayoutComponent updated data:', this.data);
+  // Merge a programmatically-loaded theme WITHOUT marking it as a user edit.
+  // Children that fetch the theme to populate their own form must call this
+  // (not updateData) so a background load can't trip the userEdited guard or
+  // overwrite a change the user already made.
+  applyLoadedTheme(newData: Partial<Data>) {
+    if (this.userEdited) return;
+    this.data = {
+      ...this.data,
+      ...newData,
+    };
+    if (!this.data.template) {
+      this.data.template = 'Origins';
+    }
   }
   checkScreenSize() {
   this.isMobileView = window.innerWidth <= 500;

@@ -65,14 +65,14 @@
     <div class="container-fluid">
       <span
         class="navbar-text text-white"
-        [ngStyle]="{ 'font-family': data?.font }"
+        [ngStyle]="{ 'font-family': fontFamily }"
       >
         <i class="bi bi-geo-alt-fill"></i> H No. 7, Ramzan Colony, Lalpur,
         Ranchi, Jharkhand, 834001
       </span>
       <span
         class="ms-auto navbar-text text-white"
-        [ngStyle]="{ 'font-family': data?.font }"
+        [ngStyle]="{ 'font-family': fontFamily }"
       >
         <i class="bi bi-telephone-fill"></i> 081020 65847
       </span>
@@ -100,7 +100,7 @@
           }"
           class="nav-link"
           href="#"
-          [ngStyle]="{ 'font-family': data?.font }"
+          [ngStyle]="{ 'font-family': fontFamily }"
         >
           {{ page.pageName }}
         </a>
@@ -122,7 +122,7 @@
       <img src="/src/assets/images/bgimg.jpeg" alt="Logo" class="mb-3" />
       <h1
         [ngStyle]="{
-          'font-family': data?.font,
+          'font-family': fontFamily,
           color: pageData?.header?.titles?.titleColour || '#fff',
           'text-align': pageData?.header?.titles?.subtitleAlignment || 'center'
         }"
@@ -131,7 +131,7 @@
       </h1>
       <p
         [ngStyle]="{
-          'font-family': data?.font,
+          'font-family': fontFamily,
           color: pageData?.header?.titles?.subtitleColour || '#fff',
           'text-align': pageData?.header?.titles?.subtitleAlignment || 'left'
         }"
@@ -152,10 +152,10 @@
   </section>
   <!-- services section -->
   <section class="service-section">
-    <h2 class="section-title" [ngStyle]="{ 'font-family': data?.font }">
+    <h2 class="section-title" [ngStyle]="{ 'font-family': fontFamily }">
       SERVICE
     </h2>
-    <p class="section-subtitle" [ngStyle]="{ 'font-family': data?.font }">
+    <p class="section-subtitle" [ngStyle]="{ 'font-family': fontFamily }">
       Get AC Service Now
     </p>
 
@@ -168,7 +168,7 @@
       </select>
     </div>
 
-    <h5 class="service-heading" [ngStyle]="{ 'font-family': data?.font }">
+    <h5 class="service-heading" [ngStyle]="{ 'font-family': fontFamily }">
       Air conditioning services
     </h5>
 
@@ -182,14 +182,14 @@
           alt="AC Repair"
         />
         <div class="card-content">
-          <h5 class="card-title" [ngStyle]="{ 'font-family': data?.font }">
+          <h5 class="card-title" [ngStyle]="{ 'font-family': fontFamily }">
             AC Repairing Service
           </h5>
-          <p class="card-text" [ngStyle]="{ 'font-family': data?.font }">
+          <p class="card-text" [ngStyle]="{ 'font-family': fontFamily }">
             Ranchi Service offers efficient and reliable AC repair services in
             Ranchi. Our skilled technicians provide thorough ...
           </p>
-          <button class="service-btn" [ngStyle]="{ 'font-family': data?.font }">
+          <button class="service-btn" [ngStyle]="{ 'font-family': fontFamily }">
             Request Service
           </button>
         </div>
@@ -203,14 +203,14 @@
           alt="Split AC"
         />
         <div class="card-content">
-          <h5 class="card-title" [ngStyle]="{ 'font-family': data?.font }">
+          <h5 class="card-title" [ngStyle]="{ 'font-family': fontFamily }">
             Split AC Service
           </h5>
-          <p class="card-text" [ngStyle]="{ 'font-family': data?.font }">
+          <p class="card-text" [ngStyle]="{ 'font-family': fontFamily }">
             Ranchi Services offers expert split AC repair in Ranchi, Jharkhand,
             ensuring fast and reliable solutions for all ...
           </p>
-          <button class="service-btn" [ngStyle]="{ 'font-family': data?.font }">
+          <button class="service-btn" [ngStyle]="{ 'font-family': fontFamily }">
             Request Service
           </button>
         </div>
@@ -224,14 +224,14 @@
           alt="AC Gas Filling"
         />
         <div class="card-content">
-          <h5 class="card-title" [ngStyle]="{ 'font-family': data?.font }">
+          <h5 class="card-title" [ngStyle]="{ 'font-family': fontFamily }">
             AC Gas Filling Service
           </h5>
-          <p class="card-text" [ngStyle]="{ 'font-family': data?.font }">
+          <p class="card-text" [ngStyle]="{ 'font-family': fontFamily }">
             Ranchi Service specializes in AC gas filling, restoring your cooling
             efficiency. Our expert technicians ensure precise ...
           </p>
-          <button class="service-btn" [ngStyle]="{ 'font-family': data?.font }">
+          <button class="service-btn" [ngStyle]="{ 'font-family': fontFamily }">
             Request Gas Filling
           </button>
         </div>
@@ -241,12 +241,12 @@
   <!-- form -->
   <section
     class="technician-form-section"
-    [ngStyle]="{ 'font-family': data?.font }"
+    [ngStyle]="{ 'font-family': fontFamily }"
   >
-    <h2 class="form-title" [ngStyle]="{ 'font-family': data?.font }">
+    <h2 class="form-title" [ngStyle]="{ 'font-family': fontFamily }">
       Available Technician at Your Service!
     </h2>
-    <p class="form-subtitle" [ngStyle]="{ 'font-family': data?.font }">
+    <p class="form-subtitle" [ngStyle]="{ 'font-family': fontFamily }">
       AC trouble? Choose Ranchi Service for quick solutions.
     </p>
     <section class="dynamicPages">
@@ -270,9 +270,9 @@
 
     <div class="form-terms">
       <input type="checkbox" id="termsCheckbox" />
-      <label for="termsCheckbox" [ngStyle]="{ 'font-family': data?.font }">
+      <label for="termsCheckbox" [ngStyle]="{ 'font-family': fontFamily }">
         I agree with the
-        <a href="#" [ngStyle]="{ 'font-family': data?.font }"
+        <a href="#" [ngStyle]="{ 'font-family': fontFamily }"
           >Terms & Conditions</a
         >
         and the <a href="#">Privacy & Cookies Policy</a> of Hostclap and any
@@ -283,7 +283,7 @@
     </div>
 
     <div class="form-button-wrapper">
-      <button class="form-button" [ngStyle]="{ 'font-family': data?.font }">
+      <button class="form-button" [ngStyle]="{ 'font-family': fontFamily }">
         Send Message
       </button>
     </div>
@@ -292,40 +292,40 @@
   <!-- form -->
 
   <section class="opening-hours-section">
-    <h2 class="section-title" [ngStyle]="{ 'font-family': data?.font }">
+    <h2 class="section-title" [ngStyle]="{ 'font-family': fontFamily }">
       Opening Hours
     </h2>
 
     <table class="hours-table">
       <tr>
-        <td [ngStyle]="{ 'font-family': data?.font }">Sunday</td>
-        <td [ngStyle]="{ 'font-family': data?.font }">All day</td>
+        <td [ngStyle]="{ 'font-family': fontFamily }">Sunday</td>
+        <td [ngStyle]="{ 'font-family': fontFamily }">All day</td>
       </tr>
       <tr class="even-row">
-        <td [ngStyle]="{ 'font-family': data?.font }">Monday</td>
-        <td [ngStyle]="{ 'font-family': data?.font }">All day</td>
+        <td [ngStyle]="{ 'font-family': fontFamily }">Monday</td>
+        <td [ngStyle]="{ 'font-family': fontFamily }">All day</td>
       </tr>
       <tr>
-        <td [ngStyle]="{ 'font-family': data?.font }">Tuesday</td>
-        <td [ngStyle]="{ 'font-family': data?.font }">All day</td>
+        <td [ngStyle]="{ 'font-family': fontFamily }">Tuesday</td>
+        <td [ngStyle]="{ 'font-family': fontFamily }">All day</td>
       </tr>
       <tr class="even-row">
-        <td [ngStyle]="{ 'font-family': data?.font }">Wednesday</td>
-        <td [ngStyle]="{ 'font-family': data?.font }">All day</td>
+        <td [ngStyle]="{ 'font-family': fontFamily }">Wednesday</td>
+        <td [ngStyle]="{ 'font-family': fontFamily }">All day</td>
       </tr>
       <tr>
-        <td [ngStyle]="{ 'font-family': data?.font }">Thursday</td>
-        <td [ngStyle]="{ 'font-family': data?.font }">All day</td>
+        <td [ngStyle]="{ 'font-family': fontFamily }">Thursday</td>
+        <td [ngStyle]="{ 'font-family': fontFamily }">All day</td>
       </tr>
       <tr class="even-row">
-        <td [ngStyle]="{ 'font-family': data?.font }">Friday</td>
-        <td [ngStyle]="{ 'font-family': data?.font }">All day</td>
+        <td [ngStyle]="{ 'font-family': fontFamily }">Friday</td>
+        <td [ngStyle]="{ 'font-family': fontFamily }">All day</td>
       </tr>
       <tr class="today-row">
-        <td [ngStyle]="{ 'font-family': data?.font }">
+        <td [ngStyle]="{ 'font-family': fontFamily }">
           <strong>Today</strong>
         </td>
-        <td [ngStyle]="{ 'font-family': data?.font }">
+        <td [ngStyle]="{ 'font-family': fontFamily }">
           <strong>All day</strong>
         </td>
       </tr>
@@ -334,23 +334,23 @@
 
   <!-- Contact Section -->
   <section class="contact-section">
-    <h3 class="contact-title" [ngStyle]="{ 'font-family': data?.font }">
+    <h3 class="contact-title" [ngStyle]="{ 'font-family': fontFamily }">
       Contact Ranchi Service
     </h3>
     <div class="contact-info">
       <div class="contact-item">
         <span class="icon">📍</span>
-        <p [ngStyle]="{ 'font-family': data?.font }">
+        <p [ngStyle]="{ 'font-family': fontFamily }">
           H No. 7, Ramzan Colony, Lalpur, Ranchi, Jharkhand, 834001
         </p>
       </div>
       <div class="contact-item">
         <span class="icon">📧</span>
-        <p [ngStyle]="{ 'font-family': data?.font }">infoanchiservice.com</p>
+        <p [ngStyle]="{ 'font-family': fontFamily }">infoanchiservice.com</p>
       </div>
       <div class="contact-item">
         <span class="icon">📞</span>
-        <p [ngStyle]="{ 'font-family': data?.font }">081020 65847</p>
+        <p [ngStyle]="{ 'font-family': fontFamily }">081020 65847</p>
       </div>
     </div>
   </section>

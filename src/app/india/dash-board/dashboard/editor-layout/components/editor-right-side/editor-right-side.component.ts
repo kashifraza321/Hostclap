@@ -7,6 +7,7 @@ import { Data } from 'src/app/models/data.model';
 import { ThemeService } from '../theme/theme/theme.service';
 import { ModernTemplateComponent } from '../theme/theme/templates/modern-template/modern-template.component';
 import { SubgroupDetailComponent } from '../theme/theme/templates/subgroup-detail/subgroup-detail.component';
+import { FontLoaderService } from '../theme/theme/font-loader.service';
 
 @Component({
   selector: 'app-editor-right-side',
@@ -22,7 +23,10 @@ import { SubgroupDetailComponent } from '../theme/theme/templates/subgroup-detai
   styleUrl: './editor-right-side.component.css',
 })
 export class EditorRightSideComponent {
-  constructor(private themeService: ThemeService) {}
+  constructor(
+    private themeService: ThemeService,
+    private fontLoader: FontLoaderService
+  ) {}
   // @Input() template: string = 'default';
   @Input() data!: Data;
   pageId:string=''
@@ -33,9 +37,9 @@ export class EditorRightSideComponent {
  showSubGroup = false; 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['data']) {
-      console.log('EditorRightSideComponent received data:', this.data);
+      // Ensure the chosen font is actually downloaded so it renders in preview.
+      this.fontLoader.load(this.data?.font);
     }
-      console.log('Preview Data =>', this.data);
   }
   ngOnInit() {
     // NOTE: Do NOT fetch the theme here. `data` is owned by the parent
