@@ -1,0 +1,83 @@
+<div class="pageWrapper">
+  <div class="top-bar">
+    <button class="back-btn" (click)="backToHomepage()">
+      <img
+        src="../../../assets/images/icons8-chevron-right-24.png"
+        alt="chevron"
+        width="18"
+      />
+      Back
+    </button>
+
+    <div class="title">Testimonials</div>
+  </div>
+  <form [formGroup]="TestiminialForm" (ngSubmit)="saveSection()">
+    <div class="section-card">
+      <label class="label" for="section-title">Section Title</label>
+      <div class="title-row">
+        <input
+          id="section-title"
+          type="text"
+          class="input-field"
+          formControlName="sectionTitle"
+          
+        />
+        <input type="checkbox" class="checkbox" checked />
+      </div>
+      <div>
+        <label class="label" for="section-subtitle">Section Subtitle</label>
+        <input
+          id="section-subtitle"
+          type="text"
+          class="input-field"
+          formControlName="subtitle"
+          />
+          <!-- (change)="applyTestimonialChanges(TestiminialForm.get('subtitle')?.value)" -->
+      </div>
+    </div>
+
+    <div class="service-groups-card">
+      <div class="header-row">
+        <div class="header-title">
+          Testimonials
+          <span class="info-icon" title="Info">i</span>
+        </div>
+        <!-- <button class="edit-btn">Edit</button> -->
+      </div>
+
+      <button type="button" class="add-group-btn" (click)="openForm()">
+        <span class="plus-icon">+</span> Add new Testimonials
+      </button>
+
+      <!-- Group List -->
+      <div>
+        <div class="group-list">
+          <div
+            class="group-item"
+            *ngFor="let group of testimonialGroups; let i = index"
+            
+            [ngClass]="{
+              'orange-border': i % 2 === 0,
+              'blue-border': i % 2 !== 0
+            }"
+          >
+          <span class="GroupTitle" (click)="navigateToForm(group._id)">
+            {{ group.testimonial?.reviewerName
+            }} 
+            </span><button  type="button" class="deleteBtn" (click)="deleteGroup(group._id, 'group')"> <img  src="../../../assets/images/delete.png" alt="delete" width="20"></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="tip-box">
+        <b>Top Tip:</b> Activate the 'Book' button to allow customers to make
+        bookings directly on your website.
+      </div>
+    </div>
+
+    <div class="footer-buttons">
+      <button (click)="backToHomepage()" class="cancel-btn cancelBtn">Cancel</button>
+      <button class="saveBtn" [disabled]="TestiminialForm.invalid">Save</button>
+    </div>
+  </form>
+</div>

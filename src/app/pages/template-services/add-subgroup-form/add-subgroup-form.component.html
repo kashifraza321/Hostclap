@@ -1,0 +1,221 @@
+<div class="service-form">
+  <button class="back-btn" (click)="backToHomepage()">
+    <img
+      src="../../../assets/images/icons8-chevron-right-24.png"
+      alt="chevron"
+      width="18"
+    />
+    Back
+  </button>
+  <form [formGroup]="subgroupForm" (ngSubmit)="onSubmit()">
+    <div class="header">
+      <h2>{{ subgroupForm.get("subgroupName")?.value || "New Service" }}</h2>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Group -->
+    <!-- <div class="form-group serviceNameWrap">
+      <label>Group</label>
+      <select formControlName="group">
+        <option>Air conditioning services</option>
+      </select>
+      <small>You can move service to another group</small>
+    </div> -->
+    <div class="serviceNameWrap">
+      <!-- Service Name -->
+      <div class="form-group">
+        <label>Service Name</label>
+        <input type="text" formControlName="subgroupName" />
+      </div>
+
+      <!-- Price and Unit -->
+      <div class="form-row">
+        <div class="form-group">
+          <label>Price</label>
+          <input type="number" formControlName="price" placeholder="₹" />
+          <div
+            *ngIf="
+              subgroupForm.get('price')?.invalid &&
+              subgroupForm.get('price')?.touched
+            "
+            class="error-text"
+          >
+            Price is required.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Unit</label>
+          <input
+            type="text"
+            formControlName="unit"
+            placeholder="e.g. per hour"
+          />
+          <div
+            *ngIf="
+              subgroupForm.get('unit')?.invalid &&
+              subgroupForm.get('unit')?.touched
+            "
+            class="error-text"
+          >
+            Unit is required.
+          </div>
+        </div>
+      </div>
+
+      <!-- Promotional Price -->
+      <div class="form-group">
+        <label>Promotional Price</label>
+        <input formControlName="promotionPrice" type="number" placeholder="₹" />
+        <small
+          >You can set a promotional pricing to sell your products with a
+          discount.</small
+        >
+      </div>
+
+      <!-- Bookable -->
+      <div class="checkbox-group">
+        <label>Bookable</label>
+        <input formControlName="bookable" type="checkbox" checked />
+      </div>
+
+      <!-- Request Service -->
+      <div class="form-group">
+        <label>Request Service</label>
+        <input
+          formControlName="bookingButtonLabel"
+          type="text"
+          placeholder="Set Booking button label"
+        />
+      </div>
+
+      <!-- Booking Options -->
+      <div class="radio-group">
+        <label>
+          <input
+             formControlName="bookingOption"
+            type="radio"
+           name="bookingOption"
+            [value]="'hostclap'"
+        
+          />
+          Bookable on Hostclap page
+        </label>
+        <label>
+          <input  formControlName="bookingOption" type="radio"   name="bookingOption"   [value]="'ThirdParty'"/>
+          Bookable on 3rd party platform
+        </label>
+         <div *ngIf="subgroupForm.get('bookingOption')?.value === 'thirdparty'">
+    <input
+      formControlName="bookingUrl"
+      type="text"
+      placeholder="Enter booking URL"
+      class="urlInput"
+    />
+  </div>
+      </div>
+    </div>
+
+    <!-- Total Booking Time -->
+    <div class="section serviceNameWrap" formGroupName="totalBookingTime">
+      <h3>Total Booking Time</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Duration</label>
+          <div class="time-inputs">
+            <input type="number" formControlName="hours" placeholder="00" />
+            hour
+            <input type="number" formControlName="hours" placeholder="00" />
+            minutes
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Buffer Time</label>
+          <div class="time-inputs">
+            <input
+              type="number"
+              formControlName="bufferHours"
+              placeholder="00"
+            />
+            hour
+            <input
+              type="number"
+              formControlName="bufferMinutes"
+              placeholder="00"
+            />
+            minutes
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Service Variations -->
+    <div class="form-section serviceNameWrap">
+      <label class="section-label">Service Variations</label>
+      <div class="toggle-container">
+        <input type="checkbox" formControlName="hasServiceVariations" />
+
+        <span>This service has multiple options</span>
+      </div>
+    </div>
+    <!-- Add variations here -->
+    <!-- 🔹 Media Upload -->
+    <div class="media-section serviceNameWrap">
+      <label class="label">Media <small>(Up to 10)</small></label>
+      <div class="upload-box">
+        <!-- Hidden input -->
+        <input
+          type="file"
+          #fileInput
+          (change)="onFileSelect($event)"
+          multiple
+          accept="image/*"
+          hidden
+        />
+        <!-- Click span triggers file dialog -->
+        <span class="upload-text" (click)="fileInput.click()">Upload</span>
+      </div>
+      <div class="media-grid">
+        <div
+          class="media-item"
+          *ngFor="let img of uploadedImages; let i = index"
+        >
+          <img class="mediaIMg" [src]="img" alt="media" />
+          <div class="actions">
+            <button type="button" (click)="removeImage(i)">
+              <img
+                src="../../../../assets/images/delete.png"
+                alt=" delete"
+                width="18"
+                height="18"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🔹 Description -->
+    <div class="form-section serviceNameWrap">
+      <label class="section-label">Description</label>
+      <textarea
+        formControlName="description"
+        rows="5"
+        placeholder="Enter service description..."
+      ></textarea>
+      <div
+        *ngIf="
+          subgroupForm.get('description')?.invalid &&
+          subgroupForm.get('description')?.touched
+        "
+        class="error-text"
+      >
+        Description is required.
+      </div>
+    </div>
+    <div class="form-section">
+      <button type="submit" class="submit-btn">Save</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,69 @@
+<div class="pagewrapper">
+  <form [formGroup]="pageForm">
+    <div class="header">
+      <button class="back-btn" (click)="goBack()">
+        <img
+          src="../../../assets/images/icons8-chevron-right-24.png"
+          alt="chevron"
+          width="18"
+        />
+        Back
+      </button>
+      <h1 class="pageName">{{ pageData.pageName }}</h1>
+    </div>
+
+    <div class="policy-item">
+      <!-- Page Name -->
+      <div>
+        <label>Page Name:</label>
+        <input type="text" formControlName="pageName" />
+        <div
+          *ngIf="
+            pageForm.get('pageName')?.invalid &&
+            pageForm.get('pageName')?.touched
+          "
+        >
+          Page name is required.
+        </div>
+      </div>
+
+      <!-- Quill Editor -->
+      <div class="editor-section">
+        <label class="quill-label">Promotion description</label>
+        <quill-editor
+          [modules]="modules"
+          theme="snow"
+          class="custom-quill"
+          formControlName="description"
+        >
+          ></quill-editor
+        >
+      </div>
+
+      <!-- URL -->
+      <div>
+        <label>URL:</label>
+        <input type="text" formControlName="url" />
+        <div
+          *ngIf="pageForm.get('url')?.invalid && pageForm.get('url')?.touched"
+        >
+          URL is required.
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="flxWrp">
+        <button
+          type="button"
+          class="btn btn-success btn-sm"
+          (click)="saveInlinePage()"
+        >
+          Save
+        </button>
+        <button type="button" class="deleteBtn" (click)="deletePage()">
+          <img src="../../assets/images/delete.png" alt="delete" />
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

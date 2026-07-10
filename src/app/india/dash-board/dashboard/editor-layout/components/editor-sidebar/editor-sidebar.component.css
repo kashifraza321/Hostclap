@@ -1,0 +1,53 @@
+.sidebar {
+  background: #fff;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  height: 100%;
+}
+
+.sidebar h3 {
+  text-align: center;
+  color: #3f51b5;
+  margin-bottom: 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin: 15px 0;
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: #333;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+}
+
+.sidebar a.active {
+  color: #3f51b5;
+  font-weight: bold;
+}
+
+.sidebar span {
+  margin-right: 10px;
+}
+.chevronIcon {
+  margin-left: auto;
+}
+.sidebrMenu li {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  padding: 15px 2px 15px 8px;
+  margin: 20px 0;
+}
+ 
+@media (max-width:480px){
+  .sidebar{
+   box-shadow: none;
+ 
+}
+}

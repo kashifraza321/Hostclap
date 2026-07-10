@@ -11,8 +11,8 @@ dotenv.config();
 // Register Route
 router.post('/register', async (req, res) => {
   try {
-    const { username, password } = req.body;
-    const user = new User({ username, password });
+    const { email,firstName,lastName, password } = req.body;
+    const user = new User({ username: email, password });
     await user.save();
     res.status(201).send('User registered');
   } catch (err) {
@@ -22,8 +22,8 @@ router.post('/register', async (req, res) => {
  
 router.post('/login', async (req, res) => {
   try {
-    const { username, password } = req.body;
-    const user = await User.findOne({ username });
+    const { email, password } = req.body;
+    const user = await User.findOne({ username:email });
     if (!user) {
       return res.status(400).send('Invalid credentials');
     }

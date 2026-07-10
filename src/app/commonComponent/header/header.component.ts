@@ -84,6 +84,10 @@ export class HeaderComponent {
     this.dataEvent.emit(this.isHalfShown);
   }
 
+  navigateToLogin() {
+    this.router.navigate(['/login']);
+  }
+
   @HostListener('window:scroll', [])
   onWindowScroll() {
     this.ngZone.run(() => {

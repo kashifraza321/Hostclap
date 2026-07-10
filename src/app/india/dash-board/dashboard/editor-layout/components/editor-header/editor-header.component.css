@@ -1,0 +1,132 @@
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  /* background-color: #f8f9fb; */
+  border-bottom: 1px solid #d0d0d0;
+  background: rgb(255, 255, 255);
+  box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.08),
+    0px 2px 7px 0px rgba(0, 0, 0, 0.1);
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.breadcrumb i {
+  font-size: 18px;
+  color: #666;
+}
+.backto{
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+  
+    font-size: 21px;
+    margin-right: auto;
+    max-width: 170px;
+    width: 100%;
+    border: none;
+    background: none;
+    gap: 11px;
+}
+
+.breadcrumb a {
+  color: #1a73e8;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.center-options {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.device-toggle {
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.device-toggle button {
+  border: none;
+  padding: 6px 10px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 16px;
+}
+.device-toggle button:first-child {
+  border-right: 1px solid #ccc;
+}
+
+.device-toggle button:hover {
+  background-color: #eee;
+}
+
+.links {
+  display: flex;
+  gap: 20px;
+  color: #444;
+}
+.links a {
+  font-size: 14px;
+  color: #333;
+}
+
+.right-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 200px;
+  width: 100%;
+}
+
+.help-icon {
+  background-color: #333;
+  color: #fff;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.preview-btn {
+  padding: 6px 14px;
+  border: 1px solid #444;
+  border-radius: 4px;
+  background-color: green;
+  cursor: pointer;
+  font-weight: 500;
+  max-width: 130px;
+  width: 100%;
+  font-size: 16px;
+  color: #fff;
+  text-align: center;
+  transition: 0.3s all;
+}
+
+.preview-btn:hover {
+  background-color: rgb(2, 95, 2);
+}
+.Desktop {
+  border-left: 1px solid #ccc;
+}
+
+
+
+@media (max-width: 480px) {
+.top-bar{
+  flex-direction: column;
+   gap: 12px;
+    align-items: flex-end;
+}
+}

@@ -1,0 +1,149 @@
+<form [formGroup]="sectionForm">
+ 
+  <div class="about-us-section">
+     <button type="button" class="back-btn" (click)="backToHomepage()">
+    <img
+      src="../../../assets/images/icons8-chevron-right-24.png"
+      alt="chevron"
+      width="18"
+    />
+    Back
+  </button>
+    <h2 class="section-title">About Us</h2>
+
+    <!-- Section Title Input -->
+    <div class="section-card">
+      <label class="label" for="section-title">Section Title</label>
+      <div class="title-row">
+        <input
+          id="section-title"
+          type="text"
+          class="input-field"
+          formControlName="sectionTitle"
+        />
+        <input type="checkbox" class="checkbox" checked />
+      </div>
+      <div>
+        <label class="label" for="section-subtitle">Section Subtitle</label>
+        <input
+          id="section-subtitle"
+          type="text"
+          class="input-field"
+          formControlName="subtitle"
+        />
+      </div>
+    </div>
+    <!-- Section Subtitle Input -->
+    <div class="service-groups-card">
+      <div class="header-row">
+         <button
+        type="button"
+        class="add-group-btn"
+        (click)="navigateTonewContent(pageId)"
+      >
+        <span class="plus-icon">+</span> New content block
+      </button>
+        
+        <div class="group-list">
+        <div
+          class="group-item"
+          *ngFor="let group of serviceGroups; let i = index"
+      
+          [ngClass]="{
+            'orange-border': i % 2 === 0,
+            'blue-border': i % 2 !== 0
+          }"
+        >
+         <span   (click)="navigateTonewContent(pageId, group._id)" class="GroupTitle">{{ group.aboutus?.alignment || 'No Alignment' }} - {{ group._id | slice:0:8 }}</span> 
+         
+          <button
+           (click)="deleteGroup(group._id, 'group')"
+            type="button"
+            class="deleteBtn"
+          >
+          <img  src="../../../assets/images/delete.png" alt="delete" width="20">
+            
+          </button>
+        </div>
+      </div>
+      </div>
+
+     
+    </div>
+
+    <!-- <div class="slider-oneGroup">
+      <div class="slider-group">
+        <label for="desktopPaddingTop">Desktop Padding Top</label>
+        <input
+          id="desktopPaddingTop"
+          formControlName="desktopPaddingTop"
+          type="range"
+          min="0"
+          max="100"
+        />
+        <span>{{ sectionForm.value.desktopPaddingTop }}%</span>
+      </div>
+      <div class="slider-group">
+        <label for="desktopPaddingBottom">Desktop Padding Bottom</label>
+        <input
+          id="desktopPaddingBottom"
+          formControlName="desktopPaddingBottom"
+          type="range"
+          min="0"
+          max="100"
+        />
+        <span>{{ sectionForm.value.desktopPaddingBottom }}%</span>
+      </div>
+    </div>
+
+    <div class="slider-oneGroup">
+      <div class="slider-group">
+        <label for="desktopImageSize">Desktop Image Size</label>
+        <input
+          id="desktopImageSize"
+          formControlName="desktopImageSize"
+          type="range"
+          min="0"
+          max="100"
+        />
+        <span>{{ sectionForm.value.desktopImageSize }}%</span>
+      </div>
+      <div class="slider-group">
+        <label for="height">Height</label>
+        <input
+          id="height"
+          formControlName="height"
+          type="range"
+          min="0"
+          max="100"
+        />
+        <span>{{ sectionForm.value.height }}%</span>
+      </div>
+      <div class="slider-group">
+        <label for="width">Width</label>
+        <input
+          id="width"
+          formControlName="width"
+          type="range"
+          min="0"
+          max="100"
+        />
+        <span>{{ sectionForm.value.width }}%</span>
+      </div>
+    </div> -->
+
+    <!-- Save Button -->
+
+    <div class="footer-buttons">
+      <button type="button" class="cancelBtn">Cancel</button>
+      <button
+      type="button"
+        class="saveBtn"
+        (click)="saveSection()"
+        [disabled]="sectionForm.invalid"
+      >
+        Save
+      </button>
+    </div>
+  </div>
+</form>

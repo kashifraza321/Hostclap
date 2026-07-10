@@ -5,6 +5,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { AlertService } from '../../services/Toaster/alert.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -25,6 +26,7 @@ export class SidebarComponent implements OnInit {
     private alertService: AlertService,
     private el: ElementRef,
     private renderer: Renderer2,
+    private authService: AuthService
   ) { }
 
   openDialog(): void {
@@ -38,11 +40,7 @@ export class SidebarComponent implements OnInit {
     );
     dialogRef?.afterClosed()?.subscribe((result) => {
       if (result) {
-        sessionStorage.clear();
-        localStorage.setItem('isLoggedIn', 'false');
-        localStorage.clear();
-        localStorage.removeItem('token');
-        this.route.navigate(['/login']);
+        this.authService.logout();
         this.alertService.success('Logout successfully')
       }
     });

@@ -1,0 +1,71 @@
+<form [formGroup]="openingHoursForm" (ngSubmit)="saveOpeningHours()">
+  <div class="pageWrapper">
+    <div class="top-bar">
+      <button class="back-btn" (click)="backToHomepage()">
+        <img
+          src="../../../assets/images/icons8-chevron-right-24.png"
+          alt="chevron"
+          width="18"
+        />
+        Back
+      </button>
+      <div class="title">Opening hours</div>
+    </div>
+
+    <div class="section-card">
+      <label class="label" for="section-title">Section title</label>
+      <div class="title-row">
+        <input
+          id="section-title"
+          type="text"
+          class="input-field"
+          formControlName="sectionTitle"
+        />
+        <input type="checkbox" class="checkbox" checked />
+      </div>
+      <label class="label" for="section-subtitle">Section Subtitle</label>
+      <input
+        id="section-subtitle"
+        type="text"
+        class="input-field"
+        formControlName="sectionSubtitle"
+      />
+    </div>
+
+    <div class="toggle-container">
+      <span class="label-text">Use 24-hours format</span>
+      <!-- <label class="switch">
+        <input type="checkbox" formControlName="is24HourFormat" />
+        <span class="slider"></span>
+      </label> -->
+    </div>
+    <div class="description">e.g. 13:00</div>
+    <p class="label-text">When is your business open?</p>
+
+    <div *ngFor="let day of daysOfWeek" class="day-row">
+      <input type="checkbox" [formControlName]="day + 'Checked'" />
+      <label>{{ day }}</label>
+
+      <div class="time-picker">
+        <input type="time" [formControlName]="day + 'Start'" />
+      </div>
+
+      <div class="time-picker">
+        <input type="time" [formControlName]="day + 'End'" />
+      </div>
+    </div>
+
+    <div class="footer-buttons">
+      <button type="button" class="cancel-btn cancelBtn" (click)="cancel()">
+        Cancel
+      </button>
+      <button
+        type="submit"
+        class=" saveBtn"
+        [disabled]="openingHoursForm.invalid"
+      >
+        Save
+      </button>
+    </div>
+  </div>
+</form>

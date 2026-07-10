@@ -1,0 +1,65 @@
+<div class="pageWrapper">
+  <div class="top-bar">
+    <button class="back-btn" (click)="backToHomepage()">
+      <img
+        src="../../../assets/images/icons8-chevron-right-24.png"
+        alt="chevron"
+        width="18"
+      />
+      Back
+    </button>
+    <div class="title">Amenities</div>
+  </div>
+
+  <form [formGroup]="amenitiesForm" (ngSubmit)="saveAmenities()">
+    <div class="section-card">
+      <label class="label" for="section-title">Amenities title</label>
+      <div class="title-row">
+        <input
+          id="section-title"
+          type="text"
+          class="input-field"
+          formControlName="title"
+           (change)="applyAmenitiesChanges()"
+        />
+        <!-- <input
+          type="checkbox"
+          class="checkbox"
+          formControlName="titleVisible"
+
+        /> -->
+      </div>
+
+      <label class="label" for="section-subtitle">Section Subtitle</label>
+      <input
+        id="section-subtitle"
+        type="text"
+        class="input-field"
+        formControlName="subtitle"
+        (change)="applyAmenitiesChanges()"
+      />
+    </div>
+
+    <div class="gallery-header">
+      <div class="amenities-container">
+        <div class="heading">Suggested Amenities</div>
+        <div class="amenity-item" *ngFor="let amenity of suggestedAmenities">
+          <input
+            type="checkbox"
+            [checked]="amenitiesNames.value?.includes(amenity)"
+            (change)="toggleAmenity($event, amenity)"
+             (change)="applyAmenitiesChanges()"
+          />
+          <label>{{ amenity }}</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-buttons">
+      <!-- <button type="button" class="cancel-btn cancelBtn" (click)="cancel()">
+        Cancel
+      </button> -->
+      <button type="submit" class="save-btn saveBtn">Save</button>
+    </div>
+  </form>
+</div>

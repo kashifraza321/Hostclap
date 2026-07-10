@@ -1,0 +1,45 @@
+<div class="top-bar">
+  <!-- Left: Breadcrumb -->
+  <div class="breadcrumb">
+    <span></span>
+    <a href="#"> </a>
+  </div>
+  <button  class="backto" *ngIf="isPreview" (click)="onBackClick()">
+  <img src="../../../../../../../assets/images/icons8-chevron-right-24.png" alt=""> Back to Editor
+</button>
+
+  <!-- Center: Device Toggle + Links -->
+  <div class="center-options" *ngIf="!isPreview">
+    <div class="device-toggle">
+      <button title="Desktop View" (click)="onDesktopClick()">
+        <img
+          src="../../../../../assets/images/icons8-desktop-50.png"
+          alt="desktop"
+          width="28"
+        />
+      </button>
+      <button title="Mobile View"(click)="onMobileClick()">
+        <img
+          src="../../../../../assets/images/icons8-cellphone-50.png"
+          alt="desktop"
+          width="28"
+        />
+      </button>
+    </div>
+    <div class="links">
+      <a href="">My Hub</a>
+      <a href="">Pro features</a>
+      <a href="">Subscription</a>
+    </div>
+  </div>
+
+
+  <!-- Right: Help + Preview -->
+  <div class="right-controls" *ngIf="!isPreview">
+    <div class="help-icon">?</div>
+
+   <a class="preview-btn" 
+  (click)="onPreviewClick()">Preview</a>
+  
+  </div>
+</div>

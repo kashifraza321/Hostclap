@@ -1,0 +1,45 @@
+<div class="about-us-slider" [class.mobile-preview]="isMobilePreview">
+  <h2 class="gallery-heading">About Us</h2>
+  <p class="gallery-subtitle">Explore Now</p>
+
+  <div class="slider-wrapper">
+    <!-- Slider Images -->
+    <div class="carousel">
+      <div
+        class="slide"
+        *ngFor="let slide of slides; let i = index"
+        [class.active]="i === currentSlide"
+        [class.prev]="i === getPrevIndex()"
+        [class.next]="i === getNextIndex()"
+      >
+        <img [src]="slide.imageUrl" alt="Slide Image" />
+      </div>
+    </div>
+
+    <!-- Slide Content -->
+    <div
+      class="slide-content"
+      [ngStyle]="{
+        'font-family': data.font,
+        'color': slides[currentSlide]?.textColour,
+        'text-align': slides[currentSlide]?.alignment
+      }"
+    >
+      <h3>{{ slides[currentSlide]?.title }}dsss</h3>
+      <p [innerHTML]="slides[currentSlide]?.sanitizedDescription"></p>
+      <a
+        class="learn-more-btn"
+        [href]="slides[currentSlide]?.link"
+       [style.color]="data?.selectedColor?.primary + ' !important'"
+      >
+        {{ slides[currentSlide]?.linkText }}
+      </a>
+    </div>
+  </div>
+
+  <!-- Navigation Buttons -->
+  <div class="slider-nav">
+    <button (click)="moveSlide(-1)"><img src="../../../../../../../../../../../assets/images/icons8-chevron-left-24.png" alt=""></button>
+    <button (click)="moveSlide(1)"><img src="../../../../../../../../../../../assets/images/icons8-chevron-right-24.png" alt=""></button>
+  </div>
+</div>

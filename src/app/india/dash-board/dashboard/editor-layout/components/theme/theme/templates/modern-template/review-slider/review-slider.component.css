@@ -1,0 +1,204 @@
+.slider {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  /* max-width: 1195px; */
+  margin: auto;
+  margin: 8rem auto 0;
+}
+
+.slides {
+  display: flex;
+  margin-top: 40px;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  flex: 0 0 35%;
+  box-sizing: border-box;
+  padding: 15px;
+}
+.name {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+.review{
+  font-size: 16px;
+    letter-spacing: 2px;
+}
+
+.review-card {
+  background: #f7f7f7;
+  padding: 20px;
+  border-radius: 12px;
+  height: 100%;
+  text-align: center;
+  color: #000;
+   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.review-text {
+  color: #000;
+  font-size: 15px;
+}
+.avatar {
+  max-width: 60px;
+  width: 100%;
+  margin: 16px auto;
+  border-radius: 50%;
+  height: 60px;
+  background: red;
+   display: grid;
+    place-items: center;
+    font-size: 20px;
+}
+.btnWrp {
+  display: flex;
+  gap: 10px;
+  margin: 15px 36px;
+}
+.btnWrp button {
+  width: 20px;
+  display: grid;
+  place-items: center;
+  padding: 0px;
+  border-radius: 6px;
+  font-size: 16px;
+  /* font-size: 16px; */
+  border: none;
+  background: none;
+}
+
+.review-box {
+  display: flex;
+  align-items: center;
+  padding: 8px 15px;
+  border-radius: 8px;
+
+ gap: 12px;
+  max-width: 400px;
+  text-align: center;
+  margin: 0 auto;
+ flex-direction: column;
+}
+.mainHeading {
+  font-size: 45px;
+  text-align: center;
+  text-decoration: underline;
+  color: #000;
+    letter-spacing: 2px;
+}
+
+.stars {
+  display: flex;
+  color: #ffca24;
+  font-size: 18px;
+
+  font-size: 18px;
+
+  margin: 14px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.star {
+  margin-right: 2px;
+}
+
+/* half star style using gradient */
+.star.half {
+  position: relative;
+  color: #e91e63;
+}
+
+.star.half::before {
+  content: "\2605";
+  position: absolute;
+  left: 0;
+  width: 50%;
+  overflow: hidden;
+  color: #e91e63;
+  z-index: 2;
+  clip-path: inset(0 50% 0 0);
+}
+.review-date {
+  font-size: 16px;
+
+}
+
+.star.half {
+  color: #ddd;
+}
+
+.review-text {
+  font-size: 24px;
+  color: #333;
+  font-weight: 600;
+}
+.review-text {
+  font-size: 19px;
+  color: #333;
+  font-weight: 600;
+}
+
+.powered-by {
+  display: flex;
+  align-items: center;
+  font-size: 22px;
+  color: #666;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.google-logo {
+  height: 18px;
+  width: auto;
+  object-fit: contain;
+}
+
+.slide {
+  flex: 0 0 100%;
+  box-sizing: border-box;
+  padding: 15px;
+}
+
+@media (min-width: 600px) {
+  .slide {
+    flex: 0 0 50%; 
+  }
+}
+
+
+@media (min-width: 1024px) {
+  .slide {
+    flex: 0 0 33.33%;
+  }
+}
+@media (min-width: 480px) {
+  .mainHeading {
+    font-size: 40px
+}
+}
+
+
+/* ---- Mobile preview container ---- */
+.mobile-preview {
+  width: 500px;              /* Force container to behave like 500px screen */
+  margin: 0 auto;            /* Center it horizontally */
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Make sure all children respect this width */
+.mobile-preview * {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+
+
+
+

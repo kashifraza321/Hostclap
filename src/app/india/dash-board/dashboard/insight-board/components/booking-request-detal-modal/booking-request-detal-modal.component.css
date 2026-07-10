@@ -1,0 +1,51 @@
+/* .booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.form-field {
+  width: 100%;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.centered-dialog .mat-dialog-container {
+  margin: auto !important;
+  position: relative !important;
+  top: auto !important;
+  transform: none !important;
+} */
+
+.textWrap h2 {
+  color: rgb(153, 153, 153);
+  font-weight: 600;
+  font-size: 1.6rem;
+  margin-bottom: 0.5rem;
+  flex: 1 1 50%;
+  margin-top: 2rem;
+}
+
+.textWrap h3 {
+  color: #000;
+  font-weight: 600;
+  font-size: 1.6rem;
+  margin-bottom: 0.5rem;
+  flex: 1 1 50%;
+  margin-top: 2rem;
+}
+
+.flexwrp {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.wrap {
+  padding: 20px 10px;
+}

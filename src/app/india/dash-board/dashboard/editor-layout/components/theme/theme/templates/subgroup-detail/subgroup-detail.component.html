@@ -1,0 +1,457 @@
+
+
+<ng-container *ngIf="isLoading; else content">
+  <app-loader></app-loader>
+</ng-container>
+<ng-template #content>
+  <div class="classicWrapper" id="scrollContainer" #scrollContainer>
+    <ng-container *ngIf="state$ | async as state" >
+      <div class="url-bar">
+      
+        <div class="url-content">
+          <img
+            src="../../../../../../../../../../assets/images/icons8-lock-30 (2).png"
+            alt="lock"
+          />
+          <span class="url-text">https://acrserviceranchi.com</span>
+        </div>
+      </div>
+      <div >
+        <div
+          class="top-bar"
+          [ngStyle]="{
+            background: data?.selectedColor?.primary || '#f88d00',
+            'font-size.px':
+              state?.preview?.announcement?.fontSize ||
+              pageData?.header?.announcement?.fontSize ||
+              '16px',
+
+            color:
+              state?.preview?.announcement?.fontColor ||
+              pageData?.header?.announcement?.fontColor ||
+              '#fff'
+          }"
+        >
+        <div class="mainContainer">
+          <span
+            *ngIf="
+              state?.preview?.announcement?.show ??
+              pageData?.header?.announcement?.show
+            "
+            [innerHTML]="
+              state?.preview?.announcement?.message?.trim() ||
+              pageData?.header?.announcement?.message?.trim() ||
+              'AC Repairing ?'
+            "
+          ></span>
+          <div>
+            <button>
+              {{
+                state?.preview?.announcement?.actionButton?.buttonName ||
+                  pageData?.header?.announcement?.actionButton?.buttonName ||
+                  "Send a message"
+              }}
+            </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <header
+        class="classic-header-info"
+        [ngStyle]="{
+          'font-family': data.font,
+          background: data?.selectedColor?.primary
+        }"
+      >
+      <div class="mainContainer">
+
+    
+        <div
+          [ngStyle]="{
+            'font-family': data.font,
+           
+          }"
+        >
+          <i class="bi bi-geo-alt-fill"></i>
+          <span class="addresTXt" [ngStyle]="{ 'font-family': data.font }">
+            {{ pageData?.contactUs?.address }} {{ pageData?.contactUs?.city }}
+            {{ pageData?.contactUs?.state }}</span
+          >
+        </div>
+        <div [ngStyle]="{ 'font-family': data.font }">
+          <i class="bi bi-telephone-fill"></i>
+          <!-- <pre>{{ pageData | json }}</pre> -->
+          {{ pageData?.header?.phones?.mobile }}
+        </div>
+          </div>
+      </header>
+
+      <!-- Navigation -->
+      <nav
+        [class.scrolled]="isScrolled"
+        class="classic-nav"
+        [ngStyle]="{
+             background: isScrolled 
+           ? 'transparent' 
+           : (state?.preview?.menu?.menuBackgroudColour 
+              || pageData?.header?.menu?.menuBackgroudColour 
+              || data?.selectedColor?.primary 
+              || '#f88d00'),
+           
+          'font-size':
+            state?.preview?.menu?.fontSize ||
+            pageData?.header?.menu?.fontSize ||
+            '16px',
+          'text-align':
+            state?.preview?.menu?.alignment ||
+            pageData?.header?.menu?.alignment ||
+            'left'
+        }"
+      >
+    <div class="mainContainer">
+        <div
+          class="logoSection"
+      [ngClass]="{ 'logo-scrolled': isScrolled }"
+            [ngStyle]="{
+         background: isScrolled 
+           ? 'transparent' 
+           : (state?.preview?.menu?.menuBackgroudColour 
+              || pageData?.header?.menu?.menuBackgroudColour 
+              || data?.selectedColor?.primary 
+              || '#f88d00')
+       }" 
+          *ngIf="state$ | async as state"
+        >
+         
+          <div
+            [ngStyle]="{
+              'text-align':
+                state?.preview?.logo?.alignment ||
+                pageData?.header?.logo?.alignment ||
+                'center'
+            }"
+            class="logoWrp"
+          >
+            <img
+              [src]="getLogoUrl()"
+              [ngStyle]="{
+                width:
+                  (state?.preview?.logo?.logoSize ||
+                    pageData?.header?.logo?.logoSize ||
+                    '') + 'px'
+              }"
+              alt="logo"
+             [ngClass]="{ 'logo-scrolled': isScrolled }"
+              width="120"
+            />
+          </div>
+        </div>
+      
+         <div class="rightHeaderWrap">
+          <div class="brandname" 
+       [ngStyle]="{
+         background: isScrolled 
+           ? 'transparent' 
+           : (state?.preview?.menu?.menuBackgroudColour 
+              || pageData?.header?.menu?.menuBackgroudColour 
+              || data?.selectedColor?.primary 
+              || '#f88d00')
+       }" 
+       [class.hide-brand]="isScrolled">
+
+          
+         <h3>Hostclap</h3>   
+       
+
+         <p>Lorem ipsum dolor, sit amet consectetur adipisicing  perspiciatis quas totam?</p>
+        </div>
+        <ul>
+         
+          <li *ngFor="let page of pagesList; let i = index">
+            <a
+              href="javascript:void(0)"
+              (click)="scrollToSection('page-' + i)"
+              [ngStyle]="{
+                color:
+                  state?.preview?.menu?.menuFontColour ||
+                  pageData?.header?.menu?.menuFontColour,
+
+                'font-size':
+                  state?.preview?.menu?.fontSize ||
+                  pageData?.header?.menu?.fontSize ||
+                  '15px',
+                'text-align':
+                  state?.preview?.menu?.alignment ||
+                  pageData?.header?.menu?.alignment ||
+                  'center'
+              }"
+              >{{ page.pageName }}</a
+            >
+          </li>
+        </ul>
+        </div>
+        </div>
+      </nav>
+      <section class="service-section" >
+  <div class="container">
+    <h1 class="title">{{ subgroupData.subgroupName }} </h1>
+    <div class="flexWrp">
+  <div class="content">
+     <p class="description">
+       {{ subgroupData.description }}
+      </p>
+        <div class="button-box">
+        <button class="btn">Request Service</button>
+      </div>
+    </div>
+
+    <div class="image-box">
+      <img    [src]="getSanitizedImageUrl(subgroupData.media[0])"alt="AC Repair" />
+    </div>
+     </div>
+  </div>
+
+  <!-- <div class="slider">
+    <img src="https://cdn.dribbble.com/users/1684714/screenshots/14274154/media/8aafbb4ad027b29b9b946c8a5d8a785e.png" alt="1" />
+    <img src="https://i.ibb.co/4mFf6nV/repair.jpg" alt="2" />
+    <img src="https://i.ibb.co/7Y2v59J/logo.jpg" alt="3" />
+    <img src="https://i.ibb.co/TMsjSsr/ac-service.jpg" alt="4" />
+  </div> -->
+</section>
+   <section
+        id="page-1"
+        class="dynamicPages"
+        [ngStyle]="{ 'font-family': data.font }"
+        *ngIf="state$ | async as state"
+      >
+        <div class="dymanic-page-header">
+          <h2 class="gradientHeading">Where To Find Us</h2>
+        </div>
+
+        <div class="contactFlex">
+          <div class="map-container">
+            <img
+              src="../../../../../../../../../../assets/images/News_gm_demo_Large-1920x0_900x900_crop_center.webp"
+              alt="Map"
+              class="map-image"
+            />
+
+            <div class="map-marker">
+              <div class="dot"></div>
+
+              <!-- Tooltip (always visible) -->
+              <div
+                class="location-tooltip"
+                [ngStyle]="{
+                  'font-family': data.font,
+                  background: data?.selectedColor?.primary
+                }"
+              >
+                <p>
+                  <strong>
+                    {{
+                      state?.preview?.contactUs?.address ||
+                        pageData?.contactUs?.address
+                    }}, <br>
+                    {{
+                      state?.preview?.contactUs?.city ||
+                        pageData?.contactUs?.city
+                    }},
+                    {{
+                      state?.preview?.contactUs?.state ||
+                        pageData?.contactUs?.state
+                    }},<br>
+                    {{
+                      state?.preview?.contactUs?.zip ||
+                        pageData?.contactUs?.zip
+                    }},
+                  </strong>
+                </p>
+                <p class="phone">
+                  {{
+                    state?.preview?.contactUs?.phoneNumber ||
+                      pageData?.contactUs?.phoneNumber
+                  }},
+                  {{ pageData?.contactUs?.phoneNumber }}
+                </p>
+                <a
+                  class="directions"
+                  target="_blank"
+                  [href]="getGoogleMapsUrl(getFullAddress())"
+                >
+                  Directions →
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- location -->
+
+      <!-- Contact Form -->
+      <div
+        class="contact-section"
+        [ngStyle]="{
+          'font-family': data.font,
+          background: data?.selectedColor?.accent
+        }"
+      >
+        <!-- Left Info -->
+
+        <!-- Right Form -->
+        <div
+          class="contact-form"
+          [ngStyle]="{
+            'font-family': data.font,
+            background: data?.selectedColor?.secondary
+          }"
+        >
+          <h3>Send a Message</h3>
+          <p class="subtitle">Have Questions? Contact Us!</p>
+
+          <form>
+            <div class="form-row">
+              <input type="text" placeholder="First name" />
+              <input type="text" placeholder="Last name" />
+            </div>
+            <div class="form-row">
+              <input type="email" placeholder="Email" />
+              <input type="tel" placeholder="e.g. +44 707 354 64 78" />
+            </div>
+            <textarea placeholder="Tell us about your request"></textarea>
+
+            <div class="form-check">
+              <input type="checkbox" id="terms" />
+              <label for="terms" [ngStyle]="{ 'font-family': data.font }">
+                I agree with the <a href="#">Terms & Conditions</a> and the
+                <a href="#">Privacy & Cookies Policy</a>.
+              </label>
+            </div>
+
+            <button
+              type="submit"
+              [ngStyle]="{
+                background: data?.selectedColor?.primary
+              }"
+            >
+              Submit Request
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <section class="dynamicPages" [ngStyle]="{ 'font-family': data.font }">
+        <div class="dymanic-page-header">
+          <h2 class="gradientHeading">{{ pagesList[3]?.pageName }}</h2>
+        </div>
+      </section>
+
+      <!-- contact us  -->
+      <div
+        class="contact-info"
+        [ngStyle]="{
+          'font-family': data.font,
+          background: data?.selectedColor?.secondary
+        }"
+        *ngIf="state$ | async as state"
+      >
+        <div class="mainContainer">
+          <div class="infoFlex">
+            <div class="info-item">
+              <span class="icon"
+                ><img
+                  src="../../../../../../../../../../assets/images/icons8-phone-30 (1).png"
+                  alt="location"
+                  width="20"
+                  height="20"
+              /></span>
+              <div>
+                <p>
+                  {{ pageData?.contactUs?.phoneNumber }}
+                  {{
+                    state?.preview?.contactUs?.phoneNumber ||
+                      pageData?.contactUs?.phoneNumber
+                  }},
+                </p>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <span class="icon"
+                ><img
+                  src="../../../../../../../../../../assets/images/icons8-location-50.png"
+                  alt="location"
+                  width="20"
+                  height="20"
+              /></span>
+              <div>
+                <h4>Office location</h4>
+                <p>
+                  {{
+                    state?.preview?.contactUs?.address ||
+                      pageData?.contactUs?.address
+                  }},
+                  {{
+                    state?.preview?.contactUs?.city ||
+                      pageData?.contactUs?.city
+                  }},
+                  {{
+                    state?.preview?.contactUs?.state ||
+                      pageData?.contactUs?.state
+                  }},
+                  {{
+                    state?.preview?.contactUs?.zip || pageData?.contactUs?.zip
+                  }},
+                  <br />
+                </p>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <span class="icon"
+                ><img
+                  src="../../../../../../../../../../assets/images/icons8-email-30.png"
+                  alt="location"
+                  width="20"
+                  height="20"
+              /></span>
+              <div>
+                <h4>Send us an email</h4>
+                <p>
+                  {{ pageData?.contactUs?.email }}
+                  {{
+                    state?.preview?.contactUs?.email ||
+                      pageData?.contactUs?.email
+                  }},
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- contact info -->
+      <!-- contact us  -->
+  
+      <!-- Footer -->
+      <footer
+        class="classic-footer"
+        [ngStyle]="{ background: data?.selectedColor?.accent || '#ccc' }"
+      >
+        <div class="linksss">
+          <a href=""> Merchant Policies</a>
+          <a href=""> Legal Notice</a>
+        </div>
+        <p [ngStyle]="{ 'font-family': data.font }">
+          Powered by
+          <img
+            src="../../../../../../../../../../assets/images/logo.png"
+            alt=""
+            width="20"
+          />
+        </p>
+        <span>{{ pageData?.footer?.tagline }}</span>
+      </footer>
+    </ng-container>
+  </div>
+</ng-template>

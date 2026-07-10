@@ -1,6 +1,52 @@
+/* Theme-based text color for dark/light mode */
+body[theme='dark'] .modern-template  h1,
+
+//body[theme='dark'] h3,
+body[theme='dark'] .modern-template  h4,
+body[theme='dark'] .modern-template  h3,
+body[theme='dark'] .modern-template  h5,
+
+body[theme='dark'] .modern-template  span,
+body[theme='dark'] .modern-template  div,
+body[theme='dark'] .modern-template  a  {
+  color: #fff !important;
+}
+
+body[theme='light'] .modern-template  ,
+
+//body[theme='light'] h3,
+body[theme='light'] .modern-template  h4,
+body[theme='light'] .modern-template  h3,
+body[theme='light'] .modern-template h5,
+body[theme='light'] .modern-template  span,
+body[theme='light'] .modern-template  div ,
+body[theme='light'] .modern-template   {
+  color: #000 !important;
+}
+/* DARK THEME for Modern Template */
+// body[theme='dark'] .modern-template * {
+//   color: #fff !important;
+// }
+
+/* LIGHT THEME for Modern Template */
+// body[theme='light'] .modern-template * {
+//   color: #000 !important;
+// }
+
+/* Testimonial card text must contrast with the card's OWN (user-chosen)
+   background, not the global light/dark theme. Each card sets --card-text to a
+   readable colour; this overrides the blanket theme rule above. */
+body .modern-template .testimonial-card h3,
+body .modern-template .testimonial-card .testimonial-text,
+body .modern-template .testimonial-card .testimonial-date {
+  color: var(--card-text, inherit) !important;
+}
+
+
 @import "bootstrap/dist/css/bootstrap.css";
 @import "bootstrap-icons/font/bootstrap-icons.css";
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap");
+@import "~quill/dist/quill.snow.css";
 
 :root {
   --primaryColor: #4e88b4;
@@ -41,9 +87,15 @@ a {
   text-decoration: none;
 }
 .container {
-  max-width: 1280px !important;
+  max-width: 1440px !important;
   width: 100% !important;
   padding: 0 40px !important;
+  margin: 0 auto;
+}
+.mainContainer {
+  max-width: 1480px !important;
+  width: 100% !important;
+  padding: 0 20px !important;
   margin: 0 auto;
 }
 
@@ -164,4 +216,17 @@ body {
 }
 .logoutWrapper .mat-mdc-dialog-surface {
   padding: 31px 30px 47px 30px !important;
+}
+
+.main {
+  padding: 115px 0;
+}
+
+.backBtn {
+  background: none;
+  border: none;
+  display: flex;
+  gap: 1px;
+  align-items: center;
+  font-size: 15px;
 }

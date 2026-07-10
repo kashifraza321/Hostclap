@@ -1,0 +1,85 @@
+.business-help-section {
+  background-color: #f7f7f7;
+  padding: 40px 20px;
+  text-align: center;
+
+  .content-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  h2 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #222;
+  }
+
+  .sub-text {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 30px;
+  }
+
+  .features-box {
+    margin: 20px 0;
+
+    label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .feature-bar {
+      height: 10px;
+      background-color: #eee;
+      border-radius: 6px;
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+
+  .payment-methods {
+    margin-top: 40px;
+
+    .payment-title {
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .payment-logos {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+
+      img {
+        height: 40px;
+        object-fit: contain;
+      }
+    }
+  }
+
+  .chat-support {
+    margin-top: 30px;
+    font-weight: 600;
+    color: #222;
+
+    a {
+      color: #ff4500;
+      text-decoration: underline;
+    }
+  }
+
+  .terms-conditions {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #555;
+
+    a {
+      color: #ff4500;
+      text-decoration: underline;
+    }
+  }
+}

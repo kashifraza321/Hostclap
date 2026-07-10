@@ -1,19 +1,26 @@
-import { Injectable } from "@angular/core";
-import { environment } from "../../environments/environment";
-import { HttpClient, HttpEvent, HttpErrorResponse, HttpEventType, HttpHeaders } from "@angular/common/http";
-import { Observable } from "rxjs";
-import { throwError } from "rxjs";
-import { catchError, map } from "rxjs/operators";
-import { Router, RouterLink } from "@angular/router";
+import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
+import {
+  HttpClient,
+  HttpEvent,
+  HttpErrorResponse,
+  HttpEventType,
+  HttpHeaders,
+} from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { Router, RouterLink } from '@angular/router';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root',
 })
 export class HttpcommanService {
   baseUrl = environment.apiUrl;
   mobileBaseUrl = environment.apiUrl;
+
   //baseUrl = environment.baseUrlLocalhost;
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient) {}
 
   postCall(routeUrl: string, data: any): Observable<any> {
     return this._http.post<any>(`${this.baseUrl}${routeUrl}`, data);
@@ -30,18 +37,37 @@ export class HttpcommanService {
     return this._http.put<any>(`${this.baseUrl}${routeUrl}`, data);
   }
 
-  patchCall(routeUrl: string, data: any): Observable<any> {
-    return this._http.patch<any>(`${this.baseUrl}${routeUrl}`, data);
+  patchCall(
+    routeUrl: string,
+    data: any,
+    isFormData: boolean = false
+  ): Observable<any> {
+    const token = localStorage.getItem('token');
+    let headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+      // 'Content-Type': 'application/json',
+    });
+    if (!isFormData) {
+      headers = headers.set('Content-Type', 'application/json');
+    }
+
+    return this._http.patch<any>(`${this.baseUrl}${routeUrl}`, data, {
+      headers,
+    });
   }
   deleteCall(routeUrl: string, id: any): Observable<any> {
     return this._http.delete<any>(`${this.baseUrl}${routeUrl}/${id}`);
   }
+  // deleteCall(id: any): Observable<any> {
+  //   return this._http.delete<any>(`${this.baseUrl}/${id}`);
+  // }
 
   resetAdminPassword(routeUrl: string, token: any, data: any): Observable<any> {
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     });
-    return this._http.post<any>(`${this.baseUrl}${routeUrl}`, data, { headers: headers })
+    return this._http.post<any>(`${this.baseUrl}${routeUrl}`, data, {
+      headers: headers,
+    });
   }
-
 }

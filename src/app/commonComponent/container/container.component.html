@@ -1,5 +1,27 @@
-<app-header></app-header>
+<ng-container *ngIf="isLoggedIn; else publicHeader">
+  <app-insight-header
+    *ngIf="showLayout"
+    style="background: lightgreen"
+  ></app-insight-header>
+  <!-- <p style="color: red">isLoggedIn: {{ isLoggedIn }}</p> -->
+  <!-- <p style="color: blue">
+    localStorage isLoggedIn: {{ localStorage.getItem("isLoggedIn") }}
+  </p> -->
+
+  <!-- Header after login -->
+</ng-container>
+
+<ng-template #publicHeader>
+  <app-header></app-header>
+  <!-- <p style="color: red">
+    isLoggedIncccccccccccccccccccccccccccccccc: {{ isLoggedIn }}
+  </p> -->
+
+  <!-- Header before login -->
+</ng-template>
+
 <main>
   <router-outlet></router-outlet>
 </main>
-<app-footer></app-footer>
+
+<app-footer *ngIf="showLayout"></app-footer>

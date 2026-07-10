@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const authRoutes = require('./routes/auth'); 
 const path = require('path');
+const cors = require('cors');
 const swaggerUi = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc');
 const bodyParser = require('body-parser');
@@ -12,11 +13,19 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
-
+const corsOptions = {
+  credentials: true,
+  origin: ['http://localhost:4201', 'http://localhost:4200'] // Whitelist the domains you want to allow
+};
+app.use(cors(corsOptions));
 // Middleware to parse JSON
 app.use(express.json());
-// Serve static files from the 'public' directory
-app.use(express.static(path.join(__dirname, 'public')));
+// Serve static files from the 'public' directory with no-cache headers
+app.use(express.static(path.join(__dirname, 'public'), {
+  setHeaders: (res) => {
+    res.set('Cache-Control', 'no-cache');
+  }
+}));
 
 // Middleware
 app.use(bodyParser.json());
@@ -154,14 +163,14 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, {
  *           schema:
  *             type: object
  *             properties:
- *               username:
+ *               email:
  *                 type: string
  *                 description: The username of the user
- *                 default: "john_doe1"  # Preset default value
+ *                 default: "user@examdple.com"  # Preset default value
  *               password:
  *                 type: string
  *                 description: The password of the user
- *                 default: "john_doe"  # Preset default value  
+ *                 default: "secret123"  # Preset default value  
  *     responses:
  *       200:
  *         description: Successfully logged in, JWT token returned
@@ -179,8 +188,8 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, {
  */
 router.post('/auth/login', async (req, res) => {
   try {
-    const { username, password } = req.body;
-    const user = await User.findOne({ username });
+    const { email, password } = req.body;
+    const user = await User.findOne({ username:email });
     if (!user) {
       return res.status(400).send('Invalid credentials');
     }
@@ -202,34 +211,44 @@ router.post('/auth/login', async (req, res) => {
  * /auth/register:
  *   post:
  *     summary: Register a new user
- *     description: This route allows a new user to register by providing a username and password. The user will be created and stored in the database.
+ *     tags:
+ *       - Authentication
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
  *             type: object
+ *             required:
+ *               - email
+ *               - firstName
+ *               - lastName
+ *               - password
  *             properties:
- *               username:
+ *               email:
  *                 type: string
- *                 description: The username of the user.
- *                 example: "newuser@krwizard.com"  # Example value for the username
+ *                 format: email
+ *                 example: user@example.com
+ *               firstName:
+ *                 type: string
+ *                 example: John
+ *               lastName:
+ *                 type: string
+ *                 example: Doe
  *               password:
  *                 type: string
- *                 description: The password of the user.
- *                 example: "password123"  # Example value for the password
+ *                 format: password
+ *                 example: secret123
  *     responses:
  *       201:
  *         description: User successfully registered
- *       400:
- *         description: Bad request (e.g., missing required fields)
  *       500:
- *         description: Internal server error
+ *         description: Server error while registering user
  */
 router.post('/auth/register', async (req, res) => {
   try {
-    const { username, password } = req.body;
-    const user = new User({ username, password });
+    const { email,firstName,lastName, password } = req.body;
+    const user = new User({ username: email, password });
     await user.save();
     res.status(201).send('User successfully registered');
   } catch (err) {

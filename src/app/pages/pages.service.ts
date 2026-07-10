@@ -1,0 +1,232 @@
+import { Injectable } from '@angular/core';
+import { HttpcommanService } from '../services/httpshared.service';
+import { API_CONSTANTS } from '../Constants/api.constant';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { TestimonialFormComponent } from './testimonials/testimonial-form/testimonial-form.component';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class PagesService {
+  constructor(private httpService: HttpcommanService) {}
+  // private stateSubject = new BehaviorSubject<{ pages: any[]; preview: any }>({
+  //   pages: [],
+  //   preview: {},
+  // });
+  // public state$ = this.stateSubject.asObservable();
+  //  SET PAGES
+  // setPages(pages: any[]) {
+  //   const current = this.stateSubject.getValue();
+  //   this.stateSubject.next({ ...current, pages });
+  // }
+
+  //  SET PREVIEW (Live Preview for Section)
+  // setPreview(section: string, data: any) {
+  //   const current = this.stateSubject.getValue();
+  //   this.stateSubject.next({
+  //     ...current,
+  //     preview: {
+  //       ...current.preview,
+  //       [section]: data,
+  //     },
+  //   });
+  // }
+
+  // getPagesValue(): any[] {
+  //   return this.stateSubject.getValue().pages;
+  // }
+
+  // new subject
+  private stateSubject = new BehaviorSubject<any>({
+    pages: [],
+    preview: {
+      announcement: {},
+      logo: {},
+      cover: {},
+      titles: {},
+      menu: {},
+      phone: {},
+      address: {},
+      offer: {},
+      service: {},
+      contactUs: {},
+       amenities: {},
+       testimonials: {},
+       
+    },
+  });
+  state$ = this.stateSubject.asObservable();
+   private scrollSubject = new Subject<string>();
+
+  scroll$ = this.scrollSubject.asObservable();
+
+  triggerScroll(sectionId: string) {
+    this.scrollSubject.next(sectionId);
+  }
+getCurrentServices(): any[] {
+  return this.stateSubject.getValue().preview.services || [];
+}
+  
+// PagesService.ts
+// updateServices(newServices: any[]) {
+//   const current = this.stateSubject.getValue();
+//   this.stateSubject.next({
+//     ...current,
+    
+//     preview: {
+//       ...current.preview,
+//       service: newServices
+//     }
+//   });
+// }
+  getCurrentService(): any {
+  return this.stateSubject.getValue().preview.service || {};
+}
+  // Update master object deeply
+  updatePreviewSection(section: string, value: any) {
+    // if (!value || Object.keys(value).length === 0) return;
+    console.log('updatePreviewSection called with:', section, value);
+      console.trace();
+    const current = this.stateSubject.getValue();
+    console.log('Current state before update:', current);
+    this.stateSubject.next({
+      ...current,
+    //  pages: Array.isArray(current.pages) ? current.pages : [],
+      preview: {
+        ...current.preview,
+        [section]: { ...current.preview[section], ...value },
+      },
+      
+    });
+     console.log('State updated with preview section:', section);
+  console.log('New state:', this.stateSubject.getValue());
+  }
+getCurrentState() {
+  return this.stateSubject.getValue();
+}
+
+  updatePages(pages: any[]) {
+    const current = this.stateSubject.getValue();
+    this.stateSubject.next({ ...current, pages:pages, });
+  } 
+
+  // Add single page
+  addPage(page: any) {
+    const current = this.stateSubject.getValue();
+    this.stateSubject.next({ ...current, pages: [...current.pages, page] });
+  }
+
+  // Get current value (rarely used)
+  getPreviewValue() {
+    return this.stateSubject.getValue().preview;
+  }
+
+  // new subject
+
+  createPages(pageData: any) {
+    return this.httpService.postCall(`${API_CONSTANTS.CREATE_PAGES}`, pageData);
+  }
+  getPages() {
+    return this.httpService.getCall(`${API_CONSTANTS.GET_PAGES}`);
+  }
+  getPageDetail(pageId: string) {
+    return this.httpService.getCall(
+      `${API_CONSTANTS.GET_PAGE_DETAIL}/${pageId}`
+    );
+  }
+  updateHeader(pageId: string, section: string, data: any) {
+    return this.httpService.patchCall(
+      `${API_CONSTANTS.EDIT_HEADER}/${pageId}`,
+      data
+    );
+  }
+  // updateLogoHeader(pageId: string, file: File) {
+  //   const formData = new FormData();
+  //   formData.append('image', file);
+
+  //   return this.httpService.patchCall(
+  //     `${API_CONSTANTS.EDIT_MEDIA_HEADER}/${pageId}`,
+  //     formData
+  //   );
+  // }
+  updateLogoHeader(pageId: string, formData: FormData) {
+    return this.httpService.patchCall(
+      `${API_CONSTANTS.EDIT_MEDIA_HEADER}/${pageId}`,
+      formData,
+      true
+    );
+  }
+  editPages(pageId: string, data: any) {
+    return this.httpService.patchCall(
+      `${API_CONSTANTS.EDIT_PAGES}/${pageId}`,
+      data
+    );
+  }
+  UpdateTestimonial(data: any) {
+    return this.httpService.patchCall(
+      `${API_CONSTANTS.UPDATE_TESTIMONIALS}`,
+      data,
+      true
+    );
+  }
+  UpdateAboutus(data: any) {
+    return this.httpService.patchCall(
+      `${API_CONSTANTS.UPDATE_ABOUTUS}`,
+      data,
+      true
+    );
+  }
+  UpdateOpeningHours(data: any) {
+    return this.httpService.patchCall(
+      `${API_CONSTANTS.UPDATE_OPENINGSERVICE}`,
+      data,
+      true
+    );
+  }
+  UpdateSubgroups(data: any) {
+    return this.httpService.patchCall(
+      `${API_CONSTANTS.UPDATE_SUBGROUPS}`,
+      data,
+      true
+    );
+  }
+
+  deletePages(pageId: string) {
+    return this.httpService.deleteCall(`${API_CONSTANTS.DELETE_PAGES}`, pageId);
+  }
+  createSection(data: any) {
+    return this.httpService.postCall(`${API_CONSTANTS.CREATE_SECTION}`, data);
+  }
+  createGroup(data: any) {
+    return this.httpService.postCall(`${API_CONSTANTS.CREATE_GROUP}`, data);
+  }
+  CREATE_Sub_GROUP(data: any) {
+    return this.httpService.postCall(`${API_CONSTANTS.CREATE_SubGROUP}`, data);
+  }
+  GET_SECTION_DETAIL(pageId: string, type: string) {
+    return this.httpService.getCall(
+      `${API_CONSTANTS.GET_SECTION_DETAIL}/${pageId}/${type}`
+    );
+  }
+  GetSubgroup_Detail(subgroupId: string) {
+    return this.httpService.getCall(
+      `${API_CONSTANTS.GET_SUBGROUP_DETAIL}/${subgroupId}`
+    );
+  }
+  GetSubgroupBySlug(slug: string) {
+    return this.httpService.getCall(
+      `${API_CONSTANTS.GET_SUBGROUPBYSLUG}/${slug}`
+    );
+  }
+  updateGallery(data: any) {
+    return this.httpService.postCall(`${API_CONSTANTS.UPDATE_GALLERY}`, data);
+  }
+  deleteServiesBlock(sectionType: string, subgroupId: string) {
+    console.log(sectionType, 'seectiontypepeee');
+    const idParam = `${subgroupId}/${sectionType}`;
+    return this.httpService.deleteCall(
+      API_CONSTANTS.DELETE_SERVICESBLOCK,
+      idParam
+    );
+  }
+}

@@ -4,7 +4,7 @@
   justify-content: center;
   background: var(--secondaryColor);
   min-height: 100vh;
-  background-image: url("../../../assets/images/bannerImg.png"); /* Replace with your image path */
+  // background-image: url("../../../assets/images/bannerImg.png");
   height: 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -143,7 +143,6 @@
   color: var(--primaryColor);
 }
 
-
 .primaryBtn {
   width: 100%;
   margin-top: 15px;
@@ -156,5 +155,96 @@
   font-weight: 600;
   transition: 0.3s all;
   padding: 15px 10px;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 1px -2px,
+    rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px;
+}
+.facebookTab a {
+  color: #000;
+  font-size: 28px;
+}
+
+.facebookTab {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 450px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  gap: 20px;
+  border-radius: 10px;
+  margin: 0 auto;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.facebookTab a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 70px;
+  font-size: 20px;
+}
+
+.facebookTab a img {
+  width: 30px;
+  height: 30px;
+}
+
+.divWrp {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 20px;
+}
+
+.social-btn img {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+.separator {
+  display: flex;
+  align-items: center;
+  margin: 15px 0;
+}
+.separator::before,
+.separator::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #ccc;
+  margin: 0 10px;
+}
+.login-options {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.login-box {
+  width: 100%;
+  max-width: 165px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+.login-box img {
+  width: 20px;
+  margin-bottom: 5px;
+}
+.register {
+  margin-top: 15px;
+  font-size: 20px;
+  text-align: center;
+}
+.register a {
+  color: orange;
+  text-decoration: none;
+  font-weight: bold;
 }

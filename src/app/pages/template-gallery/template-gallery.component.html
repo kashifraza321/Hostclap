@@ -1,0 +1,83 @@
+<div class="pageWrapper">
+  <form [formGroup]="galleryForm">
+    <div class="top-bar">
+      <button class="back-btn" (click)="backToHomepage()">
+        <img
+          src="../../../assets/images/icons8-chevron-right-24.png"
+          alt="chevron"
+          width="18"
+        />
+        Back
+      </button>
+      <div class="title">{{ galleryForm.get("title")?.value }}</div>
+    </div>
+    <div>
+      <div class="section-card">
+        <label class="label" for="section-title">Section Title</label>
+        <div class="title-row">
+          <input
+            id="section-title"
+            type="text"
+            class="input-field"
+            formControlName="title"
+          />
+          <input
+            type="checkbox"
+            class="checkbox"
+            formControlName="titleVisible"
+          />
+        </div>
+
+        <label class="label" for="section-subtitle">Section Subtitle</label>
+        <input
+          id="section-subtitle"
+          type="text"
+          class="input-field"
+          formControlName="subtitle"
+        />
+      </div>
+
+      <div class="gallery-header">
+        <span>Gallery</span>
+        <input
+          type="file"
+          multiple
+          (change)="onFileSelected($event)"
+          hidden
+          #fileInput
+        />
+        <button class="upload-link" (click)="fileInput.click()">Upload</button>
+      </div>
+      <div class="subtitle">Add images or videos</div>
+      <div class="imgWrp">
+        <div
+          class="image-container"
+          *ngFor="let file of selectedFiles; let i = index"
+        >
+          <img [src]="file.preview" alt="Gallery Image" class="gallery-image" />
+          <div
+            class="icon-btn delete-btn"
+            title="Delete"
+            (click)="removeImage(i)"
+          >
+            <img
+              src="../../../assets/images/delete.png"
+              alt="delete"
+              width="18"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="remove-all" title="Remove all" (click)="removeAll()">
+        <img src="../../../assets/images/delete.png" alt="delete" width="18" />
+        Remove all
+      </div>
+
+      <div class="footer-buttons">
+        <button class="cancel-btn cancelBtn">Cancel</button>
+        <button class="save-btn saveBtn" (click)="saveGallery()">Save</button>
+      </div>
+    </div>
+  </form>
+</div>
