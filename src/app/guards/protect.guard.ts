@@ -18,7 +18,7 @@ export class ProtectGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const accessToken = localStorage.getItem('token');
     if (accessToken != null) {
-      this.$router.navigate(['/dashboard']);
+      this.$router.navigate(['/']);
       return false;
     }
     return true;

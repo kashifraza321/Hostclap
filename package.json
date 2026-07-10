@@ -3,14 +3,13 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "concurrently \"ng serve\" \"node cms-admin/server.js\" \"node cms-admin/dist/bundle.js\"",
+    "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
   "private": true,
   "dependencies": {
-    "18": "^0.0.0",
     "@angular/animations": "^18.2.11",
     "@angular/cdk": "^18.0.2",
     "@angular/common": "^18.2.11",
@@ -23,6 +22,7 @@
     "@angular/router": "^18.2.11",
     "@auth0/angular-jwt": "^5.2.0",
     "@ng-bootstrap/ng-bootstrap": "17.0.1",
+    "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
     "chart.js": "^4.4.9",
@@ -57,7 +57,6 @@
     "@types/jquery": "^3.5.33",
     "@types/jsonwebtoken": "^9.0.7",
     "@types/uuid": "^10.0.0",
-    "concurrently": "^9.1.2",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",

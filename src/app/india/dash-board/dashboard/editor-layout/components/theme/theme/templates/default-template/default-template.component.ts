@@ -13,6 +13,14 @@ import { PagesService } from 'src/app/pages/pages.service';
 })
 export class DefaultTemplateComponent {
   @Input() data!: Data;
+
+  // Quote the family (handles multi-word names like "Open Sans") and always
+  // add a generic fallback so an unloaded/empty font degrades gracefully.
+  get fontFamily(): string {
+    const f = (this.data?.font || '').trim();
+    return f ? `"${f}", sans-serif` : 'Roboto, sans-serif';
+  }
+
   userId: string = '';
   pageId: string = '';
   // pagesList = [];
@@ -29,7 +37,6 @@ export class DefaultTemplateComponent {
 
   ngOnInit() {
     this.userId = localStorage.getItem('userId') || '';
-    console.log('User ID from localStorage:', this.userId);
     this.pagesService.state$.subscribe((state) => {
       this.pages = state.pages;
       this.preview = state.preview;

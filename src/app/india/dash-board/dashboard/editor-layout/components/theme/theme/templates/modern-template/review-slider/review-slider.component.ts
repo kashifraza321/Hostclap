@@ -152,17 +152,11 @@ modernSlides = [
   }
   ngOnInit() {
     this.userId = this.route.snapshot.paramMap.get('id') || '';
-    console.log('User ID:', this.userId);
-    console.log('ngOnInit - data received:', this.data);
      this.setSlideWidth(); // 🆕 Set initial slide width
   window.addEventListener('resize', this.setSlideWidth.bind(this));
 this.autoplayInterval = setInterval(() => {
   this.next();
 }, 3000); // autoplay every 3 seconds
- 
-  console.log('BrideGalleryComponent loaded ✅');
-    // console.log('Images array:', this.images);
-    console.log('User ID:', this.userId);
     // Theme/colors arrive via @Input() data (parent owns the theme) — no self-fetch.
   this.pagesService.state$.subscribe((state) => {
         console.log('Realtime state in ModernTemplate:', state);

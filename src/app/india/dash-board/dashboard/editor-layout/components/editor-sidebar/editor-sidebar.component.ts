@@ -14,21 +14,16 @@ export class EditorSidebarComponent {
   @Output() menuClick = new EventEmitter<string>();
   ngOnInit() {
     this.userId = localStorage.getItem('userId') || '';
-    console.log('Sidebar loaded with userId:', this.userId);
   }
 
   menuClicked(menu: string) {
-    console.log('Sidebar clicked:', menu);
-
     this.menuClick.emit(menu);
   }
 
   goToPages() {
-    console.log('User ID being sent:', this.userId);
     this.router.navigate(['/in/insight/editor/pages']);
   }
   goToTheme() {
-    console.log('clicked pages');
 
     this.router.navigateByUrl('/in/insight/editor/theme');
   }

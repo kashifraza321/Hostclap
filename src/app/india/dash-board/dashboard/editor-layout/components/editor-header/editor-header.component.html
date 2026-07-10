@@ -2,7 +2,6 @@
   <!-- Left: Breadcrumb -->
   <div class="breadcrumb">
     <span></span>
-    <a href="#"> </a>
   </div>
   <button  class="backto" *ngIf="isPreview" (click)="onBackClick()">
   <img src="../../../../../../../assets/images/icons8-chevron-right-24.png" alt=""> Back to Editor
@@ -27,19 +26,18 @@
       </button>
     </div>
     <div class="links">
-      <a href="">My Hub</a>
-      <a href="">Pro features</a>
-      <a href="">Subscription</a>
+      <button type="button" class="link-btn">My Hub</button>
+      <button type="button" class="link-btn">Pro features</button>
+      <button type="button" class="link-btn">Subscription</button>
     </div>
   </div>
 
 
   <!-- Right: Help + Preview -->
   <div class="right-controls" *ngIf="!isPreview">
-    <div class="help-icon">?</div>
+    <button type="button" class="help-icon" title="Help" aria-label="Help">?</button>
 
-   <a class="preview-btn" 
-  (click)="onPreviewClick()">Preview</a>
-  
+    <button type="button" class="preview-btn" (click)="onPreviewClick()">Preview</button>
+
   </div>
 </div>

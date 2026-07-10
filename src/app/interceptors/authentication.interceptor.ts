@@ -67,12 +67,13 @@ export class AuthenticationInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401 || error.status === 410) {
-          //localStorage.removeItem("token");
-          const message = error.error.details || ' expired, please login again';
+          localStorage.removeItem("token");
+          localStorage.removeItem("isLoggedIn");
+          const message =
+            (error.error && typeof error.error === 'object' && error.error.details) ||
+            'Session expired, please login again';
           this.alertService.warning(message);
-          console.log(error);
-          window.alert("Backend APi server down, please try again later"); 
-          // this.router.navigate(["/login"]);
+          this.router.navigate(["/login"]);
         }
         return throwError(error);
       })

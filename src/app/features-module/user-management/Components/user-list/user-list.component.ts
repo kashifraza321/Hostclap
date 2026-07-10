@@ -10,12 +10,13 @@ import { Router } from '@angular/router';
 import { UserService } from '../../user-service/user.service';
 import { AlertService } from '../../../../services/Toaster/alert.service';
 import { SearchComponent } from '../../../subscription-management/Components/search/search.component';
+import { MaterialModule } from '../../../../../Module/material.module';
 
 
 @Component({
   selector: 'app-user-list',
   standalone: true,
-  imports: [ReactiveFormsModule, MaterialModule, DatePipe, CommonModule, SearchComponent, MaterialModule],
+  imports: [ReactiveFormsModule, MaterialModule, DatePipe, CommonModule, SearchComponent],
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.scss'
 })
@@ -49,10 +50,10 @@ export class UserListComponent implements OnInit {
   displayedColums: string[] = ["S.No.", "name", "email", "userType", "subscriptionStatus", "createdAt", "status", "action"]
 
   ngOnInit(): void {
-    this.getAllUsers(this.pageAll, this.limitAll);
-    this.datasource = new MatTableDataSource<any>(this.allUserList);
+    this.datasource = new MatTableDataSource<any>([]);
     this.datasource.paginator = this.paginator;
     this.datasource.sort = this.sort;
+    this.getAllUsers(this.pageAll, this.limitAll);
   }
 
 
@@ -153,9 +154,4 @@ export class UserListComponent implements OnInit {
     }
   }
 }
-import { MaterialModule } from '../../../../../Module/material.module';
-
-
-
-
 

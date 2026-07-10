@@ -10,7 +10,6 @@ import { provideToastr } from 'ngx-toastr';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), provideAnimationsAsync(),
-  provideAnimationsAsync(),
   provideToastr(),
   provideHttpClient(withInterceptorsFromDi()),
   {

@@ -240,7 +240,9 @@ selectFont(event: Event) {
         accent: theme.selectedColor?.accent
       };
 
-      this.parent.updateData(theme);
+      // Loading the existing theme is NOT a user edit — use applyLoadedTheme so
+      // it won't trip the parent's userEdited guard or clobber a live change.
+      this.parent.applyLoadedTheme(theme);
     }
   });
 }

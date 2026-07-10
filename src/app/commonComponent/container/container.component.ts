@@ -2,12 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { SidebarComponent } from '../sidebar/sidebar.component';
-import {
-  ActivatedRoute,
-  NavigationEnd,
-  Router,
-  RouterModule,
-} from '@angular/router';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MaterialModule } from '../../../Module/material.module';
 import { LoginService } from '../../services/login.service';
@@ -29,12 +24,6 @@ import { filter } from 'rxjs';
     MaterialModule,
     FooterComponent,
     InsightHeaderComponent,
-  ],
-  providers: [
-    {
-      provide: ActivatedRoute,
-      useValue: {},
-    },
   ],
   templateUrl: './container.component.html',
   styleUrl: './container.component.scss',

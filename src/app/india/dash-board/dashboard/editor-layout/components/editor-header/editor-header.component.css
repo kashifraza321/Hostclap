@@ -73,9 +73,21 @@
   gap: 20px;
   color: #444;
 }
-.links a {
+.links a,
+.links .link-btn {
   font-size: 14px;
   color: #333;
+}
+/* Button reset so link-style buttons render like the old anchors */
+.link-btn {
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+}
+.link-btn:hover {
+  text-decoration: underline;
 }
 
 .right-controls {
@@ -97,6 +109,8 @@
   border-radius: 50%;
   font-size: 14px;
   cursor: pointer;
+  border: none;
+  padding: 0;
 }
 
 .preview-btn {

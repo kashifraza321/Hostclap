@@ -46,7 +46,7 @@ export class AuthService {
   private secertKey = 'TapCardiD'
 
   isLoggedIn(): boolean {
-    if (sessionStorage.getItem("isLoggedIn") == "true") {
+    if (localStorage.getItem("isLoggedIn") == "true") {
       return true;
     } else return false;
   }
